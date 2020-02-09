@@ -12,7 +12,7 @@ link:https://github.com/solid/solid-spec[Solid specifications].
 [role="arc42help"]
 [options="header",cols="1,2"]
 |===
-| *Requirement* | *Description*
+| Requirement | Description
 | Decentralized arquitecture | The application will be separated from the data storage, and users will store routes in their own link:https://solid.inrupt.com/how-it-works[PODs].
 | Multimedia | The app will allow users to share photos and videos of the routes with their friends. 
 | Notifications | The user will receive a notification when a friend shares a route with him.
@@ -25,7 +25,7 @@ link:https://github.com/solid/solid-spec[Solid specifications].
 [role="arc42help"]
 [options="header",cols="1,2,1"]
 |===
-| *Goal* | *Description* | *Priority* 
+| Goal | Description | Priority 
 | Usability | The application must be easy to use for non-technical people. | High
 | Efficiency | Routes will be shared instantly with other users, who will be notified at the moment. | High
 | Security | Only the user will be able to see the routes he stored and those that have been shared to him. | High
@@ -36,7 +36,7 @@ link:https://github.com/solid/solid-spec[Solid specifications].
 [role="arc42help"]
 [options="header",cols="1,2,2"]
 |===
-| *Role/Name* | *Description* | *Expectations*
+| Role/Name | Description | Expectations
 | Users | Users of Viade app | Store and share routes with their friends.
 | link:https://inrupt.com/[Inrupt] | Solid development company | See their technology being used in a new app.
 | Developers | Students who develop this app | Develop a functional application that satisfies teachers and Inrupt expectations.
