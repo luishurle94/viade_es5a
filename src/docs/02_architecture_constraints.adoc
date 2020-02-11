@@ -4,16 +4,54 @@
 
 [role="arc42help"]
 ****
-.Contents
-Any requirement that constrains software architects in their freedom of design and implementation decisions or decision about the development process. These constraints sometimes go beyond individual systems and are valid for whole organizations and companies.
 
-.Motivation
-Architects should know exactly where they are free in their design decisions and where they must adhere to constraints.
-Constraints must always be dealt with; they may be negotiable, though.
+In the next paragraphs, we set forth the constraints in a tabular format. By reading the table, you will be able to see the constraint itself, a brief explanation describing the main details and an alphanumeric identifier describing the constraint type.
 
-.Form
-Simple tables of constraints with explanations.
-If needed you can subdivide them into
-technical constraints, organizational and political constraints and
-conventions (e.g. programming or versioning guidelines, documentation or naming conventions)
+At the end of this section, there is a table legend describing the different types of the constraints that we must deal with.
+
+[%header,cols=3*] 
+|===
+|ID
+|Constraint
+|Explanation
+
+|TC01
+|SOLID Specifications
+|Creating a descentralized route management system (by using PODs) is a lead point in our Viade application taking into account SOLID specifications.
+
+|TC02
+|REACT Framework
+|This JavaScript Library is a highlighted issue in our project given the fact that GUI has a remarkable weight our for final product.
+
+|TC03
+|Docker Software
+|Deployment (of our application) goes hand in hand with Docker, providing an abstraction for multiple operating systems.
+
+|PC01
+|ARC42 Template
+|Documentation must be completed using templates in the bosom of Arc42 architecture, with Asciidoc format.
+
+|OC01
+|Time
+|Viade application will be on deck by May.
+
+|===
+
+Table Legend
+[%header,cols=2*] 
+|===
+
+|Element
+|Meaning
+
+|TCXX
+|Technical Constraint with number XX.
+
+|OCXX
+|Organizational Constraint with number XX.
+
+|PCXX
+|Political Constraint and Convention with number XX.
+
+|===
 ****
