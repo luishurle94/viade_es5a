@@ -5,19 +5,19 @@
 [role="arc42help"]
 ****
 .Contents
-System scope and context - as the name suggests - delimits your system (i.e. your scope) from all its communication partners
-(neighboring systems and users, i.e. the context of your system). It thereby specifies the external interfaces.
+The system must be a web application based on the new technology called SOLID. This must be a system that allows you to upload and share routes with friends. 
 
-If necessary, differentiate the business context (domain specific inputs and outputs) from the technical context (channels, protocols, hardware).
+The main advantage of this system is to avoid storing personal information in a external server. The user is the owner of their information and decides with whom to share it. It allows us to have a clear separation between the data and the application because the information is stored in a POD, which is unique for each user, and allows to store their information inside it. This provides us privacy, security and guarantees.
 
-.Motivation
-The domain interfaces and technical interfaces to communication partners are among your system's most critical aspects. Make sure that you completely understand them.
+The following information must be allowed to be stored:
 
-.Form
-Various options:
+* *Routes*
+* *Images*
+* *Videos*
+* *Plain text*
 
-* Context diagrams
-* Lists of communication partners and their interfaces.
+The information exchange will be done by typing in the POD of the user logged in. If you want to share some information, the other user will be given permission to read only the recurring information.
+
 ****
 
 
