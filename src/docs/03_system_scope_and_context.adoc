@@ -53,20 +53,25 @@ image::images/03-context.png[Business context diagram]
 
 [role="arc42help"]
 ****
-.Contents
-Technical interfaces (channels and transmission media) linking your system to its environment. In addition a mapping of domain specific input/output to the channels, i.e. an explanation with I/O uses which channel.
+The implementation of the system should be done using the React framework that provides the developer the facility to design a usable web page for the user. This will allow to create a path storing milestones, images and videos.
 
-.Motivation
-Many stakeholders make architectural decision based on the technical interfaces between the system and its context. Especially infrastructure or hardware designers decide these technical interfaces.
+The processing of the files must be done using RDF, a system that SOLID is compatible with. The information will be treated and processed in the client and will be sent to the server where it will be stored. If any information is received, this action will be carried out in the opposite direction.
 
-.Form
-E.g. UML deployment diagram describing channels to neighboring systems,
-together with a mapping table showing the relationships between channels and input/output.
+Solid's POD server will allow us to store the information in our POD, and access the information in the PODs where the user has permissions. 
+
+[%header,cols=2*] 
+|===
+|Technical interfaces
+|Stakeholder
+
+|Viade
+|Anonymous User, Logged User
+
+|POD
+|Logged user, friends user
+
+|POD Server
+|POD, Logged user, friends user
+|===
 
 ****
-
-**<Diagram or Table>**
-
-**<optionally: Explanation of technical interfaces>**
-
-**<Mapping Input/Output to Channels>**
