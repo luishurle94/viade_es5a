@@ -41,11 +41,92 @@ It is possible to use a sequence diagram:
 
 [plantuml,"Sequence diagram",png]
 ----
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+title Viade
+header Sequence diagram v.0.1
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+actor USER
+participant UI
+actor OTHER_USER
+participant OTHER_USER_UI
+control AuthService
+database SOLID
+control DataService
+database POD
+database OTHER_USER_POD
+
+
+== Authentication ==
+
+USER -> UI: Set (user/password) + LOGIN
+UI -> AuthService: Authentication Request
+AuthService -> SOLID: Validate credentials
+
+alt successful login
+	SOLID -> AuthService: Correct user credentials
+	AuthService --> UI: Load HomePage
+
+else failure login
+	SOLID -> AuthService: Invalid user credentials
+	AuthService --> UI: Load LoginPage
+	end
+
+== Store route ==
+
+USER -> UI: ADD ROUTE
+UI -> DataService: AddRoute()
+DataService -> POD: Store route
+
+alt successful	
+	POD -> DataService: Route added
+	DataService --> UI: Successful notification
+
+else failure
+	POD -> DataService: Route could't be added
+	DataService --> UI: Failure notification
+	end
+
+== View route map ==
+
+USER -> UI: RENDER ROUTE
+UI -> DataService: getRoute()
+DataService -> POD: Get Route
+
+alt successful	
+	POD -> DataService: Route available
+	DataService --> UI: Successful notification
+
+else failure
+	POD -> DataService: Route info could't be reached
+	DataService --> UI: Failure notification
+	end
+
+== Share content ==
+
+USER -> UI: SHARE CONTENT
+UI -> DataService: shareContent(otherUser)
+DataService -> POD: Get Content
+DataService -> OTHER_USER_POD: Send Content
+
+alt successful	
+	POD -> DataService: Content sended
+	DataService --> UI: Successful notification
+
+else failure
+	POD -> DataService: Content not sended
+	DataService --> UI: Failure notification
+	end
+
+
+
+alt successful	
+	OTHER_USER_POD -> DataService: Content received
+	DataService --> OTHER_USER_UI: Successful notification
+
+else failure
+	OTHER_USER_POD -> DataService: Content not received
+	DataService --> OTHER_USER_UI: Failure notification
+	end
+
 ----
 === <Runtime Scenario 2>
 
