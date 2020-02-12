@@ -54,7 +54,6 @@ control DataService
 database POD
 database OTHER_USER_POD
 
-
 == Authentication ==
 
 USER -> UI: Set (user/password) + LOGIN
