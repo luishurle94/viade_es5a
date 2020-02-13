@@ -50,6 +50,65 @@ For architects, two kinds of scenarios are important:
 * Usage scenarios (also called application scenarios or use case scenarios) describe the system’s runtime reaction to a certain stimulus. This also includes scenarios that describe the system’s efficiency or performance. Example: The system reacts to a user’s request within one second.
 * Change scenarios describe a modification of the system or of its immediate environment. Example: Additional functionality is implemented or requirements for a quality attribute change.
 
+[cols=4*,options="header"]
+|===
+|Ref
+|AQ
+|Scenario 
+|Priority
+
+
+|1
+|Efficiency
+|A user can access any route in less than 10 seconds
+|High, Medium
+
+|2
+|Reliability
+|All those actions that you want to do on the routes (create, delete, etc.) must appear updated in the application and can be delayed at most 1 hour
+|Medium, High
+
+|3
+|Availability
+|Any route stored in the database must be visible by any user who has the privilege for at least 97% of the time throughout the year.
+|Medium, Medium
+
+|4
+|Availability
+|In case of error, the fault will be saved in the log. This error must be accessible by any professional who works in the maintenance of this application
+|Medium, High
+
+|5
+|Maintainability
+|If you have to modify, update or make any changes to the application, it must be easily added thanks to the clean and precise code structure
+|Medium, Medium
+
+|6
+|Testability
+|Everything that involves functionality in the application must be tested before offering the new service to customers.
+|Low, Medium
+
+|7
+|Portability
+|The application must be able to be used in mobile devices and others that have the ability to be used in the street.
+|Medium, Medium
+
+|8
+|Availability
+|In case of failure of the servers, these will be replaced by ones that work correctly within 48 hours
+|Medium, High
+
+|9
+|Security
+|The application must support any type of external attack that directly affects the application and the users that use it.
+|Low, Low
+
+|10
+|Modifiability
+|In case you want to modify some aspect of the application, it must be possible to do it without any problem.
+|Medium, Medium
+|===
+
 .Motivation
 Scenarios make quality requirements concrete and allow to
 more easily measure or decide whether they are fulfilled.
