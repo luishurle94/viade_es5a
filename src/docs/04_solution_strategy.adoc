@@ -4,21 +4,66 @@
 
 [role="arc42help"]
 ****
-.Contents
-A short summary and explanation of the fundamental decisions and solution strategies, that shape the system's architecture. These include
+In this section, we present the decisions in a tabular format. By reading the table, you will be able to see the strategy itself, a brief explanation and an alphanumeric identifier describing the decision type.
 
-* technology decisions
-* decisions about the top-level decomposition of the system, e.g. usage of an architectural pattern or design pattern
-* decisions on how to achieve key quality goals
-* relevant organizational decisions, e.g. selecting a development process or delegating certain tasks to third parties.
+At the end of this section, there is a table legend describing the different types of the decisions/strategies.
 
-.Motivation
-These decisions form the cornerstones for your architecture. They are the basis for many other detailed decisions or implementation rules.
+[%header,cols=3*] 
+|===
+|ID
+|Decision
+|Explanation
 
-.Form
-Keep the explanation of these key decisions short.
+|TD01
+|SOLID Specifications
+|Decentralization as well as Security will be fulfilled by using SOLID and SOLID PODs, letting users store routes in their owned PODs
 
-Motivate what you have decided and why you decided that way,
-based upon your problem statement, the quality goals and key constraints.
-Refer to details in the following sections.
+|TD02
+|REACT Framework
+|This JavaScript Library is a breaking point for Maintainable and Usability in Software Designing and Software Quality by 'puting together' simple modular components. It will also help with the approach of making a simple-to-use user interface
+
+|TD03
+|RDF
+|The Resource Description Framework standard model will be use to interchange data.
+
+|AD01
+|MVC Pattern
+|Model-View-Controller Pattern will be used to separate application's concerns and reach our quality agreements.
+
+|OD01
+|Login Process
+|Login task will be 'delegated' to a third party (SOLID login/registration process) to ensure and strengthen Security requirements in our application
+
+|OD02
+|Agile methodology
+|Our self-organizing and cross-functional team will follow an agile methodology, with week-long meetings and continual improvement that will lead to a complete final product
+
+|OD03
+|Version Control
+|GitHub Pages has a place in our organizational decisions, its version control functionality will smooth our incremental working process worries.
+
+|OD04
+|Communication
+|According to our methodology type, communication will take place diary, expressing our problems by using 'Issues' along with our weekly team meetings
+
+|===
+
+
+Table Legend
+[%header,cols=2*] 
+|===
+
+|Element
+|Meaning
+
+|TDXX
+|Technological Decision with number XX.
+
+|ODXX
+|Organizational Decision with number XX.
+
+|ADXX
+|Architectural Decision with number XX.
+
+|===
 ****
