@@ -19,14 +19,13 @@ that is functional, stable and safe.
 
 ** Node.js: the working environment of Node.js can be troublesome because when it comes to updating libraries, the npm package manager can load libraries that do not correspond to those needed.
 
-** Javascript: the lack of practice we have in this language can be a problem translated in time since Javascript is a language that is not at all easy. 
+** Javascript: the lack of practice we have in this language can be a problem translated in time since Javascript is a language that it is not at all easy. 
 
-** ReactJS and React Native: are two frameworks that we have never used, besides they are very recent (2013 and 2015 respectively), both require native developers and are subject to the restrictions of Facebook (creator).
+** ReactJS and React Native: The first is a library and the second is a framework that we have never used, besides they are very recent (2013 and 2015 respectively), both require native developers and are subject to the restrictions of Facebook (creator).
 
 ** Bootstrap: although it is easy to learn, it is necessary to adapt, understand and become familiar with its structure and nomenclature.
 
-** Git: Except for one member of the team, the rest of us have a basic understanding of how git works, so we'll be 
-that can lead to delays and/or missed codes.
+** Git: Except for one member of the team, the rest of us have a basic understanding of how git works, which can lead to delays or missed codes.
 
 * The poor maintenance or abandonment of some libraries.
 
