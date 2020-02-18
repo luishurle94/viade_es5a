@@ -27,37 +27,25 @@ Client-Server high level communication (HTTP).
 
 === Level 2
 
-[role="arc42help"]
-****
-Here you can specify the inner structure of (some) building blocks from level 1 as white boxes.
+==== White Box Viade Client
+Contained Building Blocks::
+[cols="1,3" options="header"]
+|===
+| **Name** | **Responsibility**
+| Route Module | It manages the routes and multimedia that users can share.
+| RDF Service | It transforms data to/from RDF format.
+| Solid Adapter Service | Link between Viade and Solid Server.
+|===
 
-You have to decide which building blocks of your system are important enough to justify such a detailed description.
-Please prefer relevance over completeness. Specify important, surprising, risky, complex or volatile building blocks.
-Leave out normal, simple, boring or standardized parts of your system
-****
+==== White Box Solid Server
+Contained Building Blocks::
+ * Authentication
+ * Authorization
+ * HTTP
+ * LDP
+ * Storage
 
-==== White Box _<building block 1>_
-
-[role="arc42help"]
-****
-...describes the internal structure of _building block 1_.
-****
-
-_<white box template>_
-
-==== White Box _<building block 2>_
-
-
-_<white box template>_
-
-...
-
-==== White Box _<building block m>_
-
-
-_<white box template>_
-
-
+For more indepth information relative to this blocks, click link:https://rubenverborgh.github.io/solid-server-architecture/solid-architecture-v1-2-0.pdf[here].
 
 === Level 3
 
