@@ -31,4 +31,5 @@ RDF_Service --> Route_Module : response
 
 RDF_Service --> Solid_Adapter_Service : codification
 Solid_Adapter_Service --> RDF_Service : decodification
+
 ----
