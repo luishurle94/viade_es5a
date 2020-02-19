@@ -4,23 +4,13 @@
 
 [role="arc42help"]
 ****
-.Contents
-Important, expensive, large scale or risky architecture decisions including rationals.
-With "decisions" we mean selecting one alternative based on given criteria.
+In this section we will talk about the design decisions made to implement our routes application.
 
-Please use your judgement to decide whether an architectural decision should be documented
-here in this central section or whether you better document it locally
-(e.g. within the white box template of one building block).
+* For the project interface, we are going to use Bootstrap libraries along with solid react components.
 
-Avoid redundancy. Refer to section 4, where you already captured the most important decisions of your architecture.
+* Programming language: we will use JavaScript together with ReactJs libraries, all using the Node.js framework.
 
-.Motivation
-Stakeholders of your system should be able to comprehend and retrace your decisions.
+* Data storage: the data storage will be done through PODS implementations and through use of RDF.
 
-.Form
-Various options:
-
-* List or table, ordered by importance and consequences or:
-* more detailed in form of separate sections per decision
-* ADR (architecture decision record) for every important decision
+* Testing: to test the proect, in addition to performing unit test, we will use Cucumber for acceptance tests.
 ****
