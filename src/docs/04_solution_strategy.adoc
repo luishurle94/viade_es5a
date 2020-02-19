@@ -30,6 +30,10 @@ At the end of this section, there is a table legend describing the different typ
 |MVC Pattern
 |Model-View-Controller Pattern will be used to separate application's concerns and reach our quality agreements.
 
+|AD02
+|Multitier architecture
+|A n-tier architecture must be use in order to ensure scalability, maintainability, security, and reusability, among others by dividing _presentation_, _logical domain_ and _data storage_.  
+
 |OD01
 |Login Process
 |Login task will be 'delegated' to a third party (SOLID login/registration process) to ensure and strengthen Security requirements in our application
