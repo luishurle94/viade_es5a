@@ -10,7 +10,7 @@ For reference, we are going to use the scope and context diagram that has been d
 
 _**<Overview Diagram>**_
 
-image::images/05-block-diagram.svg[Business context diagram]
+image::05-block-diagram.svg[Business context diagram]
 
 Motivation::
 The motivation of this diagram is to have a general vision of all different modules of the application.

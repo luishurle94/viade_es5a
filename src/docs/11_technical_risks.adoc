@@ -1,9 +1,6 @@
 [[section-technical-risks]]
 == Risks and Technical Debts
 
-
-[role="arc42help"]
-****
 .Contents
 
 In this section we will find all the risks and technical debts that 
@@ -12,20 +9,20 @@ sorted by priority.
 
 * Inexperience in the following technologies:
 
-** SOLID: we have practically no previous knowledge of this technology. Moreover, as Solid project is continuously changing and updating it makes it more difficult for us to develop our application.
+** *SOLID*: we have practically no previous knowledge of this technology. Moreover, as Solid project is continuously changing and updating it makes it more difficult for us to develop our application.
 
-** PODs: the main risk is the implementation of the SOLID server instead of using an existing one and this entails
+** *PODs*: the main risk is the implementation of the SOLID server instead of using an existing one and this entails
 that is functional, stable and safe.
 
-** Node.js: the working environment of Node.js can be troublesome because when it comes to updating libraries, the npm package manager can load libraries that do not correspond to those needed.
+** *Node.js*: the working environment of Node.js can be troublesome because when it comes to updating libraries, the npm package manager can load libraries that do not correspond to those needed.
 
-** Javascript: the lack of practice we have in this language can be a problem translated in time since Javascript is a language that it is not at all easy. 
+** *Javascript*: the lack of practice we have in this language can be a problem translated in time since Javascript is a language that it is not at all easy. 
 
-** ReactJS and React Native: The first is a library and the second is a framework that we have never used, besides they are very recent (2013 and 2015 respectively), both require native developers and are subject to the restrictions of Facebook (creator).
+** *ReactJS and React Native*: The first is a library and the second is a framework that we have never used, besides they are very recent (2013 and 2015 respectively), both require native developers and are subject to the restrictions of Facebook (creator).
 
-** Bootstrap: although it is easy to learn, it is necessary to adapt, understand and become familiar with its structure and nomenclature.
+** *Bootstrap*: although it is easy to learn, it is necessary to adapt, understand and become familiar with its structure and nomenclature.
 
-** Git: Except for one member of the team, the rest of us have a basic understanding of how git works, which can lead to delays or missed codes.
+** *Git*: Except for one member of the team, the rest of us have a basic understanding of how git works, which can lead to delays or missed codes.
 
 * The poor maintenance or abandonment of some libraries.
 
@@ -33,6 +30,3 @@ that is functional, stable and safe.
 delays in the development of the application.
 
 * Lack of cohesion in the team due to lack of previous relationship.
-
-
-****

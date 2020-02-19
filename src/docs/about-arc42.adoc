@@ -1,15 +1,15 @@
 :homepage: http://arc42.org
 
-:keywords: software-architecture, documentation, template, arc42
+:keywords: software-architecture, documentation, viade, arc42
+
+[role="lead"]
+2020 - *ViaDe_es5a*
 
 :numbered!:
 **About arc42**
 
-[role="lead"]
-arc42, the Template for documentation of
-software and system architecture.
-
-By Dr. Gernot Starke, Dr. Peter Hruschka and contributors.
+Thanks to:
+Dr. Gernot Starke, Dr. Peter Hruschka and contributors.
 
 
 Template Revision: 7.0 EN (based on asciidoc), January 2017

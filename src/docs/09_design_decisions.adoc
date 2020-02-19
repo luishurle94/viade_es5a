@@ -3,8 +3,6 @@
 
 Work in progress..
 
-[role="arc42help"]
-****
 In this section we will talk about the design decisions made to implement our routes application.
 
 * For the project interface, we are going to use Bootstrap libraries along with solid react components.
@@ -14,4 +12,3 @@ In this section we will talk about the design decisions made to implement our ro
 * Data storage: the data storage will be done through PODS implementations and through use of RDF.
 
 * Testing: we will use unit test to business logic, selenium for web usability and Cucumber for aceptance tests.
-****

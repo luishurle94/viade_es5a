@@ -1,9 +1,6 @@
 [[section-system-scope-and-context]]
 == System Scope and Context
 
-
-[role="arc42help"]
-****
 .Contents
 The system must be a web application based on the new technology called SOLID. This must be a system that allows you to upload and share routes with friends. 
 
@@ -18,12 +15,8 @@ The following information must be allowed to be stored:
 
 The information exchange will be done by typing in the POD of the user logged in. If you want to share some information, the other user will be given permission to read only the recurring information.
 
-****
-
 === Business Context
 
-[role="arc42help"]
-****
 The different stakeholders in the software product we are dealing with are the following: 
 
 * *Anonymous user*
@@ -37,7 +30,7 @@ The next stakeholders are candidates to be considered in the future:
 * *Teacher*
 * *Inrupt Workers*
 
-image::images/03-context.png[Business context diagram]
+image::03-context.png[Business context diagram]
 
 [%header,cols=3*] 
 |===
@@ -47,12 +40,9 @@ image::images/03-context.png[Business context diagram]
 | POD								| Route, images, videos, text			| RDF
 |===
 
-****
 
 === Technical Context
 
-[role="arc42help"]
-****
 The implementation of the system should be done using the React framework that provides the developer the facility to design a usable web page for the user. This will allow to create a path storing milestones, images and videos.
 
 The processing of the files must be done using RDF, a system that SOLID is compatible with. The information will be treated and processed in the client and will be sent to the server where it will be stored. If any information is received, this action will be carried out in the opposite direction.
@@ -73,5 +63,3 @@ Solid's POD server will allow us to store the information in our POD, and access
 |POD Server
 |POD, Logged user, friends user
 |===
-
-****

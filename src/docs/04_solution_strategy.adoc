@@ -1,9 +1,6 @@
 [[section-solution-strategy]]
 == Solution Strategy
 
-
-[role="arc42help"]
-****
 In this section, we present the decisions in a tabular format. By reading the table, you will be able to see the strategy itself, a brief explanation and an alphanumeric identifier describing the decision type.
 
 At the end of this section, there is a table legend describing the different types of the decisions/strategies.
@@ -70,4 +67,3 @@ Table Legend
 |Architectural Decision with number XX.
 
 |===
-****

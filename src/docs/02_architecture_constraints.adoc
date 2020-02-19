@@ -1,10 +1,6 @@
 [[section-architecture-constraints]]
 == Architecture Constraints
 
-
-[role="arc42help"]
-****
-
 In the next paragraphs, we set forth the constraints in a tabular format. By reading the table, you will be able to see the constraint itself, a brief explanation describing the main details and an alphanumeric identifier describing the constraint type.
 
 At the end of this section, there is a table legend describing the different types of the constraints that we must deal with.
@@ -54,4 +50,3 @@ Table Legend
 |Political Constraint and Convention with number XX.
 
 |===
-****
