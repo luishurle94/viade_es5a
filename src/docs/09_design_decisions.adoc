@@ -1,6 +1,7 @@
 [[section-design-decisions]]
 == Design Decisions
 
+Work in progress..
 
 [role="arc42help"]
 ****
@@ -12,5 +13,5 @@ In this section we will talk about the design decisions made to implement our ro
 
 * Data storage: the data storage will be done through PODS implementations and through use of RDF.
 
-* Testing: to test the proect, in addition to performing unit test, we will use Cucumber for acceptance tests.
+* Testing: we will use unit test to business logic, selenium for web usability and Cucumber for aceptance tests.
 ****
