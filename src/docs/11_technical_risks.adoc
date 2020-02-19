@@ -5,13 +5,34 @@
 [role="arc42help"]
 ****
 .Contents
-A list of identified technical risks or technical debts, ordered by priority
 
-.Motivation
-“Risk management is project management for grown-ups” (Tim Lister, Atlantic Systems Guild.) 
+In this section we will find all the risks and technical debts that 
+can arise throughout the project, from start to finish, 
+sorted by priority.
 
-This should be your motto for systematic detection and evaluation of risks and technical debts in the architecture, which will be needed by management stakeholders (e.g. project managers, product owners) as part of the overall risk analysis and measurement planning.
+* Inexperience in the following technologies:
 
-.Form
-List of risks and/or technical debts, probably including suggested measures to minimize, mitigate or avoid risks or reduce technical debts.
+** SOLID: we have practically no previous knowledge of this technology. Moreover, as Solid project is continuously changing and updating it makes it more difficult for us to develop our application.
+
+** PODs: the main risk is the implementation of the SOLID server instead of using an existing one and this entails
+that is functional, stable and safe.
+
+** Node.js: the working environment of Node.js can be troublesome because when it comes to updating libraries, the npm package manager can load libraries that do not correspond to those needed.
+
+** Javascript: the lack of practice we have in this language can be a problem translated in time since Javascript is a language that it is not at all easy. 
+
+** ReactJS and React Native: The first is a library and the second is a framework that we have never used, besides they are very recent (2013 and 2015 respectively), both require native developers and are subject to the restrictions of Facebook (creator).
+
+** Bootstrap: although it is easy to learn, it is necessary to adapt, understand and become familiar with its structure and nomenclature.
+
+** Git: Except for one member of the team, the rest of us have a basic understanding of how git works, which can lead to delays or missed codes.
+
+* The poor maintenance or abandonment of some libraries.
+
+* Abandonment of members due to lack of motivation and time. It can cause us
+delays in the development of the application.
+
+* Lack of cohesion in the team due to lack of previous relationship.
+
+
 ****
