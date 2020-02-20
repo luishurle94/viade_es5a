@@ -2,6 +2,15 @@
 
 
 == Deployment View
+
+Currenty in WIP.
+
+image::07-deployment-view.png[Deployment View]
+
+<!---
+[plantuml,"Deployment diagram",png]
+
+<!---
 [plantuml,"Deployment diagram",png]
 ----
 actor User
@@ -32,3 +41,4 @@ RDF_Service --> Route_Module : response
 RDF_Service --> Solid_Adapter_Service : codification
 Solid_Adapter_Service --> RDF_Service : decodification
 ----
+-->
