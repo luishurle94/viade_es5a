@@ -25,6 +25,12 @@ export const NavigationItems = [
     icon: '/img/icon/files.svg',
     label: 'navBar.text-editor',
     to: '/text-editor'
+  },
+  {
+    id: 'add-route',
+    icon: '/img/icon/files.svg',
+    label: 'navBar.add-route',
+    to: '/add-route'
   }
 ];
 

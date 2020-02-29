@@ -64,7 +64,8 @@
       "noinbox": "No se encontró ningún inbox en su POD, debes tener al menos uno para jugar.",
       "fetchingError": "Error en las notificaciones"
     },
-    "tictactoe": "Juego"
+    "tictactoe": "Juego",
+    "add-route": "Añadir Ruta"
   },
   "footer": {
     "version": "Versión"
@@ -244,5 +245,24 @@
     "load": "Cargar",
     "save": "Guardar",
     "grantAccess": "Dar Acceso"
+  },
+  "addRoute": {
+    "title": "Añadir Ruta",
+    "submit": "Enviar",
+    "connection": "Conectado como:",
+    "name": "Nombre",
+    "description": "Descripción",
+    "distance": "Distancia",
+    "slope": "Desnivel",
+    "rank": "Dificultad",
+    "notifications": {
+      "nameEmpty": "El campo 'Nombre' no puede estar vacío",
+      "distanceNegative": "'Distancia' debe ser mayor que cero",
+      "slopeNegative": "'Desnivel' debe ser al menos cero",
+      "rank": "'Dificultad' debe estar en el rango [0 - 10]",
+      "correct": "Guardando tu ruta...",
+      "error": "¡Ups! Algunos campos del formulario no son válidos",
+      "errorService": "Se ha producido un error al guardar tu ruta. Quizás si lo intentaras de nuevo..."
+    }
   }
 }
