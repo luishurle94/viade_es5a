@@ -3,7 +3,7 @@ import { AccessControlList } from '@inrupt/solid-react-components';
 import { resourceExists, createDoc, createDocument } from './ldflex-helper';
 import { storageHelper, errorToaster, permissionHelper } from '@utils';
 
-const appPath = process.env.REACT_APP_TICTAC_PATH;
+const appPath = process.env.REACT_APP_VIADE_PATH;
 
 /**
  * Creates a valid string that represents the application path. This is the
@@ -57,15 +57,15 @@ export const createInitialFiles = async webId => {
     if (!hasWritePermission) return;
 
     // Get the default app storage location from the user's pod and append our path to it
-    const gameUrl = await storageHelper.getAppStorage(webId);
+    const url = await storageHelper.getAppStorage(webId);
 
-    // Set up various paths relative to the game URL
-    const dataFilePath = `${gameUrl}data.ttl`;
-    const settingsFilePath = `${gameUrl}settings.ttl`;
+    // Set up various paths relative to the app URL
+    const dataFilePath = `${url}data.ttl`;
+    const settingsFilePath = `${url}settings.ttl`;
 
-    // Check if the tictactoe folder exists, if not then create it. This is where game files, the game inbox, and settings files are created by default
-    const gameFolderExists = await resourceExists(gameUrl);
-    if (!gameFolderExists) {
+    // Check if the tictactoe folder exists, if not then create it. This is where app files, the app inbox, and settings files are created by default
+    const appFolderExists = await resourceExists(url);
+    if (!appFolderExists) {
       await createDoc(data, {
         method: 'PUT',
         headers: {
@@ -74,13 +74,13 @@ export const createInitialFiles = async webId => {
       });
     }
 
-    // Check if data file exists, if not then create it. This file holds links to other people's games
+    // Check if data file exists, if not then create it. This file holds links to other people's apps
     const dataFileExists = await resourceExists(dataFilePath);
     if (!dataFileExists) {
       await createDocument(dataFilePath);
     }
 
-    // Check if the settings file exists, if not then create it. This file is for general settings including the link to the game-specific inbox
+    // Check if the settings file exists, if not then create it. This file is for general settings including the link to the app-specific inbox
     const settingsFileExists = await resourceExists(settingsFilePath);
     if (!settingsFileExists) {
       await createDocument(settingsFilePath);
