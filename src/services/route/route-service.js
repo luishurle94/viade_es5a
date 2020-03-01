@@ -1,10 +1,15 @@
+import { SolidAdapter } from "../../solid";
+import routeShape from '@contexts/route-shape.json';
+import { Route } from '../../model'
+import { RouteFactory } from '../factories'
+
 /**
  * Add route
  * @param {Route} route 
  * @returns boolean if action is exectuted sucesfully
  */
 export const add = async (route) => {
-    return false;
+  return SolidAdapter.create(route, routeShape, route.createdBy);
 }
 
 /**
@@ -19,6 +24,7 @@ export const remove = async (webId) => {
  * @param {String} webId route 
  */
 export const get = async (webId) => {
+  return RouteFactory.create(await SolidAdapter.get(webId, routeShape));
 }
 
 /**

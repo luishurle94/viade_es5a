@@ -3,12 +3,14 @@ import Comment from './comment';
 import Milestone from './milestone';
 
 export default class Route {
+  // TODO 
+  webId = '';
+
   messages = [];
   milestones = [];
 
   /**
    * 
-   * @param {String} webId 
    * @param {String} name 
    * @param {String} description 
    * @param {number} distance 
@@ -17,8 +19,7 @@ export default class Route {
    * @param {String} createdBy 
    * @param {Date} createdAt 
    */
-  constructor(webId, name, description, distance, slope, rank, createdBy, createdAt) {
-    this.webId = webId;
+  constructor(name, description, distance, slope, rank, createdBy, createdAt) {
     this.name = name;
     this.description = description;
     this.distance = distance;
