@@ -1,55 +1,59 @@
 
 import { AccessControlList } from '@inrupt/solid-react-components';
-import { ldflexHelper } from '@utils';
 import auth from 'solid-auth-client';
 import { HashHelper } from '@utils';
 import * as SolidHelper from './solid-helper'
 
 /**
  * Create new node in graph
- * @param {*} obj add
+ * @param {Model} obj add object with getIdentifier() implemented
  * @param {*} context jsonld context {prefix, predicate}
  * @param {String} webId user
- * @param {String} filename 
  * @param {String} parentWebId parent webId
  */
-export const create = async (obj, context, webId, parentWebId) => {
+export const create = async (obj, context, createDocumentP, webIdP, parentWebIdP, parentFilenameP, parentPredicateP, folderP) => {
   try {
-    parentWebId = parentWebId || await currentUserId();
+    const {createDocument, webId, parentWebId, parentFilename, parentPredicate, folder} = await checkParams(createDocumentP, webIdP, parentWebIdP, parentFilenameP, parentPredicateP, folderP);    
 
+    // check if structure is created
     if (await SolidHelper.createInitialStructure(webId)) {
-      const appPath = await SolidHelper.getAppPathStorage(webId);
-      const path = `${HashHelper.hash(obj.name)}.ttl`;
-      const documentUri = `${appPath}${path}`;
-
-      const newDocument = await ldflexHelper.createNonExistentDocument(documentUri);
-  
-      if (!newDocument) {
-        return false;
-      }
-  
-      if (newDocument.ok) {
-        for await (const field of context.shape) {
-            const data = obj[field.object];
-            await SolidHelper.addToGraph(webId, data, field.literal, path, SolidHelper.getPredicate(field, context));
-        }
-
-        // link with parent
-        await SolidHelper.addToGraph(parentWebId, documentUri);
-
-        // check insert
-        const res = await SolidHelper.fetchRawData(documentUri, context);
-
-        return res !== null && res !== undefined;
-      }
+      return insert(obj, context, createDocument, obj.getIdentifier(), webId, parentWebId, parentFilename, parentPredicate, folder);
     }    
-    console.log(webId)
   } catch (e) {
     console.log(e)
-    return false;
   }
   
   return false;
+}
+
+export const insert = async (obj, context, createDocumentP, filename, webIdP, parentWebIdP, parentFilenameP, parentPredicateP, folderP) => {
+  const {createDocument, webId, parentWebId, parentFilename, parentPredicate, folder} = await checkParams(createDocumentP, webIdP, parentWebIdP, parentFilenameP, parentPredicateP,folderP);    
+
+  const appPath = await SolidHelper.getAppPathStorage(webId);
+  const path = `${HashHelper.hash(filename)}.ttl`;
+  const documentUri = `${appPath}${folder}${path}`;
+
+  // get graph
+  const newDocument = await SolidHelper.createAndGetDocument(documentUri, createDocument);
+  if (!newDocument) {
+    return false;
+  }
+
+  // if document is ok, continue
+  if (newDocument.ok) {
+    for await (const field of context.shape) {
+        const data = obj[field.object];
+        await SolidHelper.addToGraph(webId, data, field.literal, path, folder, SolidHelper.getPredicate(field, context));
+    }
+    
+    // create link with parent. IT CAN'T BE A LITERAL, IT'S A REFERENCE
+    await SolidHelper.addToGraph(parentWebId, documentUri, false, parentFilename, '', parentPredicate);
+
+    // check insert
+    const res = await SolidHelper.fetchRawData(documentUri, context);
+
+    return res !== null && res !== undefined;
+  }
 }
 
 export const remove = async (webId) => {
@@ -95,4 +99,28 @@ export const currentUserId = async () => {
   } catch (e) {
     throw e;
   }
+}
+
+export const getPredicate = async (field, context) => {
+  return SolidHelper.getPredicate(field, context);
+}
+
+const checkParams = async (createDocument, webId, parentWebId, parentFilename, parentPredicate, folder) => {
+  createDocument = createDocument || true;
+  folder = folder || '';
+  if (folder.length > 0 && !folder.includes('/'))  folder = `${folder}/`;
+  
+  webId = webId || await currentUserId();
+  parentWebId = parentWebId || await currentUserId();
+
+  if (parentFilename) {
+    if ((typeof parentFilename === 'string' && !parentFilename.includes('.ttl')) || (typeof parentFilename === 'number')) {
+      parentFilename = HashHelper.hash(parentFilename);
+    } 
+  } else {
+    parentFilename = 'data';
+  }
+  if (parentFilename && !parentFilename.toString().includes('.ttl'))  parentFilename = `${parentFilename}.ttl`
+  parentPredicate = parentPredicate || 'schema:hasPart';
+  return {createDocument, webId, parentWebId, parentFilename, parentPredicate, folder};
 }

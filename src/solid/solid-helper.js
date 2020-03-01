@@ -10,9 +10,13 @@ export const createInitialStructure = async (webId) => {
   return isCreatedStructure;
 }
 
-export const addToGraph = async (webId, obj, lit, filename = 'data.ttl', predicate = 'schema:hasPart') => {
+export const createAndGetDocument = async (url, createDocument) => {
+  return !createDocument ? await ldflexHelper.resourceExists(url) : await ldflexHelper.createNonExistentDocument(url);
+}
+
+export const addToGraph = async (webId, obj, lit, filename, folder, predicate) => {
   const insert = lit ? literal(obj) : namedNode(obj);
-  await ldflex[`${await getAppPathStorage(webId)}${filename}`][predicate].add(insert);
+  await ldflex[`${await getAppPathStorage(webId)}${folder}${filename}`][predicate].add(insert);
 }
 
 export const fetchRawData = async (url, context) => {

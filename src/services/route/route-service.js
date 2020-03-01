@@ -1,7 +1,6 @@
 import { SolidAdapter } from "../../solid";
 import routeShape from '@contexts/route-shape.json';
-import { Route } from '../../model'
-import { RouteFactory } from '../factories'
+import { RouteFactory } from '../factories';
 
 /**
  * Add route
@@ -9,7 +8,7 @@ import { RouteFactory } from '../factories'
  * @returns boolean if action is exectuted sucesfully
  */
 export const add = async (route) => {
-  return SolidAdapter.create(route, routeShape, route.createdBy);
+  return SolidAdapter.create(route, routeShape, true, route.createdBy);
 }
 
 /**

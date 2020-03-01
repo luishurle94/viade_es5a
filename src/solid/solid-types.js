@@ -8,6 +8,9 @@ export const transformTypes = (type, value) => {
         case "date":
           // return epoach time
           return parseInt(value);
+        case "array":
+          //TODO
+          return [value];
         default:
           return value;
       }

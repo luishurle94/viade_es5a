@@ -1,10 +1,7 @@
 {
   "@context": {
     "foaf": "http://xmlns.com/foaf/0.1/",
-    "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
-    "bibo": "http://purl.org/ontology/bibo/",
-    "terms": "http://purl.org/dc/terms/",
-    "schema": "https://schema.org/"
+    "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#"
   },
   "shape": [
     {
@@ -36,29 +33,24 @@
       "type": "number"
     },
     {
-      "prefix": "bibo",
-      "predicate": "degree",
-      "object": "rank",
+      "prefix": "geo",
+      "predicate": "latitude",
+      "object": "latitude",
       "literal": true,
       "type": "number"
     },
     {
-      "prefix": "terms",
-      "predicate": "creator",
-      "object": "createdBy",
-      "type": "webId"
-    },
-    {
-      "prefix": "terms",
-      "predicate": "created",
-      "object": "createdAt",
+      "prefix": "geo",
+      "predicate": "longitude",
+      "object": "longitude",
       "literal": true,
-      "type": "Date"
+      "type": "number"
     },
     {
-      "prefix": "schema",
-      "predicate": "hasPart",
-      "object": "milestones",
+      "prefix": "foaf",
+      "predicate": "image",
+      "object": "images",
+      "literal": false,
       "type": "Array"
     }
   ]
