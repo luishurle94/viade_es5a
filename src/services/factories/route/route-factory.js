@@ -1,6 +1,11 @@
-import { Route } from "../../model";
+import { Route } from "../../../model";
+
 
 export const create = (route) => {
+  if (!route) {
+    return undefined;
+  }
+  
   let obj = new Route();
 
   if(route.webId) obj.webId = route.webId;

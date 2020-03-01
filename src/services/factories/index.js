@@ -1,3 +1,9 @@
-import * as RouteFactory from './route-factory';
+import * as RouteFactory from './route/route-factory';
+import * as MilestoneFactory from './milestone/milestone-factory';
 
-export { RouteFactory }
+
+/**
+ * Only for use in service layer.
+ * CANNOT BE EXPORTED
+ */
+export { RouteFactory, MilestoneFactory }
