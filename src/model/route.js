@@ -49,4 +49,8 @@ export default class Route {
     }
   }
 
+  getIdentifier() {
+    return `${this.name}_${this.createdBy}`;
+  }
+
 }
