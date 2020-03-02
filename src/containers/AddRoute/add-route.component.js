@@ -22,7 +22,8 @@ import {
 
 type Props = { webId: String };
 
-export const Editor = ({ webId }: Props) => {
+
+export const AddRoute = ({ webId }: Props) => {
   const { t } = useTranslation();
   const [url, setUrl] = useState('');
   const errors = [false, false, false, false];
@@ -52,21 +53,11 @@ export const Editor = ({ webId }: Props) => {
     } else{
       errors[0] = false;
     }
+  
   }
 
   function checkDescription(event){
     values[1] = event.target.value;
-  }
-
-  function checkSlope(event) {
-
-    values[2] = event.target.value;
-    if(event.target.value < event.target.min) {
-      errorToaster(t('addRoute.notifications.slopeNegative'));
-      errors[2] = true;
-    } else{
-      errors[2] = false;
-    }
   }
 
   function checkRank(event) {
@@ -93,7 +84,7 @@ export const Editor = ({ webId }: Props) => {
       let name = values[0];
       let description = values[1];
       let distance = 0;
-      let slope = values[2];
+      let slope = 0;
       let rank = values[3];
       let createdAt = new Date();
 
@@ -141,11 +132,6 @@ export const Editor = ({ webId }: Props) => {
           </Label>
 
         <Label>
-          {t('addRoute.slope')}
-          <Input type="number" min="0" defaultValue={100} onBlur={checkSlope} size="200"/>
-        </Label>
-
-        <Label>
           {t('addRoute.rank')}
           <Input type="number" min="0" max="10" defaultValue={5} onBlur={checkRank} size="200"/>
         </Label>
@@ -157,11 +143,12 @@ export const Editor = ({ webId }: Props) => {
   );
 };
 
+
 /**
  * A React component page that is displayed when there's no valid route. Users can click the button
  * to get back to the home/welcome page.
  */
-const TextEditor = ({ webId }: Props) => {
+const AddRouteComponent = ({ webId }: Props) => {
   const { t } = useTranslation();
   return (
     <TextEditorWrapper>
@@ -169,10 +156,10 @@ const TextEditor = ({ webId }: Props) => {
         <Header>
           <p>{t('addRoute.title')}</p>
         </Header>
-        <Editor webId={webId} />
+        <AddRoute webId={webId} />
       </TextEditorContainer>
     </TextEditorWrapper>
   );
 };
 
-export default TextEditor;
+export default AddRouteComponent;
