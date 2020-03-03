@@ -46,6 +46,13 @@ export const publish = async (createNotification, content, webId, type) => {
  * Get notifications
  */
 export const getNotifications = async () => {
+export const getNotifications = async (fetchNotification, useLiveUpdate) => {
+  const session = await auth.currentSession();
+  const inbox = await notification.findUserInboxes([
+    { path: session.webId, name: 'Global' }
+  ]);
+  
+  await fetchNotification(inbox);
 }
 
 /**
