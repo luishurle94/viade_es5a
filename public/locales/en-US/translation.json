@@ -64,7 +64,8 @@
       "noinbox": "Global inbox not found. Please create one and try again.",
       "fetchingError": "Error fetching notifications from Pod"
     },
-    "tictactoe": "Game"
+    "tictactoe": "Game",
+    "add-route": "Add Route"
   },
   "footer": {
     "version": "Version"
@@ -244,5 +245,24 @@
     "load": "Load",
     "save": "Save",
     "grantAccess": "Grant Access"
+  },
+  "addRoute": {
+    "title": "Add Route",
+    "submit": "Submit",
+    "connection": "Connected as:",
+    "name": "Name",
+    "description": "Description",
+    "distance": "Distance",
+    "slope": "Slope",
+    "rank": "Rank",
+    "notifications": {
+      "nameEmpty": "'Name' field can not be empty",
+      "distanceNegative": "'Distance' must be greater than zero",
+      "slopeNegative": "'Slope' must be at least zero",
+      "rank": "'Rank' must be in range [0 - 10]",
+      "correct": "Saving your route...",
+      "error": "Oops! Some fields of your form are not valid",
+      "errorService": "There was an error saving your route. Maybe if you try again..."
+    }
   }
 }
