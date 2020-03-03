@@ -45,7 +45,6 @@ export const publish = async (createNotification, content, webId, type) => {
 /**
  * Get notifications
  */
-export const getNotifications = async () => {
 export const getNotifications = async (fetchNotification, useLiveUpdate) => {
   const session = await auth.currentSession();
   const inbox = await notification.findUserInboxes([
@@ -58,5 +57,6 @@ export const getNotifications = async (fetchNotification, useLiveUpdate) => {
 /**
  * Get unread notifications
  */
-export const getUnreadNotifications = async () => {
+export const getUnreadNotifications = async (fetchNotification) => {
+  return getNotifications(fetchNotification).filter(notification => notification.read === false);
 }
