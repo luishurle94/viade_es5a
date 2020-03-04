@@ -24,6 +24,17 @@ export const add = async (routeId, milestone) => {
  * @param {String} milestoneId 
  */
 export const remove = async (routeId, milestoneId) => {
+  const resMilestone = await SolidAdapter.remove(milestoneId);
+  if (!resMilestone)
+    return false;
+
+  // get route
+  const route = await RouteService.get(routeId);
+  // Only create node and link with route
+  const field = routeShape.shape.filter(s => s.object === 'milestones')[0];
+
+  const resRoute = await SolidAdapter.unlink(routeId, await SolidAdapter.getPredicate(field, routeShape), milestoneId);
+  return resMilestone && resRoute;
 }
 
 /**

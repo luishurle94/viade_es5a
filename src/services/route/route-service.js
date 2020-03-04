@@ -16,6 +16,7 @@ export const add = async (route) => {
  * @param {String} webId route 
  */
 export const remove = async (webId) => {
+  return SolidAdapter.remove(webId);
 }
 
 /**
