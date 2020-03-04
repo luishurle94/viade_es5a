@@ -22,6 +22,10 @@ export const addToGraph = async (webId, obj, lit, filename, folder, predicate) =
   await ldflex[`${await getAppPathStorage(webId)}${folder}${filename}`][predicate].add(insert);
 }
 
+export const removeToGraph = async (webId, predicate, url) => {
+  // unlink in graph
+}
+
 export const fetchRawData = async (url, context) => {
   try {
     const obj = await ldflexHelper.fetchLdflexDocument(url);
@@ -50,6 +54,21 @@ export const fetchFilesData = async (url) => {
  } catch(e) {
   throw e;
  }
+}
+
+export const deleteFile = async (url) => {
+  try {
+    if (!await ldflexHelper.resourceExists(url))
+      return false;
+
+    let deleteFile = await fc.deleteFile(url);
+    if (deleteFile.ok)
+      return true;
+
+    return false;
+  } catch (e) {
+      throw e;
+  }
 }
 
 export const getAppPathStorage = async (webId) => {

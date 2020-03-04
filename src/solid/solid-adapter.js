@@ -57,6 +57,11 @@ export const insert = async (obj, context, createDocumentP, filename, webIdP, pa
 }
 
 export const remove = async (webId) => {
+  return await SolidHelper.deleteFile(webId);
+}
+
+export const unlink = async(webId, predicate, url) => {
+  return await SolidHelper.removeToGraph(webId, predicate, url);
 }
 
 /**
