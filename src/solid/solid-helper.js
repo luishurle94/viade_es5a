@@ -3,6 +3,9 @@ import { SolidTypesHelper } from './../solid';
 import { ldflexHelper, storageHelper } from '@utils';
 import { namedNode, literal } from '@rdfjs/data-model';
 import ldflex from '@solid/query-ldflex';
+const auth = require('solid-auth-cli')
+const FC   = require('solid-file-client')
+const fc   = new FC( auth )
 
 let isCreatedStructure = false;
 export const createInitialStructure = async (webId) => {
@@ -35,6 +38,18 @@ export const fetchRawData = async (url, context) => {
   } catch (error) {
     throw error;
   }
+}
+
+export const fetchFilesData = async (url) => {
+ try {
+  let response = await fc.readFolder(url);
+  if (response && response.type === 'folder' && response.itemType === 'Container') {
+    console.log(response)
+    return response.files.filter(f => f.type === 'text/turtle').map(f => f.url);
+  }
+ } catch(e) {
+  throw e;
+ }
 }
 
 export const getAppPathStorage = async (webId) => {

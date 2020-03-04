@@ -28,8 +28,22 @@ export const get = async (webId) => {
 
 /**
  * Get routes from user
+ * @param {boolean} getData return url or milestone array
  */
-export const getAll = async () => {
+export const getAll = async (getData = true) => {
+  const list = await SolidAdapter.getAll();
+  // return list with url
+  if (!getData) {
+    return list;
+  }
+
+  // return list with routes
+  const res = [];
+  for(let u of list) {
+    const r = await get(u);
+    res.push(r);
+  }
+  return res;
 }
 
 /**

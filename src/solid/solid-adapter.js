@@ -67,12 +67,24 @@ export const get = async (webId, context) => {
   try {
     return await SolidHelper.fetchRawData(webId, context);
   } catch (e) {
-    console.log(e)
+    console.error(e)
     return undefined;
   }
 }
 
-export const getAll = async () => {
+export const getAll = async (folder) => {
+  try {
+    folder = folder || '';
+
+    const webId = await currentUserId();
+    const appPath = await SolidHelper.getAppPathStorage(webId);
+    const documentsUri = `${appPath}${folder}`;
+
+    return await SolidHelper.fetchFilesData(documentsUri);
+  } catch (e) {
+    console.error(e)
+    return [];
+  }
 }
 
 export const share = async (webId, friendId, shareUrl) => {
@@ -87,7 +99,7 @@ export const share = async (webId, friendId, shareUrl) => {
     await ACLFile.createACL(permissions);
     return true;
   } catch (e) {
-    console.log(e)
+    console.error(e)
     return false;
   }
 }
