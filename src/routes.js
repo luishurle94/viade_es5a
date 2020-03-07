@@ -14,7 +14,7 @@ import {
   FormModelConverter,
   FormModelRenderer,
   TextEditor,
-  AddRoute
+  GoogleMap
 } from './containers';
 
 const privateRoutes = [
@@ -44,11 +44,6 @@ const privateRoutes = [
     component: TextEditor
   },
   {
-    id: 'add-route',
-    path: '/add-route',
-    component: AddRoute
-  },
-  {
     id: 'formmodelconverter',
     path: '/formmodel/converter',
     component: FormModelConverter
@@ -57,6 +52,11 @@ const privateRoutes = [
     id: 'formmodelrenderer',
     path: '/formmodel/renderer',
     component: FormModelRenderer
+  },
+  {
+    id: 'googlemap',
+    path: '/routemap',
+    component: GoogleMap
   }
 ];
 

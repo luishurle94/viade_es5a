@@ -27,10 +27,10 @@ export const NavigationItems = [
     to: '/text-editor'
   },
   {
-    id: 'add-route',
-    icon: '/img/icon/files.svg',
-    label: 'navBar.add-route',
-    to: '/add-route'
+    id:'map',
+    icon : '',
+    label :'Mapa de rutas',
+    to :'/routemap'
   }
 ];
 

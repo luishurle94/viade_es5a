@@ -4,9 +4,9 @@ import PageNotFound from './PageNotFound';
 import Welcome from './Welcome';
 import Profile from './Profile';
 import TextEditor from './TextEditor';
-import AddRoute from './AddRoute';
 import { GamePage, GameList } from './TicTacToe';
 import { FormModelConverter, FormModelRenderer } from './FormModel';
+import GoogleMap from './GoogleMap';
 
 export {
   Login,
@@ -20,5 +20,5 @@ export {
   FormModelConverter,
   FormModelRenderer,
   TextEditor,
-  AddRoute
+  GoogleMap
 };
