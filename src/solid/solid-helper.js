@@ -22,7 +22,16 @@ export const addToGraph = async (webId, obj, lit, filename, folder, predicate) =
 }
 
 export const removeToGraph = async (webId, predicate, url) => {
-  // unlink in graph
+  try {
+    if (!await ldflexHelper.resourceExists(webId))
+      return false;
+
+    await ldflex[webId][predicate].remove(namedNode(url));
+    return true;
+  } catch (e) {
+    console.error(e);
+  }
+  
 }
 
 export const fetchRawData = async (url, context) => {
