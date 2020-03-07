@@ -24,7 +24,9 @@ export const remove = async (webId) => {
  * @param {String} webId route 
  */
 export const get = async (webId) => {
-  return RouteFactory.create(await SolidAdapter.get(webId, routeShape));
+  const route = RouteFactory.create(await SolidAdapter.get(webId, routeShape));
+  await route.getObjectsMilestones();
+  return route;
 }
 
 /**
