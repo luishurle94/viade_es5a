@@ -5,8 +5,8 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { successToaster, errorToaster } from '@utils';
-import { RouteService } from '@services';
-import { Route } from '../../model/index';
+import { MilestoneService } from '@services';
+import { Milestone } from '../../model/index';
 import {
   TextEditorWrapper,
   TextEditorContainer,
@@ -20,6 +20,13 @@ import {
 import MilestoneMap from './MilestoneMap/milestone-map.component';
 
 export const AddMilestone = () => {
+
+  let queryString = "";
+
+  if(window.location.href.split("?")[1]){
+      queryString = window.location.href.split("?")[1].split("=")[1];
+  }
+
   const { t } = useTranslation();
 
   const [text, setText] = useState('');
@@ -30,7 +37,11 @@ export const AddMilestone = () => {
   const [Existenttext, setExistenttext] = useState('');
 
   const [creatingNew, setCreatingNew] = useState(true);
+  const [routeId, setRouteId] = useState(queryString);
 
+  function changeRouteId(event){
+    setRouteId(event.target.value)
+  }
 
   function changeNameField(event){
     setNameText(event.target.value)
@@ -67,7 +78,10 @@ export const AddMilestone = () => {
 
   async function checkSubmit(){
 
-    if(creatingNew)
+    if(routeId.trim() === ""){
+      errorToaster(t('addMilestone.notifications.routeIdEmpty'));
+
+    } else if(creatingNew)
       checkCreateNew();
     else 
       checkUseExistent();
@@ -114,22 +128,22 @@ export const AddMilestone = () => {
     } else {
 
       let id = "webIdDeTest";
-      let name = "";
-      let description = "";
-      let distance = "";
-      let slope ="";
-      let rank = "";
-      let createdAt = new Date();
+      let name = Nametext;
+      let description = Descriptiontext;
+      let distance = 0;
+      let slope = 0;
+      let latitude = text;
+      let longitude = Longitudetext;
 
-      let success = await RouteService.add(new Route(id, name, description, distance, slope, rank, String(id), createdAt));
+      let success = await MilestoneService.add(routeId, new Milestone(id, name, description, distance, slope, latitude, longitude));
 
       if(success === true){
 
-        successToaster(t('addRoute.notifications.correct'));
+        successToaster(t('addMilestone.notifications.correct'));
 
       } else {
 
-        errorToaster(t('addRoute.notifications.errorService'));
+        errorToaster(t('addMilestone.notifications.errorService'));
 
       }
     }
@@ -140,10 +154,15 @@ export const AddMilestone = () => {
     <Form>
       <FullGridSize>
         
+      <Label>
+          {t('addMilestone.routeToAdd')}
+          <Input type="text" size="200" value={routeId} onChange={changeRouteId}/>
+      </Label>
+
         <Label>
           <Input type="radio" name={"opcion"} checked={!creatingNew} onChange={optionChange}/>
           <b>{t('addMilestone.useExistent')}</b>
-          <Input type="text" size="200" value={Existenttext} onChange={changeExistentField}/>
+          <Input type="text" size="200" value={Existenttext} onChange={changeExistentField} disabled={creatingNew}/>
           <br/>
           
           <Input type="radio" name={"opcion"} checked={creatingNew} onChange={optionChange} />
@@ -157,12 +176,12 @@ export const AddMilestone = () => {
 
         <Label>
           {t('addMilestone.name')}
-          <Input type="text" size="200" value={Nametext} onChange={changeNameField} />
+          <Input type="text" size="200" value={Nametext} onChange={changeNameField} disabled={!creatingNew}/>
         </Label>
 
         <Label>
           {t('addMilestone.description')}
-          <TextArea value={Descriptiontext} onChange={changeDescription} cols={40} rows={10} />
+          <TextArea value={Descriptiontext} onChange={changeDescription} cols={40} rows={10} disabled={!creatingNew}/>
         </Label>
 
         <Label>
@@ -175,17 +194,17 @@ export const AddMilestone = () => {
 
         <Label>
           {t('addMilestone.latitude')}
-          <Input type="number" min="0" max="10" value={text} onChange={changeLatitudeField} size="200"/>
+          <Input type="number" min="0" max="10" value={text} onChange={changeLatitudeField} size="200" disabled={!creatingNew}/>
         </Label>
 
         <Label>
           {t('addMilestone.longitude')}
-          <Input type="number" min="0" max="10" value={Longitudetext} onChange={changeLongitudeField} size="200"/>
+          <Input type="number" min="0" max="10" value={Longitudetext} onChange={changeLongitudeField} size="200" disabled={!creatingNew}/>
         </Label>
 
         <Label>
           {t('addMilestone.altitude')}
-          <Input type="number" min="0" value={Altitudetext} onChange={changeAltitudeField} size="200"/>
+          <Input type="number" min="0" value={Altitudetext} onChange={changeAltitudeField} size="200" disabled={!creatingNew}/>
         </Label>
 
         <Input type="button" className="ids-link-filled ids-link-filled--primary button" value={t('addRoute.submit')} onClick={checkSubmit}/>

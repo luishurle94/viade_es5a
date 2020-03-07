@@ -4,7 +4,7 @@
  * @returns boolean if action is exectuted sucesfully
  */
 export const add = async (route) => {
-    return false;
+    return true;
 }
 
 /**

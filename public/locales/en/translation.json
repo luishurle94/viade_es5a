@@ -275,12 +275,16 @@
     "createNew": "Create new Milestone",
     "useExistent": "Use an existent Milestone (Introuce the existent milestone webId)",
     "mapInfo": "Click on the map to get the latitude and longitud of a point, or insert it manually",
+    "routeToAdd": "Route to add the milestone",
     "notifications": {
       "altitudeNegative": "'Altitude' must be at least zero",
       "altitudeNaN": "'Altitude' must be a number",
       "latitudeNaN": "'Latitude' must be a number",
       "longitudeNaN": "'Longitude' must be a number",
-      "existentEmpty": "A milestone webId must be introduced"
+      "existentEmpty": "A milestone webId must be introduced",
+      "routeIdEmpty": "A route webId must be introduced",
+      "correct": "Adding your milestone...",
+      "errorService": "There was an error adding your milestone. Maybe if you try again..."
     }
   }
 }
