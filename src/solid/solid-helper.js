@@ -16,12 +16,17 @@ export const createAndGetDocument = async (url, createDocument) => {
   return !createDocument ? await ldflexHelper.resourceExists(url) : await ldflexHelper.createNonExistentDocument(url);
 }
 
-export const addToGraph = async (webId, obj, lit, filename, folder, predicate) => {
-  const insert = lit ? literal(obj) : namedNode(obj);
-  await ldflex[`${await getAppPathStorage(webId)}${folder}${filename}`][predicate].add(insert);
+export const link = async (webId, obj, lit, filename, folder, predicate) => {
+  let url = `${await getAppPathStorage(webId)}${folder}${filename}`;
+  await linkToGraph(url,obj,lit,predicate);
 }
 
-export const removeToGraph = async (webId, predicate, url) => {
+export const linkToGraph = async (webId, obj, lit, predicate) => {
+  const insert = lit ? literal(obj) : namedNode(obj);
+  await ldflex[webId][predicate].add(insert);
+}
+
+export const unlink = async (webId, predicate, url) => {
   try {
     if (!await ldflexHelper.resourceExists(webId))
       return false;

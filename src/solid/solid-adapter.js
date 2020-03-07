@@ -20,7 +20,7 @@ export const create = async (obj, context, createDocumentP, webIdP, parentWebIdP
       return insert(obj, context, createDocument, obj.getIdentifier(), webId, parentWebId, parentFilename, parentPredicate, folder);
     }    
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
   
   return false;
@@ -43,11 +43,11 @@ export const insert = async (obj, context, createDocumentP, filename, webIdP, pa
   if (newDocument.ok) {
     for await (const field of context.shape) {
         const data = obj[field.object];
-        await SolidHelper.addToGraph(webId, data, field.literal, path, folder, SolidHelper.getPredicate(field, context));
+        await SolidHelper.link(webId, data, field.literal, path, folder, SolidHelper.getPredicate(field, context));
     }
     
     // create link with parent. IT CAN'T BE A LITERAL, IT'S A REFERENCE
-    await SolidHelper.addToGraph(parentWebId, documentUri, false, parentFilename, '', parentPredicate);
+    await SolidHelper.link(parentWebId, documentUri, false, parentFilename, '', parentPredicate);
 
     // check insert
     const res = await SolidHelper.fetchRawData(documentUri, context);
@@ -61,7 +61,7 @@ export const remove = async (webId) => {
 }
 
 export const unlink = async(webId, predicate, url) => {
-  return await SolidHelper.removeToGraph(webId, predicate, url);
+  return await SolidHelper.unlink(webId, predicate, url);
 }
 
 /**
