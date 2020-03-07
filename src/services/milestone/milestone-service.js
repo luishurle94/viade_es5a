@@ -1,4 +1,4 @@
-import { SolidAdapter, SolidHelper } from "../../solid";
+import { SolidAdapter } from "../../solid";
 import { MilestoneFactory } from "../factories";
 import { RouteService } from '..'
 
@@ -24,12 +24,16 @@ export const add = async (routeId, milestone) => {
  * @param {String} milestoneId 
  */
 export const remove = async (routeId, milestoneId) => {
+  // get route
+  const route = await RouteService.get(routeId);
+  if (!route || !route.milestones || !route.milestones.map(m => m.webId).includes(milestoneId)) {
+    return false;
+  }
+
   const resMilestone = await SolidAdapter.remove(milestoneId);
   if (!resMilestone)
     return false;
 
-  // get route
-  const route = await RouteService.get(routeId);
   // Only create node and link with route
   const field = routeShape.shape.filter(s => s.object === 'milestones')[0];
 
