@@ -31,6 +31,12 @@ export const NavigationItems = [
     icon: '/img/icon/files.svg',
     label: 'navBar.add-route',
     to: '/add-route'
+  },
+  {
+    id: 'add-milestone',
+    icon: '/img/icon/files.svg',
+    label: 'navBar.add-milestone',
+    to: '/add-milestone'
   }
 ];
 

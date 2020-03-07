@@ -65,7 +65,8 @@
       "fetchingError": "Error fetching notifications from Pod"
     },
     "tictactoe": "Game",
-    "add-route": "Add Route"
+    "add-route": "Add Route",
+    "add-milestone": "Add Milestone"
   },
   "footer": {
     "version": "Version"
@@ -264,5 +265,17 @@
       "error": "Oops! Some fields of your form are not valid",
       "errorService": "There was an error saving your route. Maybe if you try again..."
     }
+  },
+  "addMilestone": {
+    "title": "Add Milestone",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "altitude": "Altitude",
+    "createNew": "Create new Milestone",
+    "useExistent": "Use an existent Milestone",
+    "notifications": {
+      "altitudeNegative": "'Altitude' must be at least zero"
+    }
+
   }
 }
