@@ -273,6 +273,7 @@
     "altitude": "Altitude",
     "createNew": "Create new Milestone",
     "useExistent": "Use an existent Milestone",
+    "mapInfo": "Click on the map to get the latitude and longitud of a point, or insert it manually",
     "notifications": {
       "altitudeNegative": "'Altitude' must be at least zero"
     }

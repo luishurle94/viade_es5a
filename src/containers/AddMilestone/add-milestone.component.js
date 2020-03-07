@@ -2,7 +2,7 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-console */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { successToaster, errorToaster } from '@utils';
 import { RouteService } from '@services';
@@ -17,13 +17,32 @@ import {
   Input,
   TextArea
 } from './add-milestone.style';
-
+import MilestoneMap from './MilestoneMap/milestone-map.component';
 
 export const AddMilestone = () => {
   const { t } = useTranslation();
+
+  const [text, setText] = useState('');
+  const [Longitudetext, setLongitudeText] = useState('');
+
   const errors = [false, false, false, false];
   const values = ["R01","",100,5];
 
+  /* Field change handlers */
+  function changeLatitudeField(event){
+    setText(event.target.value)
+  }
+
+  function changeLongitudeField(event){
+    setLongitudeText(event.target.value)
+  }
+
+  function setLatLng(lat, lng) {
+    setText(lat)
+    setLongitudeText(lng)
+    console.log("Latitud: " + lat)
+    console.log("Longitud: " + lng)
+  }
 
   /* Field checkers */
   function checkName(event) {
@@ -105,19 +124,27 @@ export const AddMilestone = () => {
           <Input type="text" size="200" defaultValue="R01" onBlur={checkName} />
         </Label>
 
-          <Label>
-            {t('addRoute.description')}
-            <TextArea onChange={checkDescription} cols={40} rows={10} />
-          </Label>
+        <Label>
+          {t('addRoute.description')}
+          <TextArea onChange={checkDescription} cols={40} rows={10} />
+        </Label>
+
+        <Label>
+          <b>
+            {t('addMilestone.mapInfo')}
+          </b>
+          <br/>
+          <br/>
+        </Label>
 
         <Label>
           {t('addMilestone.latitude')}
-          <Input type="number" min="0" max="10" defaultValue={5} size="200"/>
+          <Input type="number" min="0" max="10" value={text} onChange={changeLatitudeField} size="200"/>
         </Label>
 
         <Label>
           {t('addMilestone.longitude')}
-          <Input type="number" min="0" max="10" defaultValue={5} size="200"/>
+          <Input type="number" min="0" max="10" value={Longitudetext} onChange={changeLongitudeField} size="200"/>
         </Label>
 
         <Label>
@@ -127,6 +154,8 @@ export const AddMilestone = () => {
 
         <Input type="button" className="ids-link-filled ids-link-filled--primary button" value={t('addRoute.submit')} onClick={checkSubmit}/>
             
+        <MilestoneMap setLatLng={setLatLng}/>
+
       </FullGridSize>
     </Form>
   );
