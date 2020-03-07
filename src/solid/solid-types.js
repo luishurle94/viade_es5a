@@ -1,4 +1,4 @@
-export const transformTypes = (type, value) => {
+export const transformTypes = (type, value, beforeValue) => {
   if (type && value) {
     try {
       const t = type.toLowerCase();
@@ -9,8 +9,7 @@ export const transformTypes = (type, value) => {
           // return epoach time
           return parseInt(value);
         case "array":
-          //TODO
-          return [value];
+          return beforeValue ? [...beforeValue, value] : [value];
         default:
           return value;
       }

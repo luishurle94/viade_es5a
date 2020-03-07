@@ -33,8 +33,10 @@ export const fetchRawData = async (url, context) => {
     let data = {};
     data.webId = url;
     for await (const field of context.shape) {
-        const fieldData = await obj[getPredicate(field, context)];
-        data = { ...data, [field.object]: await fieldData && field.type && SolidTypesHelper.transformTypes(field.type, await fieldData.value) };
+        for await (const fieldData of obj[getPredicate(field, context)]) {
+          data = { ...data, [field.object]: fieldData && field.type &&
+            SolidTypesHelper.transformTypes(field.type, fieldData.value, data[field.object]) };
+        }
     }
 
     return data;

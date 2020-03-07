@@ -14,7 +14,6 @@ describe.only('Transformations', () => {
   });
 
   test('transform another type', async () => {
-    const date = new Date();
     expect(SolidTypesHelper.transformTypes("String", "test")).toBe("test");
     expect(SolidTypesHelper.transformTypes("aaa", "test")).toBe("test");
     expect(SolidTypesHelper.transformTypes("aaa", "test")).toBe("test");
