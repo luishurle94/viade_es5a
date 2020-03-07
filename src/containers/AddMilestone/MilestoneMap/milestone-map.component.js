@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
+import {
+  MapContainer
+} from './milestone-map.style';
 
 const mapStyles = {
   width: '55%',
@@ -36,6 +39,7 @@ export class MilestoneMap extends Component  {
     }
 
     return (
+      <MapContainer>
       <Map
        google={this.props.google}
        zoom={11}
@@ -60,6 +64,7 @@ export class MilestoneMap extends Component  {
 
 
       </Map>
+      </MapContainer>
     );
   }
 }

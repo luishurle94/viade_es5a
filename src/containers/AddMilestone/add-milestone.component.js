@@ -24,68 +24,101 @@ export const AddMilestone = () => {
 
   const [text, setText] = useState('');
   const [Longitudetext, setLongitudeText] = useState('');
+  const [Altitudetext, setAltitudeText] = useState('');
+  const [Nametext, setNameText] = useState('');
+  const [Descriptiontext, setDescriptionText] = useState('');
+  const [Existenttext, setExistenttext] = useState('');
 
-  const errors = [false, false, false, false];
-  const values = ["R01","",100,5];
+  const [creatingNew, setCreatingNew] = useState(true);
 
-  /* Field change handlers */
+
+  function changeNameField(event){
+    setNameText(event.target.value)
+  }
+
   function changeLatitudeField(event){
-    setText(event.target.value)
+    setText(event.target.value)  
   }
 
   function changeLongitudeField(event){
     setLongitudeText(event.target.value)
   }
 
+  function changeAltitudeField(event){
+    setAltitudeText(event.target.value)
+  }
+
+  function changeExistentField(event){
+    setExistenttext(event.target.value)
+  }
+
+  function changeDescription(event){
+    setDescriptionText(event.target.value)
+  }
+
   function setLatLng(lat, lng) {
     setText(lat)
     setLongitudeText(lng)
-    console.log("Latitud: " + lat)
-    console.log("Longitud: " + lng)
   }
 
-  /* Field checkers */
-  function checkName(event) {
-
-    values[0] = event.target.value.trim();
-    if(event.target.value.trim() === ""){
-      errorToaster(t('addRoute.notifications.nameEmpty'));
-      errors[0] = true;
-    } else{
-      errors[0] = false;
-    }
-  
-  }
-
-  function checkDescription(event){
-    values[1] = event.target.value;
-  }
-
-  function checkAltitude(event) {
-
-    values[3] = event.target.value;
-    if(Number.parseInt(event.target.value) < Number.parseInt(event.target.min) ) {
-      errorToaster(t('addMilestone.notifications.altitudeNegative'));
-      errors[3] = true;
-    } else{
-      errors[3] = false;
-    }
+  function optionChange(){
+    setCreatingNew(!creatingNew)
   }
 
   async function checkSubmit(){
 
-    if(errors.includes(true)){
+    if(creatingNew)
+      checkCreateNew();
+    else 
+      checkUseExistent();
+  }
+
+  async function checkUseExistent(){
+
+      if(Existenttext.trim() === "")
+        errorToaster(t('addMilestone.notifications.existentEmpty'));
+  }
+
+  async function checkCreateNew(){
+
+    let error = false;
+
+    if(!parseInt(Longitudetext)){
+      errorToaster(t('addMilestone.notifications.longitudeNaN'));
+      error = true;
+    }
+
+    if(!parseInt(text)){
+      errorToaster(t('addMilestone.notifications.latitudeNaN'));
+      error = true;
+    }
+
+    if(Nametext.trim() === ""){
+      errorToaster(t('addRoute.notifications.nameEmpty'));
+      error = true;
+    }
+
+    if(!parseInt(Altitudetext)){
+      errorToaster(t('addMilestone.notifications.altitudeNaN'));
+      error = true;
+
+    } else if(Number.parseInt(Altitudetext) < 0) {
+      errorToaster(t('addMilestone.notifications.altitudeNegative'));
+      error = true;
+    }
+
+    if(error){
 
       errorToaster(t('addRoute.notifications.error'));
 
     } else {
 
       let id = "webIdDeTest";
-      let name = values[0];
-      let description = values[1];
-      let distance = 0;
-      let slope = 0;
-      let rank = values[3];
+      let name = "";
+      let description = "";
+      let distance = "";
+      let slope ="";
+      let rank = "";
       let createdAt = new Date();
 
       let success = await RouteService.add(new Route(id, name, description, distance, slope, rank, String(id), createdAt));
@@ -108,10 +141,13 @@ export const AddMilestone = () => {
       <FullGridSize>
         
         <Label>
-          <Input type="radio" name={"opcion"} defaultChecked={true}/>
-          {t('addMilestone.createNew')}
-          <Input type="radio" name={"opcion"} />
-          {t('addMilestone.useExistent')}
+          <Input type="radio" name={"opcion"} checked={!creatingNew} onChange={optionChange}/>
+          <b>{t('addMilestone.useExistent')}</b>
+          <Input type="text" size="200" value={Existenttext} onChange={changeExistentField}/>
+          <br/>
+          
+          <Input type="radio" name={"opcion"} checked={creatingNew} onChange={optionChange} />
+          <b>{t('addMilestone.createNew')}</b>
         </Label>
 
       </FullGridSize>
@@ -120,13 +156,13 @@ export const AddMilestone = () => {
       <FullGridSize>
 
         <Label>
-          {t('addRoute.name')}
-          <Input type="text" size="200" defaultValue="R01" onBlur={checkName} />
+          {t('addMilestone.name')}
+          <Input type="text" size="200" value={Nametext} onChange={changeNameField} />
         </Label>
 
         <Label>
-          {t('addRoute.description')}
-          <TextArea onChange={checkDescription} cols={40} rows={10} />
+          {t('addMilestone.description')}
+          <TextArea value={Descriptiontext} onChange={changeDescription} cols={40} rows={10} />
         </Label>
 
         <Label>
@@ -149,14 +185,16 @@ export const AddMilestone = () => {
 
         <Label>
           {t('addMilestone.altitude')}
-          <Input type="number" min="0" defaultValue={5} onBlur={checkAltitude} size="200"/>
+          <Input type="number" min="0" value={Altitudetext} onChange={changeAltitudeField} size="200"/>
         </Label>
 
         <Input type="button" className="ids-link-filled ids-link-filled--primary button" value={t('addRoute.submit')} onClick={checkSubmit}/>
-            
-        <MilestoneMap setLatLng={setLatLng}/>
 
       </FullGridSize>
+
+
+      <MilestoneMap setLatLng={setLatLng}/>
+
     </Form>
   );
 };

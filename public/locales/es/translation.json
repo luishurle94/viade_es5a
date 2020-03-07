@@ -268,14 +268,20 @@
   },
   "addMilestone": {
     "title": "Añadir Hito",
+    "name": "Nombre",
+    "description": "Descripción",
     "latitude": "Latitud",
     "longitude": "Longitud",
     "altitude": "Altitud",
     "createNew": "Crear nuevo Hito",
-    "useExistent": "Usar un Hito existente",
+    "useExistent": "Usar un Hito existente (Introuce el webId del hito existente)",
     "mapInfo": "Haz click en el mapa para obtener la longitud y latitud de un punto, o introdúcelo manualmente",
     "notifications": {
-      "altitudeNegative": "'Altitud' debe ser al menos cero"
+      "altitudeNegative": "'Altitud' debe ser al menos cero",
+      "altitudeNaN": "'Altitud' debe ser un número",
+      "latitudeNaN": "'Latitud' debe ser un número",
+      "longitudeNaN": "'Longitud' debe ser un número",
+      "existentEmpty": "Se debe introducir el webId de un hito"
     }
   }
 }

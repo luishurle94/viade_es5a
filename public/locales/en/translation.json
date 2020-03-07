@@ -267,14 +267,20 @@
   },
   "addMilestone": {
     "title": "Add Milestone",
+    "name": "Name",
+    "description": "Description",
     "latitude": "Latitude",
     "longitude": "Longitude",
     "altitude": "Altitude",
     "createNew": "Create new Milestone",
-    "useExistent": "Use an existent Milestone",
+    "useExistent": "Use an existent Milestone (Introuce the existent milestone webId)",
     "mapInfo": "Click on the map to get the latitude and longitud of a point, or insert it manually",
     "notifications": {
-      "altitudeNegative": "'Altitude' must be at least zero"
+      "altitudeNegative": "'Altitude' must be at least zero",
+      "altitudeNaN": "'Altitude' must be a number",
+      "latitudeNaN": "'Latitude' must be a number",
+      "longitudeNaN": "'Longitude' must be a number",
+      "existentEmpty": "A milestone webId must be introduced"
     }
   }
 }
