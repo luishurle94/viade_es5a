@@ -60,6 +60,10 @@ export const remove = async (webId) => {
   return await SolidHelper.deleteFile(webId);
 }
 
+export const link = async (webId, obj, lit, predicate) => {
+  await SolidHelper.linkToGraph(webId, obj, lit, predicate);
+}
+
 export const unlink = async(webId, predicate, url) => {
   return await SolidHelper.unlink(webId, predicate, url);
 }

@@ -42,6 +42,18 @@ export const remove = async (routeId, milestoneId) => {
 }
 
 /**
+ * Links an existing milestone with a route
+ * @param {String} routeId 
+ * @param {Milestone} milestone 
+ */
+export const link = async (routeId, milestoneId) => {
+  const field = routeShape.shape.filter(s => s.object === 'milestones')[0];
+  const predicate = await SolidAdapter.getPredicate(field, routeShape);
+
+  await SolidAdapter.link(routeId, milestoneId, false, predicate);
+}
+
+/**
  * Get milestone from webid
  * @param {String} webId milestone 
  */
