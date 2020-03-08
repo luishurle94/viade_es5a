@@ -44,19 +44,24 @@ export const publish = async (createNotification, content, webId, type) => {
 
 /**
  * Get notifications
+ * @param {*} fetchNotification loads notifications
+ * @param {*} notificationH stores notifications
  */
-export const getNotifications = async (fetchNotification, useLiveUpdate) => {
+export const getNotifications = async (fetchNotification, notificationH) => {
   const session = await auth.currentSession();
   const inbox = await notification.findUserInboxes([
     { path: session.webId, name: 'Global' }
   ]);
   
   await fetchNotification(inbox);
+  return notificationH.originalNotifications;
 }
 
 /**
  * Get unread notifications
+ * @param {*} fetchNotification loads notifications
+ * @param {*} notificationH stores notifications
  */
-export const getUnreadNotifications = async (fetchNotification) => {
-  return getNotifications(fetchNotification).filter(notification => notification.read === false);
+export const getUnreadNotifications = async (fetchNotification, notificationH) => {
+  return await getNotifications(fetchNotification, notificationH).filter(notification => notification.read === false);
 }
