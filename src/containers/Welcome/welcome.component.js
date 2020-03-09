@@ -22,11 +22,15 @@ export const WelcomePageContent = props => {
   const { webId, image, updatePhoto, name } = props;
   const { t } = useTranslation();
   const limit = 2100000;
+  const imgLogoStyle = {
+    'maxHeight': '250px',
+    'maxWidth': '250px'
+  };
   return (
     <WelcomeWrapper data-testid="welcome-wrapper">
       <WelcomeCard className="card">
         <WelcomeLogo data-testid="welcome-logo">
-          <img src="/img/viade_500.png" alt="ViaDe" />
+          <img src="/img/viade_500.png" alt="ViaDe" style={imgLogoStyle} />
         </WelcomeLogo>
         <WelcomeProfile data-testid="welcome-profile">
           <h3>

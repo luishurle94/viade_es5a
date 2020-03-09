@@ -83,7 +83,7 @@
     "contactUsTitle": "Contáctenos",
     "contactUsText": "<0>Si tiene preguntas o nos quieres dar feedback sobre el proyecto, por favor contacte en <1>Issues Viade_5a<1>.</0>",
     "contactUsInruptText": "<0>\nSi tiene preguntas adicionales sobre Solid o la marca de Inrupt, contáctese con <1>support@inrupt.com<1>.</0>",
-    "evolvingMessage": "<0>El SDK se encuentra en constante evolución. Revisa el <1>Calendario de Desarrollo</1>  para lo que está planeado.</0>",
+    "workingInProgress": "<0>El pryecto está en desarrollo.Puede echar un vistazo en el <1>Repositorio de GitHub</1> para comprobar lo que se ha implementado, ay lo que está planificado.</0>",
     "implementing": "Esta última version se basa en las anteriores, incluye:",
     "upload": "Subir foto",
     "successTitle": "Éxito",
