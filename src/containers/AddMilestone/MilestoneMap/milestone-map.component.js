@@ -19,12 +19,15 @@ const sideBarStyle = {
 export class MilestoneMap extends Component  {
 
   _isMounted = false;
+  markers = [];
 
   constructor(props){
     super(props);
     this.state={
       lat:null,
       lng:null,
+      mLat:null,
+      mLng:null,
       isLoading: true
     }
   }
@@ -37,6 +40,8 @@ export class MilestoneMap extends Component  {
         this.setState({
           lat:position.coords.latitude,
           lng:position.coords.longitude,
+          mLat:position.coords.latitude,
+          mLng:position.coords.longitude,
         }));
     }
 
@@ -50,6 +55,11 @@ export class MilestoneMap extends Component  {
     const lat = event.latLng.lat();
     const lng = event.latLng.lng();
     this.props.setLatLng(lat, lng);
+
+    this.setState({
+      mLat: lat,
+      mLng: lng
+    });
   }
 
   render() {
@@ -67,8 +77,8 @@ export class MilestoneMap extends Component  {
             zoom={11}
             style={mapStyles}
             initialCenter={{
-              lat: this.state.lat,
-              lng: this.state.lng
+              lat: this.state.mLat,
+              lng: this.state.mLng
             }}
             center={{
               lat: this.state.lat,
@@ -79,8 +89,8 @@ export class MilestoneMap extends Component  {
             <Marker
               title={'Geolocation'}
               position={{
-              lat:this.state.lat,
-              lng:this.state.lng,
+              lat:this.state.mLat,
+              lng:this.state.mLng,
             }}
             fullscreenControl= {false}
        />
