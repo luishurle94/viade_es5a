@@ -274,7 +274,7 @@
     "longitude": "Longitud",
     "altitude": "Altitud",
     "createNew": "Crear nuevo Hito",
-    "useExistent": "Usar un Hito existente (Introuce el webId del hito existente)",
+    "useExistent": "Usar un Hito existente (Introduce el webId del hito existente)",
     "mapInfo": "Haz click en el mapa para obtener la longitud y latitud de un punto, o introdúcelo manualmente",
     "routeToAdd": "Ruta a la que se añadirá el hito",
     "notifications": {

@@ -5,27 +5,46 @@ import {
 } from './milestone-map.style';
 
 const mapStyles = {
-  width: '55%',
-  height: '20%',
+  width: '210%',
+  height: '100%',
 };
 
+const sideBarStyle = {
+  'height': '100%',
+  'backgroundColor': 'lightblue',
+  'width': '100%',
+  'position': 'relative',
+}
+
 export class MilestoneMap extends Component  {
+
+  _isMounted = false;
 
   constructor(props){
     super(props);
     this.state={
       lat:null,
-      lng:null
+      lng:null,
+      isLoading: true
     }
   }
 
   componentDidMount(){
-    navigator.geolocation.getCurrentPosition(position=>
-      this.setState({
-        lat:position.coords.latitude,
-        lng:position.coords.longitude,
-      }));
+    this._isMounted = true;
+
+    if(this._isMounted){
+      navigator.geolocation.getCurrentPosition(position=>
+        this.setState({
+          lat:position.coords.latitude,
+          lng:position.coords.longitude,
+        }));
+    }
+
    }
+
+   componentWillUnmount() {
+    this._isMounted = false;
+  }
 
    mapClicked = (mapProps, map, event) => {
     const lat = event.latLng.lat();
@@ -34,37 +53,42 @@ export class MilestoneMap extends Component  {
   }
 
   render() {
-    if (!this.props.loaded) {
+    if (!this.props.loaded | !this._isMounted) {
       return <div>Loading...</div>
     }
 
     return (
-      <MapContainer>
-      <Map
-       google={this.props.google}
-       zoom={11}
-       style={mapStyles}
-       initialCenter={{
-          lat: this.state.lat,
-          lng: this.state.lng
-       }}
-       center={{
-          lat: this.state.lat,
-          lng: this.state.lng
-       }}
-       onClick={this.mapClicked}
-       latitud = {this.getLatitude}>
-       <Marker
-         title={'Geolocation'}
-         position={{
-           lat:this.state.lat,
-           lng:this.state.lng,
-         }}
+
+
+      <div style={sideBarStyle}>
+        <MapContainer>
+          <Map
+            google={this.props.google}
+            zoom={11}
+            style={mapStyles}
+            initialCenter={{
+              lat: this.state.lat,
+              lng: this.state.lng
+            }}
+            center={{
+              lat: this.state.lat,
+              lng: this.state.lng
+            }}
+            onClick={this.mapClicked}
+            latitud = {this.getLatitude}>
+            <Marker
+              title={'Geolocation'}
+              position={{
+              lat:this.state.lat,
+              lng:this.state.lng,
+            }}
+            fullscreenControl= {false}
        />
-
-
-      </Map>
-      </MapContainer>
+          </Map>
+        </MapContainer>
+      </div>
+     
+     
     );
   }
 }

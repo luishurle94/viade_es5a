@@ -273,7 +273,7 @@
     "longitude": "Longitude",
     "altitude": "Altitude",
     "createNew": "Create new Milestone",
-    "useExistent": "Use an existent Milestone (Introuce the existent milestone webId)",
+    "useExistent": "Use an existent Milestone (Introduce the existent milestone webId)",
     "mapInfo": "Click on the map to get the latitude and longitud of a point, or insert it manually",
     "routeToAdd": "Route to add the milestone",
     "notifications": {

@@ -127,17 +127,18 @@ export const AddMilestone = () => {
 
     } else {
 
-      let id = "webIdDeTest";
+      let id = "webIdMilestoneDeTest";
       let name = Nametext;
       let description = Descriptiontext;
       let distance = 0;
       let slope = 0;
       let latitude = text;
       let longitude = Longitudetext;
-
+      
+      let linkSuccess = await MilestoneService.link(routeId, id);
       let success = await MilestoneService.add(routeId, new Milestone(id, name, description, distance, slope, latitude, longitude));
 
-      if(success === true){
+      if(success === true && linkSuccess === true){
 
         successToaster(t('addMilestone.notifications.correct'));
 
@@ -211,8 +212,8 @@ export const AddMilestone = () => {
 
       </FullGridSize>
 
-
       <MilestoneMap setLatLng={setLatLng}/>
+      
 
     </Form>
   );
