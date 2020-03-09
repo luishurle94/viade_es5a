@@ -21,10 +21,10 @@ import MilestoneMap from './MilestoneMap/milestone-map.component';
 
 export const AddMilestone = () => {
 
-  let queryString = "";
+  let routeId = "";
 
   if(window.location.href.split("?")[1]){
-      queryString = window.location.href.split("?")[1].split("=")[1];
+      routeId = window.location.href.split("?")[1].split("=")[1];
   }
 
   const { t } = useTranslation();
@@ -37,10 +37,9 @@ export const AddMilestone = () => {
   const [Existenttext, setExistenttext] = useState('');
 
   const [creatingNew, setCreatingNew] = useState(true);
-  const [routeId, setRouteId] = useState(queryString);
 
   function changeRouteId(event){
-    setRouteId(event.target.value)
+
   }
 
   function changeNameField(event){
