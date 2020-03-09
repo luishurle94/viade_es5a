@@ -72,7 +72,9 @@ export const AddRoute = ({ webId }: Props) => {
     }
   }
 
-  async function checkSubmit(){
+  async function checkSubmit(event){
+
+    event.preventDefault();
 
     if(errors.includes(true)){
 
@@ -93,6 +95,7 @@ export const AddRoute = ({ webId }: Props) => {
       if(success === true){
 
         successToaster(t('addRoute.notifications.correct'));
+        window.location.href = '/add-milestone?routeId=' + String(id);
 
       } else {
 
@@ -104,7 +107,7 @@ export const AddRoute = ({ webId }: Props) => {
   }
 
   return (
-    <Form>
+    <Form onSubmit={checkSubmit}>
       <FullGridSize>
 
         <WebId>
@@ -136,7 +139,7 @@ export const AddRoute = ({ webId }: Props) => {
           <Input type="number" min="0" max="10" defaultValue={5} onBlur={checkRank} size="200"/>
         </Label>
 
-        <Input type="button" className="ids-link-filled ids-link-filled--primary button" value={t('addRoute.submit')} onClick={checkSubmit}/>
+        <Input type="submit" className="ids-link-filled ids-link-filled--primary button" value={t('addRoute.submit')} />
             
       </FullGridSize>
     </Form>

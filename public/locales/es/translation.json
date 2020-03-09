@@ -65,7 +65,8 @@
       "fetchingError": "Error en las notificaciones"
     },
     "tictactoe": "Juego",
-    "add-route": "Añadir Ruta"
+    "add-route": "Añadir Ruta",
+    "add-milestone": "Añadir Hito"
   },
   "footer": {
     "version": "Versión"
@@ -263,6 +264,28 @@
       "correct": "Guardando tu ruta...",
       "error": "¡Ups! Algunos campos del formulario no son válidos",
       "errorService": "Se ha producido un error al guardar tu ruta. Quizás si lo intentaras de nuevo..."
+    }
+  },
+  "addMilestone": {
+    "title": "Añadir Hito",
+    "name": "Nombre",
+    "description": "Descripción",
+    "latitude": "Latitud",
+    "longitude": "Longitud",
+    "altitude": "Altitud",
+    "createNew": "Crear nuevo Hito",
+    "useExistent": "Usar un Hito existente (Introduce el webId del hito existente)",
+    "mapInfo": "Haz click en el mapa para obtener la longitud y latitud de un punto, o introdúcelo manualmente",
+    "routeToAdd": "Ruta a la que se añadirá el hito",
+    "notifications": {
+      "altitudeNegative": "'Altitud' debe ser al menos cero",
+      "altitudeNaN": "'Altitud' debe ser un número",
+      "latitudeNaN": "'Latitud' debe ser un número",
+      "longitudeNaN": "'Longitud' debe ser un número",
+      "existentEmpty": "Se debe introducir el webId de un hito",
+      "routeIdEmpty": "Se debe introducir el webId de una ruta",
+      "correct": "Añadiendo tu hito...",
+      "errorService": "Se ha producido un error al añadir tu hito. Quizás si lo intentaras de nuevo..."
     }
   }
 }
