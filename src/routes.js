@@ -9,7 +9,8 @@ import {
   Welcome,
   RegistrationSuccess,
   Profile,
-  AddRoute
+  AddRoute,
+  AddMilestone
 } from './containers';
 
 const privateRoutes = [
@@ -27,6 +28,11 @@ const privateRoutes = [
     id: 'add-route',
     path: '/add-route',
     component: AddRoute
+  },
+  {
+    id: 'add-milestone',
+    path: '/add-milestone',
+    component: AddMilestone
   }
 ];
 

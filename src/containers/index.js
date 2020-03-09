@@ -5,6 +5,7 @@ import Welcome from './Welcome';
 import Profile from './Profile';
 import TextEditor from './TextEditor';
 import AddRoute from './AddRoute';
+import AddMilestone from './AddMilestone';
 import { GamePage, GameList } from './TicTacToe';
 import { FormModelConverter, FormModelRenderer } from './FormModel';
 
@@ -20,5 +21,6 @@ export {
   FormModelConverter,
   FormModelRenderer,
   TextEditor,
-  AddRoute
+  AddRoute,
+  AddMilestone
 };
