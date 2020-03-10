@@ -8,6 +8,7 @@ import AddRoute from './AddRoute';
 import AddMilestone from './AddMilestone';
 import { GamePage, GameList } from './TicTacToe';
 import { FormModelConverter, FormModelRenderer } from './FormModel';
+import GoogleMap from './GoogleMap';
 
 export {
   Login,
@@ -21,6 +22,7 @@ export {
   FormModelConverter,
   FormModelRenderer,
   TextEditor,
+  GoogleMap,
   AddRoute,
   AddMilestone
 };

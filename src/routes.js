@@ -9,6 +9,7 @@ import {
   Welcome,
   RegistrationSuccess,
   Profile,
+  GoogleMap,
   AddRoute,
   AddMilestone
 } from './containers';
@@ -23,6 +24,11 @@ const privateRoutes = [
     id: 'profile',
     path: '/profile',
     component: Profile
+  },
+  {
+    id: 'googlemap',
+    path: '/routemap',
+    component: GoogleMap
   },
   {
     id: 'add-route',

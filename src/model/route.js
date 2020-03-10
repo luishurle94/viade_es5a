@@ -28,7 +28,7 @@ export default class Route {
     this.slope = slope;
     this.rank = rank;
     this.createdBy = createdBy;
-    this.createdAt = createdAt || (new Date).getTime();
+    this.createdAt = createdAt || (new Date()).getTime();
   }
 
   /**
@@ -49,6 +49,62 @@ export default class Route {
     if (milestone && milestone instanceof Milestone) {
       this.milestones.push(milestone);
     }
+  }
+  /**
+   * @return JSON
+   */
+  getGeoJson() {
+    this.refreshMilestones();
+    let base = {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {},
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+            ]
+          }
+        }
+      ]
+    }
+
+    for(let m of this.milestonesObject) {
+      // access line string
+      base.features.geometry.coordinates.push([
+        m.latitude,
+        m.longitude
+      ]);
+
+      base.features.push(this.createPoint(m.latitude, m.longitude));
+    }
+  }
+  /**
+   * 
+   * @param {Integer} lat 
+   * @param {Integer} lon 
+   */
+  createPoint(lat, lon) {
+    return {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          lon,
+          lat
+        ]
+      }
+    }
+  }
+  /** 
+   * 
+  */
+  refreshMilestones() {
+    this.milestones.forEach(url => {
+      this.milestonesObject.push(MilestoneService.get(url));
+    });
   }
 
   getIdentifier() {

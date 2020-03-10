@@ -136,7 +136,7 @@ export const AddMilestone = () => {
       let longitude = Longitudetext;
       
       let res = await MilestoneService.add(routeId, new Milestone(name, description, distance, slope, latitude, longitude));
-
+console.log(res)
       if(res && res.added === true && res.webId){
         let linkSuccess = await MilestoneService.link(routeId, res.webId);
         successToaster(t('addMilestone.notifications.correct'));
