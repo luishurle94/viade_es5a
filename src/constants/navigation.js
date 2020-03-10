@@ -28,7 +28,7 @@ export const NavigationItems = [
   },
   {
     id:'map',
-    icon : '',
+    icon : '/img/googlemaps.svg',
     label :'Mapa de rutas',
     to :'/routemap'
   }

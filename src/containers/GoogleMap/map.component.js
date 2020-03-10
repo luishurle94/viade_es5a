@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, InfoWindow } from 'google-maps-react';
+import {Mapa} from './map.style'
+
 
 export class MapContainer extends Component {
 
@@ -53,6 +55,7 @@ export class MapContainer extends Component {
           }}
           zoom={14}
           onReady={this.onReady}
+          styles={Mapa}
         >
           <InfoWindow
             marker={this.state.activeMarker}
