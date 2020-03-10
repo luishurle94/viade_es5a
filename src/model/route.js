@@ -4,13 +4,15 @@ import Milestone from './milestone';
 import { MilestoneService } from '@services';
 
 export default class Route {
+  // TODO 
+  webId = '';
+
   messages = [];
   milestones = [];
-  milestonesObjects = [];
+  milestonesObject = [];
 
   /**
    * 
-   * @param {String} webId 
    * @param {String} name 
    * @param {String} description 
    * @param {number} distance 
@@ -19,15 +21,14 @@ export default class Route {
    * @param {String} createdBy 
    * @param {Date} createdAt 
    */
-  constructor(webId, name, description, distance, slope, rank, createdBy, createdAt) {
-    this.webId = webId;
+  constructor(name, description, distance, slope, rank, createdBy, createdAt) {
     this.name = name;
     this.description = description;
     this.distance = distance;
     this.slope = slope;
     this.rank = rank;
     this.createdBy = createdBy;
-    this.createdAt = createdAt || Date.now();
+    this.createdAt = createdAt || (new Date()).getTime();
   }
 
   /**
@@ -69,8 +70,14 @@ export default class Route {
       ]
     }
 
-    for(let m of this.milestonesObjects) {
-      this.createPoint(m.latitude, m.longitude);
+    for(let m of this.milestonesObject) {
+      // access line string
+      base.features.geometry.coordinates.push([
+        m.latitude,
+        m.longitude
+      ]);
+
+      base.features.push(this.createPoint(m.latitude, m.longitude));
     }
   }
   /**
@@ -96,78 +103,28 @@ export default class Route {
   */
   refreshMilestones() {
     this.milestones.forEach(url => {
-      this.milestonesObjects.push(MilestoneService.get(url));
+      this.milestonesObject.push(MilestoneService.get(url));
     });
   }
 
-  ejemplo(){
-    return {
-      "type": "FeatureCollection",
-      "features": [
-        {
-          "type": "Feature",
-          "properties": {},
-          "geometry": {
-            "type": "LineString",
-            "coordinates": [
-              [
-                -5.850943922996521,
-                43.35589397969254
-              ],
-              [
-                -5.851303339004517,
-                43.35510997685353
-              ],
-              [
-                -5.850740075111388,
-                43.35470041910396
-              ],
-              [
-                -5.849431157112122,
-                43.354552197522914
-              ],
-              [
-                -5.848755240440369,
-                43.35480963477412
-              ],
-              [
-                -5.848492383956909,
-                43.355371312258654
-              ],
-              [
-                -5.850890278816223,
-                43.35590178066491
-              ]
-            ]
-          }
-        },
-        {
-          "type": "Feature",
-          "properties": {},
-          "geometry": {
-            "type": "Point",
-            "coordinates": [
-              -5.850901007652283,
-              43.35591738260667
-            ]
-          }
-        },
-        {
-          "type": "Feature",
-          "properties": {
-            "marker-color": "#7e7e7e",
-            "marker-size": "medium",
-            "marker-symbol": ""
-          },
-          "geometry": {
-            "type": "Point",
-            "coordinates": [
-              -5.848234891891479,
-              43.35578476597392
-            ]
-          }
-        }
-      ]
-    }
+  getIdentifier() {
+    return `${this.name}_${this.createdBy}`;
   }
+
+  getObjectsMilestones = async () => {
+    let distance = 0;
+    let slope = 0;
+    for (let i = 0; i < this.milestones.length; i++) {
+      this.milestonesObject.push(await MilestoneService.get(this.milestones[i]));
+      if (!this.distance)
+        distance += this.milestonesObject[i].distance;
+      if (!this.slope) {
+        if (i > 0) 
+          slope = Math.abs(this.milestonesObject[i] - this.milestonesObject[i-1]);
+      }
+    }
+    this.distance = distance;
+    this.slope = slope;
+  }
+
 }

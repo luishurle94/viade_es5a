@@ -1,0 +1,57 @@
+{
+  "@context": {
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+  },
+  "shape": [
+    {
+      "prefix": "foaf",
+      "predicate": "name",
+      "object": "name",
+      "literal": true,
+      "type": "String"
+    },
+    {
+      "prefix": "foaf",
+      "predicate": "description",
+      "object": "description",
+      "literal": true,
+      "type": "String"
+    },
+    {
+      "prefix": "geo",
+      "predicate": "location",
+      "object": "distance",
+      "literal": true,
+      "type": "number"
+    },
+    {
+      "prefix": "geo",
+      "predicate": "altitude",
+      "object": "slope",
+      "literal": true,
+      "type": "number"
+    },
+    {
+      "prefix": "geo",
+      "predicate": "latitude",
+      "object": "latitude",
+      "literal": true,
+      "type": "number"
+    },
+    {
+      "prefix": "geo",
+      "predicate": "longitude",
+      "object": "longitude",
+      "literal": true,
+      "type": "number"
+    },
+    {
+      "prefix": "foaf",
+      "predicate": "image",
+      "object": "images",
+      "literal": false,
+      "type": "Array"
+    }
+  ]
+}
