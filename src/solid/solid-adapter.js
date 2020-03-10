@@ -17,13 +17,15 @@ export const create = async (obj, context, createDocumentP, webIdP, parentWebIdP
 
     // check if structure is created
     if (await SolidHelper.createInitialStructure(webId)) {
-      return insert(obj, context, createDocument, obj.getIdentifier(), webId, parentWebId, parentFilename, parentPredicate, folder);
+      return await insert(obj, context, createDocument, obj.getIdentifier(), webId, parentWebId, parentFilename, parentPredicate, folder);
     }    
   } catch (e) {
     console.error(e)
   }
   
-  return false;
+  return {
+    added: false
+  };
 }
 
 export const insert = async (obj, context, createDocumentP, filename, webIdP, parentWebIdP, parentFilenameP, parentPredicateP, folderP) => {
@@ -36,7 +38,9 @@ export const insert = async (obj, context, createDocumentP, filename, webIdP, pa
   // get graph
   const newDocument = await SolidHelper.createAndGetDocument(documentUri, createDocument);
   if (!newDocument) {
-    return false;
+    return {
+      added: false
+    };
   }
 
   // if document is ok, continue
@@ -48,11 +52,14 @@ export const insert = async (obj, context, createDocumentP, filename, webIdP, pa
     
     // create link with parent. IT CAN'T BE A LITERAL, IT'S A REFERENCE
     await SolidHelper.link(parentWebId, documentUri, false, parentFilename, '', parentPredicate);
-
+console.log(parentWebId)
     // check insert
     const res = await SolidHelper.fetchRawData(documentUri, context);
 
-    return res !== null && res !== undefined;
+    return {
+      webId: documentUri,
+      added: res !== null && res !== undefined
+    };
   }
 }
 

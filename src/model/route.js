@@ -28,7 +28,7 @@ export default class Route {
     this.slope = slope;
     this.rank = rank;
     this.createdBy = createdBy;
-    this.createdAt = createdAt || Date.now();
+    this.createdAt = createdAt || (new Date).getTime();
   }
 
   /**
