@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, InfoWindow } from 'google-maps-react';
-import { Route } from '../../model/index';
 
 export class MapContainer extends Component {
 
