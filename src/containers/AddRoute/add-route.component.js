@@ -81,8 +81,6 @@ export const AddRoute = ({ webId }: Props) => {
       errorToaster(t('addRoute.notifications.error'));
 
     } else {
-
-      let id = "webIdDeTest";
       let name = values[0];
       let description = values[1];
       let distance = 0;
@@ -90,12 +88,13 @@ export const AddRoute = ({ webId }: Props) => {
       let rank = values[3];
       let createdAt = new Date();
 
-      let success = await RouteService.add(new Route(id, name, description, distance, slope, rank, String(webId), createdAt));
+      const route = new Route(name, description, distance, slope, rank, webId, createdAt)
+      console.log(route)
+      let res = await RouteService.add(route);
 
-      if(success === true){
-
+      if(res && res.added === true && res.webId){
         successToaster(t('addRoute.notifications.correct'));
-        window.location.href = '/add-milestone?routeId=' + String(id);
+        window.location.href = '/add-milestone?routeId=' + res.webId;
 
       } else {
 

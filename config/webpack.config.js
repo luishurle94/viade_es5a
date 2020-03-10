@@ -604,6 +604,7 @@ module.exports = function(webpackEnv) {
       'web-streams-polyfill': 'window',
       // Exclude the following unneeded modules
       '@comunica/actor-rdf-serialize-jsonld': 'null',
+      '@trust/webcrypto': 'crypto',
       'graphql': 'null',
       'graphql-to-sparql': 'null',
     },

@@ -2,6 +2,8 @@
 import { Image, Video } from './media';
 
 export default class Milestone {
+  webId = '';
+
   images = [];
   videos = [];
 
@@ -15,8 +17,7 @@ export default class Milestone {
  * @param {number} latitude 
  * @param {number} longitude 
  */
-  constructor(webId, name, description, distance, slope, latitude, longitude) {
-    this.webId = webId;
+  constructor(name, description, distance, slope, latitude, longitude) {
     this.name = name;
     this.description = description;
     this.distance = distance;
@@ -43,6 +44,10 @@ export default class Milestone {
     if (video && video instanceof Video) {
       this.videos.push(video);
     }
+  }
+
+  getIdentifier() {
+    return `${this.name}_${this.latitude}_${this.longitude}`;
   }
 
 }

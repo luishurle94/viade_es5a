@@ -92,16 +92,18 @@ export const AddMilestone = () => {
         errorToaster(t('addMilestone.notifications.existentEmpty'));
   }
 
+  const isNumber = (n) => n && !isNaN(parseFloat(n)) && !isNaN(n - 0);
+
   async function checkCreateNew(){
 
     let error = false;
 
-    if(!parseInt(Longitudetext)){
+    if(!isNumber(Longitudetext)){
       errorToaster(t('addMilestone.notifications.longitudeNaN'));
       error = true;
     }
 
-    if(!parseInt(text)){
+    if(!isNumber(text)){
       errorToaster(t('addMilestone.notifications.latitudeNaN'));
       error = true;
     }
@@ -111,7 +113,7 @@ export const AddMilestone = () => {
       error = true;
     }
 
-    if(!parseInt(Altitudetext)){
+    if(!isNumber(Altitudetext)){
       errorToaster(t('addMilestone.notifications.altitudeNaN'));
       error = true;
 
@@ -126,7 +128,6 @@ export const AddMilestone = () => {
 
     } else {
 
-      let id = "webIdMilestoneDeTest";
       let name = Nametext;
       let description = Descriptiontext;
       let distance = 0;
@@ -134,13 +135,15 @@ export const AddMilestone = () => {
       let latitude = text;
       let longitude = Longitudetext;
       
-      let linkSuccess = await MilestoneService.link(routeId, id);
-      let success = await MilestoneService.add(routeId, new Milestone(id, name, description, distance, slope, latitude, longitude));
+      let res = await MilestoneService.add(routeId, new Milestone(name, description, distance, slope, latitude, longitude));
 
-      if(success === true && linkSuccess === true){
-
+      if(res && res.added === true && res.webId){
+        let linkSuccess = await MilestoneService.link(routeId, res.webId);
         successToaster(t('addMilestone.notifications.correct'));
 
+        if (linkSuccess === true) {
+          errorToaster(t('addMilestone.notifications.errorService'));
+        }
       } else {
 
         errorToaster(t('addMilestone.notifications.errorService'));

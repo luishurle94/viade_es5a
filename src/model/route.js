@@ -1,14 +1,18 @@
 // @flow
 import Comment from './comment';
 import Milestone from './milestone';
+import { MilestoneService } from '@services';
 
 export default class Route {
+  // TODO 
+  webId = '';
+
   messages = [];
   milestones = [];
+  milestonesObject = [];
 
   /**
    * 
-   * @param {String} webId 
    * @param {String} name 
    * @param {String} description 
    * @param {number} distance 
@@ -17,15 +21,14 @@ export default class Route {
    * @param {String} createdBy 
    * @param {Date} createdAt 
    */
-  constructor(webId, name, description, distance, slope, rank, createdBy, createdAt) {
-    this.webId = webId;
+  constructor(name, description, distance, slope, rank, createdBy, createdAt) {
     this.name = name;
     this.description = description;
     this.distance = distance;
     this.slope = slope;
     this.rank = rank;
     this.createdBy = createdBy;
-    this.createdAt = createdAt || Date.now();
+    this.createdAt = createdAt || (new Date).getTime();
   }
 
   /**
@@ -46,6 +49,26 @@ export default class Route {
     if (milestone && milestone instanceof Milestone) {
       this.milestones.push(milestone);
     }
+  }
+
+  getIdentifier() {
+    return `${this.name}_${this.createdBy}`;
+  }
+
+  getObjectsMilestones = async () => {
+    let distance = 0;
+    let slope = 0;
+    for (let i = 0; i < this.milestones.length; i++) {
+      this.milestonesObject.push(await MilestoneService.get(this.milestones[i]));
+      if (!this.distance)
+        distance += this.milestonesObject[i].distance;
+      if (!this.slope) {
+        if (i > 0) 
+          slope = Math.abs(this.milestonesObject[i] - this.milestonesObject[i-1]);
+      }
+    }
+    this.distance = distance;
+    this.slope = slope;
   }
 
 }

@@ -13,4 +13,8 @@ export default class Comment {
     this.createdAt = createdAt ? createdBy : Date.now();
   }
 
+  getIdentifier() {
+    return `${this.message}_${this.createdBy}`;
+  }
+
 }
