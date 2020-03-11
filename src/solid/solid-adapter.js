@@ -52,7 +52,6 @@ export const insert = async (obj, context, createDocumentP, filename, webIdP, pa
     
     // create link with parent. IT CAN'T BE A LITERAL, IT'S A REFERENCE
     await SolidHelper.link(parentWebId, documentUri, false, parentFilename, '', parentPredicate);
-console.log(parentWebId)
     // check insert
     const res = await SolidHelper.fetchRawData(documentUri, context);
 

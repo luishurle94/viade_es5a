@@ -23,8 +23,8 @@ export const AddMilestone = () => {
 
   let routeId = "";
 
-  if(window.location.href.split("?")[1]){
-      routeId = window.location.href.split("?")[1].split("=")[1];
+  if (window.location.href.split("?")[1]) {
+    routeId = window.location.href.split("?")[1].split("=")[1];
   }
 
   const { t } = useTranslation();
@@ -38,31 +38,31 @@ export const AddMilestone = () => {
 
   const [creatingNew, setCreatingNew] = useState(true);
 
-  function changeRouteId(event){
+  function changeRouteId(event) {
 
   }
 
-  function changeNameField(event){
+  function changeNameField(event) {
     setNameText(event.target.value)
   }
 
-  function changeLatitudeField(event){
-    setText(event.target.value)  
+  function changeLatitudeField(event) {
+    setText(event.target.value)
   }
 
-  function changeLongitudeField(event){
+  function changeLongitudeField(event) {
     setLongitudeText(event.target.value)
   }
 
-  function changeAltitudeField(event){
+  function changeAltitudeField(event) {
     setAltitudeText(event.target.value)
   }
 
-  function changeExistentField(event){
+  function changeExistentField(event) {
     setExistenttext(event.target.value)
   }
 
-  function changeDescription(event){
+  function changeDescription(event) {
     setDescriptionText(event.target.value)
   }
 
@@ -71,103 +71,99 @@ export const AddMilestone = () => {
     setLongitudeText(lng)
   }
 
-  function optionChange(){
+  function optionChange() {
     setCreatingNew(!creatingNew)
   }
 
-  async function checkSubmit(){
+  async function checkSubmit() {
 
-    if(routeId.trim() === ""){
+    if (routeId.trim() === "") {
       errorToaster(t('addMilestone.notifications.routeIdEmpty'));
 
-    } else if(creatingNew)
+    } else if (creatingNew)
       checkCreateNew();
-    else 
+    else
       checkUseExistent();
   }
 
-  async function checkUseExistent(){
+  async function checkUseExistent() {
 
-      if(Existenttext.trim() === "")
-        errorToaster(t('addMilestone.notifications.existentEmpty'));
+    if (Existenttext.trim() === "") {
+      errorToaster(t('addMilestone.notifications.existentEmpty'));
+      return;
+    }
+
+    await MilestoneService.link(routeId, Existenttext);
+    successToaster(t('addMilestone.notifications.correct'));
   }
 
   const isNumber = (n) => n && !isNaN(parseFloat(n)) && !isNaN(n - 0);
 
-  async function checkCreateNew(){
+  async function checkCreateNew() {
 
-    let error = false;
-
-    if(!isNumber(Longitudetext)){
+    if (!isNumber(Longitudetext)) {
       errorToaster(t('addMilestone.notifications.longitudeNaN'));
-      error = true;
+      return;
     }
 
-    if(!isNumber(text)){
+    if (!isNumber(text)) {
       errorToaster(t('addMilestone.notifications.latitudeNaN'));
-      error = true;
+      return;
     }
 
-    if(Nametext.trim() === ""){
+    if (Nametext.trim() === "") {
       errorToaster(t('addRoute.notifications.nameEmpty'));
-      error = true;
+      return;
     }
 
-    if(!isNumber(Altitudetext)){
+    if (!isNumber(Altitudetext)) {
       errorToaster(t('addMilestone.notifications.altitudeNaN'));
-      error = true;
+      return;
 
-    } else if(Number.parseInt(Altitudetext) < 0) {
+    } else if (Number.parseInt(Altitudetext) < 0) {
       errorToaster(t('addMilestone.notifications.altitudeNegative'));
-      error = true;
+      return;
     }
 
-    if(error){
 
-      errorToaster(t('addRoute.notifications.error'));
+    let name = Nametext;
+    let description = Descriptiontext;
+    let distance = 0;
+    let slope = 0;
+    let latitude = text;
+    let longitude = Longitudetext;
 
+    let res = await MilestoneService.add(routeId, new Milestone(name, description, distance, slope, latitude, longitude));
+
+    if (res && res.added === true && res.webId) {
+      successToaster(t('addMilestone.notifications.correct'));
+
+      setNameText('');
+      setDescriptionText('');
+      setText('');
+      setLongitudeText('');
+      setAltitudeText('');
     } else {
-
-      let name = Nametext;
-      let description = Descriptiontext;
-      let distance = 0;
-      let slope = 0;
-      let latitude = text;
-      let longitude = Longitudetext;
-      
-      let res = await MilestoneService.add(routeId, new Milestone(name, description, distance, slope, latitude, longitude));
-console.log(res)
-      if(res && res.added === true && res.webId){
-        let linkSuccess = await MilestoneService.link(routeId, res.webId);
-        successToaster(t('addMilestone.notifications.correct'));
-
-        if (linkSuccess === true) {
-          errorToaster(t('addMilestone.notifications.errorService'));
-        }
-      } else {
-
-        errorToaster(t('addMilestone.notifications.errorService'));
-
-      }
+      errorToaster(t('addMilestone.notifications.errorService'));
     }
-    
+
   }
 
   return (
     <Form>
       <FullGridSize>
-        
-      <Label>
-          {t('addMilestone.routeToAdd')}
-          <Input type="text" size="200" value={routeId} onChange={changeRouteId}/>
-      </Label>
 
         <Label>
-          <Input type="radio" name={"opcion"} checked={!creatingNew} onChange={optionChange}/>
+          {t('addMilestone.routeToAdd')}
+          <Input type="text" size="200" value={routeId} onChange={changeRouteId} />
+        </Label>
+
+        <Label>
+          <Input type="radio" name={"opcion"} checked={!creatingNew} onChange={optionChange} />
           <b>{t('addMilestone.useExistent')}</b>
-          <Input type="text" size="200" value={Existenttext} onChange={changeExistentField} disabled={creatingNew}/>
-          <br/>
-          
+          <Input type="text" size="200" value={Existenttext} onChange={changeExistentField} disabled={creatingNew} />
+          <br />
+
           <Input type="radio" name={"opcion"} checked={creatingNew} onChange={optionChange} />
           <b>{t('addMilestone.createNew')}</b>
         </Label>
@@ -179,43 +175,43 @@ console.log(res)
 
         <Label>
           {t('addMilestone.name')}
-          <Input type="text" size="200" value={Nametext} onChange={changeNameField} disabled={!creatingNew}/>
+          <Input type="text" size="200" value={Nametext} onChange={changeNameField} disabled={!creatingNew} />
         </Label>
 
         <Label>
           {t('addMilestone.description')}
-          <TextArea value={Descriptiontext} onChange={changeDescription} cols={40} rows={10} disabled={!creatingNew}/>
+          <TextArea value={Descriptiontext} onChange={changeDescription} cols={40} rows={10} disabled={!creatingNew} />
         </Label>
 
         <Label>
           <b>
             {t('addMilestone.mapInfo')}
           </b>
-          <br/>
-          <br/>
+          <br />
+          <br />
         </Label>
 
         <Label>
           {t('addMilestone.latitude')}
-          <Input type="number" min="0" max="10" value={text} onChange={changeLatitudeField} size="200" disabled={!creatingNew}/>
+          <Input type="number" min="0" max="10" value={text} onChange={changeLatitudeField} size="200" disabled={!creatingNew} />
         </Label>
 
         <Label>
           {t('addMilestone.longitude')}
-          <Input type="number" min="0" max="10" value={Longitudetext} onChange={changeLongitudeField} size="200" disabled={!creatingNew}/>
+          <Input type="number" min="0" max="10" value={Longitudetext} onChange={changeLongitudeField} size="200" disabled={!creatingNew} />
         </Label>
 
         <Label>
           {t('addMilestone.altitude')}
-          <Input type="number" min="0" value={Altitudetext} onChange={changeAltitudeField} size="200" disabled={!creatingNew}/>
+          <Input type="number" min="0" value={Altitudetext} onChange={changeAltitudeField} size="200" disabled={!creatingNew} />
         </Label>
 
-        <Input type="button" className="ids-link-filled ids-link-filled--primary button" value={t('addRoute.submit')} onClick={checkSubmit}/>
+        <Input type="button" className="ids-link-filled ids-link-filled--primary button" value={t('addRoute.submit')} onClick={checkSubmit} />
 
       </FullGridSize>
 
-      <MilestoneMap setLatLng={setLatLng}/>
-      
+      <MilestoneMap setLatLng={setLatLng} />
+
 
     </Form>
   );
@@ -234,7 +230,7 @@ const AddMilestoneComponent = () => {
         <Header>
           <p>{t('addMilestone.title')}</p>
         </Header>
-        <AddMilestone/>
+        <AddMilestone />
       </TextEditorContainer>
     </TextEditorWrapper>
   );

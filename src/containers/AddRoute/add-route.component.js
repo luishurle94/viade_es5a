@@ -86,9 +86,8 @@ export const AddRoute = ({ webId }: Props) => {
       let distance = 0;
       let slope = 0;
       let rank = values[3];
-      let createdAt = new Date();
 
-      const route = new Route(name, description, distance, slope, rank, webId, createdAt)
+      const route = new Route(name, description, distance, slope, rank, webId)
       console.log(route)
       let res = await RouteService.add(route);
 
