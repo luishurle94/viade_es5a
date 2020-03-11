@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { successToaster, errorToaster } from '@utils';
 import { MilestoneService } from '@services';
 import { Milestone } from '../../model/index';
+import { Loader } from '@util-components';
 import {
   TextEditorWrapper,
   TextEditorContainer,
@@ -35,6 +36,7 @@ export const AddMilestone = () => {
   const [Nametext, setNameText] = useState('');
   const [Descriptiontext, setDescriptionText] = useState('');
   const [Existenttext, setExistenttext] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const [creatingNew, setCreatingNew] = useState(true);
 
@@ -125,6 +127,7 @@ export const AddMilestone = () => {
       return;
     }
 
+    setIsLoading(true);
 
     let name = Nametext;
     let description = Descriptiontext;
@@ -136,6 +139,7 @@ export const AddMilestone = () => {
     let res = await MilestoneService.add(routeId, new Milestone(name, description, distance, slope, latitude, longitude));
 
     if (res && res.added === true && res.webId) {
+      setIsLoading(false);
       successToaster(t('addMilestone.notifications.correct'));
 
       setNameText('');
@@ -144,6 +148,7 @@ export const AddMilestone = () => {
       setLongitudeText('');
       setAltitudeText('');
     } else {
+      setIsLoading(false);
       errorToaster(t('addMilestone.notifications.errorService'));
     }
 
@@ -212,6 +217,7 @@ export const AddMilestone = () => {
 
       <MilestoneMap setLatLng={setLatLng} />
 
+      {isLoading && <Loader absolute />}
 
     </Form>
   );

@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { successToaster, errorToaster } from '@utils';
 import { RouteService } from '@services';
 import { Route } from '../../model/index';
+import { Loader } from '@util-components';
 import ldflex from '@solid/query-ldflex';
 import {
   TextEditorWrapper,
@@ -26,6 +27,7 @@ type Props = { webId: String };
 export const AddRoute = ({ webId }: Props) => {
   const { t } = useTranslation();
   const [url, setUrl] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const errors = [false, false, false, false];
   const values = ["R01","",100,5];
 
@@ -73,13 +75,10 @@ export const AddRoute = ({ webId }: Props) => {
   }
 
   async function checkSubmit(event){
-
     event.preventDefault();
 
     if(errors.includes(true)){
-
       errorToaster(t('addRoute.notifications.error'));
-
     } else {
       let name = values[0];
       let description = values[1];
@@ -88,17 +87,19 @@ export const AddRoute = ({ webId }: Props) => {
       let rank = values[3];
 
       const route = new Route(name, description, distance, slope, rank, webId)
-      console.log(route)
+      
+      setIsLoading(true);
+
       let res = await RouteService.add(route);
 
       if(res && res.added === true && res.webId){
+        setIsLoading(false);
         successToaster(t('addRoute.notifications.correct'));
         window.location.href = '/add-milestone?routeId=' + res.webId;
 
       } else {
-
+        setIsLoading(false);
         errorToaster(t('addRoute.notifications.errorService'));
-
       }
     }
     
@@ -140,6 +141,7 @@ export const AddRoute = ({ webId }: Props) => {
         <Input type="submit" className="ids-link-filled ids-link-filled--primary button" value={t('addRoute.submit')} />
             
       </FullGridSize>
+      {isLoading && <Loader absolute />}
     </Form>
   );
 };
