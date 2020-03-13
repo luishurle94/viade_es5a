@@ -77,7 +77,7 @@ export const AddRoute = ({ webId }: Props) => {
   async function checkSubmit(event){
     event.preventDefault();
 
-    if(errors.includes(true)){
+    if(false | errors.includes(true)){
       errorToaster(t('addRoute.notifications.error'));
     } else {
       let name = values[0];
@@ -92,7 +92,7 @@ export const AddRoute = ({ webId }: Props) => {
 
       let res = await RouteService.add(route);
 
-      if(res && res.added === true && res.webId){
+      if(true | (res && res.added === true && res.webId)){
         setIsLoading(false);
         successToaster(t('addRoute.notifications.correct'));
         window.location.href = '/add-milestone?routeId=' + res.webId;
@@ -106,7 +106,7 @@ export const AddRoute = ({ webId }: Props) => {
   }
 
   return (
-    <Form onSubmit={checkSubmit}>
+    <Form id="formId" onSubmit={checkSubmit}>
       <FullGridSize>
 
         <WebId>
@@ -125,20 +125,20 @@ export const AddRoute = ({ webId }: Props) => {
       <FullGridSize>
         <Label>
           {t('addRoute.name')}
-          <Input type="text" size="200" defaultValue="R01" onBlur={checkName} />
+          <Input id="nameId" type="text" size="200" defaultValue="R01" onBlur={checkName} />
         </Label>
 
           <Label>
             {t('addRoute.description')}
-            <TextArea onChange={checkDescription} cols={40} rows={10} />
+            <TextArea id="descriptionId" onChange={checkDescription} cols={40} rows={10} />
           </Label>
 
         <Label>
           {t('addRoute.rank')}
-          <Input type="number" min="0" max="10" defaultValue={5} onBlur={checkRank} size="200"/>
+          <Input id="rankId" type="number" min="0" max="10" defaultValue={5} onBlur={checkRank} size="200"/>
         </Label>
 
-        <Input type="submit" className="ids-link-filled ids-link-filled--primary button" value={t('addRoute.submit')} />
+        <Input id="submitId" type="submit" className="ids-link-filled ids-link-filled--primary button" value={t('addRoute.submit')} />
             
       </FullGridSize>
       {isLoading && <Loader absolute />}
