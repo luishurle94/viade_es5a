@@ -77,7 +77,7 @@ export const AddRoute = ({ webId }: Props) => {
   async function checkSubmit(event){
     event.preventDefault();
 
-    if(false | errors.includes(true)){
+    if(errors.includes(true)){
       errorToaster(t('addRoute.notifications.error'));
     } else {
       let name = values[0];
@@ -92,7 +92,7 @@ export const AddRoute = ({ webId }: Props) => {
 
       let res = await RouteService.add(route);
 
-      if(true | (res && res.added === true && res.webId)){
+      if(res && res.added === true && res.webId){
         setIsLoading(false);
         successToaster(t('addRoute.notifications.correct'));
         window.location.href = '/add-milestone?routeId=' + res.webId;
