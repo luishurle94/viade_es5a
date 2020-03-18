@@ -160,16 +160,16 @@ export const AddMilestone = () => {
 
         <Label>
           {t('addMilestone.routeToAdd')}
-          <Input type="text" size="200" value={routeId} onChange={changeRouteId} />
+          <Input id="routeToAddId" type="text" size="200" value={routeId} onChange={changeRouteId} />
         </Label>
 
         <Label>
-          <Input type="radio" name={"opcion"} checked={!creatingNew} onChange={optionChange} />
+          <Input id="radio1Id" type="radio" name={"opcion"} checked={!creatingNew} onChange={optionChange} />
           <b>{t('addMilestone.useExistent')}</b>
-          <Input type="text" size="200" value={Existenttext} onChange={changeExistentField} disabled={creatingNew} />
+          <Input id="existentId" type="text" size="200" value={Existenttext} onChange={changeExistentField} disabled={creatingNew} />
           <br />
 
-          <Input type="radio" name={"opcion"} checked={creatingNew} onChange={optionChange} />
+          <Input id="radio2Id" type="radio" name={"opcion"} checked={creatingNew} onChange={optionChange} />
           <b>{t('addMilestone.createNew')}</b>
         </Label>
 
@@ -180,12 +180,12 @@ export const AddMilestone = () => {
 
         <Label>
           {t('addMilestone.name')}
-          <Input type="text" size="200" value={Nametext} onChange={changeNameField} disabled={!creatingNew} />
+          <Input id="nameId" type="text" size="200" value={Nametext} onChange={changeNameField} disabled={!creatingNew} />
         </Label>
 
         <Label>
           {t('addMilestone.description')}
-          <TextArea value={Descriptiontext} onChange={changeDescription} cols={40} rows={10} disabled={!creatingNew} />
+          <TextArea id="descriptionId" value={Descriptiontext} onChange={changeDescription} cols={40} rows={10} disabled={!creatingNew} />
         </Label>
 
         <Label>
@@ -198,20 +198,20 @@ export const AddMilestone = () => {
 
         <Label>
           {t('addMilestone.latitude')}
-          <Input type="number" min="0" max="10" value={text} onChange={changeLatitudeField} size="200" disabled={!creatingNew} />
+          <Input id="latitudeId" type="number" min="0" max="10" value={text} onChange={changeLatitudeField} size="200" disabled={!creatingNew} />
         </Label>
 
         <Label>
           {t('addMilestone.longitude')}
-          <Input type="number" min="0" max="10" value={Longitudetext} onChange={changeLongitudeField} size="200" disabled={!creatingNew} />
+          <Input id="longitudeId" type="number" min="0" max="10" value={Longitudetext} onChange={changeLongitudeField} size="200" disabled={!creatingNew} />
         </Label>
 
         <Label>
           {t('addMilestone.altitude')}
-          <Input type="number" min="0" value={Altitudetext} onChange={changeAltitudeField} size="200" disabled={!creatingNew} />
+          <Input id="altitudeId" type="number" min="0" value={Altitudetext} onChange={changeAltitudeField} size="200" disabled={!creatingNew} />
         </Label>
 
-        <Input type="button" className="ids-link-filled ids-link-filled--primary button" value={t('addRoute.submit')} onClick={checkSubmit} />
+        <Input id="submitId" type="button" className="ids-link-filled ids-link-filled--primary button" value={t('addRoute.submit')} onClick={checkSubmit} />
 
       </FullGridSize>
 
