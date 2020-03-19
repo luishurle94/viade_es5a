@@ -187,15 +187,13 @@ export const AddMilestone = () => {
 
       <FullGridSize>
           <Accordion activeIndex="0">
-                      {renderedMilestones.map(function(milestone, index){
-                          return <AccordionTab header= {milestone.name}> 
-                                  <ul>
-                                    <li key={ index }> {t('addMilestone.description') + ': '} {milestone.description}</li>
-                                    <li key={ index }> {t('addMilestone.distance') + ': '} {milestone.distance}</li> 
-                                    <li key={ index }> {t('addMilestone.slope') + ': '} {milestone.slope}</li> 
-                                    <li key={ index }> {t('addMilestone.latitude') + ': '} {milestone.latitude}</li> 
-                                    <li key={ index }> {t('addMilestone.longitude') + ': '} {milestone.longitude}</li> 
-                                  </ul>
+                      {renderedMilestones.map(function(milestone, key){
+                          return <AccordionTab key={key} header= {milestone.name}> 
+                                    <p> {t('addMilestone.description') + ': '} {milestone.description}</p>
+                                    <p> {t('addMilestone.distance') + ': '} {milestone.distance}</p> 
+                                    <p> {t('addMilestone.slope') + ': '} {milestone.slope}</p> 
+                                    <p> {t('addMilestone.latitude') + ': '} {milestone.latitude}</p> 
+                                    <p> {t('addMilestone.longitude') + ': '} {milestone.longitude}</p> 
                                   </AccordionTab>;
                       })}
           </Accordion>
