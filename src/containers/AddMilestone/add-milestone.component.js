@@ -34,7 +34,8 @@ export const AddMilestone = () => {
   }
 
   const [renderedMilestones, setRenderedMilestones] = useState([]);
-  useEffect(()=> {obtainMilestones();} );
+  const [size, setSize] = useState(0);
+  useEffect(()=> {obtainMilestones();});
  
   
 
@@ -111,6 +112,27 @@ export const AddMilestone = () => {
 
   const isNumber = (n) => n && !isNaN(parseFloat(n)) && !isNaN(n - 0);
   
+  const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    if ((lat1 === lat2) && (lon1 === lon2)) {
+      return 0;
+    }
+    else {
+      var radlat1 = Math.PI * lat1/180;
+      var radlat2 = Math.PI * lat2/180;
+      var theta = lon1-lon2;
+      var radtheta = Math.PI * theta/180;
+      var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+      if (dist > 1) {
+        dist = 1;
+      }
+      dist = Math.acos(dist);
+      dist = dist * 180/Math.PI;
+      dist = dist * 60 * 1.1515;
+          dist = dist * 1.609344
+      return dist;
+    }
+  }
+
   async function checkCreateNew() {
 
     if (!isNumber(Longitudetext)) {
@@ -142,10 +164,25 @@ export const AddMilestone = () => {
     let name = Nametext;
     let description = Descriptiontext;
     let distance = 0;
-    let slope = 0;
     let latitude = text;
     let longitude = Longitudetext;
-    let res = await MilestoneService.add(routeId, new Milestone(name, description, distance, slope, latitude, longitude));
+    let altitude = Altitudetext;
+    let previousLat = 0;
+    let previousLong = 0;
+
+    if(size > 0 && renderedMilestones[size -1]){
+
+      if(renderedMilestones[size -1].latitude)
+        previousLat = renderedMilestones[size -1].latitude;
+
+      if(renderedMilestones[size -1].longitude)
+        previousLong = renderedMilestones[size -1].longitude;
+
+      distance = calculateDistance(latitude, longitude, previousLat, previousLong)
+
+    }
+      
+    let res = await MilestoneService.add(routeId, new Milestone(name, description, distance, altitude, latitude, longitude, size + 1));
 
     if (res && res.added === true && res.webId) {
       setIsLoading(false);
@@ -168,8 +205,13 @@ export const AddMilestone = () => {
     try {
         route = await RouteService.get(routeId);
 
-        if(route.milestonesObject)
-          setRenderedMilestones(route.milestonesObject);
+        if(route.milestonesObject){
+            route.milestonesObject.sort((a, b) => (a.order >  b.order) ? 1 : -1);
+            setRenderedMilestones(route.milestonesObject);
+            setSize(route.milestonesObject.length);
+
+        }
+          
 
     } catch(error) {
       errorToaster(t('addMilestone.notifications.errorLoadingMilestones'));
@@ -187,11 +229,11 @@ export const AddMilestone = () => {
 
       <FullGridSize>
           <Accordion activeIndex="0">
-                      {renderedMilestones.map(function(milestone, key){
+                      {renderedMilestones.sort((a, b) => (a.order >  b.order) ? 1 : -1).map(function(milestone, key){
                           return <AccordionTab key={key} header= {milestone.name}> 
                                     <p> {t('addMilestone.description') + ': '} {milestone.description}</p>
                                     <p> {t('addMilestone.distance') + ': '} {milestone.distance}</p> 
-                                    <p> {t('addMilestone.slope') + ': '} {milestone.slope}</p> 
+                                    <p> {t('addMilestone.altitude') + ': '} {milestone.slope}</p> 
                                     <p> {t('addMilestone.latitude') + ': '} {milestone.latitude}</p> 
                                     <p> {t('addMilestone.longitude') + ': '} {milestone.longitude}</p> 
                                   </AccordionTab>;
