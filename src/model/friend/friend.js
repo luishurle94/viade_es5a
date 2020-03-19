@@ -1,5 +1,5 @@
 
-import { Image } from './media';
+import { Image } from '@models';
 
 export default class Friend {
   webId = '';

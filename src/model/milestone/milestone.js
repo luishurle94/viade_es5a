@@ -1,5 +1,5 @@
 
-import { Image, Video } from './media';
+import { Image, Video } from '@models';
 
 export default class Milestone {
   webId = '';
