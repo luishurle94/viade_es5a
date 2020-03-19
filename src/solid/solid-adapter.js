@@ -151,3 +151,7 @@ const checkParams = async (createDocument, webId, parentWebId, parentFilename, p
   parentPredicate = parentPredicate || 'schema:hasPart';
   return {createDocument, webId, parentWebId, parentFilename, parentPredicate, folder};
 }
+
+  export const getFriends = async (webId) => {
+    return await SolidHelper.getFriends(webId);
+  }
