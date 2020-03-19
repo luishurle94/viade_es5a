@@ -96,3 +96,21 @@ export const getPredicate = (field, context) => {
   const prefix = context['@context'][field.prefix];
   return `${prefix}${field.predicate}`;
 }
+
+export const getFriends = async (webId) => {
+  const me = ldflex[webId];
+  let friends = [];
+  for await (const name of me.friends) {
+    friends.push(await getFriendData(name));
+  }
+  return friends;
+}
+
+export const getFriendData = async (webId) => {
+  let friend = {};
+  let data = ldflex[webId];
+  friend.fn = `${await data.vcard_fn}`;
+  friend.webId = `${await data["solid:account"]}`.concat("profile/card#");
+  friend.image = `${await data["vcard:hasPhoto"]}`;
+  return friend;
+}
