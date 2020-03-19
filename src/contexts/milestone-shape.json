@@ -52,6 +52,12 @@
       "object": "images",
       "literal": false,
       "type": "Array"
+    },{
+      "prefix": "geo",
+      "predicate": "order",
+      "object": "order",
+      "literal": true,
+      "type": "number"
     }
   ]
 }
