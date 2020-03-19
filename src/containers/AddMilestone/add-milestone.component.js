@@ -2,12 +2,14 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-console */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { successToaster, errorToaster } from '@utils';
-import { MilestoneService } from '@services';
+import { MilestoneService, RouteService } from '@services';
 import { Milestone } from '../../model/index';
 import { Loader } from '@util-components';
+import {Accordion,AccordionTab} from 'primereact/accordion';
+
 import {
   TextEditorWrapper,
   TextEditorContainer,
@@ -16,17 +18,25 @@ import {
   FullGridSize,
   Label,
   Input,
-  TextArea
+  TextArea,
+  Title
 } from './add-milestone.style';
 import MilestoneMap from './MilestoneMap/milestone-map.component';
 
 export const AddMilestone = () => {
 
+  let route;
+  
   let routeId = "";
 
   if (window.location.href.split("?")[1]) {
     routeId = window.location.href.split("?")[1].split("=")[1];
   }
+
+  const [renderedMilestones, setRenderedMilestones] = useState([]);
+  useEffect(()=> {obtainMilestones();} );
+ 
+  
 
   const { t } = useTranslation();
 
@@ -100,7 +110,7 @@ export const AddMilestone = () => {
   }
 
   const isNumber = (n) => n && !isNaN(parseFloat(n)) && !isNaN(n - 0);
-
+  
   async function checkCreateNew() {
 
     if (!isNumber(Longitudetext)) {
@@ -135,7 +145,6 @@ export const AddMilestone = () => {
     let slope = 0;
     let latitude = text;
     let longitude = Longitudetext;
-
     let res = await MilestoneService.add(routeId, new Milestone(name, description, distance, slope, latitude, longitude));
 
     if (res && res.added === true && res.webId) {
@@ -154,8 +163,44 @@ export const AddMilestone = () => {
 
   }
 
-  return (
-    <Form>
+  async function obtainMilestones(){
+
+    try {
+        route = await RouteService.get(routeId);
+
+        if(route.milestonesObject)
+          setRenderedMilestones(route.milestonesObject);
+
+    } catch(error) {
+      errorToaster(t('addMilestone.notifications.errorLoadingMilestones'));
+      console.log(error)
+    }
+
+  }
+
+  return ( 
+    <Form>  
+      <Title>
+          {t('addMilestone.accordionTitle') + ' ' + renderedMilestones.length + ' ' + t('addMilestone.accordionEndTtile') }
+          <br/>
+      </Title>
+
+      <FullGridSize>
+          <Accordion activeIndex="0">
+                      {renderedMilestones.map(function(milestone, index){
+                          return <AccordionTab header= {milestone.name}> 
+                                  <ul>
+                                    <li key={ index }> {t('addMilestone.description') + ': '} {milestone.description}</li>
+                                    <li key={ index }> {t('addMilestone.distance') + ': '} {milestone.distance}</li> 
+                                    <li key={ index }> {t('addMilestone.slope') + ': '} {milestone.slope}</li> 
+                                    <li key={ index }> {t('addMilestone.latitude') + ': '} {milestone.latitude}</li> 
+                                    <li key={ index }> {t('addMilestone.longitude') + ': '} {milestone.longitude}</li> 
+                                  </ul>
+                                  </AccordionTab>;
+                      })}
+          </Accordion>
+      </FullGridSize>
+
       <FullGridSize>
 
         <Label>
