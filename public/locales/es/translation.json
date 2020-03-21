@@ -249,6 +249,8 @@
     "distance": "Distancia",
     "slope": "Desnivel",
     "rank": "Dificultad",
+    "creator": "Creador",
+    "createdAt": "Fecha de creación",
     "notifications": {
       "nameEmpty": "El campo 'Nombre' no puede estar vacío",
       "distanceNegative": "'Distancia' debe ser mayor que cero",
@@ -285,5 +287,8 @@
       "errorService": "Se ha producido un error al añadir tu hito. Quizás si lo intentaras de nuevo...",
       "errorLoadingMilestones": "¡Ups! Ha ocurrido un error al cargar tus hitos..."
     }
+  },
+  "routeDetails":{
+    "title": "Información de la Ruta"
   }
 }

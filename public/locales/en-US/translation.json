@@ -249,6 +249,8 @@
     "distance": "Distance",
     "slope": "Slope",
     "rank": "Rank",
+    "creator": "Creator",
+    "createdAt": "Creation date",
     "notifications": {
       "nameEmpty": "'Name' field can not be empty",
       "distanceNegative": "'Distance' must be greater than zero",
@@ -286,5 +288,8 @@
       "errorLoadingMilestones": "Oops! There was an error loading your milestones..."
     }
 
+  },
+  "routeDetails":{
+    "title": "Route Information"
   }
 }
