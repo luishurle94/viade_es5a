@@ -8,6 +8,7 @@ import { errorToaster } from '@utils';
 import { Loader } from '@util-components';
 import { RouteService } from '@services';
 import {Accordion,AccordionTab} from 'primereact/accordion';
+import RouteDetailsMap from './RouteDetailsMap/index';
 
 import {
   TextEditorWrapper,
@@ -17,6 +18,15 @@ import {
   FullGridSize,
   Title
 } from './route-details.style';
+
+const flexStyle = {
+  'display': 'flex',
+  'flexDirection': 'row',
+  'height': '100%',
+  'width': '100%',
+  'position': 'relative',
+};
+
 
 export const RouteDetails = () => {
 
@@ -35,6 +45,9 @@ export const RouteDetails = () => {
   const [renderedRank, setRenderedRank] = useState('');
   const [renderedCreatedBy, setRenderedCreatedBy] = useState('');
   const [renderedCreatedAt, setRenderedCreatedAt] = useState('');
+
+  const [mapLat, setMapLat] = useState(40.416775);
+  const [mapLng, setMapLng] = useState(-3.703790);
 
   const [renderedMilestones, setRenderedMilestones] = useState([]);
   useEffect(()=> {obtainMilestones();});
@@ -77,48 +90,68 @@ export const RouteDetails = () => {
 
   }
 
+  function updateMarker(milestone){
+    let lat = renderedMilestones[milestone.index].latitude;
+    let lng = renderedMilestones[milestone.index].longitude;
+    if(lat && lng){
+      setMapLat(lat);
+      setMapLng(lng);
+    }
+  }
+
   return ( 
     <Form>  
-      <Title>
-          {t('routeDetails.title')}
-          <br/>
-      </Title>
-
-      <FullGridSize> 
-          <p> {t('addMilestone.name') + ': '} {renderedName}</p>
-          <p> {t('addMilestone.description') + ': '} {renderedDescription}</p>
-          <p> {t('addMilestone.distance') + ': '} {renderedDistance}</p>
-          <p> {t('addMilestone.slope') + ': '}{renderedSlope}</p>
-          <p> {t('addRoute.rank') + ': '} {renderedRank}</p>
-          <p> {t('addRoute.creator') + ': '} {renderedCreatedBy}</p>
-          <p> {t('addRoute.createdAt') + ': '} {renderedCreatedAt}</p>
-      </FullGridSize>
-
-      <Title>
-          {t('addMilestone.accordionTitle') + ' ' + renderedMilestones.length + ' ' + t('addMilestone.accordionEndTtile') }
-          <br/>
-      </Title>
       
-      <FullGridSize>
-          <Accordion activeIndex="0">
-                      {renderedMilestones.sort((a, b) => (a.order >  b.order) ? 1 : -1).map(function(milestone, key){
-                          return <AccordionTab key={key} header= {milestone.name}> 
-                                    <p> {t('addMilestone.description') + ': '} {milestone.description}</p>
-                                    <p> {t('addMilestone.distance') + ': '} {milestone.distance}</p> 
-                                    <p> {t('addMilestone.altitude') + ': '} {milestone.slope}</p> 
-                                    <p> {t('addMilestone.latitude') + ': '} {milestone.latitude}</p> 
-                                    <p> {t('addMilestone.longitude') + ': '} {milestone.longitude}</p> 
-                                  </AccordionTab>;
-                      })}
-          </Accordion>
+    <div style={flexStyle}>
+      <div>
+        <FullGridSize> 
+            <Title>
+              {t('routeDetails.title')}
+              <br/>
+            </Title>
+            <p> {t('addMilestone.name') + ': '} {renderedName}</p>
+            <p> {t('addMilestone.description') + ': '} {renderedDescription}</p>
+            <p> {t('addMilestone.distance') + ': '} {renderedDistance}</p>
+            <p> {t('addMilestone.slope') + ': '}{renderedSlope}</p>
+            <p> {t('addRoute.rank') + ': '} {renderedRank}</p>
+            <p> {t('addRoute.creator') + ': '} {renderedCreatedBy}</p>
+            <p> {t('addRoute.createdAt') + ': '} {renderedCreatedAt}</p>
+        </FullGridSize>
 
-      </FullGridSize>
+        <Title>
+            {t('addMilestone.accordionTitle') + ' ' + renderedMilestones.length + ' ' + t('addMilestone.accordionEndTtile') }
+            <br/>
+        </Title>
+        
+        <FullGridSize>
+            <Accordion activeIndex="0" onTabOpen={(a, b) => updateMarker(a)}>
+                        {renderedMilestones.sort((a, b) => (a.order >  b.order) ? 1 : -1).map(function(milestone, key){
+                            return <AccordionTab key={key} header= {milestone.name}> 
+                                      <p> {t('addMilestone.description') + ': '} {milestone.description}</p>
+                                      <p> {t('addMilestone.distance') + ': '} {milestone.distance}</p> 
+                                      <p> {t('addMilestone.altitude') + ': '} {milestone.slope}</p> 
+                                      <p> {t('addMilestone.latitude') + ': '} {milestone.latitude}</p> 
+                                      <p> {t('addMilestone.longitude') + ': '} {milestone.longitude}</p> 
+                                    </AccordionTab>;
+                        })}
+            </Accordion>
 
+        </FullGridSize>
+      </div>
+      <div>
+        <RouteDetailsMap
+          lat={mapLat}
+          long={mapLng}
+        />
+       
+      </div>
+    </div>
       {isLoading && <Loader absolute />}
 
     </Form>
   );
 };
+
 
 
 /**
