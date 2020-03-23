@@ -11,6 +11,7 @@ describe.only('Transformations', () => {
       slope: "10",
       latitude: "10",
       longitude: "10",
+      "order": "1"
     };
 
     const result = MilestoneFactory.create(milestone);

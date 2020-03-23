@@ -12,6 +12,8 @@ describe.only('Transformations', () => {
       rank: "10",
       createdBy: "https://jaluma.inrupt.net/profile/card#me",
       createdAt: "1583017272006",
+      messages: [],
+      milestones: []
     };
 
     const result = RouteFactory.create(route);
@@ -23,7 +25,8 @@ describe.only('Transformations', () => {
     expect(route.rank === result.rank).toBe(true);
     expect(route.createdBy === result.createdBy).toBe(true);
     expect(route.createdAt === result.createdAt).toBe(true);
-
+    expect(route.messages === result.messages).toBe(true);
+    expect(route.milestones === result.milestones).toBe(true);
   });
 
   test('transform object', async () => {
