@@ -30,7 +30,7 @@ export const WelcomePageContent = props => {
     <WelcomeWrapper data-testid="welcome-wrapper">
       <WelcomeCard className="card">
         <WelcomeLogo data-testid="welcome-logo">
-          <img src="/img/viade_500.png" alt="ViaDe" style={imgLogoStyle} />
+          <img src="img/viade_500.png" alt="ViaDe" style={imgLogoStyle} />
         </WelcomeLogo>
         <WelcomeProfile data-testid="welcome-profile">
           <h3>

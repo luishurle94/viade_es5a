@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { successToaster, errorToaster } from '@utils';
 import { RouteService } from '@services';
-import { Route } from '../../model/index';
+import { Route } from '@models';
 import { Loader } from '@util-components';
 import ldflex from '@solid/query-ldflex';
 import {

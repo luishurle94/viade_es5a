@@ -1,4 +1,4 @@
-import { SolidTypesHelper } from '../solid';
+import { SolidTypesHelper } from '@solid-services'
 
 describe.only('Transformations', () => {
   test('transform number', async () => {

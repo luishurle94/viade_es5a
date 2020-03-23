@@ -1,4 +1,4 @@
-import { RouteFactory } from '../index';
+import { RouteFactory } from '@services/factories';
 
 describe.only('Transformations', () => {
   test('transform object', async () => {
