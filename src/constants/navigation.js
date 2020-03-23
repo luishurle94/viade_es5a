@@ -4,13 +4,13 @@
 export const NavigationItems = [
   {
     id:'map',
-    icon : '/img/googlemaps.svg',
+    icon : 'img/googlemaps.svg',
     label :'Mapa de rutas',
     to :'/routemap'
   },
   {
     id: 'add-route',
-    icon: '/img/icon/route.png',
+    icon: 'img/icon/route.png',
     label: 'navBar.add-route',
     to: '/add-route'
   }
