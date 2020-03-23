@@ -1,6 +1,6 @@
 // @flow
-import Comment from '@models';
-import Milestone from '@models';
+import { Comment } from '@models';
+import { Milestone } from '@models';
 import { MilestoneService } from '@services';
 
 export default class Route {

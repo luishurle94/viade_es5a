@@ -1,4 +1,4 @@
-import { Friend } from "../../../model";
+import { Friend } from "@models";
 
 export const create = (friend) => {
   if (!friend) {
