@@ -10,7 +10,7 @@ export default class Comment {
     this.webId = webId;
     this.message = message;
     this.createdBy = createdBy;
-    this.createdAt = createdAt ? createdBy : Date.now();
+    this.createdAt = createdAt ? createdAt : Date.now();
   }
 
   getIdentifier() {
