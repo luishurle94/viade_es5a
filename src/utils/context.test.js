@@ -1,5 +1,4 @@
 import * as Context from "./context";
-import routeShape from '@contexts/route-shape.json';
 
 describe.only('Generate suffix', () => {
   test('get suffix', async () => {

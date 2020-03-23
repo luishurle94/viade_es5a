@@ -25,4 +25,27 @@ describe.only('Transformations', () => {
     expect(route.createdAt === result.createdAt).toBe(true);
 
   });
+
+  test('transform object', async () => {
+
+    const route = {
+    };
+
+    const result = RouteFactory.create(route);
+
+    expect(result).toBeTruthy();
+  });
+
+  test('transform undefined', async () => {
+    const result = RouteFactory.create();
+
+    expect(result).toBeUndefined()
+  });
+
+  test('transform null', async () => {
+    const route = null;
+    const result = RouteFactory.create(route);
+
+    expect(result).toBeUndefined()
+  });
 });

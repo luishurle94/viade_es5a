@@ -1,6 +1,5 @@
 // @flow
-import { Comment } from '@models';
-import { Milestone } from '@models';
+import { Comment, Milestone } from '@models';
 import { MilestoneService } from '@services';
 
 export default class Route {
@@ -36,7 +35,7 @@ export default class Route {
    * @param {Comment} comment 
    */
   linkComment(comment) {
-    if (comment && comment instanceof Comment) {
+    if (comment) {
       this.messages.push(comment);
     }
   }
@@ -46,7 +45,7 @@ export default class Route {
    * @param {Milestone} milestone 
    */
   linkMilestone(milestone) {
-    if (milestone && milestone instanceof Milestone) {
+    if (milestone) {
       this.milestones.push(milestone);
     }
   }

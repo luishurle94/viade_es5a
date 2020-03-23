@@ -1,10 +1,8 @@
 import React from 'react';
-import { render, cleanup } from 'react-testing-library';
+import { cleanup } from 'react-testing-library';
 import App from './App';
 
 afterAll(cleanup);
-
-// const { container } = render();
 
 describe('App', () => {
   it('renders without crashing', () => {

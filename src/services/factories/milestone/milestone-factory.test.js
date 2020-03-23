@@ -23,4 +23,27 @@ describe.only('Transformations', () => {
     expect(milestone.longitude === result.longitude).toBe(true);
 
   });
+
+  test('transform object', async () => {
+
+    const milestone = {
+    };
+
+    const result = MilestoneFactory.create(milestone);
+
+    expect(result).toBeTruthy();
+  });
+
+  test('transform undefined', async () => {
+    const milestone = MilestoneFactory.create();
+
+    expect(milestone).toBeUndefined()
+  });
+
+  test('transform null', async () => {
+    const milestone = null;
+    const result = MilestoneFactory.create(milestone);
+
+    expect(result).toBeUndefined()
+  });
 });
