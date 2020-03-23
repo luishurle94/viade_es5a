@@ -1,4 +1,4 @@
-import { Milestone } from "../../../model";
+import { Milestone } from "@models";
 
 export const create = (milestone) => {
   if (!milestone) {
