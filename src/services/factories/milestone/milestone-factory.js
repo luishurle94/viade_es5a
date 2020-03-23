@@ -1,4 +1,4 @@
-import { Milestone } from "../../../model";
+import { Milestone } from "@models";
 
 export const create = (milestone) => {
   if (!milestone) {
@@ -14,6 +14,7 @@ export const create = (milestone) => {
   if(milestone.slope) obj.slope = milestone.slope;
   if(milestone.latitude) obj.latitude = milestone.latitude;
   if(milestone.longitude) obj.longitude = milestone.longitude;
+  if(milestone.order) obj.order = milestone.order;
 
   return obj;
 }

@@ -266,10 +266,14 @@
     "latitude": "Latitud",
     "longitude": "Longitud",
     "altitude": "Altitud",
+    "slope": "Pendiente",
+    "distance": "Distancia",
     "createNew": "Crear nuevo Hito",
     "useExistent": "Usar un Hito existente (Introduce el webId del hito existente)",
     "mapInfo": "Haz click en el mapa para obtener la longitud y latitud de un punto, o introdúcelo manualmente",
     "routeToAdd": "Ruta a la que se añadirá el hito",
+    "accordionTitle": "Esta ruta tiene",
+    "accordionEndTtile": "hitos",
     "notifications": {
       "altitudeNegative": "'Altitud' debe ser al menos cero",
       "altitudeNaN": "'Altitud' debe ser un número",
@@ -278,7 +282,8 @@
       "existentEmpty": "Se debe introducir el webId de un hito",
       "routeIdEmpty": "Se debe introducir el webId de una ruta",
       "correct": "Añadiendo tu hito...",
-      "errorService": "Se ha producido un error al añadir tu hito. Quizás si lo intentaras de nuevo..."
+      "errorService": "Se ha producido un error al añadir tu hito. Quizás si lo intentaras de nuevo...",
+      "errorLoadingMilestones": "¡Ups! Ha ocurrido un error al cargar tus hitos..."
     }
   }
 }

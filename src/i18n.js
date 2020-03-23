@@ -21,6 +21,9 @@ i18n
     // learn more: https://react.i18next.com/components/i18next-instance
     react: {
       wait: true
+    },
+    backend: {
+      loadPath: 'locales/{{lng}}/{{ns}}.json'
     }
   });
 

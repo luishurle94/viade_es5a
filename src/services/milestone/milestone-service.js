@@ -1,6 +1,6 @@
-import { SolidAdapter } from "../../solid";
-import { MilestoneFactory } from "../factories";
-import { RouteService } from '..'
+import { SolidAdapter } from "@solid-services";
+import { MilestoneFactory } from "@services/factories";
+import { RouteService } from '@services'
 
 import milestoneShape from '@contexts/milestone-shape.json';
 import routeShape from '@contexts/route-shape.json';
