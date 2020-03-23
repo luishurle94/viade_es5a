@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { successToaster, errorToaster } from '@utils';
 import { MilestoneService } from '@services';
-import { Milestone } from '../../model/index';
+import { Milestone } from '@models';
 import { Loader } from '@util-components';
 import {
   TextEditorWrapper,

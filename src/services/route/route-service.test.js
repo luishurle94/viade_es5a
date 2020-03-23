@@ -1,5 +1,5 @@
-import { Route } from '../../model'
-import { RouteService } from '..';
+import { Route } from '@models'
+import { RouteService } from '@services';
 
 const makeid = (length) => {
   let result = '';
