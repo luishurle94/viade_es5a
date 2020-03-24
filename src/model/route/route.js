@@ -51,8 +51,8 @@ export default class Route {
   /**
    * @return JSON
    */
-  getGeoJson() {
-    this.refreshMilestones();
+  async getGeoJson() {
+    await this.refreshMilestones();
     let base = {
       "type": "FeatureCollection",
       "features": [
@@ -68,15 +68,15 @@ export default class Route {
       ]
     }
 
-    for(let m of this.milestonesObject) {
+    for (let m of this.milestonesObject) {
       // access line string
-      base.features.geometry.coordinates.push([
-        m.latitude,
-        m.longitude
+      base.features[0].geometry.coordinates.push([
+        m.longitude,
+        m.latitude
       ]);
-
       base.features.push(this.createPoint(m.latitude, m.longitude));
     }
+    return base;
   }
   /**
    * 
@@ -99,10 +99,15 @@ export default class Route {
   /** 
    * 
   */
-  refreshMilestones() {
-    this.milestones.forEach(url => {
-      this.milestonesObject.push(MilestoneService.get(url));
-    });
+  async refreshMilestones() {
+    const newList = [];
+    for(let url of this.milestones){
+      newList.push(await MilestoneService.get(url));
+    };
+    if (newList.length > 0) {
+      this.milestonesObject = newList;
+    }
+
   }
 
   getIdentifier() {

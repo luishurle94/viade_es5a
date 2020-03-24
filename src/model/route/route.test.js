@@ -1,5 +1,12 @@
-import { Route } from '@models'
-import { Milestone } from '..';
+import 'jest';
+
+import * as SolidHelper from './../../../test/__mocks__/solid-helper';
+import auth from './../../../test/__mocks__/solid-auth-client';
+
+import { Route, Milestone } from '@models';
+
+jest.mock('../../solid/solid-helper');
+jest.mock('solid-auth-client');
 
 const route = new Route('Esto es una prueba', 'Descripcion', 5, 10, 10, "javier");
 describe.only('Create a new route', () => {
@@ -54,7 +61,33 @@ describe.only('Link comment', () => {
 });
 
 describe.only('Create geojson', () => {
-  test('should create a geojson object', async () => {
+  test('should create a geojson object empty', async () => {
+    const r = new Route();
+    expect(await r.getGeoJson()).toStrictEqual({
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {},
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+            ]
+          }
+        }
+      ]
+    })
+  });
+
+  test('should create a geojson object with points', async () => {
+    const r = new Route('Esto es una prueba2', 'Descripcion', 5, 10, 10, "javier");
+    r.milestones.push('1574320256') //soy_un_hito
+    r.milestones.push('1559287730')//soy_un_hito_2
+    const geojson = await r.getGeoJson();
+    expect(geojson.features[0].geometry.coordinates).toStrictEqual([["10", "-10"], ["11", "-11"]])
+    expect(geojson.features[1].geometry.coordinates).toStrictEqual(["10", "-10"])
+    expect(geojson.features[2].geometry.coordinates).toStrictEqual(["11", "-11"])
+    expect(geojson.features[3]).toBeUndefined()
   });
 
   test('should create a point geojson object', async () => {

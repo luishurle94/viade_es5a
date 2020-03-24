@@ -13,11 +13,56 @@ export default jest.mock('../../src/solid/solid-helper', () => {
     webId: HashHelper.hash('soy_una_ruta'),
     predicate: 'foaf:name'
   });
+
+
   links.push({
     obj: 'soy_un_hito',
     webId: HashHelper.hash('soy_un_hito'),
     predicate: 'foaf:name'
   });
+  links.push({
+    obj: -10 ,
+    webId: HashHelper.hash('soy_un_hito'),
+    predicate: 'geo:latitude'
+  });
+  links.push({
+    obj: 10 ,
+    webId: HashHelper.hash('soy_un_hito'),
+    predicate: 'geo:longitude'
+  });
+  links.push({
+    obj: 11 ,
+    webId: HashHelper.hash('soy_un_hito'),
+    predicate: 'geo:location'
+  });
+  links.push({
+    obj: 9 ,
+    webId: HashHelper.hash('soy_un_hito'),
+    predicate: 'geo:altitude'
+  });
+
+  links.push({
+    obj: 'soy_un_hito2',
+    webId: HashHelper.hash('soy_un_hito2'),
+    predicate: 'foaf:name'
+  });
+  links.push({
+    obj: -11 ,
+    webId: HashHelper.hash('soy_un_hito2'),
+    predicate: 'geo:latitude'
+  });
+  links.push({
+    obj: 11 ,
+    webId: HashHelper.hash('soy_un_hito2'),
+    predicate: 'geo:longitude'
+  });
+  links.push({
+    obj: 12 ,
+    webId: HashHelper.hash('soy_un_hito2'),
+    predicate: 'geo:location'
+  });
+
+
   links.push({
     obj: [HashHelper.hash('soy_un_hito')],
     webId: HashHelper.hash('soy_una_ruta'),
