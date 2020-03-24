@@ -1,85 +1,82 @@
+import 'jest';
+
+import * as SolidHelper from './../../../test/__mocks__/solid-helper';
+import auth from './../../../test/__mocks__/solid-auth-client';
+
 import { Milestone } from '@models'
 import { MilestoneService } from '@services';
+import { Route } from '@models';
+import { HashHelper } from '@utils'
+
+jest.mock('../../solid/solid-helper');
+jest.mock('solid-auth-client');
 
 const makeid = (length) => {
   let result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const charactersLength = characters.length;
-  for (let i = 0; i < length; i++ ) {
-     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
 }
 
-describe.only('Add new milestone', () => {
-  const route = new Milestone(makeid(20), 'Esto es una prueba', 'Descripcion', 5, 10, 10, 11);
+const nameRoute = 'soy_una_ruta';
+const rName = HashHelper.hash(nameRoute);
 
+const milestone = new Milestone(makeid(20), 'Esto es una prueba', 'Descripcion', 5, 10, 10, 11);
+const mName = HashHelper.hash(milestone.getIdentifier());
+
+describe.only('Add new milestone', () => {
   MilestoneService.default = jest.fn();
 
   test('should add sucessfully', async () => {
-    MilestoneService.add('soy_una_ruta', route).then(res => {
-      expect(res).toBeTruthy();
-    });
+    const res = await MilestoneService.add(rName, milestone);
+    expect(res.added).toBe(true);
   });
 
-  test('should return false because file has been created', () => {
-    MilestoneService.add('soy_una_ruta', route).then(res => {
-      expect(res).toBeTruthy();
-    });
+  test('should return false because file has been created', async () => {
+    const res = await MilestoneService.add(rName, milestone);
+    expect(res.added).toBe(false);
   });
-  
+
 });
 
 describe.only('Remove milestone', () => {
   test('should remove sucessfully', async () => {
-    MilestoneService.remove('aaaa').then(res => {
-      expect(res).toBe(true);
-    });
+    expect(await MilestoneService.remove(1608503625, 1574320256)).toBe(true);
   });
 
-  test('should return undefined', () => {
-    MilestoneService.remove('aaa').then(res => {
-      expect(res).toBe(false);
-    });
+  test('should return false', async () => {
+    expect(await MilestoneService.remove(1608503625, 'bbbb')).toBe(false);
+    expect(await MilestoneService.remove('aaaa', 'bbbbb')).toBe(false)
+    expect(await MilestoneService.remove('aaaa')).toBe(false)
   });
-  
+
 });
 
 describe.only('Link milestone', () => {
   test('should link sucessfully', async () => {
-    MilestoneService.link('soy_una_ruta', 'soy_un_milestone').then(res => {
-      expect(res).toBe(true);
-    });
+    await MilestoneService.link(name, mName);
   });
-  
 });
 
 describe.only('Get milestone', () => {
   test('should get sucessfully', async () => {
-    MilestoneService.get('soy_un_milestone').then(res => {
-      expect(res).toBeTruthy();
-    });
+    expect(await MilestoneService.get(HashHelper.hash('soy_un_hito'))).toBeTruthy();
   });
 
-  test('should return undefined', () => {
-    MilestoneService.get('').then(res => {
-      expect(res).toBe(undefined);
-    });
+  test('should return undefined', async () => {
+    expect(await MilestoneService.get('')).toBeTruthy(undefined);
   });
-  
+
 });
 
 describe.only('Get all milestones', () => {
+
   test('should get sucessfully', async () => {
-    MilestoneService.getAll().then(res => {
-      expect(res).toBeTruthy();
-    });
+    expect(await MilestoneService.getAll()).toBeTruthy();
+    expect(await MilestoneService.getAll(false)).toBeTruthy();
   });
 
-  test('should return undefined', () => {
-    MilestoneService.getAll(false).then(res => {
-      expect(res).toBe(undefined);
-    });
-  });
-  
 });
