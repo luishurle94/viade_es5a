@@ -15,6 +15,12 @@ class SolidAuthClient extends EventEmitter {
 
   logout = () => {};
 
+  currentSession = async () =>  {
+    return {
+      webId: 'https://jaluma.inrupt.net/'
+    }
+  }
+
   trackSession(callback) {
     if (this.session !== undefined) callback(this.session);
     this.on('session', callback);
@@ -31,6 +37,7 @@ class SolidAuthClient extends EventEmitter {
 const instance = new SolidAuthClient();
 jest.spyOn(instance, 'fetch');
 jest.spyOn(instance, 'popupLogin');
+jest.spyOn(instance, 'currentSession');
 jest.spyOn(instance, 'logout');
 jest.spyOn(instance, 'removeListener');
 
