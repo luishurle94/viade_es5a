@@ -125,20 +125,20 @@ export const AddRoute = ({ webId }: Props) => {
       <FullGridSize>
         <Label>
           {t('addRoute.name')}
-          <Input id="nameId" type="text" size="200" defaultValue="R01" onBlur={checkName} />
+          <Input id="nameId" data-testid="nameId" type="text" size="200" defaultValue="R01" onBlur={checkName} />
         </Label>
 
           <Label>
             {t('addRoute.description')}
-            <TextArea id="descriptionId" onChange={checkDescription} cols={40} rows={10} />
+            <TextArea id="descriptionId" data-testid="descriptionId"  onChange={checkDescription} cols={40} rows={10} />
           </Label>
 
         <Label>
           {t('addRoute.rank')}
-          <Input id="rankId" type="number" min="0" max="10" defaultValue={5} onBlur={checkRank} size="200"/>
+          <Input id="rankId" data-testid="rankId" type="number" min="0" max="10" defaultValue={5} onBlur={checkRank} size="200"/>
         </Label>
 
-        <Input id="submitId" type="submit" className="ids-link-filled ids-link-filled--primary button" value={t('addRoute.submit')} />
+        <Input id="submitId" data-testid="submitId" type="submit" className="ids-link-filled ids-link-filled--primary button" value={t('addRoute.submit')} />
             
       </FullGridSize>
       {isLoading && <Loader absolute />}

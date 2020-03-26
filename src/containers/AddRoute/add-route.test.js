@@ -1,7 +1,8 @@
 import React from 'react';
-import { render, cleanup, queryByAttribute, fireEvent } from 'react-testing-library';
+import { render, cleanup, queryByAttribute, fireEvent, getByTestId, act } from 'react-testing-library';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AddRoute from './add-route.component';
+
 
 describe('Add Route', () => {
   afterAll(cleanup);
@@ -82,15 +83,73 @@ describe('Add Route', () => {
 
   });
 
-  test('Add Route Form Submission with Incorrect Values', async () => {
+  test('Input rank correct value', async () => {
     
-    const formInput = getById(container, 'formId');
+    const rankInput = getById(container, 'rankId');
+    const query = '5';
     const mockChange = jest.fn();
-    formInput.onSubmit = mockChange;
+    expect(rankInput.value).toEqual('');
+    rankInput.onChange = mockChange;
 
-    fireEvent.change(formInput);
+    fireEvent.change(rankInput, { target: { value: query } });
+
+    expect(rankInput.value).toEqual('5');
 
   });
 
+  it('Submission simulation', function(){
+
+    const rankInput = getById(container, 'rankId');
+    const query = 'abcdef';
+    const mockChange = jest.fn();
+    expect(rankInput.value).toEqual('5');
+    rankInput.onChange = mockChange;
+
+    fireEvent.change(rankInput, { target: { value: query } });
+
+    const submitButton = getById(container, 'submitId');
+    fireEvent.click(submitButton);
+    expect(rankInput.value).toEqual('');
+  });
+  
+  it('Submission simulation with errors', function(){
+
+    
+    const rankInput = getById(container, 'rankId');
+    const query = '....';
+    const mockChange = jest.fn();
+    expect(rankInput.value).toEqual('');
+    rankInput.onChange = mockChange;
+
+    fireEvent.change(rankInput, { target: { value: query } });
+
+    expect(rankInput.value).toEqual('');
+    const submitButton = getById(container, 'submitId');
+    fireEvent.click(submitButton);
+    expect(rankInput.value).toEqual('');
+  });
+
+  it("Complete test", () => {
+
+    const { container, rerender } = render(<AddRoute />);
+    const inputName = getByTestId(container, "nameId");
+    const inputDescription = getByTestId(container, "descriptionId");
+    const inputRank = getByTestId(container, "rankId");
+    const submitButton = getByTestId(container, "submitId");
+
+    fireEvent.change(inputName, { target: { value: "" } });
+    fireEvent.change(inputDescription, { target: { value: "" } });
+    fireEvent.change(inputRank, { target: { value: "..." } }); 
+
+    
+    act(() => {
+      fireEvent.click(submitButton);
+
+      expect(inputName.value).toEqual("");
+      expect(inputDescription.value).toEqual("");
+      expect(inputRank.value).toEqual("");
+      rerender(<AddRoute />);
+    });
+  });
 
 });
