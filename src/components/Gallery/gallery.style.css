@@ -1,0 +1,97 @@
+.custom-galleria > .p-galleria-content {
+  height: 95%;
+  overflow: hidden;
+  position: relative;
+}
+
+.custom-galleria > .p-galleria-content > .p-galleria-thumbnail-content {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.5) 70%
+  );
+}
+
+.custom-galleria
+  > .p-galleria-content
+  > .p-galleria-thumbnail-container
+  > .p-galleria-thumbnail-prev,
+.p-galleria-thumbnail-next {
+  background-color: #111;
+  border: 0 none;
+  font-size: 1.2em;
+}
+
+.p-galleria-preview-prev, .p-galleria-preview-next {
+  color: #000 !important;
+}
+
+.custom-galleria
+  > .p-galleria-content
+  > .p-galleria-thumbnail-container
+  > .p-galleria-thumbnail-items-content
+  > .p-galleria-thumbnail-items-container
+  > .p-galleria-thumbnail-item {
+  opacity: 0.6;
+}
+
+.custom-galleria
+  > .p-galleria-content
+  > .p-galleria-thumbnail-container
+  > .p-galleria-thumbnail-items-content
+  > .p-galleria-thumbnail-items-container
+  > .p-galleria-thumbnail-item
+  > .p-galleria-thumbnail-item-current {
+  opacity: 1;
+}
+
+.p-galleria-footer {
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  border: rgba(0, 0, 0, 0.9);
+}
+
+.p-galleria-footer > .custom-galleria-footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  color: #000;
+}
+
+.p-galleria-footer > .custom-galleria-footer > button {
+  background-color: transparent;
+  padding: 0.1em 0.1em;
+  border: 0 none;
+  color: #000;
+  width: 20px !important;
+}
+
+.p-button:enabled:hover {
+  background-color: gray !important;
+}
+
+.p-galleria-footer > .custom-galleria-footer > span {
+  flex-grow: 1;
+}
+
+.p-galleria-footer > .custom-galleria-footer > span > span {
+  font-size: 0.9em;
+  padding-left: 0.829em;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.p-galleria-footer.preview-fullscreen
+  > .p-galleria-preview-container
+  > .p-galleria-preview-nav-button {
+  top: 50%;
+  height: 20em;
+  width: 4em;
+  margin-top: -10em;
+}

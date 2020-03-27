@@ -15,6 +15,8 @@ export {
   NavBar,
   AuthNavBar,
   ImageProfile,
+  GalleriaComponent,
+  FileUploader,
   Footer,
   Notification,
   AutoSaveSpinner
