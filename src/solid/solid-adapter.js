@@ -155,3 +155,8 @@ export const checkParams = async (createDocument, webId, parentWebId, parentFile
   export const getFriends = async (webId) => {
     return await SolidHelper.getFriends(webId);
   }
+  
+  export const createFile = async (webId, body, mimeType) => {
+    return await SolidHelper.createFile(webId, body, mimeType);
+  }
+  

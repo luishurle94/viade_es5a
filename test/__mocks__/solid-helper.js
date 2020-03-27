@@ -11,7 +11,7 @@ export default jest.mock('../../src/solid/solid-helper', () => {
   links.push({
     obj: 'soy_una_ruta',
     webId: HashHelper.hash('soy_una_ruta'),
-    predicate: 'foaf:name'
+    predicate: 'schema:name'
   });
 
 
@@ -23,22 +23,17 @@ export default jest.mock('../../src/solid/solid-helper', () => {
   links.push({
     obj: -10 ,
     webId: HashHelper.hash('soy_un_hito'),
-    predicate: 'geo:latitude'
+    predicate: 'schema:latitude'
   });
   links.push({
     obj: 10 ,
     webId: HashHelper.hash('soy_un_hito'),
-    predicate: 'geo:longitude'
+    predicate: 'schema:longitude'
   });
   links.push({
     obj: 11 ,
     webId: HashHelper.hash('soy_un_hito'),
-    predicate: 'geo:location'
-  });
-  links.push({
-    obj: 9 ,
-    webId: HashHelper.hash('soy_un_hito'),
-    predicate: 'geo:altitude'
+    predicate: 'schema:elevation'
   });
 
   links.push({
@@ -49,24 +44,24 @@ export default jest.mock('../../src/solid/solid-helper', () => {
   links.push({
     obj: -11 ,
     webId: HashHelper.hash('soy_un_hito2'),
-    predicate: 'geo:latitude'
+    predicate: 'schema:latitude'
   });
   links.push({
     obj: 11 ,
     webId: HashHelper.hash('soy_un_hito2'),
-    predicate: 'geo:longitude'
+    predicate: 'schema:longitude'
   });
   links.push({
     obj: 12 ,
     webId: HashHelper.hash('soy_un_hito2'),
-    predicate: 'geo:location'
+    predicate: 'schema:elevation'
   });
 
 
   links.push({
     obj: [HashHelper.hash('soy_un_hito')],
     webId: HashHelper.hash('soy_una_ruta'),
-    predicate: 'schema:hasPart'
+    predicate: 'viade:point'
   });
 
   // throw new Error(9)
@@ -184,6 +179,13 @@ export default jest.mock('../../src/solid/solid-helper', () => {
     return friend;
   })
 
+  const createFile = async (webId, body, mimeType) => {
+    if (body && body === '404') {
+      return false;
+    }
+    return true;
+  }
+
   return {
     createInitialStructure,
     createAndGetDocument,
@@ -196,6 +198,7 @@ export default jest.mock('../../src/solid/solid-helper', () => {
     getAppPathStorage,
     getPredicate,
     getFriends,
-    getFriendData
+    getFriendData,
+    createFile
   }
 });

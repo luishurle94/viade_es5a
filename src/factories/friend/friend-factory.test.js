@@ -1,4 +1,4 @@
-import { FriendFactory } from '@services/factories';
+import { FriendFactory } from '@factories';
 
 describe.only('Transformations', () => {
   test('transform object', async () => {

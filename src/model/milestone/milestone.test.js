@@ -27,32 +27,6 @@ describe.only('Create a new milestone', () => {
   });
 });
 
-describe.only('Link image', () => {
-  test('should link successfully', async () => {
-    expect(milestone.images.length === 0).toBe(true);
-    milestone.linkImge(new Image());
-    expect(milestone.images.length === 1).toBe(true);
-  });
-
-  test('should not link successfully', () => {
-    milestone.linkImge();
-    expect(milestone.images.length === 1).toBe(true);    
-  })
-});
-
-describe.only('Link video', () => {
-  test('should link successfully', async () => {
-    expect(milestone.videos.length === 0).toBe(true);
-    milestone.linkVideo(new Video());
-    expect(milestone.videos.length === 1).toBe(true);
-  });
-
-  test('should not link successfully', () => {
-    milestone.linkVideo();
-    expect(milestone.videos.length === 1).toBe(true);    
-  })
-});
-
 describe.only('Get identifier', () => {
   test('should return true', async () => {
     expect(`Hito 1_43.3625_-5.8502` === milestone.getIdentifier()).toBe(true);

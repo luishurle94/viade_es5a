@@ -1,4 +1,4 @@
-import { Friend, Image } from '@models';
+import { Friend } from '@models';
 
 const img = new Image();
 const friend = new Friend('Isabel', img);

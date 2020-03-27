@@ -1,6 +1,6 @@
 import { SolidAdapter } from "@solid-services";
 import routeShape from '@contexts/route-shape.json';
-import { RouteFactory } from '../factories';
+import { RouteFactory } from '@factories';
 
 /**
  * Add route

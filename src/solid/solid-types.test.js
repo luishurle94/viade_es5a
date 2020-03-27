@@ -9,8 +9,8 @@ describe.only('Transformations', () => {
 
   test('transform date', async () => {
       const date = new Date();
-      expect(SolidTypesHelper.transformTypes("Date", date.getTime().toString())).toBe(date.getTime());
-      expect(SolidTypesHelper.transformTypes("date", date.getTime().toString())).toBe(date.getTime());
+      expect(SolidTypesHelper.transformTypes("Date", date.toISOString())).toBe(date.getTime());
+      expect(SolidTypesHelper.transformTypes("date", date.toISOString())).toBe(date.getTime());
   });
 
   test('transform array', async () => {

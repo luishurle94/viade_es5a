@@ -1,11 +1,5 @@
-
-import { Image, Video } from '@models';
-
 export default class Milestone {
   webId = '';
-
-  images = [];
-  videos = [];
 
 /**
  * 
@@ -26,26 +20,6 @@ export default class Milestone {
     this.latitude = latitude;
     this.longitude = longitude;
     this.order = order;
-  }
-
-  /**
-   * 
-   * @param {Image} image 
-   */
-  linkImge(image) {
-    if (image && image instanceof Image) {
-      this.images.push(image);
-    }
-  }
-
-  /**
-   * 
-   * @param {Video} video 
-   */
-  linkVideo(video) {
-    if (video && video instanceof Video) {
-      this.videos.push(video);
-    }
   }
 
   getIdentifier() {

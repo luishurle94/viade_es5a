@@ -1,5 +1,5 @@
 
-import { SolidTypesHelper } from './../solid';
+import { SolidTypesHelper } from '@solid-services';
 import { ldflexHelper, storageHelper } from '@utils';
 import { namedNode, literal } from '@rdfjs/data-model';
 import ldflex from '@solid/query-ldflex';
@@ -126,4 +126,13 @@ export const getFriendData = async (webId) => {
   friend.webId = `${await data["solid:account"]}`.concat("profile/card#");
   friend.image = `${await data["vcard:hasPhoto"]}`;
   return friend;
+}
+
+export const createFile = async (webId, body, mimeType) => {
+  try {
+    await ldflexHelper.createDocumentWithMimeType(webId, body, mimeType);
+    return true;
+  } catch (e) {
+    return false;
+  }
 }

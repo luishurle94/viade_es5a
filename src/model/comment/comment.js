@@ -1,16 +1,16 @@
 export default class Comment {
+  webId = '';
+
   /**
    * 
-   * @param {String} webId 
    * @param {String} message 
+   * @param {String} createdAt 
    * @param {String} createdBy 
-   * @param {Date} createdAt 
    */
-  constructor(webId, message, createdBy, createdAt) {
-    this.webId = webId;
+  constructor(message, createdAt, createdBy) {
     this.message = message;
+    this.createdAt = createdAt;
     this.createdBy = createdBy;
-    this.createdAt = createdAt ? createdAt : Date.now();
   }
 
   getIdentifier() {

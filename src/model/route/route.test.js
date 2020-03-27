@@ -3,7 +3,7 @@ import 'jest';
 import * as SolidHelper from './../../../test/__mocks__/solid-helper';
 import auth from './../../../test/__mocks__/solid-auth-client';
 
-import { Route, Milestone } from '@models';
+import { Route, Milestone, Media } from '@models';
 
 jest.mock('../../solid/solid-helper');
 jest.mock('solid-auth-client');
@@ -60,6 +60,19 @@ describe.only('Link comment', () => {
 
 });
 
+describe.only('Link media', () => {
+  test('should link successfully', async () => {
+    expect(route.media.length === 0).toBe(true);
+    route.linkMedia(new Media());
+    expect(route.media.length === 1).toBe(true);
+  });
+
+  test('should not link successfully', () => {
+    route.linkMedia();
+    expect(route.media.length === 1).toBe(true);    
+  })
+});
+
 describe.only('Create geojson', () => {
   test('should create a geojson object empty', async () => {
     const r = new Route();
@@ -109,6 +122,6 @@ describe.only('Create geojson', () => {
 
 describe.only('Get identifier', () => {
   test('should return true', async () => {
-    expect(`Esto es una prueba_javier` === route.getIdentifier()).toBe(true);
+    expect(`Esto es una prueba_Descripcion_javier` === route.getIdentifier()).toBe(true);
   });
 });

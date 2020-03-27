@@ -1,4 +1,4 @@
-import { RouteFactory } from '@services/factories';
+import { RouteFactory } from '@factories';
 
 describe.only('Transformations', () => {
   test('transform object', async () => {
@@ -13,7 +13,8 @@ describe.only('Transformations', () => {
       createdBy: "https://jaluma.inrupt.net/profile/card#me",
       createdAt: "1583017272006",
       messages: [],
-      milestones: []
+      milestones: [],
+      media: []
     };
 
     const result = RouteFactory.create(route);
@@ -25,8 +26,9 @@ describe.only('Transformations', () => {
     expect(route.rank === result.rank).toBe(true);
     expect(route.createdBy === result.createdBy).toBe(true);
     expect(route.createdAt === result.createdAt).toBe(true);
-    expect(route.messages === result.messages).toBe(true);
-    expect(route.milestones === result.milestones).toBe(true);
+    expect(route.messages.length === result.messages.length).toBe(true);
+    expect(route.milestones.length === result.milestones.length).toBe(true);
+    expect(route.media.length === result.media.length).toBe(true);
   });
 
   test('transform object', async () => {

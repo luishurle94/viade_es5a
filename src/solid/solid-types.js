@@ -6,8 +6,7 @@ export const transformTypes = (type, value, beforeValue) => {
         case "number":
           return parseFloat(value);
         case "date":
-          // return epoach time
-          return parseInt(value);
+          return Date.parse(value);
         case "array":
           return beforeValue ? [...beforeValue, value] : [value];
         default:

@@ -8,6 +8,7 @@ export default class Route {
   messages = [];
   milestones = [];
   milestonesObject = [];
+  media = [];
 
   /**
    * 
@@ -26,7 +27,11 @@ export default class Route {
     this.slope = slope;
     this.rank = rank;
     this.createdBy = createdBy;
-    this.createdAt = createdAt || (new Date()).getTime();
+    if (createdAt) {
+      this.createdAt = new Date(createdAt).toISOString()
+    } else {
+      this.createdAt = new Date().toISOString();
+    }
   }
 
   /**
@@ -48,6 +53,17 @@ export default class Route {
       this.milestones.push(milestone);
     }
   }
+
+  /**
+   * 
+   * @param {Media} media 
+   */
+  linkMedia(media) {
+    if (media) {
+      this.media.push(media);
+    }
+  }
+
   /**
    * @return JSON
    */
@@ -111,7 +127,7 @@ export default class Route {
   }
 
   getIdentifier() {
-    return `${this.name}_${this.createdBy}`;
+    return `${this.name}_${this.description}_${this.createdBy}`;
   }
 
   getObjectsMilestones = async () => {

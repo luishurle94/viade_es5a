@@ -1,6 +1,3 @@
-
-import { Image } from '@models';
-
 export default class Friend {
   webId = '';
 
@@ -12,9 +9,7 @@ export default class Friend {
  */
   constructor(name, image) {
     this.name = name;
-    if (image && image instanceof Image) {
-        this.image = image;
-      }
+    this.image = image;
   }
 
 }

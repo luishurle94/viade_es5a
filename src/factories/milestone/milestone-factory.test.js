@@ -1,4 +1,4 @@
-import { MilestoneFactory } from '@services/factories';
+import { MilestoneFactory } from '@factories';
 
 describe.only('Transformations', () => {
   test('transform object', async () => {

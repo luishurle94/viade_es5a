@@ -70,7 +70,7 @@ describe.only('Link file', () => {
   });
 
   test('not exist', async () => {
-    expect(await SolidHelper.link("404", 'photo', true, 'filename', '', '')).toBe(false)
+    expect(await SolidHelper.link("404", 'photo', false, 'filename', '', '')).toBe(false)
   });
 
   test('param undefined', async () => {
