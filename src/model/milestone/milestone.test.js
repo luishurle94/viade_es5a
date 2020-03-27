@@ -1,4 +1,4 @@
-import { Milestone, Image, Video } from '@models';
+import { Milestone } from '@models';
 
 const milestone = new Milestone('Hito 1', 'Hito de prueba', 10, 10, 43.3625, -5.8502, 1);
 
