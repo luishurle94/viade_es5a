@@ -1,5 +1,4 @@
-import React from 'react';
-import { render, cleanup } from 'react-testing-library';
+import { cleanup } from 'react-testing-library';
 import * as Toaster from './toaster';
 
 afterAll(cleanup);

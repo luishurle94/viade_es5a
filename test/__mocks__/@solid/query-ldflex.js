@@ -1,6 +1,4 @@
-import resolve from 'resolve';
-
-const { context } = jest.requireActual('@solid/query-ldflex').default;
+jest.requireActual('@solid/query-ldflex').default;
 
 const graph = {
   'me': {

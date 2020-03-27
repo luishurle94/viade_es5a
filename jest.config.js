@@ -94,10 +94,9 @@ module.exports = {
 
   // A map from regular expressions to module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    "^react-native$": "react-native-web",
-    "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-    "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-    "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
+    "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules",
+    // fix bug with solid style guide
+    "@inrupt/solid-style-guide": "<rootDir>/node_modules/jest-css-modules"
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -194,8 +193,7 @@ module.exports = {
   // A map from regular expressions to paths to transformers
   "transform": {
     "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
-    "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-    "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    "^(?!.*\\.(js|jsx|ts|tsx|json)$)": "<rootDir>/config/jest/fileTransform.js"
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation

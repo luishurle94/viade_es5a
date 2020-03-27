@@ -5,7 +5,6 @@ import auth from '../../../test/__mocks__/solid-auth-client';
 
 import { Media } from '@models'
 import { MediaService } from '@services';
-import { Route } from '@models';
 import { HashHelper } from '@utils'
 
 jest.mock('../../solid/solid-helper');

@@ -10,9 +10,6 @@ const response = {
 }
 
 export default class SolidFileClient {
-    constructor (auth, options) {
-    }
-  
     async readFile (url, request) {
       return "Esto es una prueba"
     }

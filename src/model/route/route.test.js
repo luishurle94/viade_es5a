@@ -17,7 +17,7 @@ describe.only('Create a new route', () => {
     expect(route.distance === 5).toBe(true);
     expect(route.slope === 10).toBe(true);
     expect(route.rank === 10).toBe(true);
-    expect(route.createdBy == 'javier').toBe(true);
+    expect(route.createdBy === 'javier').toBe(true);
   });
 
   test('should return false because file has been created', () => {
@@ -34,28 +34,28 @@ describe.only('Create a new route', () => {
 
 describe.only('Link milestone', () => {
   test('should link sucessfully', async () => {
-    expect(route.milestones.length == 0).toBe(true);
+    expect(route.milestones.length === 0).toBe(true);
     route.linkMilestone(new Milestone());
-    expect(route.milestones.length == 1).toBe(true);
+    expect(route.milestones.length === 1).toBe(true);
   });
 
   test('not should link sucessfully', () => {
     route.linkMilestone();
-    expect(route.milestones.length == 1).toBe(true);
+    expect(route.milestones.length === 1).toBe(true);
   });
 
 });
 
 describe.only('Link comment', () => {
   test('should link sucessfully', async () => {
-    expect(route.messages.length == 0).toBe(true);
+    expect(route.messages.length === 0).toBe(true);
     route.linkComment(new Comment());
-    expect(route.messages.length == 1).toBe(true);
+    expect(route.messages.length === 1).toBe(true);
   });
 
   test('not should link sucessfully', () => {
     route.linkComment();
-    expect(route.messages.length == 1).toBe(true);
+    expect(route.messages.length === 1).toBe(true);
   });
 
 });
