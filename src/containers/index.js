@@ -6,6 +6,7 @@ import Profile from './Profile';
 import AddRoute from './AddRoute';
 import AddMilestone from './AddMilestone';
 import GoogleMap from './GoogleMap';
+import ListRoutes from './ListRoutes'
 
 export {
   Login,
@@ -16,5 +17,6 @@ export {
   Profile,
   GoogleMap,
   AddRoute,
-  AddMilestone
+  AddMilestone,
+  ListRoutes
 };

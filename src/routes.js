@@ -11,7 +11,8 @@ import {
   Profile,
   GoogleMap,
   AddRoute,
-  AddMilestone
+  AddMilestone,
+  ListRoutes
 } from './containers';
 
 const privateRoutes = [
@@ -39,6 +40,11 @@ const privateRoutes = [
     id: 'add-milestone',
     path: '/add-milestone',
     component: AddMilestone
+  },
+  {
+    id: 'list-routes',
+    path: '/list-routes',
+    component: ListRoutes
   }
 ];
 
