@@ -1,9 +1,6 @@
 [[section-quality-scenarios]]
 == Quality Requirements
 
-
-[role="arc42help"]
-****
 There are numerous quality requirements but then the most essential and which we will focus on:
 
 * *Efficiency*
@@ -14,24 +11,13 @@ There are numerous quality requirements but then the most essential and which we
 * *Portability*
 * *Security*
 * *Modifiability*
-****
 
 === Quality Tree
 
-[role="arc42help"]
-****
-The quality tree (as defined in ATAM – Architecture Tradeoff Analysis Method) with quality/evaluation scenarios as leafs.
-
-The tree structure with priorities provides an overview for a sometimes large number of quality requirements.
-
-image:images/10-Quality-Tree.png["Possible topics for crosscutting concepts"]
-
-****
+image::10-Quality-Tree.png["Possible topics for crosscutting concepts"]
 
 === Quality Scenarios
 
-[role="arc42help"]
-****
 [cols=4*,options="header"]
 |===
 |Ref
@@ -47,18 +33,13 @@ image:images/10-Quality-Tree.png["Possible topics for crosscutting concepts"]
 
 |2
 |Reliability
-|All those actions that you want to do on the routes (CRUD) must appear updated in the application and can be delayed at most 1 hour
+|All those actions that you want to do on the routes (CRUD) must appear updated in the application and can be delayed at most 1 minute.
 |Medium, High
 
 |3
 |Availability
-|Any route stored in the database must be visible by any user who has the privilege for at least 97% of the time throughout the year.
+|Any route stored in the database must be visible by any user who has the privilege for at least 100% of the time throughout the year.
 |Medium, Medium
-
-|4
-|Availability
-|In case of error, the fault will be saved in the log. This error must be accessible by any professional who works in the maintenance of this application
-|Medium, High
 
 |5
 |Maintainability
@@ -90,5 +71,3 @@ image:images/10-Quality-Tree.png["Possible topics for crosscutting concepts"]
 |In case you want to modify some aspect of the application, it must be possible to do it without any problem.
 |Medium, Medium
 |===
-
-****
