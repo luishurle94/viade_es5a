@@ -64,8 +64,7 @@ export const fetchFilesData = async (url) => {
   const fc   = new FC( auth );
   let response = await fc.readFolder(url);
   if (response && response.type === 'folder' && response.itemType === 'Container') {
-    console.log(response)
-    return response.files.filter(f => f.type === 'text/turtle').map(f => f.url);
+    return response.files.filter(f => f.type === 'text/turtle' && !['data.ttl', 'settings.ttl'].includes(f.name)).map(f => f.url);
   }
  } catch(e) {
   throw e;
