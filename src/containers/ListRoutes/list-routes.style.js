@@ -44,9 +44,49 @@ export const Header = styled.div`
 export const Button = styled.button`
   max-width: 128px;
   display: inline-block;
-  float: right;
+  background-color: #7C4DFF;
+  color: white;
 
   &:first-child {
     margin-right: 10px;
   }
+`;
+
+export const RouteDetails = styled.div`
+  display: grid;
+  border: 0.5px groove;
+  padding: 10px;
+  font-size: 1.2rem;
+
+  .content {
+    display:flex;
+    font-size: 1rem;
+  }
+
+  .p-grid {
+    margin: 10px;
+    margin-left: 20px;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex: 1;
+  }
+
+  .flex-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .button {
+    height: 25px;
+    width: 80px;
+    text-align: center;
+    
+  }
+
 `;
