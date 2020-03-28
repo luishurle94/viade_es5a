@@ -6,7 +6,8 @@ import Profile from './Profile';
 import AddRoute from './AddRoute';
 import AddMilestone from './AddMilestone';
 import GoogleMap from './GoogleMap';
-import ListRoutes from './ListRoutes'
+import ListRoutes from './ListRoutes';
+import ListFriends from './ListFriends';
 
 export {
   Login,
@@ -18,5 +19,6 @@ export {
   GoogleMap,
   AddRoute,
   AddMilestone,
-  ListRoutes
+  ListRoutes,
+  ListFriends
 };
