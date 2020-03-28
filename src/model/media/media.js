@@ -21,6 +21,15 @@ export default class Media {
     this.mimeType = mimeType;
   }
 
+  get galleryObject() {
+    return {
+      "previewImageSrc": this.href,
+      "thumbnailImageSrc": this.href,
+      "alt": `${this.createdAt} - ${this.createdBy}`,
+      "title": `${this.href.split('/').pop()}`
+    }
+  }
+
   getIdentifier() {
     return `${this.href}_${this.createdBy}_${this.mimeType}`;
   }

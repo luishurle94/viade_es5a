@@ -1,12 +1,12 @@
 import { Media } from '@models';
 const date = new Date();
-const img = new Media('href', 'esto_Es_un_binary', date, 'me', 'image/jpg');
+const img = new Media('http://example.com/picture.jpg', 'esto_Es_un_binary', date, 'me', 'image/jpg');
 
 describe.only('Create a new image', () => {
 
   test('should create succesfully', async () => {
     expect(img.webId === '').toBe(true);
-    expect(img.href === 'href').toBe(true);
+    expect(img.href === 'http://example.com/picture.jpg').toBe(true);
     expect(img.body === 'esto_Es_un_binary').toBe(true);
     expect(img.createdAt === date.toISOString()).toBe(true);
     expect(img.createdBy === 'me').toBe(true);
@@ -25,6 +25,17 @@ describe.only('Create a new image', () => {
 
 describe.only('Get identifier', () => {
     test('should return true', async () => {
-      expect(`href_me_image/jpg` === img.getIdentifier()).toBe(true);
+      expect(`http://example.com/picture.jpg_me_image/jpg`).toBe(img.getIdentifier());
+    });
+  });
+
+  describe.only('Get gallery object', () => {
+    test('should return object', async () => {
+      expect(img.galleryObject).toStrictEqual({
+        alt: `${date.toISOString()} - me`,
+        previewImageSrc: "http://example.com/picture.jpg",
+        thumbnailImageSrc: "http://example.com/picture.jpg",
+        title: "picture.jpg"}
+        );
     });
   });

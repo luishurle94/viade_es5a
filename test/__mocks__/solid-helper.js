@@ -7,6 +7,8 @@ export default jest.mock('../../src/solid/solid-helper', () => {
 
   files.push(HashHelper.hash('soy_una_ruta'))
   files.push(HashHelper.hash('soy_un_hito'))
+  files.push(HashHelper.hash('soy_una_imagen'))
+  files.push(HashHelper.hash('soy_un_comentario'))
 
   links.push({
     obj: 'soy_una_ruta',
@@ -62,6 +64,18 @@ export default jest.mock('../../src/solid/solid-helper', () => {
     obj: [HashHelper.hash('soy_un_hito')],
     webId: HashHelper.hash('soy_una_ruta'),
     predicate: 'viade:point'
+  });
+
+  links.push({
+    obj: [HashHelper.hash('soy_una_imagen')],
+    webId: HashHelper.hash('soy_una_ruta'),
+    predicate: 'viade:hasMediaAttached'
+  });
+
+  links.push({
+    obj: [HashHelper.hash('soy_un_comentario')],
+    webId: HashHelper.hash('soy_una_ruta'),
+    predicate: 'viade:hasComments'
   });
 
   // throw new Error(9)

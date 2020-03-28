@@ -13,7 +13,6 @@ jest.mock('solid-auth-client');
 const rName = HashHelper.hash('soy_una_ruta');
 
 const media = new Media('http://example.com/image', 'aaaaaaa', new Date(), 'me', 'image/jpg');
-const mName = HashHelper.hash(media.getIdentifier());
 
 describe.only('Add image', () => {
   MediaService.default = jest.fn();
@@ -21,12 +20,35 @@ describe.only('Add image', () => {
     expect(await MediaService.addMedia(rName, media)).toBe(true);
   });
 
-  test('should return false because param are incorrect', async () => {
+  test('should return false because params are incorrect', async () => {
     media.body = '404';
     expect(await MediaService.addMedia('aaaa', media)).toBe(false);
     expect(await MediaService.addMedia('404', media)).toBe(false);
     expect(await MediaService.addMedia(rName)).toBe(false);
     expect(await MediaService.addMedia()).toBe(false);
+  });
+
+});
+
+describe.only('Get image', () => {
+  test('should get sucessfully', async () => {
+    expect(await MediaService.get(HashHelper.hash('soy_una_imagen'))).toBeTruthy();
+    expect(await MediaService.get(HashHelper.hash('soy_una_imagen'), true)).toBeTruthy();
+  });
+
+  test('should return undefined', async () => {
+    expect(await MediaService.get('')).toBeTruthy(undefined);
+  });
+
+});
+
+describe.only('Get href', () => {
+  test('should add sucessfully', async () => {
+    const webId = 'https://jaluma.inrupt.net/profile/card#me';
+    const filename = 'prueba';
+    const url = MediaService.getHref(webId, filename);
+    expect(url.includes('jaluma.inrupt.net')).toBe(true);
+    expect(url.includes('media/prueba')).toBe(true);
   });
 
 });

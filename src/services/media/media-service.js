@@ -2,6 +2,7 @@ import routeShape from '@contexts/route-shape.json';
 import mediaShape from '@contexts/media-shape.json';
 import { RouteService } from '@services';
 import { SolidAdapter } from "@solid-services";
+import { MediaFactory } from "@factories";
 /**
  * Add image
  * @param {String} routeId 
@@ -25,7 +26,7 @@ export const addMedia = async (routeId, media) => {
 
   //create ttl file
   const res = await SolidAdapter.create(media, mediaShape, true, media.createdBy);
-  if (!res && res.added) {
+  if (!res && !res.added) {
     return false;
   }
 
@@ -34,6 +35,14 @@ export const addMedia = async (routeId, media) => {
 
   await SolidAdapter.link(route.webId, res.webId, false, predicate);
   return true;
+}
+
+/**
+ * Get media (ttl file) from webid
+ * @param {String} webId media 
+ */
+export const get = async (webId) => {
+  return MediaFactory.create(await SolidAdapter.get(webId, mediaShape));
 }
 
 export const getHref = (webId, filename) => {
