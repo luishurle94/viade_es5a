@@ -22,7 +22,8 @@ describe.only('Add image', () => {
 
   test('should return false because params are incorrect', async () => {
     media.body = '404';
-    expect(await MediaService.addMedia('aaaa', media)).toBe(false);
+    expect(await MediaService.addMedia(rName, media)).toBe(false);
+    expect(await MediaService.addMedia(HashHelper.hash('soy_una_imagen'), media)).toBe(false);
     expect(await MediaService.addMedia('404', media)).toBe(false);
     expect(await MediaService.addMedia(rName)).toBe(false);
     expect(await MediaService.addMedia()).toBe(false);

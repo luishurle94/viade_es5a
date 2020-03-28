@@ -8,7 +8,7 @@ import { Route, Milestone, Media } from '@models';
 jest.mock('../../solid/solid-helper');
 jest.mock('solid-auth-client');
 
-const route = new Route('Esto es una prueba', 'Descripcion', 5, 10, 10, "javier");
+const route = new Route('Esto es una prueba', 'Descripcion', 5, 10, 10, "javier", new Date());
 describe.only('Create a new route', () => {
   test('should create sucessfully', async () => {
     expect(route.webId === '').toBe(true);
@@ -102,26 +102,48 @@ describe.only('Create geojson', () => {
     expect(geojson.features[2].geometry.coordinates).toStrictEqual(["11", "-11"])
     expect(geojson.features[3]).toBeUndefined()
   });
-
-  test('should create a point geojson object', async () => {
-    const obj = {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          10,
-          -11
-        ]
-      }
-    };
-    expect(obj.geometry.coordinates[0] === route.createPoint(-11, 10).geometry.coordinates[0]).toBe(true);
-    expect(obj.geometry.coordinates[1] === route.createPoint(-11, 10).geometry.coordinates[1]).toBe(true);
-  });
 });
 
 describe.only('Get identifier', () => {
   test('should return true', async () => {
     expect(`Esto es una prueba_Descripcion_javier` === route.getIdentifier()).toBe(true);
   });
+});
+
+describe.only('Get milestone objects', () => {
+  test('should return ', async () => {
+    expect(`Esto es una prueba_Descripcion_javier` === route.getIdentifier()).toBe(true);
+  });
+});
+
+
+describe.only('Refresh media', () => {
+  test('should download successfully', async () => {
+    expect(route.mediaObject.length).toBe(0);
+    route.messages.push('soy_una_imagen')
+    await route.refreshMedia();
+    expect(route.mediaObject.length).toBeGreaterThan(0);
+  });
+
+  test('not exist media file', async () => {
+    const l = route.messagesObject.length;
+    await route.refreshMedia()
+    expect(route.mediaObject.length).toBeGreaterThan(0);  
+  })
+});
+
+
+describe.only('Refresh comment', () => {
+  test('should download successfully', async () => {
+    expect(route.messagesObject.length).toBe(0);
+    route.messages.push('soy_una_imagen')
+    await route.refreshComments();
+    expect(route.messagesObject.length).toBeGreaterThan(0);
+  });
+
+  test('not exist media file', async () => {
+    const l = route.messagesObject.length;
+    await route.refreshComments()
+    expect(route.messagesObject.length).toBe(l);    
+  })
 });

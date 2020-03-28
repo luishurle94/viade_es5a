@@ -56,7 +56,7 @@ describe.only('Remove route', () => {
 describe.only('Get route', () => {
   test('should get sucessfully', async () => {
     expect(await RouteService.get(HashHelper.hash('soy_una_ruta'))).toBeTruthy();
-    expect(await RouteService.get(HashHelper.hash('soy_una_ruta'), true)).toBeTruthy();
+    expect(await RouteService.get(HashHelper.hash('soy_una_ruta'), true, true, true)).toBeTruthy();
   });
 
   test('should return undefined', async () => {

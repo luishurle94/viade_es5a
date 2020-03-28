@@ -6,6 +6,7 @@ import * as notification from './notification';
 import * as storageHelper from './storage';
 import * as permissionHelper from './permissions';
 import * as HashHelper from './hash';
+import * as GeoJsonHelper from './geojson';
 
 function* entries(obj) {
   for (const key of Object.keys(obj)) {
@@ -23,5 +24,6 @@ export {
   errorToaster,
   notification,
   permissionHelper,
-  HashHelper
+  HashHelper,
+  GeoJsonHelper
 };
