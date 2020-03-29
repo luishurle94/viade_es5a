@@ -26,9 +26,6 @@ import MilestoneMap from './MilestoneMap/milestone-map.component';
 import { FileUploader } from '@components';
 
 var webId;
-auth.currentSession().then(res => {
-  webId = res.webId
-});
 
 export const AddMilestone = () => {
 
@@ -38,6 +35,14 @@ export const AddMilestone = () => {
 
   if (window.location.href.split("?")[1]) {
     routeId = window.location.href.split("?")[1].split("=")[1];
+  }
+
+  if (webId) {
+    auth.currentSession().then(res => {
+      if (res) {
+        webId = res.webId
+      }
+    });
   }
 
   const [renderedMilestones, setRenderedMilestones] = useState([]);
