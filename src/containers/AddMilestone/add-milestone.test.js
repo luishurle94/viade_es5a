@@ -3,21 +3,40 @@ import { render, cleanup, queryByAttribute, fireEvent, getByTestId, act } from '
 import { BrowserRouter as Router } from 'react-router-dom';
 import { AddMilestone } from './add-milestone.component';
 import { MilestoneMap } from './MilestoneMap/milestone-map.component';
+import { useTranslation } from 'react-i18next';
+import {
+  TextEditorWrapper,
+  TextEditorContainer,
+  Header
+} from './add-milestone.style';
 
 describe('Add Milestone', () => {
   afterAll(cleanup);
 
+  const { t } = useTranslation();
   const getById = queryByAttribute.bind(null, 'id');
   const { container } = render(
-    <Router>
-      <AddMilestone />
-    </Router>
+    <TextEditorWrapper>
+      <TextEditorContainer>
+        <Header>
+          <p>{t('addMilestone.title')}</p>
+        </Header>
+        <AddMilestone />
+      </TextEditorContainer>
+    </TextEditorWrapper>
   );
 
   test('App renders without crashing', () => {
     expect(container).toBeTruthy();
   });
 
+  test('Page components render properly', async () => {
+    
+    expect(TextEditorWrapper).not.toBe(null);
+    expect(TextEditorContainer).not.toBe(null);
+    expect(Header).not.toBe(null);
+
+  });
 
   test('Inputs render properly', async () => {
     
