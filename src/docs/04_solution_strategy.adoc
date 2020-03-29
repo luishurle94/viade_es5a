@@ -24,20 +24,16 @@ At the end of this section, there is a table legend describing the different typ
 |The Resource Description Framework standard model will be use to interchange data.
 
 |AD01
-|MVC Pattern
-|Model-View-Controller Pattern will be used to separate application's concerns and reach our quality agreements.
-
-|AD02
 |Multitier architecture
 |A n-tier architecture must be use in order to ensure scalability, maintainability, security, and reusability, among others by dividing _presentation_, _logical domain_ and _data storage_.  
 
 |OD01
 |Login Process
-|Login task will be 'delegated' to a third party (SOLID login/registration process) to ensure and strengthen Security requirements in our application
+|Login task will be 'delegated' to a third party (SOLID login/registration process) to ensure and strengthen Security requirements in our application.
 
 |OD02
 |Agile methodology
-|Our self-organizing and cross-functional team will follow an agile methodology, with week-long meetings and continual improvement that will lead to a complete final product
+|Our self-organizing and cross-functional team will follow an agile methodology, with week-long meetings and continual improvement that will lead to a complete final product.
 
 |OD03
 |Version Control
