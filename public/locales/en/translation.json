@@ -284,5 +284,12 @@
       "errorService": "There was an error adding your milestone. Maybe if you try again...",
       "errorLoadingMilestones": "Oops! There was an error loading your milestones..."
     }
+  },
+  "file": {
+    "dropzone": {
+      "upload": "Uplaod media"
+    },
+    "success": "Upload completed succesfully.",
+    "error": "There has been some problem uploading. Try later."
   }
 }

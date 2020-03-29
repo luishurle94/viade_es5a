@@ -63,5 +63,5 @@ export const getNotifications = async (fetchNotification, notificationH) => {
  * @param {*} notificationH stores notifications
  */
 export const getUnreadNotifications = async (fetchNotification, notificationH) => {
-  return await getNotifications(fetchNotification, notificationH).filter(notification => notification.read === false);
+  return (await getNotifications(fetchNotification, notificationH)).filter(notification => notification.read === false);
 }
