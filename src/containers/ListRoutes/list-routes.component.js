@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import { useTranslation } from 'react-i18next';
 import { RouteService } from '@services';
 import { DataView } from 'primereact/dataview';
+import { Dialog } from 'primereact/dialog';
 import {
   TextEditorWrapper,
   TextEditorContainer,
   Header,
   Button,
-  RouteDetails
+  RouteDetails,
+  DialogContent
 } from './list-routes.style';
+import { ListFriends } from '../index';
 
 export class ListRoutes extends Component {
 
@@ -20,7 +23,7 @@ export class ListRoutes extends Component {
       visible: false,
       sortKey: null,
       sortOrder: null,
-      rows: 5
+      rows: 5,
     };
     this.itemTemplate = this.itemTemplate.bind(this);
   }
@@ -50,12 +53,12 @@ export class ListRoutes extends Component {
           <div className="content">
             <div className="p-grid">
               <div className="p-col-12">{route.description}</div>
-              <div className="p-col-12">Rank: {route.rank}</div>
+              <div className="p-col-12">{this.props.t('listRoutes.rank')} {route.rank}</div>
             </div>
             <div className="buttons">
               <div className="flex-buttons">
-                <div><Button className="button" label="Details" onClick={() => { window.location.href = '/routemap?routeId=' + route.webId; }}>Detalles</Button></div>
-                <div><Button className="button" label="Share" onClick={() => { }}>Compartir</Button></div>
+                <div><Button className="button" label="Details" onClick={() => { window.location.href = '/route-details?routeId=' + route.webId; }}>{this.props.t('listRoutes.details')}</Button></div>
+                <div><Button className="button" label="Share" onClick={(e) => this.setState({ selectedRoute: route, visible: true })}>{this.props.t('listRoutes.share')}</Button></div>
               </div>
             </div>
           </div>
@@ -64,7 +67,16 @@ export class ListRoutes extends Component {
     );
   }
 
-
+  renderFriendsDialog() {
+    if (this.state.selectedRoute) {
+      return (
+        <DialogContent>
+          <ListFriends />
+          <Button className="button" label="send" onClick={() => { }}>{this.props.t('listRoutes.send')}</Button>
+        </DialogContent>
+      );
+    }
+  }
 
   render() {
     return (
@@ -74,7 +86,9 @@ export class ListRoutes extends Component {
             <DataView value={this.state.routes} layout={this.state.layout}
               itemTemplate={this.itemTemplate} paginatorPosition={'both'} paginator={true} rows={this.state.rows} />
           }
-
+          <Dialog header={this.props.t('listRoutes.selectFriend')} visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({ visible: false })}>
+            {this.renderFriendsDialog()}
+          </Dialog>
         </div>
       </div>
 
@@ -82,7 +96,7 @@ export class ListRoutes extends Component {
   }
 }
 
-const ListRoutesComponent = ({ props }: Props) => {
+const ListRoutesComponent = () => {
   const { t } = useTranslation();
 
   return (
@@ -91,7 +105,7 @@ const ListRoutesComponent = ({ props }: Props) => {
         <Header>
           <p>{t('listRoutes.title')}</p>
         </Header>
-        <ListRoutes props={t} />
+        <ListRoutes t={t} />
       </TextEditorContainer>
     </TextEditorWrapper>
   );

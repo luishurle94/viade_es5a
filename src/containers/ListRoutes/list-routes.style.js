@@ -46,6 +46,8 @@ export const Button = styled.button`
   display: inline-block;
   background-color: #7C4DFF;
   color: white;
+  text-align: center;
+  height: 30px;
 
   &:first-child {
     margin-right: 10px;
@@ -83,10 +85,20 @@ export const RouteDetails = styled.div`
   }
 
   .button {
-    height: 25px;
-    width: 80px;
-    text-align: center;
+    width: 90px;
+    
     
   }
 
+`;
+
+export const DialogContent = styled.div`
+display: flex;
+flex-direction: column;
+
+.button {
+  align-self: flex-end;
+  margin: 10px;
+  max-width: 150px;
+}
 `;
