@@ -17,3 +17,9 @@ describe.only('Create a new friend', () => {
     expect(fail.image).toBe(undefined);
   });
 });
+
+describe.only('Get identifier', () => {
+  test('should return true', async () => {
+    expect(`Isabel_` === friend.getIdentifier()).toBe(true);
+  });
+});

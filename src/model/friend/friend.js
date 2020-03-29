@@ -12,4 +12,8 @@ export default class Friend {
     this.image = image;
   }
 
+  getIdentifier() {
+    return `${this.name}_${this.webId}`;
+  }
+
 }
