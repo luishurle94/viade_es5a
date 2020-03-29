@@ -9,13 +9,13 @@ export default jest.mock('../../src/solid/solid-helper', () => {
   files.push(HashHelper.hash('soy_un_hito'))
   files.push(HashHelper.hash('soy_una_imagen'))
   files.push(HashHelper.hash('soy_un_comentario'))
+  files.push(HashHelper.hash('soy_un_amigo'))
 
   links.push({
     obj: 'soy_una_ruta',
     webId: HashHelper.hash('soy_una_ruta'),
     predicate: 'schema:name'
   });
-
 
   links.push({
     obj: 'soy_un_hito',
@@ -78,6 +78,12 @@ export default jest.mock('../../src/solid/solid-helper', () => {
     predicate: 'viade:hasComments'
   });
 
+  links.push({
+    obj: 'soy_un_amigo',
+    webId: HashHelper.hash('soy_un_amigo'),
+    predicate: 'vcard_fn'
+  })
+
   // throw new Error(9)
   const createInitialStructure = jest.fn(async (webId) => {
     return true;
@@ -128,7 +134,6 @@ export default jest.mock('../../src/solid/solid-helper', () => {
       if (res && res.length < 0) {
         throw new Error('404');
       }
-
       return context.shape
         .filter(p => links.map(l => l.predicate).includes(getPredicate(p)))
         .reduce((obj, key) => ({
