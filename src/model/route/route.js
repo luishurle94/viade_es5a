@@ -96,10 +96,10 @@ export default class Route {
     for(let i = 0; i < this.milestones.length; i++){
       newList.push(await MilestoneService.get(this.milestones[i]));
       if (!this.distance)
-        distance += this.milestonesObject[i].distance;
+        this.distance += this.milestonesObject[i].distance;
       if (!this.slope) {
         if (i > 0) 
-          slope = Math.abs(this.milestonesObject[i] - this.milestonesObject[i-1]);
+          this.slope = Math.abs(this.milestonesObject[i] - this.milestonesObject[i-1]);
       }
     };
     if (newList.length > 0) {
