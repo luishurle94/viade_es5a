@@ -228,7 +228,7 @@ export const AddMilestone = () => {
       </Title>
 
       <FullGridSize>
-          <Accordion activeIndex="0">
+          <Accordion id="accordionId" activeIndex="0">
                       {renderedMilestones.sort((a, b) => (a.order >  b.order) ? 1 : -1).map(function(milestone, key){
                           return <AccordionTab key={key} header= {milestone.name}> 
                                     <p> {t('addMilestone.description') + ': '} {milestone.description}</p>
@@ -249,12 +249,12 @@ export const AddMilestone = () => {
         </Label>
 
         <Label>
-          <Input id="radio1Id" type="radio" name={"opcion"} checked={!creatingNew} onChange={optionChange} />
+          <Input id="radio1Id" data-testid="radio1Id" type="radio" name={"opcion"} checked={!creatingNew} onChange={optionChange} />
           <b>{t('addMilestone.useExistent')}</b>
           <Input id="existentId" type="text" size="200" value={Existenttext} onChange={changeExistentField} disabled={creatingNew} />
           <br />
 
-          <Input id="radio2Id" type="radio" name={"opcion"} checked={creatingNew} onChange={optionChange} />
+          <Input id="radio2Id" data-testid="radio2Id" type="radio" name={"opcion"} checked={creatingNew} onChange={optionChange} />
           <b>{t('addMilestone.createNew')}</b>
         </Label>
 
@@ -300,7 +300,7 @@ export const AddMilestone = () => {
 
       </FullGridSize>
 
-      <MilestoneMap setLatLng={setLatLng} />
+      <MilestoneMap id="mapId" setLatLng={setLatLng} />
 
       {isLoading && <Loader absolute />}
 

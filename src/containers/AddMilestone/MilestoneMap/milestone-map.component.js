@@ -36,7 +36,8 @@ export class MilestoneMap extends Component  {
     this._isMounted = true;
 
     if(this._isMounted){
-      navigator.geolocation.getCurrentPosition(position=>
+      if(navigator.geolocation)
+        navigator.geolocation.getCurrentPosition(position=>
         this.setState({
           lat:position.coords.latitude,
           lng:position.coords.longitude,

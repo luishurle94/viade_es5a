@@ -2,8 +2,9 @@ import React from 'react';
 import { render, cleanup, queryByAttribute, fireEvent, getByTestId, act } from 'react-testing-library';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { AddMilestone } from './add-milestone.component';
+import { MilestoneMap } from './MilestoneMap/milestone-map.component';
 
-describe('Add Route', () => {
+describe('Add Milestone', () => {
   afterAll(cleanup);
 
   const getById = queryByAttribute.bind(null, 'id');
@@ -131,5 +132,60 @@ describe('Add Route', () => {
       rerender(<AddMilestone />);
     });
   });
+
+  it("Radio buttons test", () => {
+
+    const { container, rerender } = render(<AddMilestone />);
+    const firstRadioButton = getByTestId(container, "radio1Id");
+    const secondRadioButton = getByTestId(container, "radio2Id");
+
+    fireEvent.change(firstRadioButton, { target: { checked: true } });
+    fireEvent.change(secondRadioButton, { target: { checked: false } });
+
+    act(() => {
+      expect(firstRadioButton.checked).toEqual(true);
+      expect(secondRadioButton.checked).toEqual(false);
+      rerender(<AddMilestone />);
+    });
+  });  
+
+  
+  it("Radio buttons click test", () => {
+
+    const { container, rerender } = render(<AddMilestone />);
+    const firstRadioButton = getByTestId(container, "radio1Id");
+    const secondRadioButton = getByTestId(container, "radio2Id");
+
+    fireEvent.click(firstRadioButton);
+
+    act(() => {
+      expect(firstRadioButton.checked).toEqual(true);
+      expect(secondRadioButton.checked).toEqual(false);
+      rerender(<AddMilestone />);
+    });
+  });  
+
+  it("Accordion test", () => {
+
+    const accordion = getById(container, 'accordionId');
+
+    expect(accordion).not.toEqual(null);
+  });
+
+});
+
+describe('Add Milestone Map', () => {
+  afterAll(cleanup);
+
+  const { container } = render(
+    <Router>
+      <MilestoneMap />
+    </Router>
+  );
+
+  test('App renders without crashing', () => {
+    expect(container).toBeTruthy();
+  });
+
 
 });
