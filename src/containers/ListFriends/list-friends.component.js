@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import { useTranslation } from 'react-i18next';
 import { ListBox } from 'primereact/listbox';
 import { FriendService } from '@services';
-import {
-  TextEditorWrapper,
-  TextEditorContainer,
-  Header
-} from './list-friends.style';
+import {List} from './list-friends.style';
 
-export class ListFriend extends Component {
+export class ListFriends extends Component {
 
   constructor() {
     super();
@@ -30,27 +25,12 @@ export class ListFriend extends Component {
 
   render() {
     return (
-      <div>
+      <List>
         {this.state.friends &&
-          <ListBox value={this.state.selected} options={this.state.friends} onChange={(e) => this.setState({ selected: e.value })} multiple={true} optionLabel="webId" />}
-      </div>
+          <ListBox className='lista' value={this.state.selected} options={this.state.friends} onChange={(e) => this.setState({ selected: e.value })} multiple={true} optionLabel="webId" />}
+      </List>
     );
   }
 }
 
-const ListFriendsComponent = ({ props }: Props) => {
-  const { t } = useTranslation();
-
-  return (
-    <TextEditorWrapper>
-      <TextEditorContainer>
-        <Header>
-          <h3>{t('listRoutes.selectFriend')}</h3>
-        </Header>
-        <ListFriend />
-      </TextEditorContainer>
-    </TextEditorWrapper>
-  );
-};
-
-export default ListFriendsComponent;
+export default ListFriends;
