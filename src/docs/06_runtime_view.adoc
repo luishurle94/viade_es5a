@@ -12,6 +12,7 @@ participant OTHER_USER_UI
 control AuthService
 database SOLID
 control DataService
+control SolidAdapter
 database POD
 database OTHER_USER_POD
 
@@ -34,14 +35,17 @@ else failure login
 
 USER -> UI: ADD ROUTE
 UI -> DataService: AddRoute()
-DataService -> POD: Store route
+DataService -> SolidAdapter: Store route
+SolidAdapter -> POD: Create and link urls
 
 alt successful	
-	POD -> DataService: Route added
+	POD -> SolidAdapter: completed successfully
+	SolidAdapter -> DataService: Route added
 	DataService --> UI: Successful notification
 
 else failure
-	POD -> DataService: Route could't be added
+	POD -> SolidAdapter: failed
+	SolidAdapter -> DataService: Route could't be added
 	DataService --> UI: Failure notification
 	end
 
@@ -49,14 +53,17 @@ else failure
 
 USER -> UI: RENDER ROUTE
 UI -> DataService: getRoute()
-DataService -> POD: Get Route
+DataService -> SolidAdapter: Get Route
+SolidAdapter -> POD:Fetch turtle file
 
 alt successful	
-	POD -> DataService: Route available
+	POD -> SolidAdapter: exits
+	SolidAdapter -> DataService: Route available
 	DataService --> UI: Successful notification
 
 else failure
-	POD -> DataService: Route info could't be reached
+	POD -> SolidAdapter: not exists
+	SolidAdapter -> DataService: Route info could't be reached
 	DataService --> UI: Failure notification
 	end
 
@@ -64,26 +71,29 @@ else failure
 
 USER -> UI: SHARE CONTENT
 UI -> DataService: shareContent(otherUser)
-DataService -> POD: Get Content
-DataService -> OTHER_USER_POD: Send Content
+DataService -> SolidAdapter: share
+SolidAdapter -> POD: Get Content
+SolidAdapter -> OTHER_USER_POD: Send Content
 
 alt successful	
-	POD -> DataService: Content sended
+	POD -> SolidAdapter: completed successfully
+	SolidAdapter -> DataService: Content sended
 	DataService --> UI: Successful notification
 
 else failure
-	POD -> DataService: Content not sended
+	POD -> SolidAdapter: failed
+	SolidAdapter -> DataService: Content sended
 	DataService --> UI: Failure notification
 	end
 
 
 
 alt successful	
-	OTHER_USER_POD -> DataService: Content received
-	DataService --> OTHER_USER_UI: Successful notification
+	OTHER_USER_POD -> SolidAdapter: Content received
+	SolidAdapter --> OTHER_USER_UI: Successful notification
 
 else failure
-	OTHER_USER_POD -> DataService: Content not received
-	DataService --> OTHER_USER_UI: Failure notification
+	OTHER_USER_POD -> SolidAdapter: Content not received
+	SolidAdapter --> OTHER_USER_UI: Failure notification
 	end
 ----

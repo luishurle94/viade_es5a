@@ -3,42 +3,36 @@
 
 == Deployment View
 
-Currenty in WIP.
-
-image::07-deployment-view.png[Deployment View]
-
-<!---
-[plantuml,"Deployment diagram",png]
-
-<!---
 [plantuml,"Deployment diagram",png]
 ----
 actor User
 
 node Browser
 
-cloud Docker{
-   rectangle Viade{
-	file Route_Module
-	file RDF_Service
-	file Solid_Adapter_Service
+node Docker{
+   node ViaDe {
+	   [RouteModule]
+	   [DataService]
+	   [SolidAdapter]
    }
 
-   
-   node Solid_Server
+   node SolidNodeServer {
+      interface HTTP
+      [Autentication] - [LDP]
+      [LDP] - HTTP
+      HTTP - [Storage]
+   }
 }
 
 
 User --> Browser : uses
-Browser --> Docker : HTTP
+Browser --> Docker : HTTP request
 
-Solid_Adapter_Service --> Solid_Server : request
-Solid_Server --> Solid_Adapter_Service : response
+RouteModule --> DataService: action
+DataService--> RouteModule : response
 
-Route_Module --> RDF_Service : action
-RDF_Service --> Route_Module : response
+DataService--> SolidAdapter: codification
+SolidAdapter --> DataService: decodification
 
-RDF_Service --> Solid_Adapter_Service : codification
-Solid_Adapter_Service --> RDF_Service : decodification
+SolidAdapter --> HTTP: HTTP request
 ----
--->
