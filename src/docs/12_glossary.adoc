@@ -9,4 +9,8 @@
 | Term | Definition
 | POD | Personal storage space that you can access from anywhere.
 | Solid | Solid (derived from "social linked data") is a proposed set of conventions and tools for building decentralized social applications based on Linked Data principles. 
+| LinkedData | Solid (derived from "social linked data") is a proposed set of conventions and tools for building decentralized social applications based on Linked Data principles. 
+| Object-Triple | Mapper allows to convert object in RDF file.
+| Turtle | It allows an RDF graph to be completely written in a compact and natural text form, with abbreviations for common usage patterns and datatypes. Turtle provides levels of compatibility with the N-Triples [N-TRIPLES] format as well as the triple pattern syntax of the SPARQL.
+| RDF | It is a family of World Wide Web Consortium (W3C) specifications originally designed as a metadata data model. It has come to be used as a general method for conceptual description or modeling of information that is implemented in web resources, using a variety of syntax notations and data serialization formats. It is also used in knowledge management applications.
 |===
