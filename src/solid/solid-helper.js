@@ -1,5 +1,5 @@
 
-import { SolidTypesHelper } from './../solid';
+import { SolidTypesHelper } from '@solid-services';
 import { ldflexHelper, storageHelper } from '@utils';
 import { namedNode, literal } from '@rdfjs/data-model';
 import ldflex from '@solid/query-ldflex';
@@ -17,13 +17,25 @@ export const createAndGetDocument = async (url, createDocument) => {
 }
 
 export const link = async (webId, obj, lit, filename, folder, predicate) => {
-  let url = `${await getAppPathStorage(webId)}${folder}${filename}`;
-  await linkToGraph(url,obj,lit,predicate);
+  try {
+    let url = `${await getAppPathStorage(webId)}${folder}${filename}`;
+    if (!await ldflexHelper.resourceExists(url))
+      return false;
+    await linkToGraph(url, obj, lit, predicate);
+    return true;
+  } catch (e) {
+    return false
+  }
 }
 
 export const linkToGraph = async (webId, obj, lit, predicate) => {
-  const insert = lit ? literal(obj) : namedNode(obj);
-  await ldflex[webId][predicate].add(insert);
+  try {
+    const insert = lit ? literal(obj) : namedNode(obj);
+    await ldflex[webId][predicate].add(insert);
+  } catch (e) {
+    throw e
+  }
+
 }
 
 export const unlink = async (webId, predicate, url) => {
@@ -34,9 +46,9 @@ export const unlink = async (webId, predicate, url) => {
     await ldflex[webId][predicate].remove(namedNode(url));
     return true;
   } catch (e) {
-    console.error(e);
+    return false;
   }
-  
+
 }
 
 export const fetchRawData = async (url, context) => {
@@ -47,10 +59,12 @@ export const fetchRawData = async (url, context) => {
     let data = {};
     data.webId = url;
     for await (const field of context.shape) {
-        for await (const fieldData of obj[getPredicate(field, context)]) {
-          data = { ...data, [field.object]: fieldData && field.type &&
-            SolidTypesHelper.transformTypes(field.type, fieldData.value, data[field.object]) };
-        }
+      for await (const fieldData of obj[getPredicate(field, context)]) {
+        data = {
+          ...data, [field.object]: fieldData && field.type &&
+            SolidTypesHelper.transformTypes(field.type, fieldData.value, data[field.object])
+        };
+      }
     }
 
     return data;
@@ -60,20 +74,20 @@ export const fetchRawData = async (url, context) => {
 }
 
 export const fetchFilesData = async (url) => {
- try {
-  const fc   = new FC( auth );
-  let response = await fc.readFolder(url);
-  if (response && response.type === 'folder' && response.itemType === 'Container') {
-    return response.files.filter(f => f.type === 'text/turtle' && !['data.ttl', 'settings.ttl'].includes(f.name)).map(f => f.url);
+  try {
+    const fc = new FC(auth);
+    let response = await fc.readFolder(url);
+    if (response && response.type === 'folder' && response.itemType === 'Container') {
+      return response.files.filter(f => f.type === 'text/turtle' && !['data.ttl', 'settings.ttl'].includes(f.name)).map(f => f.url);
+    }
+  } catch (e) {
+    throw e;
   }
- } catch(e) {
-  throw e;
- }
 }
 
 export const deleteFile = async (url) => {
   try {
-    const fc   = new FC( auth );
+    const fc = new FC(auth);
     if (!await ldflexHelper.resourceExists(url))
       return false;
 
@@ -83,7 +97,7 @@ export const deleteFile = async (url) => {
 
     return false;
   } catch (e) {
-      throw e;
+    throw e;
   }
 }
 
@@ -112,4 +126,13 @@ export const getFriendData = async (webId) => {
   friend.webId = `${await data["solid:account"]}`.concat("profile/card#");
   friend.image = `${await data["vcard:hasPhoto"]}`;
   return friend;
+}
+
+export const createFile = async (webId, body, mimeType) => {
+  try {
+    await ldflexHelper.createDocumentWithMimeType(webId, body, mimeType);
+    return true;
+  } catch (e) {
+    return false;
+  }
 }

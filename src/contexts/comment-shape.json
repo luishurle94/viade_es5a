@@ -1,0 +1,28 @@
+{
+  "@context": {
+    "schema": "http://schema.org/"
+  },
+  "shape": [
+    {
+      "prefix": "schema",
+      "predicate": "text",
+      "object": "href",
+      "literal": true,
+      "type": "String"
+    },
+    {
+      "prefix": "schema",
+      "predicate": "publishedDate",
+      "object": "createdAt",
+      "literal": true,
+      "type": "Date"
+    },
+    {
+      "prefix": "schema",
+      "predicate": "author",
+      "object": "createdBy",
+      "literal": false,
+      "type": "number"
+    }
+  ]
+}

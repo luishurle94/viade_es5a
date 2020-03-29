@@ -294,10 +294,13 @@
     "details": "Details",
     "share": "Share",
     "selectFriend": "Select friends to share the route:",
-    "send": "Send route",
-    "notifications": {
-      "errorLoadingRoutes": "Oops! There was an error loading your routes...",
-      "errorLoadingFriends": "Oops! There was an error loading your friends..."
-    }
+    "send": "Send route"
+  },
+  "file": {
+    "dropzone": {
+      "upload": "Uplaod media"
+    },
+    "success": "Upload completed succesfully.",
+    "error": "There has been some problem uploading. Try later."
   }
 }

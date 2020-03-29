@@ -1,39 +1,27 @@
 {
   "@context": {
-    "foaf": "http://xmlns.com/foaf/0.1/",
+    "viade": "http://arquisoft.github.io/viadeSpec/",
+    "schema": "http://schema.org/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
     "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
     "bibo": "http://purl.org/ontology/bibo/",
-    "terms": "http://purl.org/dc/terms/",
-    "schema": "https://schema.org/"
+    "terms": "http://purl.org/dc/terms/"
   },
   "shape": [
     {
-      "prefix": "foaf",
+      "prefix": "schema",
       "predicate": "name",
       "object": "name",
       "literal": true,
       "type": "String"
     },
     {
-      "prefix": "foaf",
+      "prefix": "schema",
       "predicate": "description",
       "object": "description",
       "literal": true,
       "type": "String"
-    },
-    {
-      "prefix": "geo",
-      "predicate": "location",
-      "object": "distance",
-      "literal": true,
-      "type": "number"
-    },
-    {
-      "prefix": "geo",
-      "predicate": "altitude",
-      "object": "slope",
-      "literal": true,
-      "type": "number"
     },
     {
       "prefix": "bibo",
@@ -43,22 +31,36 @@
       "type": "number"
     },
     {
-      "prefix": "terms",
-      "predicate": "creator",
+      "prefix": "schema",
+      "predicate": "author",
       "object": "createdBy",
       "type": "webId"
     },
     {
-      "prefix": "terms",
-      "predicate": "created",
+      "prefix": "schema",
+      "predicate": "publishedDate",
       "object": "createdAt",
       "literal": true,
       "type": "Date"
     },
     {
-      "prefix": "schema",
-      "predicate": "hasPart",
+      "prefix": "viade",
+      "predicate": "point",
       "object": "milestones",
+      "type": "Array"
+    },
+    {
+      "prefix": "viade",
+      "predicate": "hasComments",
+      "object": "messages",
+      "literal": false,
+      "type": "Array"
+    },
+    {
+      "prefix": "viade",
+      "predicate": "hasMediaAttached",
+      "object": "media",
+      "literal": false,
       "type": "Array"
     }
   ]

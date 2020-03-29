@@ -293,10 +293,13 @@
     "details": "Detalles",
     "share": "Compartir",
     "selectFriend": "Selecciona amigos para compartir la ruta:",
-    "send": "Enviar ruta",
-    "notifications": {
-      "errorLoadingRoutes": "¡Ups! Ha ocurrido un error al cargar tus rutas...",
-      "errorLoadingFriends": "¡Ups! Ha ocurrido un error al cargar tus amigos..."
-    }
+    "send": "Enviar ruta"
+  },
+  "file": {
+    "dropzone": {
+      "upload": "Subir archivos multimedia"
+    },
+    "success": "Subida completada correctamente.",
+    "error": "Ha habido alguna problemas. Vuelvalo a intentar más adelante."
   }
 }

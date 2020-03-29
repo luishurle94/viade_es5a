@@ -293,5 +293,12 @@
     "share": "Share",
     "selectFriend": "Select friends to share the route:",
     "send": "Send route"
+  },
+  "file": {
+    "dropzone": {
+      "upload": "Uplaod media"
+    },
+    "success": "Upload completed succesfully.",
+    "error": "There has been some problem uploading. Try later."
   }
 }
