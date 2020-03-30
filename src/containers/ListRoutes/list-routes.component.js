@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { useTranslation } from 'react-i18next';
 import { RouteService } from '@services';
+import { errorToaster } from '@utils';
 import { DataView } from 'primereact/dataview';
 import { Dialog } from 'primereact/dialog';
 import {
@@ -12,6 +13,7 @@ import {
   DialogContent
 } from './list-routes.style';
 import { ListFriends } from '../index';
+
 
 export class ListRoutes extends Component {
 
@@ -53,12 +55,12 @@ export class ListRoutes extends Component {
           <div className="content">
             <div className="p-grid">
               <div className="p-col-12">{route.description}</div>
-              <div className="p-col-12">{this.props.t('listRoutes.rank')} {route.rank}</div>
+              <div className="p-col-12">{this.props.t('listRoutes.rank')}: {route.rank}</div>
             </div>
             <div className="buttons">
               <div className="flex-buttons">
-                <div><Button className="button" label="Details" onClick={() => { window.location.href = '/route-details?routeId=' + route.webId; }}>{this.props.t('listRoutes.details')}</Button></div>
-                <div><Button className="button" label="Share" onClick={(e) => this.setState({ selectedRoute: route, visible: true })}>{this.props.t('listRoutes.share')}</Button></div>
+                <div><Button data-testid="details" className="button" label="Details" onClick={() => { window.location.assign('/route-details?routeId=' + route.webId); }}>{this.props.t('listRoutes.details')}</Button></div>
+                <div><Button data-testid="share" className="button" label="Share" onClick={(e) => this.setState({ selectedRoute: route, visible: true })}>{this.props.t('listRoutes.share')}</Button></div>
               </div>
             </div>
           </div>
@@ -72,7 +74,10 @@ export class ListRoutes extends Component {
       return (
         <DialogContent>
           <ListFriends />
-          <Button className="button" label="send" onClick={() => { }}>{this.props.t('listRoutes.send')}</Button>
+          <Button data-testid="send" className="button" label="send" onClick={() => {
+            errorToaster('This funcionality is not implemented yet');
+            this.setState({selectedRoute: null, visible: false})
+          }}>{this.props.t('listRoutes.send')}</Button>
         </DialogContent>
       );
     }
