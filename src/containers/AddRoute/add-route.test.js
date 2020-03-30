@@ -131,7 +131,9 @@ describe('Add Route', () => {
 
   it("Complete test", () => {
 
-    const { container, rerender } = render(<AddRoute />);
+    const { container, rerender } = render(    <Router>
+      <AddRoute />
+    </Router>);
     const inputName = getByTestId(container, "nameId");
     const inputDescription = getByTestId(container, "descriptionId");
     const inputRank = getByTestId(container, "rankId");
@@ -148,7 +150,9 @@ describe('Add Route', () => {
       expect(inputName.value).toEqual("");
       expect(inputDescription.value).toEqual("");
       expect(inputRank.value).toEqual("");
-      rerender(<AddRoute />);
+      rerender(    <Router>
+        <AddRoute />
+      </Router>);
     });
   });
 
