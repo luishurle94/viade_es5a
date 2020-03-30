@@ -16,7 +16,6 @@ export class ListFriends extends Component {
     FriendService.getAll(false)
       .then(list => {
         if (list) {
-          console.log(list)
           list = list.filter(i => i !== null && i !== undefined);
           this.setState({ friends: list });
         }

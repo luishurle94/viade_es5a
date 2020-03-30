@@ -17,6 +17,7 @@ export const get = async (webId) => {
  * @param {boolean} getData
  */
 export const getAll = async (getData = true) => {
+  console.log('hola')
   const session = await auth.currentSession();
 
   const list = await SolidAdapter.getFriends(session.webId);

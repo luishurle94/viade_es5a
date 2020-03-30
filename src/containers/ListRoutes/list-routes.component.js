@@ -49,7 +49,7 @@ export class ListRoutes extends Component {
     return (
       <div className="p-col-12">
         <RouteDetails>
-          <div className="p-col-12"><b>{route.name}</b></div>
+          <div data-testid="routeName" className="p-col-12"><b>{route.name}</b></div>
           <div className="content">
             <div className="p-grid">
               <div className="p-col-12">{route.description}</div>
