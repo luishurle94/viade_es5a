@@ -287,6 +287,13 @@
       "errorLoadingMilestones": "Oops! There was an error loading your milestones..."
     }
   },
+  "file": {
+    "dropzone": {
+      "upload": "Uplaod media"
+    },
+    "success": "Upload completed succesfully.",
+    "error": "There has been some problem uploading. Try later."
+  },
   "routeDetails":{
     "title": "Route Information"
   }

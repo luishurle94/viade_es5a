@@ -2,6 +2,7 @@ import EventEmitter from 'events';
 import { act } from 'react-testing-library';
 
 const fetchResponse = { ok: true, status: 200 };
+const errorFetchResponse = { ok: undefined, status: 404 };
 
 class SolidAuthClient extends EventEmitter {
   constructor() {
@@ -9,11 +10,24 @@ class SolidAuthClient extends EventEmitter {
     this.session = undefined;
   }
 
-  fetch = () => fetchResponse;
+  fetch = (resource) => {
+    if (resource && resource !== 'fail') {
+      return fetchResponse;
+    }
+    if (resource && resource !== '404') {
+      return errorFetchResponse;
+    }
+  };
 
   popupLogin = () => {};
 
   logout = () => {};
+
+  currentSession = async () =>  {
+    return {
+      webId: 'https://jaluma.inrupt.net/'
+    }
+  }
 
   trackSession(callback) {
     if (this.session !== undefined) callback(this.session);
@@ -31,6 +45,7 @@ class SolidAuthClient extends EventEmitter {
 const instance = new SolidAuthClient();
 jest.spyOn(instance, 'fetch');
 jest.spyOn(instance, 'popupLogin');
+jest.spyOn(instance, 'currentSession');
 jest.spyOn(instance, 'logout');
 jest.spyOn(instance, 'removeListener');
 

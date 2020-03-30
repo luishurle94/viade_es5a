@@ -6,9 +6,10 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { successToaster, errorToaster } from '@utils';
 import { MilestoneService, RouteService } from '@services';
-import { Milestone } from '../../model/index';
+import { Milestone } from '@models';
 import { Loader } from '@util-components';
 import {Accordion,AccordionTab} from 'primereact/accordion';
+import auth from 'solid-auth-client';
 
 import {
   TextEditorWrapper,
@@ -22,6 +23,9 @@ import {
   Title
 } from './add-milestone.style';
 import MilestoneMap from './MilestoneMap/milestone-map.component';
+import { FileUploader } from '@components';
+
+var webId;
 
 export const AddMilestone = () => {
 
@@ -31,6 +35,14 @@ export const AddMilestone = () => {
 
   if (window.location.href.split("?")[1]) {
     routeId = window.location.href.split("?")[1].split("=")[1];
+  }
+
+  if (webId) {
+    auth.currentSession().then(res => {
+      if (res) {
+        webId = res.webId
+      }
+    });
   }
 
   const [renderedMilestones, setRenderedMilestones] = useState([]);
@@ -203,7 +215,7 @@ export const AddMilestone = () => {
   async function obtainMilestones(){
 
     try {
-        route = await RouteService.get(routeId);
+        route = await RouteService.get(routeId, true);
 
         if(route.milestonesObject){
             route.milestonesObject.sort((a, b) => (a.order >  b.order) ? 1 : -1);
@@ -221,13 +233,23 @@ export const AddMilestone = () => {
   }
 
   return ( 
-    <Form>  
-      <Title>
-          {t('addMilestone.accordionTitle') + ' ' + renderedMilestones.length + ' ' + t('addMilestone.accordionEndTtile') }
-          <br/>
-      </Title>
-
+    <Form>
       <FullGridSize>
+        <FullGridSize>
+          <h5>
+              {t('file.dropzone.upload') }
+              <br/>
+          </h5>
+          <FileUploader webId={webId} routeId={routeId} t={t} />
+        </FullGridSize>
+
+        <Title>
+            {t('addMilestone.accordionTitle') + ' ' + renderedMilestones.length + ' ' + t('addMilestone.accordionEndTtile') }
+            <br/>
+        </Title>
+      </FullGridSize>
+      <FullGridSize>
+
           <Accordion activeIndex="0">
                       {renderedMilestones.sort((a, b) => (a.order >  b.order) ? 1 : -1).map(function(milestone, key){
                           return <AccordionTab key={key} header= {milestone.name}> 
@@ -259,7 +281,6 @@ export const AddMilestone = () => {
         </Label>
 
       </FullGridSize>
-
 
       <FullGridSize>
 

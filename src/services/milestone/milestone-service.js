@@ -1,6 +1,6 @@
-import { SolidAdapter } from "../../solid";
-import { MilestoneFactory } from "../factories";
-import { RouteService } from '..'
+import { SolidAdapter } from "@solid-services";
+import { MilestoneFactory } from "@factories";
+import { RouteService } from '@services'
 
 import milestoneShape from '@contexts/milestone-shape.json';
 import routeShape from '@contexts/route-shape.json';
@@ -26,7 +26,7 @@ export const add = async (routeId, milestone) => {
 export const remove = async (routeId, milestoneId) => {
   // get route
   const route = await RouteService.get(routeId);
-  if (!route || !route.milestones || !route.milestones.map(m => m.webId).includes(milestoneId)) {
+  if (!route || !route.milestones || !route.milestones.map(m => m.toString()).filter(m => m === milestoneId.toString()).length > 0) {
     return false;
   }
 

@@ -1,13 +1,12 @@
 export const transformTypes = (type, value, beforeValue) => {
-  if (type && value) {
+  if (type && value && value.toString().trim().length > 0) {
     try {
-      const t = type.toLowerCase();
+      const t = type.toString().toLowerCase();
       switch (t) {
         case "number":
           return parseFloat(value);
         case "date":
-          // return epoach time
-          return parseInt(value);
+          return Date.parse(value);
         case "array":
           return beforeValue ? [...beforeValue, value] : [value];
         default:

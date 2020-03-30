@@ -1,6 +1,6 @@
-import { SolidAdapter } from "../../solid";
+import { SolidAdapter } from "@solid-services";
 import routeShape from '@contexts/route-shape.json';
-import { RouteFactory } from '../factories';
+import { RouteFactory } from '@factories';
 
 /**
  * Add route
@@ -23,9 +23,17 @@ export const remove = async (webId) => {
  * Get route from user
  * @param {String} webId route 
  */
-export const get = async (webId) => {
+export const get = async (webId, lazyLoadingMilestones = true, lazyLoadingMedia = true, lazyLoadingComments = true) => {
   const route = RouteFactory.create(await SolidAdapter.get(webId, routeShape));
-  await route.getObjectsMilestones();
+  if (!lazyLoadingMilestones) {
+    await route.refreshMilestones();
+  }
+  if(!lazyLoadingMedia) {
+    await route.refreshMedia();
+  }
+  if (!lazyLoadingComments) {
+    await route.refreshComments();
+  }
   return route;
 }
 
@@ -47,12 +55,4 @@ export const getAll = async (getData = true) => {
     res.push(r);
   }
   return res;
-}
-
-/**
- * Add message to route
- * @param {String} webId route 
- * @param {Comment} comment
- */
-export const publishComment = async (webId, comment) => {
 }
