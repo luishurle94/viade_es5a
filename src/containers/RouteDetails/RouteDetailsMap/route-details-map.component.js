@@ -1,5 +1,11 @@
-import React, { Component} from 'react';
-import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
+import React, { Component } from 'react';
+
+import {
+  GoogleApiWrapper,
+  Map,
+  Marker,
+} from 'google-maps-react';
+
 import { RouteDetailsMapContainer } from './route-details-map.style';
 
 const mapStyles = {
@@ -68,7 +74,7 @@ export class RouteDetailsMap extends Component  {
   
         <div style={sideBarStyle}>
           <RouteDetailsMapContainer>
-            <Map
+            <Map id="mapa"
               google={this.props.google}
               zoom={12}
               style={mapStyles}
@@ -78,7 +84,7 @@ export class RouteDetailsMap extends Component  {
                 lng: this.state.lng
               }}
               latitud = {this.getLatitude}>
-              <Marker
+              <Marker id="marcador"
                 title={'Geolocation'}
                 position={{
                 lat:this.state.lat,

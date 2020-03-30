@@ -2,22 +2,30 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-console */
 
-import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { errorToaster } from '@utils';
-import { Loader } from '@util-components';
-import { RouteService } from '@services';
-import {Accordion,AccordionTab} from 'primereact/accordion';
-import RouteDetailsMap from './RouteDetailsMap/index';
+import React, {
+  useEffect,
+  useState,
+} from 'react';
 
 import {
-  TextEditorWrapper,
-  TextEditorContainer,
-  Header,
+  Accordion,
+  AccordionTab,
+} from 'primereact/accordion';
+import { useTranslation } from 'react-i18next';
+
+import { RouteService } from '@services';
+import { Loader } from '@util-components';
+import { errorToaster } from '@utils';
+
+import {
   Form,
   FullGridSize,
-  Title
+  Header,
+  TextEditorContainer,
+  TextEditorWrapper,
+  Title,
 } from './route-details.style';
+import RouteDetailsMap from './RouteDetailsMap/index';
 
 const flexStyle = {
   'display': 'flex',
@@ -105,7 +113,7 @@ export const RouteDetails = () => {
     <div style={flexStyle}>
       <div>
         <FullGridSize> 
-            <Title>
+            <Title id="tituloRuta">
               {t('routeDetails.title')}
               <br/>
             </Title>
@@ -118,12 +126,12 @@ export const RouteDetails = () => {
             <p> {t('addRoute.createdAt') + ': '} {renderedCreatedAt}</p>
         </FullGridSize>
 
-        <Title>
+        <Title id="tituloHito">
             {t('addMilestone.accordionTitle') + ' ' + renderedMilestones.length + ' ' + t('addMilestone.accordionEndTtile') }
             <br/>
         </Title>
         
-        <FullGridSize>
+        <FullGridSize id="hitos">
             <Accordion activeIndex="0" onTabOpen={(a, b) => updateMarker(a)}>
                         {renderedMilestones.sort((a, b) => (a.order >  b.order) ? 1 : -1).map(function(milestone, key){
                             return <AccordionTab key={key} header= {milestone.name}> 
