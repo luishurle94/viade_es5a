@@ -82,7 +82,6 @@ export const get = async (webId, context) => {
   try {
     return await SolidHelper.fetchRawData(webId, context);
   } catch (e) {
-    console.error(e)
     return undefined;
   }
 }
@@ -97,7 +96,6 @@ export const getAll = async (folder) => {
 
     return await SolidHelper.fetchFilesData(documentsUri);
   } catch (e) {
-    console.error(e)
     return [];
   }
 }
@@ -114,7 +112,6 @@ export const share = async (webId, friendId, shareUrl) => {
     await ACLFile.createACL(permissions);
     return true;
   } catch (e) {
-    console.error(e)
     return false;
   }
 }
@@ -122,6 +119,9 @@ export const share = async (webId, friendId, shareUrl) => {
 export const currentUserId = async () => {
   try {
     const session = await auth.currentSession();
+    if (!session || !session.webId) {
+      return undefined;
+    }
     return session.webId;
   } catch (e) {
     throw e;
@@ -132,7 +132,7 @@ export const getPredicate = async (field, context) => {
   return SolidHelper.getPredicate(field, context);
 }
 
-const checkParams = async (createDocument, webId, parentWebId, parentFilename, parentPredicate, folder) => {
+export const checkParams = async (createDocument, webId, parentWebId, parentFilename, parentPredicate, folder) => {
   createDocument = createDocument || true;
   folder = folder || '';
   if (folder.length > 0 && !folder.includes('/'))  folder = `${folder}/`;
@@ -155,3 +155,8 @@ const checkParams = async (createDocument, webId, parentWebId, parentFilename, p
   export const getFriends = async (webId) => {
     return await SolidHelper.getFriends(webId);
   }
+  
+  export const createFile = async (webId, body, mimeType) => {
+    return await SolidHelper.createFile(webId, body, mimeType);
+  }
+  

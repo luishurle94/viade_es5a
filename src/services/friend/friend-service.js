@@ -1,5 +1,5 @@
-import { SolidAdapter } from "../../solid";
-import { FriendFactory } from "../factories";
+import { SolidAdapter } from "@solid-services";
+import { FriendFactory } from "@factories";
 import auth from 'solid-auth-client';
 
 import friendShape from '@contexts/friend-shape.json';

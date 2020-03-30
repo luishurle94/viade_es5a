@@ -1,16 +1,16 @@
 module.exports = {
   projects: ['viade_es5a'],
   verbose: true,
+  resolver: "jest-pnp-resolver",
   preset: 'jest-puppeteer',
-  testRegex: 'feature/.*\\js$',
-  "collectCoverageFrom": [
-    "src/**/*.{js,jsx,ts,tsx}",
-    "!src/**/*.d.ts"
+  testRegex: '(/feature/.*|(\\.|/)(feature))\\.[jt]sx?$',
+  testTimeout: 30000,
+  setupFiles: [
+    "react-app-polyfill/jsdom"
   ],
   "transform": {
     "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
-    "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-    "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    "^(?!.*\\.(js|jsx|ts|tsx|json)$)": "<rootDir>/config/jest/fileTransform.js"
   },
   "transformIgnorePatterns": [
     "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
@@ -18,6 +18,7 @@ module.exports = {
   ],
   "moduleNameMapper": {
     "^react-native$": "react-native-web",
-    "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
+    "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules",
+    "@inrupt/solid-style-guide": "<rootDir>/node_modules/jest-css-modules"
   }
 };

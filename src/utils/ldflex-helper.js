@@ -40,12 +40,12 @@ export const createDocument = async (documentUri, body = '') => {
   }
 };
 
-export const createDocumentWithTurtle = async (documentUri, body = '') => {
+export const createDocumentWithMimeType = async (documentUri, body = '', mimeType = 'text/plain') => {
   try {
     return createDoc(documentUri, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'text/turtle'
+        'Content-Type': mimeType
       },
       body
     });

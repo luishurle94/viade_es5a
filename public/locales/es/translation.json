@@ -285,5 +285,12 @@
       "errorService": "Se ha producido un error al añadir tu hito. Quizás si lo intentaras de nuevo...",
       "errorLoadingMilestones": "¡Ups! Ha ocurrido un error al cargar tus hitos..."
     }
+  },
+  "file": {
+    "dropzone": {
+      "upload": "Subir archivos multimedia"
+    },
+    "success": "Subida completada correctamente.",
+    "error": "Ha habido alguna problemas. Vuelvalo a intentar más adelante."
   }
 }

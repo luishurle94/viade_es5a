@@ -1,7 +1,9 @@
 {
   "@context": {
     "foaf": "http://xmlns.com/foaf/0.1/",
-    "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+    "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+    "viade": "http://arquisoft.github.io/viadeSpec/",
+    "schema": "http://schema.org/"
   },
   "shape": [
     {
@@ -26,34 +28,28 @@
       "type": "number"
     },
     {
-      "prefix": "geo",
-      "predicate": "altitude",
+      "prefix": "schema",
+      "predicate": "elevation",
       "object": "slope",
       "literal": true,
       "type": "number"
     },
     {
-      "prefix": "geo",
+      "prefix": "schema",
       "predicate": "latitude",
       "object": "latitude",
       "literal": true,
       "type": "number"
     },
     {
-      "prefix": "geo",
+      "prefix": "schema",
       "predicate": "longitude",
       "object": "longitude",
       "literal": true,
       "type": "number"
     },
     {
-      "prefix": "foaf",
-      "predicate": "image",
-      "object": "images",
-      "literal": false,
-      "type": "Array"
-    },{
-      "prefix": "geo",
+      "prefix": "viade",
       "predicate": "order",
       "object": "order",
       "literal": true,

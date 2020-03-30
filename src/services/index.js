@@ -5,5 +5,6 @@ import * as MilestoneService from './milestone/milestone-service';
 import * as NotificationService from './notification/notification-service';
 import * as MediaService from './media/media-service';
 import * as FriendService from './friend/friend-service';
+import * as CommentService from './comment/comment-service';
 
-export { Provider, RouteService, MilestoneService, NotificationService, MediaService, FriendService };
+export { Provider, RouteService, MilestoneService, NotificationService, MediaService, FriendService, CommentService };

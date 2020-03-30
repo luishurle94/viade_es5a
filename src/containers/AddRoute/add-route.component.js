@@ -3,6 +3,7 @@
 /* eslint-disable no-console */
 
 import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { successToaster, errorToaster } from '@utils';
 import { RouteService } from '@services';
@@ -21,10 +22,9 @@ import {
   WebId
 } from './add-route.style';
 
-type Props = { webId: String };
+type Props = { webId: String, history: any };
 
-
-export const AddRoute = ({ webId }: Props) => {
+export const AddRoute = ({ webId, history }: Props) => {
   const { t } = useTranslation();
   const [url, setUrl] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -95,7 +95,7 @@ export const AddRoute = ({ webId }: Props) => {
       if(res && res.added === true && res.webId){
         setIsLoading(false);
         successToaster(t('addRoute.notifications.correct'));
-        window.location.href = '/add-milestone?routeId=' + res.webId;
+        history.push(`/add-milestone?routeId=${res.webId}`);
 
       } else {
         setIsLoading(false);
@@ -151,7 +151,7 @@ export const AddRoute = ({ webId }: Props) => {
  * A React component page that is displayed when there's no valid route. Users can click the button
  * to get back to the home/welcome page.
  */
-const AddRouteComponent = ({ webId }: Props) => {
+const AddRouteComponent = ({ webId, history }: Props) => {
   const { t } = useTranslation();
   return (
     <TextEditorWrapper>
@@ -159,10 +159,12 @@ const AddRouteComponent = ({ webId }: Props) => {
         <Header>
           <p>{t('addRoute.title')}</p>
         </Header>
-        <AddRoute webId={webId} />
+        <AddRoute webId={webId} history={history} />
       </TextEditorContainer>
     </TextEditorWrapper>
   );
 };
 
-export default AddRouteComponent;
+
+
+export default withRouter(AddRouteComponent);
