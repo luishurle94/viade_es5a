@@ -3,90 +3,77 @@ import { defineFeature, loadFeature } from 'jest-cucumber';
 
 const feature = loadFeature('./feature/features/login.feature');
 const puppeteer = require('puppeteer')
-const screenshot = 'amazon_nyan_cat_pullover.png'
+let browser = null;
+let page = null;
 
 defineFeature(feature, test => {
 
-  beforeEach(async () => {
-});
+  beforeEach(async () => {});
 
-  test('Iniciando sesión', ({ given, when, then }) => {
+  test('Iniciando sesión', ({ given, when,and, then }) => {
     
     given('Soy un usuario intentando iniciar sesión', async () => {
-
+      browser = await puppeteer.launch({
+        headless: false
+      })
+    
+      page = await browser.newPage()
+      await page.goto("http://localhost:3000/#/login", {
+        waitUntil: 'networkidle2'
+      });
 
     });
 
-    when('relleno el formulario y lo envío', async () => {
+    when('introduzco mi webId', async () => {
 
-      (async () => {
-        const browser = await puppeteer.launch({
-          headless: false
-        })
-        const page = await browser.newPage()
-        await page.goto("https://www.instagram.com/accounts/login/?source=auth_switcher", {
-          waitUntil: 'networkidle2'
-        });
-      
-        //email
-        await page.waitForSelector("[name='username']");
-        // await page.click("[name='username']");
-        await page.type("[name='username']", "Adri");
-      
-        //password
-        await page.keyboard.down("Tab");
-        //uncomment the following if you want the passwor dto be visible
-        // page.$eval("._2hvTZ.pexuQ.zyHYP[type='password']", (el) => el.setAttribute("type", "text"));
-        await page.keyboard.type("Contrasennna");
-      
-        //the selector of the "Login" button
-        // await page.click("._0mzm-.sqdOP.L3NKy>.Igw0E.IwRSH.eGOV_._4EzTm");
-        
-        //we find the Login btn using the innerText comparison because the selector used for the btn might be unstable
+        await page.waitForSelector(".sc-EHOje.cffgrt");
+        await page.type(".sc-EHOje.cffgrt", "https://fakeadri.solid.community/profile/card#me");
+
         await page.evaluate(() => {
-          let btns = [...document.querySelector(".HmktE").querySelectorAll("button")];
+          let btns = [...document.querySelectorAll("button")];
           btns.forEach(function (btn) {
-            if (btn.innerText == "Iniciar sesión")
+            if (btn.innerText == "Iniciar sesión"){
               btn.click();
+            }
+              
           });
         });
-      
-        //Optional
-        //check if the element asking to download the app arises
-        // try {
-        // 	await loginPage.waitForSelector("._3m3RQ._7XMpj",{
-        // 		timeout:3000
-        // 	});
-        // 	await loginPage.click("._3m3RQ._7XMpj");
-        // } catch (err) {
-      
-        // }
-      
-        //Optional
-        //check if the app asks for notifications
-        // try {
-        // 	await loginPage.waitForSelector(".aOOlW.HoLwm",{
-        // 		timeout:5000
-        // 	});
-        // 	await loginPage.click(".aOOlW.HoLwm");
-        // } catch (err) {
-      
-        // }
-      
-        await page.waitForSelector(".glyphsSpriteMobile_nav_type_logo");
-      
-        await page.screenshot({ path: screenshot });
-      
-        browser.close()
-        console.log('See screenshot: ' + screenshot)
-      })()
+
+        await page.waitForNavigation({
+          waitUntil: 'networkidle2'
+        });
 
     });
 
-    then('nos redirige al la página de Solid', async () => {
-      //const element = await page.$("h1");
-      //const text = await page.evaluate(element => element.textContent, element);
-      //expect(text).toMatch("Login");
+    and('relleno el formulario', async () => {
+  
+      await page.waitForSelector("[id='username']", {visible: true});
+      await page.type("[id='username']", "fakeAdri");
+
+      await page.waitFor(500);
+      await page.waitForSelector("[id='password']", {visible: true});
+      await page.type("[id='password']", "9FakeAdri9*", {visible: true});
+
+      await page.waitFor(500);
+
+      await page.evaluate(() => {
+        let btns = [...document.querySelector(".form-horizontal.login-up-form").querySelectorAll("button")];
+        btns.forEach(function (btn) {
+          if (btn.innerText == "Log In")
+            btn.click();
+        });
+      });
+
     });
+
+    then('nos redirige a la página de bienvenida', async () => {
+  
+          await page.waitForNavigation({
+            waitUntil: 'networkidle2'
+          });
+
+          expect(page.url()).toBe("http://localhost:3000/#/welcome")
+
+      });
   });
 });
