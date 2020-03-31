@@ -1,5 +1,9 @@
-import 'jest'
-import { defineFeature, loadFeature } from 'jest-cucumber';
+import 'jest';
+
+import {
+  defineFeature,
+  loadFeature,
+} from 'jest-cucumber';
 
 const feature = loadFeature('./feature/features/internationalization.feature');
 
@@ -18,13 +22,17 @@ defineFeature(feature, test => {
     });
 
     when('cambio el idioma', async () => {
-      // await page.$eval('.sc-TOsTZ > .flag-icon', el => el.parentNode.click());
+      //await page.$eval("div[@id='root']/div/header/section/section/div/div/div/div/ul/li/button/span", element => element.click())
     });
+      
+   
 
     then('el idioma se cambia', async () => {
       const element = await page.$("h1");
       const text = await page.evaluate(element => element.textContent, element);
+      //expect(text).toMatch("Hola! Bienvenido a Solid.");
       expect(text).toMatch("Hi! Welcome to Solid.");
     });
   });
 });
+
