@@ -34,7 +34,7 @@ image::08-uml.png["Domain Model"]
 Throughout the development of this project, we will build on the architectural pattern based on Layered Arquitecture:
 
 * Divides an interactive application in n layers. In our case, we have a very similar pattern to MVC. We have 3 layers:
-** **SolidAdapter**: it ocnstains the core functionality related about persistency in Solid's POD. 
+** **SolidAdapter**: it contains the core functionality related about persistency in Solid's POD. 
 ** **DataService/Model**: it contains the core functionality and data view. This layer includes the data services that allow us to decouple Solid context and our app model. It brings us efficient code reuse and maintainability. This is done to separate internal representations of information from the ways information is presented to, and accepted from, the user. 
 ** **RouteModule/Front-End**: it displays the information to the Front-end layer controller.
 
