@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { useTranslation } from 'react-i18next';
 import { RouteService } from '@services';
 import { errorToaster } from '@utils';
+import { Loader } from '@util-components';
 import { DataView } from 'primereact/dataview';
 import { Dialog } from 'primereact/dialog';
 import {
@@ -93,6 +94,7 @@ export class ListRoutes extends Component {
     return (
       <div>
         <div className="content-section implementation">
+          {!this.state.routes && <Loader/>}
           {this.state.routes &&
             <DataView value={this.state.routes} layout={this.state.layout}
               itemTemplate={this.itemTemplate} paginatorPosition={'both'} paginator={true} rows={this.state.rows} />
