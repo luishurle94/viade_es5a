@@ -22,10 +22,9 @@ export class MapContainer extends Component {
   }
 
   loadGeoJson = async (map) => {
-    if (this.route instanceof Promise) {
-      this.route = await this.route;
-    }
-    map.data.addGeoJson(this.route.getGeoJson());
+    const geoJson = await this.route.getGeoJson();
+    console.log(geoJson)
+    map.data.addGeoJson(geoJson);
   }
 
   onMarkerClick = (props, marker, e) =>

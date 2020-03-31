@@ -9,17 +9,11 @@ import {
 import { RouteDetailsMapContainer } from './route-details-map.style';
 
 const mapStyles = {
-    width: '375%',
-    height: '250%',
+  flex: 1,
+    // width: '375%',
+    // height: '250%',
   };
   
-  const sideBarStyle = {
-    'marginLeft': '300px',
-    'height': '100%',
-    'backgroundColor': 'lightblue',
-    'width': '100%',
-    'position': 'relative',
-  };
 
 export class RouteDetailsMap extends Component  {
 
@@ -34,6 +28,7 @@ export class RouteDetailsMap extends Component  {
       this.state={
         lat:this.props.lat,
         lng:this.props.long,
+        route:this.props.route,
         isLoading: true
       }
     }
@@ -49,12 +44,13 @@ export class RouteDetailsMap extends Component  {
   
 
     fetchData = (lat, lng) => {
-      setTimeout(() => {
-        this.setState({
-          lat : this.props.lat,
-          lng : this.props.long
-        });
-      }, 5000);
+      // setTimeout(() => {
+      //   this.setState({
+      //     lat : this.props.lat,
+      //     lng : this.props.long,
+      //     route: this.props.route
+      //   });
+      // }, 5000);
     };
   
     componentDidUpdate(prevProps) {
@@ -63,6 +59,22 @@ export class RouteDetailsMap extends Component  {
       }
     }
     
+    onReady = ({ google }, map) => {
+      this.loadGeoJson(map);
+    }
+
+    loadGeoJson = async (map) => {
+      if (this.props.route) {
+        const geoJson = await this.props.route.getGeoJson();
+        map.data.addGeoJson(geoJson);
+        if (this.props.route.milestonesObject.length) {
+          this.setState({
+            lat : this.props.route.milestonesObject[0].latitude,
+            lng : this.props.route.milestonesObject[0].longitude,
+          })
+        }
+      }
+    }
 
     render() {
       if (!this.props.loaded | !this._isMounted) {
@@ -72,12 +84,13 @@ export class RouteDetailsMap extends Component  {
       return (
   
   
-        <div style={sideBarStyle}>
+        <div>
           <RouteDetailsMapContainer>
             <Map id="mapa"
               google={this.props.google}
               zoom={12}
               style={mapStyles}
+              onReady={this.onReady}
               
               center={{
                 lat: this.state.lat,

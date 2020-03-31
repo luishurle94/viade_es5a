@@ -69,6 +69,8 @@ export const Form = styled.form`
   align-items: center;
   display: grid;
   grid-template-columns: 1fr;
+  width: 130vw;
+  height: 90vh;
   grid-gap: 20px 40px;
   ${media.tablet`
     grid-template-columns: 1fr 1fr;
@@ -87,9 +89,13 @@ export const Button = styled.button`
 export const FullGridSize = styled.div`
   grid-column: span 1;
   text-align: left;
+  margin-bottom: 50px;
   ${media.tablet`
     grid-column: span 2;
   `}
+  p > span {
+    font-weight: bold;
+  }
 `;
 
 export const WebId = styled.div`

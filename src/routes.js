@@ -28,11 +28,6 @@ const privateRoutes = [
     component: Profile
   },
   {
-    id: 'googlemap',
-    path: '/routemap',
-    component: GoogleMap
-  },
-  {
     id: 'add-route',
     path: '/add-route',
     component: AddRoute
@@ -51,7 +46,13 @@ const privateRoutes = [
     id: 'list-routes',
     path: '/list-routes',
     component: ListRoutes
-  }
+  },
+  // TODO remove in next sprint
+  {
+    id: 'googlemap',
+    path: '/routemap',
+    component: GoogleMap
+  },
 ];
 
 const Routes = () => (
