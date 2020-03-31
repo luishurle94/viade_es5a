@@ -42,6 +42,10 @@ export class ListRoutes extends Component {
       }).catch(err => console.error(err));
   }
 
+  share(route) {
+    this.setState({ selectedRoute: route, visible: true });
+  }
+
   itemTemplate(route) {
     if (!route) {
       return (
@@ -60,7 +64,7 @@ export class ListRoutes extends Component {
             <div className="buttons">
               <div className="flex-buttons">
                 <div><Button data-testid="details" className="button" label="Details" onClick={() => { window.location.assign('/route-details?routeId=' + route.webId); }}>{this.props.t('listRoutes.details')}</Button></div>
-                <div><Button data-testid="share" className="button" label="Share" onClick={(e) => this.setState({ selectedRoute: route, visible: true })}>{this.props.t('listRoutes.share')}</Button></div>
+                <div><Button data-testid="share" className="button" label="Share" onClick={() => this.share(route)}>{this.props.t('listRoutes.share')}</Button></div>
               </div>
             </div>
           </div>
@@ -74,13 +78,15 @@ export class ListRoutes extends Component {
       return (
         <DialogContent>
           <ListFriends />
-          <Button data-testid="send" className="button" label="send" onClick={() => {
-            errorToaster('This funcionality is not implemented yet');
-            this.setState({selectedRoute: null, visible: false})
-          }}>{this.props.t('listRoutes.send')}</Button>
+          <Button data-testid="send" className="button" label="send" onClick={() => this.sendButton()}>{this.props.t('listRoutes.send')}</Button>
         </DialogContent>
       );
     }
+  }
+
+  sendButton() {
+    errorToaster('This funcionality is not implemented yet');
+    this.setState({ selectedRoute: null, visible: false })
   }
 
   render() {

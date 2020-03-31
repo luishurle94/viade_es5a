@@ -43,8 +43,8 @@ describe('List friends', () => {
     instance.componentDidMount = () => {
       return [new Friend().webId = 'Amigo1WebId']
     };
-    instance.setState({
-      selected: 'AmigoWebId'
+    instance.selectFriend({
+      value: 'AmigoWebId'
     })
     expect(instance.state.selected).toBeTruthy();
   })

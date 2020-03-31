@@ -22,11 +22,15 @@ export class ListFriends extends Component {
       }).catch(err => console.error(err));
   }
 
+  selectFriend(e) {
+    this.setState({ selected: e.value })
+  }
+
   render() {
     return (
       <List>
         {this.state.friends &&
-          <ListBox className='lista' value={this.state.selected} options={this.state.friends} onChange={(e) => this.setState({ selected: e.value })} multiple={true} optionLabel="webId" />}
+          <ListBox className='lista' value={this.state.selected} options={this.state.friends} onChange={(e) => this.selectFriend(e)} multiple={true} optionLabel="webId" />}
       </List>
     );
   }

@@ -77,6 +77,7 @@ describe('List routes', () => {
   test('share button', () => {
     let wrapper = mount(<ListRoutes t={t} />);
     let instance = wrapper.instance();
+    let r1 = new Route('Ruta 1', 'Descripción 1', 10, 10, 5);
     instance.componentDidMount = () => {
       return [
         new Route('Ruta 1', 'Descripción 1', 10, 10, 5),
@@ -85,9 +86,26 @@ describe('List routes', () => {
         new Route('Ruta 4', 'Descripción 4', 10, 10, 2)
       ]
     };
-    instance.setState({
-      visible: true
-    })
+    instance.share(r1);
     expect(instance.state.visible).toBeTruthy();
+    expect(instance.state.selectedRoute).toBeTruthy();
   });
+
+  test('send button in friends dialog', () => {
+    let wrapper = mount(<ListRoutes t={t} />);
+    let instance = wrapper.instance();
+    let r1 = new Route('Ruta 1', 'Descripción 1', 10, 10, 5);
+    instance.componentDidMount = () => {
+      return [
+        new Route('Ruta 1', 'Descripción 1', 10, 10, 5),
+        new Route('Ruta 2', 'Descripción 2', 10, 10, 4),
+        new Route('Ruta 3', 'Descripción 3', 10, 10, 3),
+        new Route('Ruta 4', 'Descripción 4', 10, 10, 2)
+      ]
+    };
+    instance.share(r1);
+    instance.sendButton();
+    expect(instance.state.visible).toBeFalsy();
+    expect(instance.state.selectedRoute).toBeFalsy();
+  })
 });
