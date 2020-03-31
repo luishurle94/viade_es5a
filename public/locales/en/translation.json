@@ -65,7 +65,8 @@
     },
     "tictactoe": "Game",
     "add-route": "Add Route",
-    "add-milestone": "Add Milestone"
+    "add-milestone": "Add Milestone",
+    "list-routes": "Routes list"
   },
   "footer": {
     "version": "Version"
@@ -286,6 +287,14 @@
       "errorService": "There was an error adding your milestone. Maybe if you try again...",
       "errorLoadingMilestones": "Oops! There was an error loading your milestones..."
     }
+  },
+  "listRoutes": {
+    "title": "Route list",
+    "rank": "Rank",
+    "details": "Details",
+    "share": "Share",
+    "selectFriend": "Select friends to share the route:",
+    "send": "Send route"
   },
   "file": {
     "dropzone": {

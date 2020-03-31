@@ -11,7 +11,8 @@ import {
   Profile,
   GoogleMap,
   AddRoute,
-  AddMilestone
+  AddMilestone,
+  ListRoutes
 } from './containers';
 import { RouteDetails } from './containers/RouteDetails/route-details.component';
 
@@ -45,6 +46,11 @@ const privateRoutes = [
     id: 'route-details',
     path: '/route-details',
     component: RouteDetails
+  },
+  {
+    id: 'list-routes',
+    path: '/list-routes',
+    component: ListRoutes
   }
 ];
 

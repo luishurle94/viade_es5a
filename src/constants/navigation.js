@@ -13,6 +13,12 @@ export const NavigationItems = [
     icon: 'img/icon/route.png',
     label: 'navBar.add-route',
     to: '/add-route'
+  },
+  {
+    id: 'list-routes',
+    icon: 'img/bars-nav.svg',
+    label: 'navBar.list-routes',
+    to: '/list-routes'
   }
 ];
 
