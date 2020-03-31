@@ -25,14 +25,16 @@ export const remove = async (webId) => {
  */
 export const get = async (webId, lazyLoadingMilestones = true, lazyLoadingMedia = true, lazyLoadingComments = true) => {
   const route = RouteFactory.create(await SolidAdapter.get(webId, routeShape));
-  if (!lazyLoadingMilestones) {
-    await route.refreshMilestones();
-  }
-  if(!lazyLoadingMedia) {
-    await route.refreshMedia();
-  }
-  if (!lazyLoadingComments) {
-    await route.refreshComments();
+  if (route) {
+    if (!lazyLoadingMilestones) {
+      await route.refreshMilestones();
+    }
+    if(!lazyLoadingMedia) {
+      await route.refreshMedia();
+    }
+    if (!lazyLoadingComments) {
+      await route.refreshComments();
+    }
   }
   return route;
 }

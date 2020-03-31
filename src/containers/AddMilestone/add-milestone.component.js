@@ -35,7 +35,8 @@ if (window.location.href.split("?")[1]) {
 
 var webId;
 
-if (webId) {
+
+if (!webId) {
   auth.currentSession().then(res => {
     if (res) {
       webId = res.webId
@@ -235,6 +236,7 @@ export const AddMilestone = () => {
 
   return ( 
     <Form>
+      {!isLoading && 
       <FullGridSize>
         <FullGridSize>
           <h5>
@@ -249,6 +251,7 @@ export const AddMilestone = () => {
             <br/>
         </Title>
       </FullGridSize>
+      }
       <FullGridSize>
 
           <Accordion activeIndex="0">

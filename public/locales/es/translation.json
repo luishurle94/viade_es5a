@@ -305,6 +305,7 @@
     "error": "Ha habido alguna problemas. Vuelvalo a intentar más adelante."
   },
   "routeDetails":{
-    "title": "Información de la Ruta"
+    "title": "Información de la Ruta",
+    "media": "Archivos multimedia"
   }
 }

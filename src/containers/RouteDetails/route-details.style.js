@@ -70,7 +70,7 @@ export const Form = styled.form`
   display: grid;
   grid-template-columns: 1fr;
   width: 130vw;
-  height: 90vh;
+  height: 85vh;
   grid-gap: 20px 40px;
   ${media.tablet`
     grid-template-columns: 1fr 1fr;

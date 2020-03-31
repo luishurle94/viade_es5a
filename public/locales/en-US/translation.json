@@ -306,6 +306,7 @@
     "error": "There has been some problem uploading. Try later."
   },
   "routeDetails":{
-    "title": "Route Information"
+    "title": "Route Information",
+    "media": "Media files"
   }
 }

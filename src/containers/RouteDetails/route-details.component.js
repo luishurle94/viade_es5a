@@ -13,7 +13,7 @@ import {
 } from 'primereact/accordion';
 import { Card } from 'primereact/card';
 import { useTranslation } from 'react-i18next';
-
+import { GalleriaComponent } from '@components';
 import { RouteService } from '@services';
 import { Loader } from '@util-components';
 import { errorToaster } from '@utils';
@@ -39,12 +39,13 @@ const flexStyle = {
 };
 
 let route;
-
 let routeId = "";
 
 if (window.location.href.split("?")[1]) {
   routeId = window.location.href.split("?")[1].split("=")[1];
 }
+
+let images;
 
 export const RouteDetails = () => {
 
@@ -62,7 +63,7 @@ export const RouteDetails = () => {
   const [renderedMilestones, setRenderedMilestones] = useState([]);
   useEffect(() => {
     if (!route) {
-      obtainMilestones();
+      obtainChildren();
     }
   });
 
@@ -70,10 +71,10 @@ export const RouteDetails = () => {
 
   const [isLoading, setLoading] = useState(false);
 
-  async function obtainMilestones() {
+  async function obtainChildren() {
     setLoading(true);
     try {
-      route = await RouteService.get(routeId, false);
+      route = await RouteService.get(routeId, false, false);
 
       setRenderedName(route.name);
       setRenderedDescription(route.description);
@@ -96,7 +97,16 @@ export const RouteDetails = () => {
         setLoading(false)
       }
 
-
+      if (route.mediaObject) {
+        images = route.mediaObject.map(function (m) {console.log(m)
+          return {
+            previewImageSrc: m.href,
+            thumbnailImageSrc: m.href,
+            title: `${m.href.split('/media/').pop().substring(0, 27)}...`,
+            alt: new Date(m.createdAt).toLocaleDateString()
+          }
+        });
+      }
     } catch (error) {
       errorToaster(t('addMilestone.notifications.errorLoadingMilestones'));
       console.log(error)
@@ -118,8 +128,8 @@ export const RouteDetails = () => {
 
       <Form>
         <div style={flexStyle}>
-          <Card>
-            <div>
+          <Card style={{minWidth: '450px', maxWidth: '450px'}}>
+            <div style={{overflowY: 'auto', height: '78vh', paddingRight: '16px'}}>
               <FullGridSize>
                 <Title id="tituloRuta">
                   {t('routeDetails.title')}
@@ -153,6 +163,19 @@ export const RouteDetails = () => {
                 </Accordion>
 
               </FullGridSize>
+
+              {images &&
+                <div>
+                  <Title id="tituloGaleria">
+                    {t('routeDetails.media')}
+                    <br />
+                  </Title>
+
+                  <FullGridSize id="galeria">
+                    <GalleriaComponent images={images} activeIndex={0} isAutoPlayActive={false} isPreviewFullScreen={false} />
+                  </FullGridSize>
+                </div>
+              }
             </div>
           </Card>
           <div>
