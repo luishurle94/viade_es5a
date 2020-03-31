@@ -63,7 +63,7 @@ export class ListRoutes extends Component {
             </div>
             <div className="buttons">
               <div className="flex-buttons">
-                <div><Button data-testid="details" className="button" label="Details" onClick={() => { window.location.assign('/route-details?routeId=' + route.webId); }}>{this.props.t('listRoutes.details')}</Button></div>
+                <div><Button data-testid="details" className="button" label="Details" onClick={() => { this.props.history.push(`route-details?routeId=${route.webId}`); }}>{this.props.t('listRoutes.details')}</Button></div>
                 <div><Button data-testid="share" className="button" label="Share" onClick={() => this.share(route)}>{this.props.t('listRoutes.share')}</Button></div>
               </div>
             </div>
@@ -107,7 +107,7 @@ export class ListRoutes extends Component {
   }
 }
 
-const ListRoutesComponent = () => {
+const ListRoutesComponent = ({history}: Props) => {
   const { t } = useTranslation();
 
   return (
@@ -116,7 +116,7 @@ const ListRoutesComponent = () => {
         <Header>
           <p>{t('listRoutes.title')}</p>
         </Header>
-        <ListRoutes t={t} />
+        <ListRoutes t={t} history={history}/>
       </TextEditorContainer>
     </TextEditorWrapper>
   );
