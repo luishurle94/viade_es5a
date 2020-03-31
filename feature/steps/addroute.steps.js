@@ -8,7 +8,9 @@ let page = null;
 
 defineFeature(feature, test => {
 
-  beforeEach(async () => {});
+  beforeEach(async () => {
+    jest.setTimeout(40000);
+  });
 
   test('Añadiendo una ruta en la aplicación', ({ given, when, then }) => {
     
@@ -101,7 +103,10 @@ defineFeature(feature, test => {
 
         let currentPage = page.url().split("?")[0];
         expect(currentPage).toBe("http://localhost:3000/#/add-milestone")
+        
     });
+
+    
 
   });
 
