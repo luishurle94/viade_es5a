@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { render, cleanup, fireEvent } from 'react-testing-library';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history'
 import { ListRoutes } from './list-routes.component';
 import {
   TextEditorWrapper,
@@ -41,6 +42,7 @@ describe('List routes', () => {
   ];
 
   const { t } = useTranslation();  
+  const history = createMemoryHistory();
 
   const { container, queryByText, getByTestId } = render(
     <TextEditorWrapper>
@@ -48,7 +50,7 @@ describe('List routes', () => {
         <Header>
           <p>{t('listRoutes.title')}</p>
         </Header>
-      <ListRoutes t={t} />
+      <ListRoutes t={t} history = {history}/>
       </TextEditorContainer>
     </TextEditorWrapper>
   );
@@ -67,11 +69,24 @@ describe('List routes', () => {
   });
 
   test('details button', () => {
-    const {getAllByTestId} = render(<ListRoutes t={t} />);
-    fireEvent.click(getByTestId('details'));
-    jest.spyOn(window.location, 'assign').mockImplementation( l => {
-      expect(l).toContain('/route-details?routeId=');
-   })
+    let wrapper = mount(<ListRoutes t={t} history={history}/>);
+    let instance = wrapper.instance();
+    let r1 = new Route('Ruta 1', 'Descripción 1', 10, 10, 5);
+    r1.webId = 'RutaId1';
+    instance.componentDidMount = () => {
+      return [
+        new Route('Ruta 1', 'Descripción 1', 10, 10, 5),
+        new Route('Ruta 2', 'Descripción 2', 10, 10, 4),
+        new Route('Ruta 3', 'Descripción 3', 10, 10, 3),
+        new Route('Ruta 4', 'Descripción 4', 10, 10, 2)
+      ]
+    };
+    const spy = jest.spyOn(instance, 'seeDetails').mockImplementationOnce((route) => {
+      history.push(`route-details?routeId=${route.webId}`)
+    })
+    instance.seeDetails(r1);
+    expect(history.location.pathname).toBe('/route-details');
+    expect(history.location.search).toBe('?routeId=RutaId1');
   });
 
   test('share button', () => {

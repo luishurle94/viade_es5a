@@ -47,6 +47,10 @@ export class ListRoutes extends Component {
     this.setState({ selectedRoute: route, visible: true });
   }
 
+  seeDetails(route) {
+    this.props.history.push(`route-details?routeId=${route.webId}`);
+  }
+
   itemTemplate(route) {
     if (!route) {
       return (
@@ -64,7 +68,7 @@ export class ListRoutes extends Component {
             </div>
             <div className="buttons">
               <div className="flex-buttons">
-                <div><Button data-testid="details" className="button" label="Details" onClick={() => { this.props.history.push(`route-details?routeId=${route.webId}`); }}>{this.props.t('listRoutes.details')}</Button></div>
+                <div><Button id="details" data-testid="details" className="button" label="Details" onClick={() => this.seeDetails(route)}>{this.props.t('listRoutes.details')}</Button></div>
                 <div><Button data-testid="share" className="button" label="Share" onClick={() => this.share(route)}>{this.props.t('listRoutes.share')}</Button></div>
               </div>
             </div>
