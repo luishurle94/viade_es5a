@@ -14,6 +14,7 @@ import {
   AddMilestone,
   ListRoutes
 } from './containers';
+import { RouteDetails } from './containers/RouteDetails/route-details.component';
 
 const privateRoutes = [
   {
@@ -40,6 +41,11 @@ const privateRoutes = [
     id: 'add-milestone',
     path: '/add-milestone',
     component: AddMilestone
+  },
+  {
+    id: 'route-details',
+    path: '/route-details',
+    component: RouteDetails
   },
   {
     id: 'list-routes',

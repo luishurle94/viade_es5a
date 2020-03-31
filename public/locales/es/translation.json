@@ -250,6 +250,8 @@
     "distance": "Distancia",
     "slope": "Desnivel",
     "rank": "Dificultad",
+    "creator": "Creador",
+    "createdAt": "Fecha de creación",
     "notifications": {
       "nameEmpty": "El campo 'Nombre' no puede estar vacío",
       "distanceNegative": "'Distancia' debe ser mayor que cero",
@@ -301,5 +303,8 @@
     },
     "success": "Subida completada correctamente.",
     "error": "Ha habido alguna problemas. Vuelvalo a intentar más adelante."
+  },
+  "routeDetails":{
+    "title": "Información de la Ruta"
   }
 }
