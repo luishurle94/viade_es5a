@@ -124,17 +124,17 @@ export const AddRoute = ({ webId, history }: Props) => {
 
       <FullGridSize>
         <Label>
-          {t('addRoute.name')}
+          {t('addRoute.name') + '*'}
           <Input id="nameId" data-testid="nameId" type="text" size="200" defaultValue="R01" onBlur={checkName} />
         </Label>
 
           <Label>
-            {t('addRoute.description')}
-            <TextArea id="descriptionId" data-testid="descriptionId"  onChange={checkDescription} cols={40} rows={10} />
+            {t('addRoute.description') + '*'}
+            <TextArea id="descriptionId" data-testid="descriptionId"  onChange={checkDescription} cols={40} rows={10} required={true} />
           </Label>
 
         <Label>
-          {t('addRoute.rank')}
+          {t('addRoute.rank') + '*'}
           <Input id="rankId" data-testid="rankId" type="number" min="0" max="10" defaultValue={5} onBlur={checkRank} size="200"/>
         </Label>
 

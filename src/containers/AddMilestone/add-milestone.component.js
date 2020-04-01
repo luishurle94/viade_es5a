@@ -304,7 +304,7 @@ export const AddMilestone = () => {
       <FullGridSize>
 
         <Label>
-          {t('addMilestone.name')}
+          {t('addMilestone.name') + '*'}
           <Input id="nameId" data-testid="nameId" type="text" size="200" value={Nametext} onChange={changeNameField} disabled={!creatingNew} />
         </Label>
 
@@ -322,17 +322,17 @@ export const AddMilestone = () => {
         </Label>
 
         <Label>
-          {t('addMilestone.latitude')}
+          {t('addMilestone.latitude') + '*'}
           <Input id="latitudeId" type="number" data-testid="latitudeId" min="0" max="10" value={text} onChange={changeLatitudeField} size="200" disabled={!creatingNew} />
         </Label>
 
         <Label>
-          {t('addMilestone.longitude')}
+          {t('addMilestone.longitude') + '*'}
           <Input id="longitudeId" type="number" data-testid="longitudeId" min="0" max="10" value={Longitudetext} onChange={changeLongitudeField} size="200" disabled={!creatingNew} />
         </Label>
 
         <Label>
-          {t('addMilestone.altitude')}
+          {t('addMilestone.altitude') + '*'}
           <Input id="altitudeId" type="number" data-testid="altitudeId" min="0" value={Altitudetext} onChange={changeAltitudeField} size="200" disabled={!creatingNew} />
         </Label>
 

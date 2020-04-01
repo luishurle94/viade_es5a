@@ -9,7 +9,7 @@ let page = null;
 defineFeature(feature, test => {
 
   beforeEach(async () => {
-    jest.setTimeout(100000);
+    jest.setTimeout(1200000);
   });
 
   test('Subiendo una imagen en la aplicación', ({ given, when, then, and }) => {

@@ -9,7 +9,7 @@ let page = null;
 defineFeature(feature, test => {
 
   beforeEach(async () => {
-    jest.setTimeout(40000);
+    jest.setTimeout(1200000);
   });
 
   test('Añadiendo una ruta en la aplicación', ({ given, when, then }) => {

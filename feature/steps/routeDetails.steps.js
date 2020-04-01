@@ -13,7 +13,7 @@ let page = null;
 defineFeature(feature, test => {
 
   beforeEach(async () => {
-      jest.setTimeout(50000);
+    jest.setTimeout(1200000);
   });
 
   test('Quiero ver los detalles de una ruta', ({ given, when,and, then }) => {
