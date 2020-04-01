@@ -235,7 +235,6 @@ export const AddMilestone = () => {
     try {
       if (!route) {
         route = await RouteService.get(routeId, false);
-        console.log(route)
         if(route && route.milestonesObject){
             route.milestonesObject.sort((a, b) => a.order >  b.order);
             setRenderedMilestones(route.milestonesObject);

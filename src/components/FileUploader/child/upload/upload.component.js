@@ -4,7 +4,7 @@ import "./upload.style.css";
 import { MediaService } from '@services';
 import { Media } from '@models';
 import { Loader } from '@util-components';
-import { successToaster, errorToaster } from '@utils';
+import { successToaster } from '@utils';
 
 export class Upload extends Component {
   constructor(props) {
@@ -30,7 +30,6 @@ export class Upload extends Component {
 
   async uploadFiles() {
     this.setState({ uploadProgress: {}, uploading: true });
-    const promises = [];
     this.setState({
       isLoading: true
     })

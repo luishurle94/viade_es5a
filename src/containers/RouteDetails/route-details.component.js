@@ -37,25 +37,9 @@ const flexStyle = {
   'position': 'relative',
 };
 
-let images;
-
 export const RouteDetails = () => {
 
-  // if(isLoading){
-  //   var timeout = setTimeout(
-  //     function checkError() {
-  //       if (isLoading) {
-  //         setLoading(false);
-  //         errorToaster('Error');
-  //       }
-  //       clearTimeout(timeout);
-  //     },
-  //     3000);
-  // }
-
   let routeId = "";
-
-  let route;
 
   if (window.location.href.split("?")[1]) {
     const aux = window.location.href.split("?")[1].split("=")[1];
@@ -64,6 +48,8 @@ export const RouteDetails = () => {
     }
   }
 
+  const [route, setRoute] = useState(null);
+  const [images, setImages] = useState(null);
   const [renderedName, setRenderedName] = useState('');
   const [renderedDescription, setRenderedDescription] = useState('');
   const [renderedDistance, setRenderedDistance] = useState(0);
@@ -77,15 +63,12 @@ export const RouteDetails = () => {
 
   const [renderedMilestones, setRenderedMilestones] = useState([]);
   useEffect(() => {
-    if (!route) {
-      obtainChildren();
-    }
+    obtainChildren();
   }, []);
 
   const { t } = useTranslation();
 
   const [isLoading, setLoading] = useState(false);
-  console.log(images)
 
   async function obtainChildren() {
     setLoading(true);
@@ -114,7 +97,7 @@ export const RouteDetails = () => {
           }
         }
         if (fetch.mediaObject && fetch.mediaObject.length) {
-          images = fetch.mediaObject.filter(m => m && m.href).map(function (m) {
+          const fetchData = fetch.mediaObject.filter(m => m && m.href).map(function (m) {
             return {
               previewImageSrc: m.href,
               thumbnailImageSrc: m.href,
@@ -122,9 +105,10 @@ export const RouteDetails = () => {
               alt: new Date(m.createdAt).toLocaleDateString()
             }
           });
+          setImages(fetchData)
         }
         setLoading(false);
-        route = fetch;
+        setRoute(fetch)
         return fetch;
       }
     } catch (error) {

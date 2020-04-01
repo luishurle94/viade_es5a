@@ -13,7 +13,7 @@ export const transformTypes = (type, value, beforeValue) => {
           return value;
       }
     } catch (e) {
-      console.log(e)
+      console.error(e)
     }
   }
 
