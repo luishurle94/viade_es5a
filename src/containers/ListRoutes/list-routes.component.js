@@ -60,11 +60,12 @@ export class ListRoutes extends Component {
     return (
       <div className="p-col-12">
         <RouteDetails>
-          <div data-testid="routeName" className="p-col-12"><b>{route.name}</b></div>
+          {route.name && <div data-testid="routeName" className="p-col-12"><b>{route.name}</b></div>}
+          {!route.name && <div data-testid="routeName" className="p-col-12"><b>Route</b></div>}
           <div className="content">
             <div className="p-grid">
-              <div className="p-col-12">{route.description}</div>
-              <div className="p-col-12">{this.props.t('listRoutes.rank')}: {route.rank}</div>
+              {route.description && <div className="p-col-12">{route.description}</div>}
+              {route.rank && <div className="p-col-12">{this.props.t('listRoutes.rank')}: {route.rank}</div>}
             </div>
             <div className="buttons">
               <div className="flex-buttons">
@@ -97,23 +98,23 @@ export class ListRoutes extends Component {
   render() {
     return (
       <div>
-        <div className="content-section implementation">
-          {!this.state.routes && <Loader/>}
-          {this.state.routes &&
+        {this.state.routes &&
+          <div className="content-section implementation">
             <DataView value={this.state.routes} layout={this.state.layout}
               itemTemplate={this.itemTemplate} paginatorPosition={'both'} paginator={true} rows={this.state.rows} />
-          }
-          <Dialog header={this.props.t('listRoutes.selectFriend')} visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({ visible: false })}>
-            {this.renderFriendsDialog()}
-          </Dialog>
-        </div>
+          </div>
+        }
+        <Dialog header={this.props.t('listRoutes.selectFriend')} visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({ visible: false })}>
+          {this.renderFriendsDialog()}
+        </Dialog>
+        {!this.state.routes && <Loader />}
       </div>
 
     );
   }
 }
 
-const ListRoutesComponent = ({history}: Props) => {
+const ListRoutesComponent = ({ history }: Props) => {
   const { t } = useTranslation();
 
   return (
@@ -122,7 +123,7 @@ const ListRoutesComponent = ({history}: Props) => {
         <Header>
           <p>{t('listRoutes.title')}</p>
         </Header>
-        <ListRoutes t={t} history={history}/>
+        <ListRoutes t={t} history={history} />
       </TextEditorContainer>
     </TextEditorWrapper>
   );

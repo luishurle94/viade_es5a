@@ -37,16 +37,7 @@ const flexStyle = {
   'position': 'relative',
 };
 
-let route;
-let routeId = "";
-
-if (window.location.href.split("?")[1]) {
-  routeId = window.location.href.split("?")[1].split("=")[1];
-}
-
 let images;
-
-
 
 export const RouteDetails = () => {
 
@@ -61,6 +52,17 @@ export const RouteDetails = () => {
   //     },
   //     3000);
   // }
+
+  let routeId = "";
+
+  let route;
+
+  if (window.location.href.split("?")[1]) {
+    const aux = window.location.href.split("?")[1].split("=")[1];
+    if (aux !== routeId) {
+      routeId = aux;
+    }
+  }
 
   const [renderedName, setRenderedName] = useState('');
   const [renderedDescription, setRenderedDescription] = useState('');
@@ -78,43 +80,41 @@ export const RouteDetails = () => {
     if (!route) {
       obtainChildren();
     }
-  });
+  }, []);
 
   const { t } = useTranslation();
 
   const [isLoading, setLoading] = useState(false);
-
-  
+  console.log(images)
 
   async function obtainChildren() {
     setLoading(true);
     try {
-      route = await RouteService.get(routeId, false, false);
-      if (route) {
-        setRenderedName(route.name);
-        setRenderedDescription(route.description);
+      const fetch = await RouteService.get(routeId, false, false);
+      if (fetch) {
+        setRenderedName(fetch.name);
+        setRenderedDescription(fetch.description);
 
-        if (Number(route.distance))
-          setRenderedDistance(route.distance);
+        if (Number(fetch.distance))
+          setRenderedDistance(fetch.distance);
 
-        if (Number(route.slope))
-          setRenderedSlope(route.slope);
+        if (Number(fetch.slope))
+          setRenderedSlope(fetch.slope);
 
-        setRenderedRank(route.rank);
-        setRenderedCreatedBy(route.createdBy);
+        setRenderedRank(fetch.rank);
+        setRenderedCreatedBy(fetch.createdBy);
 
-        if (route.createdAt)
-          setRenderedCreatedAt(new Date(route.createdAt).toLocaleDateString().toString());
+        if (fetch.createdAt)
+          setRenderedCreatedAt(new Date(fetch.createdAt).toLocaleDateString().toString());
 
-        if (route.milestonesObject) {
-          route.milestonesObject.sort((a, b) => a.order > b.order);
-          setRenderedMilestones(route.milestonesObject);
-          setLoading(false)
+        if (fetch.milestonesObject) {
+          fetch.milestonesObject = fetch.milestonesObject.filter(m => m).sort((a, b) => a.order - b.order);
+          if (fetch.milestonesObject.length) {
+            setRenderedMilestones(fetch.milestonesObject);
+          }
         }
-
-        if (route.mediaObject) {
-          images = route.mediaObject.filter(m => m).map(function (m) {
-            console.log();
+        if (fetch.mediaObject && fetch.mediaObject.length) {
+          images = fetch.mediaObject.filter(m => m && m.href).map(function (m) {
             return {
               previewImageSrc: m.href,
               thumbnailImageSrc: m.href,
@@ -123,12 +123,16 @@ export const RouteDetails = () => {
             }
           });
         }
+        setLoading(false);
+        route = fetch;
+        return fetch;
       }
     } catch (error) {
+      console.error(error)
       errorToaster(t('addMilestone.notifications.errorLoadingMilestones'));
-      console.log(error)
+      setLoading(false)
     }
-
+    return undefined;
   }
 
   function updateMarker(milestone) {
@@ -170,20 +174,20 @@ export const RouteDetails = () => {
 
               <FullGridSize id="hitos">
                 <Accordion activeIndex="0" onTabOpen={(a, b) => updateMarker(a)}>
-                  {renderedMilestones.sort((a, b) => a.order > b.order).map(function (milestone, key) {
-                    return <AccordionTab key={key} header={milestone.name}>
-                      <p> {t('addMilestone.description') + ': '} {milestone.description}</p>
-                      <p> {t('addMilestone.distance') + ': '} {milestone.distance}</p>
-                      <p> {t('addMilestone.altitude') + ': '} {milestone.slope}</p>
-                      <p> {t('addMilestone.latitude') + ': '} {milestone.latitude}</p>
-                      <p> {t('addMilestone.longitude') + ': '} {milestone.longitude}</p>
+                  {renderedMilestones.filter(m => m).sort((a, b) => a.order - b.order).map(function (milestone, key) {
+                    return <AccordionTab key={key} header={milestone.name || milestone.order}>
+                      { milestone.description && <p> {t('addMilestone.description') + ': '} {milestone.description}</p> }
+                      { milestone.distance && <p> {t('addMilestone.distance') + ': '} {milestone.distance}</p> }
+                      <p> {t('addMilestone.altitude') + ': '} {milestone.slope}</p> 
+                      <p> {t('addMilestone.latitude') + ': '} {milestone.latitude}</p> 
+                      <p> {t('addMilestone.longitude') + ': '} {milestone.longitude}</p> 
                     </AccordionTab>;
                   })}
                 </Accordion>
 
               </FullGridSize>
 
-              {images &&
+              {images && images.length &&
                 <div>
                   <Title id="tituloGaleria">
                     {t('routeDetails.media')}

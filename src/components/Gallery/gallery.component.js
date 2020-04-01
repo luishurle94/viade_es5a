@@ -14,7 +14,8 @@ export class GalleriaComponent extends Component {
       images: null,
       activeIndex: 0,
       isAutoPlayActive: true,
-      isPreviewFullScreen: false
+      isPreviewFullScreen: false,
+      enableButtons: false
     };
     this.previewTemplate = this.previewTemplate.bind(this);
     this.onItemChange = this.onItemChange.bind(this);
@@ -31,6 +32,9 @@ export class GalleriaComponent extends Component {
     }
     if (this.props.isPreviewFullScreen) {
       this.setState({ isPreviewFullScreen: this.props.isPreviewFullScreen });
+    }
+    if (this.props.enableButtons) {
+      this.setState({ enableButtons: this.props.enableButtons });
     }
     this.bindDocumentListeners();
   }
@@ -127,10 +131,9 @@ export class GalleriaComponent extends Component {
       'pi-window-maximize': !this.state.isPreviewFullScreen,
       'pi-window-minimize': this.state.isPreviewFullScreen
     });
-
     return (
       <div className="custom-galleria-footer">
-        <Button data-testid="play" icon={autoPlayClassName} onClick={() => {
+        {this.state.enableButtons && <Button data-testid="play" icon={autoPlayClassName} onClick={() => {
           if (!this.state.isAutoPlayActive) {
             this.galleria.startSlideShow();
             this.setState({ isAutoPlayActive: true });
@@ -139,15 +142,20 @@ export class GalleriaComponent extends Component {
             this.galleria.stopSlideShow();
             this.setState({ isAutoPlayActive: false });
           }
-        }} />
+        }} /> }
         {
-          this.state.images && (
+          this.state.images && this.state.activeIndex < this.state.images.length &&
             <span>
               <span>{this.state.activeIndex + 1}/{this.state.images.length}</span>
-              <span className="title">{this.state.images[this.state.activeIndex].title}</span>
-              <span>{this.state.images[this.state.activeIndex].alt}</span>
+              {
+                this.state.images[this.state.activeIndex] && this.state.images[this.state.activeIndex].title &&
+                  <span className="title">{this.state.images[this.state.activeIndex].title}</span>
+              }
+              {
+                this.state.images[this.state.activeIndex] && this.state.images[this.state.activeIndex].alt &&
+                  <span>{this.state.images[this.state.activeIndex].alt}</span>
+              }
             </span>
-          )
         }
         <Button data-testid="fullscreen" icon={fullScreenClassName} onClick={() => this.toggleFullScreen()} />
       </div>
@@ -163,11 +171,12 @@ export class GalleriaComponent extends Component {
     return (
       <div className="galleria">
         <div className="content-section implementation">
-          <Galleria ref={(el) => this.galleria = el} value={this.state.images} activeIndex={this.state.activeIndex} onItemChange={this.onItemChange}
+          {this.state.images && <Galleria ref={(el) => this.galleria = el} value={this.state.images} activeIndex={this.state.activeIndex} onItemChange={this.onItemChange}
             showThumbnails={false} showPreviewNavButtons={true} showNavButtonsOnPreviewHover={true}
             numVisible={5} circular={true} autoPlay={true} transitionInterval={10000}
             previewItemTemplate={this.previewTemplate} footer={footer}
             style={{ maxWidth: '520px', margin: '0 auto' }} className={galleriaClassName} />
+          }
         </div>
       </div>
     );

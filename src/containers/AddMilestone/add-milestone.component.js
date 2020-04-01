@@ -40,12 +40,6 @@ import {
 import MilestoneMap from './MilestoneMap/milestone-map.component';
 
 let route;
-  
-let routeId = "";
-
-if (window.location.href.split("?")[1]) {
-  routeId = window.location.href.split("?")[1].split("=")[1];
-}
 
 var webId;
 
@@ -59,6 +53,15 @@ if (!webId) {
 }
 
 export const AddMilestone = () => {
+  
+  let routeId = "";
+
+  if (window.location.href.split("?")[1]) {
+    const aux = window.location.href.split("?")[1].split("=")[1];
+    if (aux !== routeId) {
+      routeId = aux;
+    }
+  }
 
   const [renderedMilestones, setRenderedMilestones] = useState([]);
   const [size, setSize] = useState(0);
@@ -269,10 +272,10 @@ export const AddMilestone = () => {
       <FullGridSize>
 
           <Accordion activeIndex="0">
-                      {renderedMilestones.sort((a, b) => a.order > b.order).map(function(milestone, key){
-                          return <AccordionTab key={key} header= {milestone.name}> 
-                                    <p> {t('addMilestone.description') + ': '} {milestone.description}</p>
-                                    <p> {t('addMilestone.distance') + ': '} {milestone.distance}</p> 
+                      {renderedMilestones.filter(m => m).sort((a, b) => a.order - b.order).map(function(milestone, key){
+                          return <AccordionTab key={key} header= {milestone.name || milestone.order + 1}> 
+                                    { milestone.description && <p> {t('addMilestone.description') + ': '} {milestone.description}</p> }
+                                    { milestone.distance && <p> {t('addMilestone.distance') + ': '} {milestone.distance}</p> }
                                     <p> {t('addMilestone.altitude') + ': '} {milestone.slope}</p> 
                                     <p> {t('addMilestone.latitude') + ': '} {milestone.latitude}</p> 
                                     <p> {t('addMilestone.longitude') + ': '} {milestone.longitude}</p> 
