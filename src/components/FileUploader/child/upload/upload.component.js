@@ -50,7 +50,11 @@ export class Upload extends Component {
   sendRequest(file) {
     if (this.props.webId && this.props.routeId) {
       const webId = this.props.webId;
-      return MediaService.addMedia(this.props.routeId, new Media(MediaService.getHref(webId, file.name), file, new Date(), webId, file.type));
+      const res = MediaService.addMedia(this.props.routeId, new Media(MediaService.getHref(webId, file.name), file, new Date(), webId, file.type));
+      
+      if (res) {
+        return res;
+      }
     }
     
     errorToaster(this.props.t('file.error'));
