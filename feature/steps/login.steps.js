@@ -1,5 +1,9 @@
-import 'jest'
-import { defineFeature, loadFeature } from 'jest-cucumber';
+import 'jest';
+
+import {
+  defineFeature,
+  loadFeature,
+} from 'jest-cucumber';
 
 const feature = loadFeature('./feature/features/login.feature');
 const puppeteer = require('puppeteer')
@@ -8,7 +12,9 @@ let page = null;
 
 defineFeature(feature, test => {
 
-  beforeEach(async () => {});
+  beforeEach(async () => {
+    jest.setTimeout(50000);
+  });
 
   test('Iniciando sesión', ({ given, when,and, then }) => {
     

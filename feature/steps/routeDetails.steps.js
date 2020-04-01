@@ -72,7 +72,7 @@ defineFeature(feature, test => {
     });
 
     when('abro la página de detalles', async () => {
-        await page.goto("http://localhost:3000/route-details?routeId=https://isafdezpe.solid.community/public/viade/1982780447.ttl", {
+        await page.goto("http://localhost:3000/#/route-details?routeId=https://fakeadri.solid.community/public/viade/2053335278.ttl", {
           waitUntil: 'networkidle2'
         });
 
