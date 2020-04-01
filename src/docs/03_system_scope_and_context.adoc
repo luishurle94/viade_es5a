@@ -8,7 +8,9 @@ The main advantage of this system is to avoid storing personal information in a 
 
 The following information must be allowed to be stored:
 
-* *Routes*
+* *Routes (ttl)*
+* *Milestones (ttl)*
+* *Comments*
 * *Images*
 * *Videos*
 * *Plain text*
@@ -23,6 +25,7 @@ The different stakeholders in the software product we are dealing with are the f
 * *Logged user*
 * *POD*
 * *POD Server*: Composite of PODs
+* *Google Maps*
 
 The next stakeholders are candidates to be considered in the future:
 
@@ -36,8 +39,9 @@ image::03-context.png[Business context diagram]
 |===
 | Communication Partner             | Input									| Output
 | Anonymous User					| Text              	                | Access to POD
-| Logged User						| Route              	                | Route, images, videos
-| POD								| Route, images, videos, text			| RDF
+| Logged User						| Route              	                | Route, Milestones, Comments, Images, Videos
+| POD								| Data models, images, videos, text		| RDF
+| Google Maps						| GeoJSON		                        | Javascript
 |===
 
 
@@ -55,7 +59,7 @@ Solid's POD server will allow us to store the information in our POD, and access
 |Stakeholder
 
 |Viade
-|Anonymous User, Logged User
+|Anonymous User, Logged User, Google Maps API
 
 |POD
 |Logged user, friends user

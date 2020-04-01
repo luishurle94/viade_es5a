@@ -8,8 +8,6 @@ For reference, we are going to use the scope and context diagram that has been d
 
 === Whitebox Overall System
 
-_**<Overview Diagram>**_
-
 image::05-block-diagram.svg[Business context diagram]
 
 Motivation::
@@ -34,8 +32,8 @@ Contained Building Blocks::
 |===
 | **Name** | **Responsibility**
 | Route Module | It manages the routes and multimedia that users can share.
-| RDF Service | It transforms data to/from RDF format.
-| Solid Adapter Service | Link between Viade and Solid Server.
+| Data Service Module | It links Front-End layer with SolidAdapter. Includes business logic and data models.
+| Solid Adapter Module | Link between Viade and Solid Server.
 |===
 
 ==== White Box Solid Server
@@ -53,8 +51,36 @@ For more indepth information relative to this blocks, click link:https://rubenve
 [cols="1,3" options="header"]
 |===
 | **Name** | **Responsibility**
+| Login | It allows to log in to a Solid Server provider.
+| Add route | Create new routes.
+| My Routes | List routes were created by logged user.
+| List friends | List your friends
+| Register | It allows to sign up to a Solid Server provider.
+| Add Milestone | Create a new point.
+| Shared Routes | Share created route.
+| Inboxes | Inbox with received notifications.
+|===
+
+==== White Box Data Service Module
+[cols="1,3" options="header"]
+|===
+| **Name** | **Responsibility**
 | Friend Service | User friends are managed.
 | Route Service | It manages all actions relative to routes.
+| Milestone Service | It manages all actions relative to milestones.
 | Notification Service | When a user shares a route, it allows to publish and suscribe a notification.
+| Comment Service | Allows publish and get messages.
 | Media Service | It manages the processing of media.
+|===
+
+==== White Box Solid Adapter Module
+[cols="1,3" options="header"]
+|===
+| **Name** | **Responsibility**
+| Solid Adapter | Link between DataModel and Solid Helper. First layer with fundamental functions.
+| Solid Helper | It distributes work among low-level modules.
+| LdFlex | Low-level functions that manage SPARQL query and create Turtle files.
+| Notification | Low-level functions that create and receive notifications.
+| Storage | Low-level  functions that allow to manage Solid's POD.
+| Permission | Low-level functions which allows to control the ACL.
 |===

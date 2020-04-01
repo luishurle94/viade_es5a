@@ -20,8 +20,8 @@ At the end of this section, there is a table legend describing the different typ
 |This JavaScript Library is a highlighted issue in our project given the fact that GUI has a remarkable weight our for final product.
 
 |TC03
-|Docker Software
-|Deployment (of our application) goes hand in hand with Docker, providing an abstraction for multiple operating systems.
+|Viade Spec
+|This specification allows us to have interoperability between different applications
 
 |PC01
 |ARC42 Template

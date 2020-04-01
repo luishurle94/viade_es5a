@@ -1,67 +1,100 @@
 [[section-concepts]]
 == Cross-cutting Concepts
 
-
-[role="arc42help"]
-****
-.Content
 This section describes overall, principal regulations and solution ideas that are
 relevant in multiple parts (= cross-cutting) of your system.
 Such concepts are often related to multiple building blocks.
-They can include many different topics, such as
+They can include many different topics, such as:
 
-* domain models
-* architecture patterns or design patterns
-* rules for using specific technology
-* principal, often technical decisions of overall decisions
-* implementation rules
+* *Domain Model*
+* *Architecture patterns and design patterns*
+* *Rules for using specific technology*
+* *Principal, often technical decisions of overall decisions*
+* *Implementation rules*
+* *Domain concepts*
+* *User Experience concepts (UX)*
+* *Safety and security concepts*
+* *"Under-the-hood"*
+* *Development concepts*
+* *Operational concepts*
 
-.Motivation
-Concepts form the basis for _conceptual integrity_ (consistency, homogeneity)
-of the architecture. Thus, they are an important contribution to achieve inner qualities of your system.
+_The following image shows most of the concepts to be treated, as well as the elements that form each of these._
 
-Some of these concepts cannot be assigned to individual building blocks
-(e.g. security or safety). This is the place in the template that we provided for a
-cohesive specification of such concepts.
+image::08-Crosscutting-Concepts-Structure-EN.png["Possible topics for crosscutting concepts"]
 
-.Form
-The form can be varied:
+The following points will provide an overview of each concept mentioned.
 
-* concept papers with any kind of structure
-* cross-cutting model excerpts or scenarios using notations of the architecture views
-* sample implementations, especially for technical concepts
-* reference to typical usage of standard frameworks (e.g. using Hibernate for object/relational mapping)
+=== Domain Model
+Below is the domain model of the route management application.
 
-.Structure
-A potential (but not mandatory) structure for this section could be:
+image::08-uml.png["Domain Model"]
 
-* Domain concepts
-* User Experience concepts (UX)
-* Safety and security concepts
-* Architecture and design patterns
-* "Under-the-hood"
-* development concepts
-* operational concepts
+=== Architecture Patterns and Design Patterns
+.Architecture Patterns
+Throughout the development of this project, we will build on the architectural pattern based on Layered Arquitecture:
 
-Note: it might be difficult to assign individual concepts to one specific topic
-on this list.
+* Divides an interactive application in n layers. In our case, we have a very similar pattern to MVC. We have 3 layers:
+** **SolidAdapter**: it contains the core functionality related about persistency in Solid's POD. 
+** **DataService/Model**: it contains the core functionality and data view. This layer includes the data services that allow us to decouple Solid context and our app model. It brings us efficient code reuse and maintainability. This is done to separate internal representations of information from the ways information is presented to, and accepted from, the user. 
+** **RouteModule/Front-End**: it displays the information to the Front-end layer controller.
 
-image:08-Crosscutting-Concepts-Structure-EN.png["Possible topics for crosscutting concepts"]
-****
+.Design Patterns
+As for design patterns, patterns such as Observer are likely to be used:
+* It is mainly used to implement distributed event handling systems, in "event driven" software. In those systems, the subject is usually called a "stream of events" or "stream source of events", while the observers are called "sink of events". 
 
+More patterns will be used such as the Factories:
+* It is a creational pattern that uses factory methods to deal with the problem of creating objects without having to specify the exact class of the object that will be created. 
 
-=== _<Concept 1>_
+=== Rules for Using Specific Technology
+For the use of the application, only a series of steps will be necessary:
 
-_<explanation>_
+* Open browser
+* Enter the URL corresponding to the application
+* In order to access more features of the application a registration will be necessary. This step can be skipped if you are already registered in the route management application.
+* Log in to your Solid Server Account
+* From here you can already do private actions. Now you have extra functionalities such as being able to list friends, create your own routes and publish them. You will also have configuration options like editing the profile, etc.
 
+=== Principal, Often Technical Decisions of Overall Decisions
+The team of developers reserves the right to be able to modify the application at any time, always to try to fix or improve existing aspects or to add any other that is considered convenient.
+Therefore we do not take care of any problem caused by such change.
 
+=== Implementation rules
+As for the implementation, we will always try to make the decision that assumes that the code is less coupled, dividing the code by layers. In this way it will be much easier to modify any type of change and in turn fix any existing fault. Any type of pattern that assumes a good balance between the difficulty of understanding and modifying the code and the increase in performance that this entails will be used.
+Duplication of the code will be avoided.
 
-=== _<Concept 2>_
+=== User Experience concepts (UX)
+We will try to make the user have a good experience with the application, providing a friendly interface that will consist of fundamental things such as:
 
-_<explanation>_
+* A registration / login
+* Search and filter routes, being able to access them for a more detailed description.
+* Possibility that the user can create their routes.
+* Configuration of the user profile.
 
-...
+=== Safety and security concepts
+We will not be as dedicated to security as to other aspects, but if we focus on data privacy, this application will be safe,
+since based on solid, you will get all the route data that the customer will be providing throughout your stay in the application
+they will be stored in your terminal and not in a centralized data system as other important companies like Facebook and Instagram do.
+To this we add the "https" protocols that increase security in the browser.
 
-=== _<Concept n>_
+=== Development concepts
+Within the development concepts, the concept of "Build, Test, Deploy" should be highlighted. This concept is what we will rely on to fulfill a good design.
+The design process looks more or less like this:
 
-_<explanation>_
+* Generating a concept
+* Refining ideas through visual exploration
+* Preparation of approximate designs that detail the design directions
+* Establish preliminary specifications for typography and graphic elements such as photography, illustration, pictures or graphics, icons or symbols
+* Presentation of short designs and general designs for customer consideration
+* Refining design and complete designs, if necessary
+* Obtain customer approval of designs and text before the next phase
+
+There are other concepts such as code generation, migration, configurability that we will not enter but that we will take into account when making our application.
+
+=== Operational concepts
+There are numerous operational concepts among which the following stand out:
+
+* Disaster-Recovering: independent infrastructure of advanced technology superior to Backup that focuses on business continuity and is the recommended solution for Critical Mission roles. It protects and restores not only 100% of the Client's data, but also restores the operation of an entire organization in a matter of minutes regardless of the size of the data.
+* Clustering: Group potential customers in similar characteristics according to their visits and behavior on a website.
+* Monitoring: It is based on the continuous supervision of the application to detect possible errors early and that these can be solved in the shortest possible time.
+
+It should be noted that we will not use the disaster-recovering option due to the lack of resources we currently have at our disposal. Also we will use another technique called backup. In this way we can restore the web application in case of an unexpected error.
