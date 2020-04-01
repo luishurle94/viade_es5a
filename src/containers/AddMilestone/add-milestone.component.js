@@ -270,8 +270,7 @@ export const AddMilestone = () => {
       </FullGridSize>
       }
       <FullGridSize>
-
-          <Accordion activeIndex="0">
+          <Accordion id="accordionId" activeIndex="0">
                       {renderedMilestones.filter(m => m).sort((a, b) => a.order - b.order).map(function(milestone, key){
                           return <AccordionTab key={key} header= {milestone.name || milestone.order + 1}> 
                                     { milestone.description && <p> {t('addMilestone.description') + ': '} {milestone.description}</p> }
@@ -292,12 +291,12 @@ export const AddMilestone = () => {
         </Label>
 
         <Label>
-          <Input id="radio1Id" type="radio" name={"opcion"} checked={!creatingNew} onChange={optionChange} />
+          <Input id="radio1Id" data-testid="radio1Id" type="radio" name={"opcion"} checked={!creatingNew} onChange={optionChange} />
           <b>{t('addMilestone.useExistent')}</b>
           <Input id="existentId" type="text" size="200" value={Existenttext} onChange={changeExistentField} disabled={creatingNew} />
           <br />
 
-          <Input id="radio2Id" type="radio" name={"opcion"} checked={creatingNew} onChange={optionChange} />
+          <Input id="radio2Id" data-testid="radio2Id" type="radio" name={"opcion"} checked={creatingNew} onChange={optionChange} />
           <b>{t('addMilestone.createNew')}</b>
         </Label>
 
@@ -307,12 +306,12 @@ export const AddMilestone = () => {
 
         <Label>
           {t('addMilestone.name')}
-          <Input id="nameId" type="text" size="200" value={Nametext} onChange={changeNameField} disabled={!creatingNew} />
+          <Input id="nameId" data-testid="nameId" type="text" size="200" value={Nametext} onChange={changeNameField} disabled={!creatingNew} />
         </Label>
 
         <Label>
           {t('addMilestone.description')}
-          <TextArea id="descriptionId" value={Descriptiontext} onChange={changeDescription} cols={40} rows={10} disabled={!creatingNew} />
+          <TextArea id="descriptionId" data-testid="descriptionId" value={Descriptiontext} onChange={changeDescription} cols={40} rows={10} disabled={!creatingNew} />
         </Label>
 
         <Label>
@@ -325,24 +324,24 @@ export const AddMilestone = () => {
 
         <Label>
           {t('addMilestone.latitude')}
-          <Input id="latitudeId" type="number" min="0" max="10" value={text} onChange={changeLatitudeField} size="200" disabled={!creatingNew} />
+          <Input id="latitudeId" type="number" data-testid="latitudeId" min="0" max="10" value={text} onChange={changeLatitudeField} size="200" disabled={!creatingNew} />
         </Label>
 
         <Label>
           {t('addMilestone.longitude')}
-          <Input id="longitudeId" type="number" min="0" max="10" value={Longitudetext} onChange={changeLongitudeField} size="200" disabled={!creatingNew} />
+          <Input id="longitudeId" type="number" data-testid="longitudeId" min="0" max="10" value={Longitudetext} onChange={changeLongitudeField} size="200" disabled={!creatingNew} />
         </Label>
 
         <Label>
           {t('addMilestone.altitude')}
-          <Input id="altitudeId" type="number" min="0" value={Altitudetext} onChange={changeAltitudeField} size="200" disabled={!creatingNew} />
+          <Input id="altitudeId" type="number" data-testid="altitudeId" min="0" value={Altitudetext} onChange={changeAltitudeField} size="200" disabled={!creatingNew} />
         </Label>
 
-        <Input id="submitId" type="button" className="ids-link-filled ids-link-filled--primary button" value={t('addRoute.submit')} onClick={checkSubmit} />
+        <Input id="submitId" type="button" data-testid="submitId" className="ids-link-filled ids-link-filled--primary button" value={t('addRoute.submit')} onClick={checkSubmit} />
 
       </FullGridSize>
 
-      <MilestoneMap setLatLng={setLatLng} />
+      <MilestoneMap id="mapId" setLatLng={setLatLng} />
 
       {isLoading && <Loader absolute />}
 

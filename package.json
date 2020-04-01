@@ -23,6 +23,7 @@
     "classnames": "^2.2.6",
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
+    "enzyme-adapter-react-15": "^1.4.1",
     "flag-icon-css": "^3.3.0",
     "fork-ts-checker-webpack-plugin-alt": "0.4.14",
     "fs-extra": "7.0.0",
@@ -62,7 +63,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --coverage",
-    "test:e2e": "jest -c jest-cucumber.config.js --passWithNoTests",
+    "test:e2e": "jest -c jest-cucumber.config.js",
     "docs": "shx rm -rf build/docs && asciidoctor -D build/docs -a imagesdir=./images -r asciidoctor-diagram src/docs/index.adoc && shx cp -R src/docs/images build/docs",
     "eject": "react-scripts eject",
     "flow": "flow"
