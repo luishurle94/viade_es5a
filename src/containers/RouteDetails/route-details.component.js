@@ -46,7 +46,21 @@ if (window.location.href.split("?")[1]) {
 
 let images;
 
+
+
 export const RouteDetails = () => {
+
+  // if(isLoading){
+  //   var timeout = setTimeout(
+  //     function checkError() {
+  //       if (isLoading) {
+  //         setLoading(false);
+  //         errorToaster('Error');
+  //       }
+  //       clearTimeout(timeout);
+  //     },
+  //     3000);
+  // }
 
   const [renderedName, setRenderedName] = useState('');
   const [renderedDescription, setRenderedDescription] = useState('');
@@ -69,6 +83,8 @@ export const RouteDetails = () => {
   const { t } = useTranslation();
 
   const [isLoading, setLoading] = useState(false);
+
+  
 
   async function obtainChildren() {
     setLoading(true);
@@ -123,6 +139,8 @@ export const RouteDetails = () => {
       setMapLng(lng);
     }
   }
+
+
 
   return (
     <div>
