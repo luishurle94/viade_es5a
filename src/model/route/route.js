@@ -88,7 +88,10 @@ export default class Route {
 
 
   getIdentifier() {
-    return `${this.name}_${this.description}_${this.createdBy}`;
+    if (this.name && this.description && this.createdBy)
+      return `${this.name}_${this.description}_${this.createdBy}`;
+
+    return undefined;
   }
 
   async refreshMilestones() {

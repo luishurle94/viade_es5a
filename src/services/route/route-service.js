@@ -54,7 +54,8 @@ export const getAll = async (getData = true) => {
   const res = [];
   for(let u of list) {
     const r = await get(u);
-    res.push(r);
+    if (r && r.getIdentifier())
+      res.push(r);
   }
   return res;
 }

@@ -13,7 +13,10 @@ export default class Friend {
   }
 
   getIdentifier() {
-    return `${this.name}_${this.webId}`;
+    if (this.name && this.webId)
+      return `${this.name}_${this.webId}`;
+
+    return undefined;
   }
 
 }

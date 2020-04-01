@@ -31,7 +31,10 @@ export default class Media {
   }
 
   getIdentifier() {
-    return `${this.href}_${this.createdBy}_${this.mimeType}`;
+    if (this.href && this.createdBy && this.mimeType)
+      return `${this.href}_${this.createdBy}_${this.mimeType}`;
+
+    return undefined;
   }
 
 }

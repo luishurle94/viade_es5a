@@ -14,7 +14,10 @@ export default class Comment {
   }
 
   getIdentifier() {
-    return `${this.message}_${this.createdBy}`;
+    if (this.message && this.createdBy)
+      return `${this.message}_${this.createdBy}`;
+
+    return undefined;
   }
 
 }
