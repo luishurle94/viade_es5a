@@ -2,11 +2,12 @@ import { Friend } from '@models';
 
 const img = new Image();
 const friend = new Friend('Isabel', img);
+friend.webId = 'webId'
 
 describe.only('Create a new friend', () => {
 
   test('should create succesfully', async () => {
-    expect(friend.webId === '').toBe(true);
+    expect(friend.webId === 'webId').toBe(true);
     expect(friend.name === 'Isabel').toBe(true);
     expect(friend.image === img).toBe(true);
   });
@@ -20,6 +21,6 @@ describe.only('Create a new friend', () => {
 
 describe.only('Get identifier', () => {
   test('should return true', async () => {
-    expect(`Isabel_` === friend.getIdentifier()).toBe(true);
+    expect(`Isabel_webId` === friend.getIdentifier()).toBe(true);
   });
 });

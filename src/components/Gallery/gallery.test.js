@@ -26,7 +26,7 @@ describe('Gallery component', () => {
     }
   ]
 
-  const { container, rerender, getByTestId } = render(<GalleriaComponent images={images} activeIndex={1} isAutoPlayActive={false} isPreviewFullScreen={true} />);
+  const { container, rerender, getByTestId } = render(<GalleriaComponent images={images} activeIndex={1} isAutoPlayActive={false} isPreviewFullScreen={true} enableButtons={true}/>);
 
   it('should render without crashing', () => {
     expect(container).toBeTruthy();
@@ -37,7 +37,7 @@ describe('Gallery component', () => {
   });
 
   it ('stop gallery', () => {
-    rerender(<GalleriaComponent images={images} isAutoPlayActive={true}/>);
+    rerender(<GalleriaComponent images={images} isAutoPlayActive={true} enableButtons={true}/>);
     expect(getByTestId("play")).toBeTruthy()
     fireEvent.click(getByTestId("play"));
     fireEvent.click(getByTestId("play"));

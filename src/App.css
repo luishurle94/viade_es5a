@@ -37,7 +37,7 @@
   }
 }
 
-input[type="number"] {
+input[type="number"], textarea {
   border: 1px solid #DAE0E6;
   font-size: 0.8em;
   padding: 0.5em 0;

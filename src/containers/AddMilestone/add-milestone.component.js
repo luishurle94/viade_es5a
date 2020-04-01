@@ -2,52 +2,70 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-console */
 
-import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { successToaster, errorToaster } from '@utils';
-import { MilestoneService, RouteService } from '@services';
-import { Milestone } from '@models';
-import { Loader } from '@util-components';
-import {Accordion,AccordionTab} from 'primereact/accordion';
-import auth from 'solid-auth-client';
+import React, {
+  useEffect,
+  useState,
+} from 'react';
 
 import {
-  TextEditorWrapper,
-  TextEditorContainer,
-  Header,
+  Accordion,
+  AccordionTab,
+} from 'primereact/accordion';
+import { useTranslation } from 'react-i18next';
+import auth from 'solid-auth-client';
+
+import { FileUploader } from '@components';
+import { Milestone } from '@models';
+import {
+  MilestoneService,
+  RouteService,
+} from '@services';
+import { Loader } from '@util-components';
+import {
+  errorToaster,
+  successToaster,
+} from '@utils';
+
+import {
   Form,
   FullGridSize,
-  Label,
+  Header,
   Input,
+  Label,
   TextArea,
-  Title
+  TextEditorContainer,
+  TextEditorWrapper,
+  Title,
 } from './add-milestone.style';
 import MilestoneMap from './MilestoneMap/milestone-map.component';
-import { FileUploader } from '@components';
+
+let route;
 
 var webId;
 
-export const AddMilestone = () => {
 
-  let route;
+if (!webId) {
+  auth.currentSession().then(res => {
+    if (res) {
+      webId = res.webId
+    }
+  });
+}
+
+export const AddMilestone = () => {
   
   let routeId = "";
 
   if (window.location.href.split("?")[1]) {
-    routeId = window.location.href.split("?")[1].split("=")[1];
-  }
-
-  if (webId) {
-    auth.currentSession().then(res => {
-      if (res) {
-        webId = res.webId
-      }
-    });
+    const aux = window.location.href.split("?")[1].split("=")[1];
+    if (aux !== routeId) {
+      routeId = aux;
+    }
   }
 
   const [renderedMilestones, setRenderedMilestones] = useState([]);
   const [size, setSize] = useState(0);
-  useEffect(()=> {obtainMilestones();});
+  useEffect(()=> {obtainMilestones()});
  
   
 
@@ -197,6 +215,7 @@ export const AddMilestone = () => {
     let res = await MilestoneService.add(routeId, new Milestone(name, description, distance, altitude, latitude, longitude, size + 1));
 
     if (res && res.added === true && res.webId) {
+      route = null;
       setIsLoading(false);
       successToaster(t('addMilestone.notifications.correct'));
 
@@ -213,17 +232,17 @@ export const AddMilestone = () => {
   }
 
   async function obtainMilestones(){
-
     try {
-        route = await RouteService.get(routeId, true);
-
-        if(route.milestonesObject){
-            route.milestonesObject.sort((a, b) => (a.order >  b.order) ? 1 : -1);
+      if (!route) {
+        route = await RouteService.get(routeId, false);
+        console.log(route)
+        if(route && route.milestonesObject){
+            route.milestonesObject.sort((a, b) => a.order >  b.order);
             setRenderedMilestones(route.milestonesObject);
             setSize(route.milestonesObject.length);
 
         }
-          
+      }         
 
     } catch(error) {
       errorToaster(t('addMilestone.notifications.errorLoadingMilestones'));
@@ -234,6 +253,7 @@ export const AddMilestone = () => {
 
   return ( 
     <Form>
+      {!isLoading && 
       <FullGridSize>
         <FullGridSize>
           <h5>
@@ -248,12 +268,13 @@ export const AddMilestone = () => {
             <br/>
         </Title>
       </FullGridSize>
+      }
       <FullGridSize>
           <Accordion id="accordionId" activeIndex="0">
-                      {renderedMilestones.sort((a, b) => (a.order >  b.order) ? 1 : -1).map(function(milestone, key){
-                          return <AccordionTab key={key} header= {milestone.name}> 
-                                    <p> {t('addMilestone.description') + ': '} {milestone.description}</p>
-                                    <p> {t('addMilestone.distance') + ': '} {milestone.distance}</p> 
+                      {renderedMilestones.filter(m => m).sort((a, b) => a.order - b.order).map(function(milestone, key){
+                          return <AccordionTab key={key} header= {milestone.name || milestone.order + 1}> 
+                                    { milestone.description && <p> {t('addMilestone.description') + ': '} {milestone.description}</p> }
+                                    { milestone.distance && <p> {t('addMilestone.distance') + ': '} {milestone.distance}</p> }
                                     <p> {t('addMilestone.altitude') + ': '} {milestone.slope}</p> 
                                     <p> {t('addMilestone.latitude') + ': '} {milestone.latitude}</p> 
                                     <p> {t('addMilestone.longitude') + ': '} {milestone.longitude}</p> 

@@ -34,26 +34,26 @@ export class Upload extends Component {
     this.setState({
       isLoading: true
     })
-    this.state.files.forEach(file => {
-      promises.push(this.sendRequest(file));
-    });
     try {
-      await Promise.all(promises);
+      for(const file of this.state.files) {
+        await this.sendRequest(file);
+      }
 
       this.setState({ successfullUploaded: true, uploading: false, files: [] });
-      successToaster(this.props.t('file.success'));
+      if (this.state.successfullUploaded) {
+        successToaster(this.props.t('file.success'));
+      }
     } catch (e) {
       throw e;
     }
   }
 
-  sendRequest(file) {
+  async sendRequest(file) {
     if (this.props.webId && this.props.routeId) {
       const webId = this.props.webId;
-      return MediaService.addMedia(this.props.routeId, new Media(MediaService.getHref(webId, file.name), file, new Date(), webId, file.type));
+      return await MediaService.addMedia(this.props.routeId, new Media(MediaService.getHref(webId, file.name), file, new Date(), webId, file.type));
     }
-    
-    errorToaster(this.props.t('file.error'));
+    return Promise.resolve();
   }
 
   renderActions() {
@@ -76,7 +76,7 @@ export class Upload extends Component {
           <div>
             <Dropzone
               onFilesAdded={this.onFilesAdded}
-              disabled={this.state.uploading || this.state.successfullUploaded}
+              disabled={this.state.uploading}
             />
           </div>
           <div className="Files">

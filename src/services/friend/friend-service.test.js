@@ -24,7 +24,7 @@ const makeid = (length) => {
 const nameFriend = 'soy_un_amigo';
 
 const friend = new Friend(nameFriend);
-const fName = HashHelper.hash(friend.getIdentifier());
+// const fName = HashHelper.hash(friend.getIdentifier());
 
 describe.only('Get friend', () => {
 

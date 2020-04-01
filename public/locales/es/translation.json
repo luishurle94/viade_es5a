@@ -21,7 +21,7 @@
     "notSharable": "(logéate y carga undocumento en tu própio pod para poder dar acceso)"
   },
   "login": {
-    "title": "Hola! Bienvenido a Solid.",
+    "title": "Hola! Bienvenido a Viade.",
     "loginTitle": "Iniciar sesión",
     "register": "Registrarse por una identidad Solid",
     "solidHelp": "Qué es una identidad Solid?",
@@ -66,7 +66,8 @@
     },
     "tictactoe": "Juego",
     "add-route": "Añadir Ruta",
-    "add-milestone": "Añadir Hito"
+    "add-milestone": "Añadir Hito",
+    "list-routes": "Lista de rutas"
   },
   "footer": {
     "version": "Versión"
@@ -249,6 +250,8 @@
     "distance": "Distancia",
     "slope": "Desnivel",
     "rank": "Dificultad",
+    "creator": "Creador",
+    "createdAt": "Fecha de creación",
     "notifications": {
       "nameEmpty": "El campo 'Nombre' no puede estar vacío",
       "distanceNegative": "'Distancia' debe ser mayor que cero",
@@ -286,11 +289,23 @@
       "errorLoadingMilestones": "¡Ups! Ha ocurrido un error al cargar tus hitos..."
     }
   },
+  "listRoutes": {
+    "title": "Lista de rutas",
+    "rank": "Dificultad",
+    "details": "Detalles",
+    "share": "Compartir",
+    "selectFriend": "Selecciona amigos para compartir la ruta:",
+    "send": "Enviar ruta"
+  },
   "file": {
     "dropzone": {
       "upload": "Subir archivos multimedia"
     },
     "success": "Subida completada correctamente.",
     "error": "Ha habido alguna problemas. Vuelvalo a intentar más adelante."
+  },
+  "routeDetails":{
+    "title": "Información de la Ruta",
+    "media": "Archivos multimedia"
   }
 }

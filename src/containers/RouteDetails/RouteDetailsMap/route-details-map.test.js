@@ -1,18 +1,26 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { render, cleanup } from 'react-testing-library';
-import GoogleMap from './map.component';
 
-describe('Google Map', () => {
+import { BrowserRouter as Router } from 'react-router-dom';
+import {
+  cleanup,
+  queryByAttribute,
+  render,
+} from 'react-testing-library';
+
+import { RouteDetailsMap } from './route-details-map.component';
+
+describe('Add Route', () => {
   afterAll(cleanup);
 
+  const getById = queryByAttribute.bind(null, 'id');
   const { container } = render(
     <Router>
-      <GoogleMap/>
+      <RouteDetailsMap />
     </Router>
   );
 
   test('App renders without crashing', () => {
     expect(container).toBeTruthy();
   });
+
 });

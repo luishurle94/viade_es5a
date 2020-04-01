@@ -88,22 +88,29 @@ export default class Route {
 
 
   getIdentifier() {
-    return `${this.name}_${this.description}_${this.createdBy}`;
+    if (this.name && this.description && this.createdBy)
+      return `${this.name}_${this.description}_${this.createdBy}`;
+
+    return undefined;
   }
 
   async refreshMilestones() {
     const newList = [];
+    let distance = 0;
+    let slope = 0;
     for(let i = 0; i < this.milestones.length; i++){
       newList.push(await MilestoneService.get(this.milestones[i]));
-      if (!this.distance)
-        this.distance += this.milestonesObject[i].distance;
-      if (!this.slope) {
-        if (i > 0) 
-          this.slope = Math.abs(this.milestonesObject[i] - this.milestonesObject[i-1]);
+      if (newList.length > i) {
+        distance += newList[i].distance;
+        if (i > 0)  {
+          slope += Math.abs(newList[i].slope - newList[i - 1].slope);
+        }
       }
     };
     if (newList.length > 0) {
       this.milestonesObject = newList;
+      this.distance = distance;
+      this.slope = slope;
     }
     return this.milestonesObject;
   }

@@ -23,7 +23,10 @@ export default class Milestone {
   }
 
   getIdentifier() {
-    return `${this.name}_${this.latitude}_${this.longitude}`;
+    if (this.name && this.latitude && this.longitude)
+      return `${this.name}_${this.latitude}_${this.longitude}`;
+
+    return undefined;
   }
 
 }

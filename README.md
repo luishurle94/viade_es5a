@@ -93,21 +93,24 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 Skelenton built using [Solid React Application Generator](https://github.com/inrupt/generator-solid-react).
 
 ## To Do
-- [ ] Documentation based on Arc42.
+- [x] Documentation based on Arc42.
   - [x] Initial version.
   - [ ] Final version.
 - [x] Skeleton.
 - [x] Service Layer.
 - [x] Solid Adapter.
 - [ ] Map.
-  - [ ] Generate GeoJson from Route.
-  - [ ] Load GeoJson in Map.
+  - [x] Generate GeoJson from Route.
+  - [x] Load GeoJson in Map.
   - [ ] Secure Google Maps API Key.
 - [ ] Management
   - [x] Create Route.
-  - [ ] Create Milestones.
-  - [ ] List my routes.
-  - [ ] Details.
+  - [x] Create Milestones.
+  - [x] List my routes.
+  - [x] Details.
   - [ ] Share route.
     - [ ] Share routes.
     - [ ] List shared routes.
+  - [ ] Friends
+    - [x] List friends.
+    - [ ] Add friends.

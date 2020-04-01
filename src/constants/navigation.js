@@ -3,17 +3,17 @@
  */
 export const NavigationItems = [
   {
-    id:'map',
-    icon : 'img/googlemaps.svg',
-    label :'Mapa de rutas',
-    to :'/routemap'
-  },
-  {
     id: 'add-route',
     icon: 'img/icon/route.png',
     label: 'navBar.add-route',
     to: '/add-route'
-  }
+  },
+  {
+    id: 'list-routes',
+    icon: 'img/bars-nav.svg',
+    label: 'navBar.list-routes',
+    to: '/list-routes'
+  },
 ];
 
 export const ProfileOptions = [
