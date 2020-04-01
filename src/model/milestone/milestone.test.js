@@ -1,6 +1,9 @@
 import { Milestone } from '@models';
 
 const milestone = new Milestone('Hito 1', 'Hito de prueba', 10, 10, 43.3625, -5.8502, 1);
+const milestone2 = new Milestone(null, 'Hito de prueba', 10, 10, 43.3625, -5.8502, 1);
+const milestone3 = new Milestone('Hito 1', 'Hito de prueba', 10, 10, null, -5.8502, 1);
+const milestone4 = new Milestone('Hito 1', 'Hito de prueba', 10, 10, 43.3625, null, 1);
 
 describe.only('Create a new milestone', () => {
 
@@ -31,4 +34,10 @@ describe.only('Get identifier', () => {
   test('should return true', async () => {
     expect(`Hito 1_43.3625_-5.8502` === milestone.getIdentifier()).toBe(true);
   });
+
+  test('should be undefined', () => {
+    expect(milestone2.getIdentifier()).toBe(undefined);
+    expect(milestone3.getIdentifier()).toBe(undefined);
+    expect(milestone4.getIdentifier()).toBe(undefined);
+  })
 });

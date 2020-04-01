@@ -9,6 +9,10 @@ jest.mock('../../solid/solid-helper');
 jest.mock('solid-auth-client');
 
 const route = new Route('Esto es una prueba', 'Descripcion', 5, 10, 10, "javier", new Date());
+const route2 = new Route(undefined, 'Descripcion', 5, 10, 10, "javier", new Date());
+const route3 = new Route('Esto es una prueba', undefined, 5, 10, 10, "javier", new Date());
+const route4 = new Route('Esto es una prueba', 'Descripcion', 5, 10, 10, undefined, new Date());
+
 describe.only('Create a new route', () => {
   test('should create sucessfully', async () => {
     expect(route.webId === '').toBe(true);
@@ -108,6 +112,12 @@ describe.only('Get identifier', () => {
   test('should return true', async () => {
     expect(`Esto es una prueba_Descripcion_javier` === route.getIdentifier()).toBe(true);
   });
+
+  test('should be undefined', () => {
+    expect(route2.getIdentifier()).toBe(undefined);
+    expect(route3.getIdentifier()).toBe(undefined);
+    expect(route4.getIdentifier()).toBe(undefined);
+  })
 });
 
 describe.only('Get milestone objects', () => {
