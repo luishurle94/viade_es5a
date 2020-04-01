@@ -23,8 +23,14 @@ module.exports = {
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   collectCoverageFrom: [
     "src/**/*.{js,jsx,ts,tsx}",
+    "!src/hocs/*.js",
+    "!src/hooks/*.js",
+    "!src/layouts/**/*.js",
     "!src/**/*.d.ts",
     "!src/**/index.js",
+    "!src/**/serviceWorker.js",
+    "!src/**/setupTests.js",
+    "!src/**/*.lite.js",
   ],
 
   // The directory where Jest should output its coverage files
@@ -88,8 +94,9 @@ module.exports = {
 
   // A map from regular expressions to module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    "^react-native$": "react-native-web",
-    "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
+    "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules",
+    // fix bug with solid style guide
+    "@inrupt/solid-style-guide": "<rootDir>/node_modules/jest-css-modules"
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -139,7 +146,9 @@ module.exports = {
   ],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  // setupFilesAfterEnv: [],
+  "setupFilesAfterEnv": [
+    './node_modules/jest-enzyme/lib/index.js'
+  ],
 
   // A list of paths to snapshot serializer modules Jest should use for snapshot testing
   // snapshotSerializers: [],
@@ -184,8 +193,7 @@ module.exports = {
   // A map from regular expressions to paths to transformers
   "transform": {
     "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
-    "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-    "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    "^(?!.*\\.(js|jsx|ts|tsx|json)$)": "<rootDir>/config/jest/fileTransform.js"
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation

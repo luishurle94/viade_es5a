@@ -18,7 +18,7 @@ that is functional, stable and safe.
 
 ** *Javascript*: the lack of practice we have in this language can be a problem translated in time since Javascript is a language that it is not at all easy. 
 
-** *ReactJS and React Native*: The first is a library and the second is a framework that we have never used, besides they are very recent (2013 and 2015 respectively), both require native developers and are subject to the restrictions of Facebook (creator).
+** *ReactJS and React Native*: the first is a library and the second is a framework that we have never used, besides they are very recent (2013 and 2015 respectively), both require native developers and are subject to the restrictions of Facebook (creator).
 
 ** *Bootstrap*: although it is easy to learn, it is necessary to adapt, understand and become familiar with its structure and nomenclature.
 
@@ -26,7 +26,8 @@ that is functional, stable and safe.
 
 * The poor maintenance or abandonment of some libraries.
 
-* Abandonment of members due to lack of motivation and time. It can cause us
-delays in the development of the application.
+* Lack of documentation in Solid libraries.
+
+* Abandonment of members due to lack of motivation and time. It can cause us delays in the development of the application.
 
 * Lack of cohesion in the team due to lack of previous relationship.

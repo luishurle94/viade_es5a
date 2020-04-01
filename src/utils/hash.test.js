@@ -1,4 +1,4 @@
-import { HashHelper } from "../utils";
+import { HashHelper } from "@utils";
 
 describe.only('Generate Hash', () => {
   test('it should get same value', async () => {

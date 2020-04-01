@@ -1,0 +1,31 @@
+{
+  "@context": {
+    "@vocab": "http://xmlns.com/foaf/0.1/",
+    "friends": "knows",
+    "vcard": "https://www.w3.org/2006/vcard/ns#",
+    "solid": "http://www.w3.org/ns/solid/terms#"
+  },
+  "shape" : [
+    {
+      "prefix": "foaf",
+      "predicate": "name",
+      "object": "name",
+      "literal": true,
+      "type": "String"
+    },
+    {
+      "prefix": "solid",
+      "predicate": "account",  
+      "object": "webId",
+      "literal": false,
+      "type": "String"
+    },
+    {
+      "prefix": "vcard",
+      "predicate": "hasFoto",
+      "object": "image",
+      "literal": false,
+      "type": "String"
+    }
+  ]
+}

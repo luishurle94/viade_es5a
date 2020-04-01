@@ -5,10 +5,12 @@ Work in progress..
 
 In this section we will talk about the design decisions made to implement our routes application.
 
-* For the project interface, we are going to use Bootstrap libraries along with solid react components.
+* For the project interface, we are going to use Bootstrap libraries along with Solid React components and PrimeReact.
 
-* Programming language: we will use JavaScript together with ReactJs libraries, all using the Node.js framework.
+* Programming language: we will use JavaScript together with ReactJS libraries, all using the Node.js framework.
 
-* Data storage: the data storage will be done through PODS implementations and through use of RDF.
+* Data storage: the data storage will be done through POD's implementations and through use of RDF/Turtle.
 
-* Testing: we will use unit test to business logic, selenium for web usability and Cucumber for aceptance tests.
+* Object/Turtle: All the information used by the application will be from the data model defined in section 8.1. Domain Model. To store the information in the POD, it will use a JS object to Turtle file mapper and vice versa. 
+
+* Testing: we will use unit test to business logic (Jest) and Cucumber for aceptance tests.

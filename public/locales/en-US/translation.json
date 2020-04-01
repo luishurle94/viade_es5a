@@ -21,7 +21,7 @@
     "notSharable": "(log in and load a doc on your own pod to give others access)"
   },
   "login": {
-    "title": "Hi! Welcome to Solid.",
+    "title": "Hi! Welcome to Viade.",
     "loginTitle": "Log in",
     "register": "Register for a solid identity",
     "solidHelp": "What is a Solid Identity?",
@@ -66,7 +66,8 @@
     },
     "tictactoe": "Game",
     "add-route": "Add Route",
-    "add-milestone": "Add Milestone"
+    "add-milestone": "Add Milestone",
+    "list-routes": "Routes list"
   },
   "footer": {
     "version": "Version"
@@ -249,6 +250,8 @@
     "distance": "Distance",
     "slope": "Slope",
     "rank": "Rank",
+    "creator": "Creator",
+    "createdAt": "Creation date",
     "notifications": {
       "nameEmpty": "'Name' field can not be empty",
       "distanceNegative": "'Distance' must be greater than zero",
@@ -266,10 +269,14 @@
     "latitude": "Latitude",
     "longitude": "Longitude",
     "altitude": "Altitude",
+    "slope": "Slope",
+    "distance": "Distance",
     "createNew": "Create new Milestone",
     "useExistent": "Use an existent Milestone (Introduce the existent milestone webId)",
     "mapInfo": "Click on the map to get the latitude and longitud of a point, or insert it manually",
     "routeToAdd": "Route to add the milestone",
+    "accordionTitle": "This route already has",
+    "accordionEndTtile": "milestones",
     "notifications": {
       "altitudeNegative": "'Altitude' must be at least zero",
       "altitudeNaN": "'Altitude' must be a number",
@@ -278,8 +285,28 @@
       "existentEmpty": "A milestone webId must be introduced",
       "routeIdEmpty": "A route webId must be introduced",
       "correct": "Adding your milestone...",
-      "errorService": "There was an error adding your milestone. Maybe if you try again..."
+      "errorService": "There was an error adding your milestone. Maybe if you try again...",
+      "errorLoadingMilestones": "Oops! There was an error loading your milestones..."
     }
 
+  },
+  "listRoutes": {
+    "title": "Route list",
+    "rank": "Rank",
+    "details": "Details",
+    "share": "Share",
+    "selectFriend": "Select friends to share the route:",
+    "send": "Send route"
+  },
+  "file": {
+    "dropzone": {
+      "upload": "Uplaod media"
+    },
+    "success": "Upload completed succesfully.",
+    "error": "There has been some problem uploading. Try later."
+  },
+  "routeDetails":{
+    "title": "Route Information",
+    "media": "Media files"
   }
 }

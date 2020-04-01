@@ -21,7 +21,7 @@
     "notSharable": "(logéate y carga undocumento en tu própio pod para poder dar acceso)"
   },
   "login": {
-    "title": "Hola! Bienvenido a Solid.",
+    "title": "Hola! Bienvenido a Viade.",
     "loginTitle": "Iniciar sesión",
     "register": "Registrarse por una identidad Solid",
     "solidHelp": "Qué es una identidad Solid?",
@@ -66,7 +66,8 @@
     },
     "tictactoe": "Juego",
     "add-route": "Añadir Ruta",
-    "add-milestone": "Añadir Hito"
+    "add-milestone": "Añadir Hito",
+    "list-routes": "Lista de rutas"
   },
   "footer": {
     "version": "Versión"
@@ -249,6 +250,8 @@
     "distance": "Distancia",
     "slope": "Desnivel",
     "rank": "Dificultad",
+    "creator": "Creador",
+    "createdAt": "Fecha de creación",
     "notifications": {
       "nameEmpty": "El campo 'Nombre' no puede estar vacío",
       "distanceNegative": "'Distancia' debe ser mayor que cero",
@@ -266,10 +269,14 @@
     "latitude": "Latitud",
     "longitude": "Longitud",
     "altitude": "Altitud",
+    "slope": "Pendiente",
+    "distance": "Distancia",
     "createNew": "Crear nuevo Hito",
     "useExistent": "Usar un Hito existente (Introduce el webId del hito existente)",
     "mapInfo": "Haz click en el mapa para obtener la longitud y latitud de un punto, o introdúcelo manualmente",
     "routeToAdd": "Ruta a la que se añadirá el hito",
+    "accordionTitle": "Esta ruta tiene",
+    "accordionEndTtile": "hitos",
     "notifications": {
       "altitudeNegative": "'Altitud' debe ser al menos cero",
       "altitudeNaN": "'Altitud' debe ser un número",
@@ -278,7 +285,27 @@
       "existentEmpty": "Se debe introducir el webId de un hito",
       "routeIdEmpty": "Se debe introducir el webId de una ruta",
       "correct": "Añadiendo tu hito...",
-      "errorService": "Se ha producido un error al añadir tu hito. Quizás si lo intentaras de nuevo..."
+      "errorService": "Se ha producido un error al añadir tu hito. Quizás si lo intentaras de nuevo...",
+      "errorLoadingMilestones": "¡Ups! Ha ocurrido un error al cargar tus hitos..."
     }
+  },
+  "listRoutes": {
+    "title": "Lista de rutas",
+    "rank": "Dificultad",
+    "details": "Detalles",
+    "share": "Compartir",
+    "selectFriend": "Selecciona amigos para compartir la ruta:",
+    "send": "Enviar ruta"
+  },
+  "file": {
+    "dropzone": {
+      "upload": "Subir archivos multimedia"
+    },
+    "success": "Subida completada correctamente.",
+    "error": "Ha habido alguna problemas. Vuelvalo a intentar más adelante."
+  },
+  "routeDetails":{
+    "title": "Información de la Ruta",
+    "media": "Archivos multimedia"
   }
 }

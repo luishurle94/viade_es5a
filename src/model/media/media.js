@@ -1,14 +1,40 @@
 export default class Media {
+  webId = '';
+
   /**
    * 
-   * @param {String} webId 
    * @param {String} href 
-   * @param {String} alt 
+   * @param {any} body 
+   * @param {String} createdAt 
+   * @param {String} createdBy 
+   * @param {String} mimeType 
    */
-  constructor(webId, href, alt) {
-    this.webId = webId;
+  constructor(href, body, createdAt, createdBy, mimeType) {
     this.href = href;
-    this.alt = alt;
+    this.body = body;
+    if (createdAt) {
+      this.createdAt = new Date(createdAt).toISOString()
+    } else {
+      this.createdAt = new Date().toISOString()
+    }
+    this.createdBy = createdBy;
+    this.mimeType = mimeType;
+  }
+
+  get galleryObject() {
+    return {
+      "previewImageSrc": this.href,
+      "thumbnailImageSrc": this.href,
+      "alt": `${this.createdAt} - ${this.createdBy}`,
+      "title": `${this.href.split('/').pop()}`
+    }
+  }
+
+  getIdentifier() {
+    if (this.href && this.createdBy && this.mimeType)
+      return `${this.href}_${this.createdBy}_${this.mimeType}`;
+
+    return undefined;
   }
 
 }

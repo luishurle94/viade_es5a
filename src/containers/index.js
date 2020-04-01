@@ -1,14 +1,12 @@
-import Login from './Login';
-import Register, { RegistrationSuccess } from './Register';
-import PageNotFound from './PageNotFound';
-import Welcome from './Welcome';
-import Profile from './Profile';
-import TextEditor from './TextEditor';
-import AddRoute from './AddRoute';
 import AddMilestone from './AddMilestone';
-import { GamePage, GameList } from './TicTacToe';
-import { FormModelConverter, FormModelRenderer } from './FormModel';
-import GoogleMap from './GoogleMap';
+import AddRoute from './AddRoute';
+import ListFriends from './ListFriends';
+import ListRoutes from './ListRoutes';
+import Login from './Login';
+import PageNotFound from './PageNotFound';
+import Profile from './Profile';
+import Register, { RegistrationSuccess } from './Register';
+import Welcome from './Welcome';
 
 export {
   Login,
@@ -17,12 +15,8 @@ export {
   PageNotFound,
   Welcome,
   Profile,
-  GamePage,
-  GameList,
-  FormModelConverter,
-  FormModelRenderer,
-  TextEditor,
-  GoogleMap,
   AddRoute,
-  AddMilestone
+  AddMilestone,
+  ListRoutes,
+  ListFriends
 };
