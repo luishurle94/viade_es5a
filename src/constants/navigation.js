@@ -14,12 +14,6 @@ export const NavigationItems = [
     label: 'navBar.list-routes',
     to: '/list-routes'
   },
-  {
-    id:'map',
-    icon : 'img/googlemaps.svg',
-    label :'Mapa de rutas',
-    to :'/routemap'
-  },
 ];
 
 export const ProfileOptions = [

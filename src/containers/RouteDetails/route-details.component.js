@@ -13,12 +13,11 @@ import {
 } from 'primereact/accordion';
 import { Card } from 'primereact/card';
 import { useTranslation } from 'react-i18next';
+
 import { GalleriaComponent } from '@components';
 import { RouteService } from '@services';
 import { Loader } from '@util-components';
 import { errorToaster } from '@utils';
-
-
 
 import {
   Form,
@@ -75,37 +74,39 @@ export const RouteDetails = () => {
     setLoading(true);
     try {
       route = await RouteService.get(routeId, false, false);
+      if (route) {
+        setRenderedName(route.name);
+        setRenderedDescription(route.description);
 
-      setRenderedName(route.name);
-      setRenderedDescription(route.description);
+        if (Number(route.distance))
+          setRenderedDistance(route.distance);
 
-      if (Number(route.distance))
-        setRenderedDistance(route.distance);
+        if (Number(route.slope))
+          setRenderedSlope(route.slope);
 
-      if (Number(route.slope))
-        setRenderedSlope(route.slope);
+        setRenderedRank(route.rank);
+        setRenderedCreatedBy(route.createdBy);
 
-      setRenderedRank(route.rank);
-      setRenderedCreatedBy(route.createdBy);
+        if (route.createdAt)
+          setRenderedCreatedAt(new Date(route.createdAt).toLocaleDateString().toString());
 
-      if (route.createdAt)
-        setRenderedCreatedAt(new Date(route.createdAt).toLocaleDateString().toString());
+        if (route.milestonesObject) {
+          route.milestonesObject.sort((a, b) => a.order > b.order);
+          setRenderedMilestones(route.milestonesObject);
+          setLoading(false)
+        }
 
-      if (route.milestonesObject) {
-        route.milestonesObject.sort((a, b) => a.order > b.order);
-        setRenderedMilestones(route.milestonesObject);
-        setLoading(false)
-      }
-
-      if (route.mediaObject) {
-        images = route.mediaObject.map(function (m) {console.log(m)
-          return {
-            previewImageSrc: m.href,
-            thumbnailImageSrc: m.href,
-            title: `${m.href.split('/media/').pop().substring(0, 27)}...`,
-            alt: new Date(m.createdAt).toLocaleDateString()
-          }
-        });
+        if (route.mediaObject) {
+          images = route.mediaObject.filter(m => m).map(function (m) {
+            console.log();
+            return {
+              previewImageSrc: m.href,
+              thumbnailImageSrc: m.href,
+              title: `${m.href.split('/media/').pop().substring(0, 27)}...`,
+              alt: new Date(m.createdAt).toLocaleDateString()
+            }
+          });
+        }
       }
     } catch (error) {
       errorToaster(t('addMilestone.notifications.errorLoadingMilestones'));
@@ -128,8 +129,8 @@ export const RouteDetails = () => {
 
       <Form>
         <div style={flexStyle}>
-          <Card style={{minWidth: '450px', maxWidth: '450px'}}>
-            <div style={{overflowY: 'auto', height: '78vh', paddingRight: '16px'}}>
+          <Card style={{ minWidth: '450px', maxWidth: '450px' }}>
+            <div style={{ overflowY: 'auto', height: '78vh', paddingRight: '16px' }}>
               <FullGridSize>
                 <Title id="tituloRuta">
                   {t('routeDetails.title')}

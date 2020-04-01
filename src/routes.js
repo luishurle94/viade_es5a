@@ -1,20 +1,31 @@
 import React, { Fragment } from 'react';
-import { PrivateLayout, PublicLayout, NotLoggedInLayout } from '@layouts';
-import { HashRouter as Router, Switch, Redirect } from 'react-router-dom';
 
 import {
-  Login,
-  Register,
-  PageNotFound,
-  Welcome,
-  RegistrationSuccess,
-  Profile,
-  GoogleMap,
-  AddRoute,
+  HashRouter as Router,
+  Redirect,
+  Switch,
+} from 'react-router-dom';
+
+import {
+  NotLoggedInLayout,
+  PrivateLayout,
+  PublicLayout,
+} from '@layouts';
+
+import {
   AddMilestone,
-  ListRoutes
+  AddRoute,
+  ListRoutes,
+  Login,
+  PageNotFound,
+  Profile,
+  Register,
+  RegistrationSuccess,
+  Welcome,
 } from './containers';
-import { RouteDetails } from './containers/RouteDetails/route-details.component';
+import {
+  RouteDetails,
+} from './containers/RouteDetails/route-details.component';
 
 const privateRoutes = [
   {
@@ -46,12 +57,6 @@ const privateRoutes = [
     id: 'list-routes',
     path: '/list-routes',
     component: ListRoutes
-  },
-  // TODO remove in next sprint
-  {
-    id: 'googlemap',
-    path: '/routemap',
-    component: GoogleMap
   },
 ];
 

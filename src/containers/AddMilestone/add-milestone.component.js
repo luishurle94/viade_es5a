@@ -2,28 +2,42 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-console */
 
-import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { successToaster, errorToaster } from '@utils';
-import { MilestoneService, RouteService } from '@services';
-import { Milestone } from '@models';
-import { Loader } from '@util-components';
-import {Accordion,AccordionTab} from 'primereact/accordion';
-import auth from 'solid-auth-client';
+import React, {
+  useEffect,
+  useState,
+} from 'react';
 
 import {
-  TextEditorWrapper,
-  TextEditorContainer,
-  Header,
+  Accordion,
+  AccordionTab,
+} from 'primereact/accordion';
+import { useTranslation } from 'react-i18next';
+import auth from 'solid-auth-client';
+
+import { FileUploader } from '@components';
+import { Milestone } from '@models';
+import {
+  MilestoneService,
+  RouteService,
+} from '@services';
+import { Loader } from '@util-components';
+import {
+  errorToaster,
+  successToaster,
+} from '@utils';
+
+import {
   Form,
   FullGridSize,
-  Label,
+  Header,
   Input,
+  Label,
   TextArea,
-  Title
+  TextEditorContainer,
+  TextEditorWrapper,
+  Title,
 } from './add-milestone.style';
 import MilestoneMap from './MilestoneMap/milestone-map.component';
-import { FileUploader } from '@components';
 
 let route;
   
@@ -219,7 +233,7 @@ export const AddMilestone = () => {
       if (!route) {
         route = await RouteService.get(routeId, false);
         console.log(route)
-        if(route.milestonesObject){
+        if(route && route.milestonesObject){
             route.milestonesObject.sort((a, b) => a.order >  b.order);
             setRenderedMilestones(route.milestonesObject);
             setSize(route.milestonesObject.length);
