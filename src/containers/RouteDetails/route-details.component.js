@@ -26,6 +26,7 @@ import {
   TextEditorContainer,
   TextEditorWrapper,
   Title,
+  Button
 } from './route-details.style';
 import RouteDetailsMap from './RouteDetailsMap/index';
 
@@ -37,7 +38,9 @@ const flexStyle = {
   'position': 'relative',
 };
 
-export const RouteDetails = () => {
+type Props = { history: any };
+
+export const RouteDetails = ({ history }: Props) => {
 
   let routeId = "";
 
@@ -128,6 +131,10 @@ export const RouteDetails = () => {
     }
   }
 
+  function addMilestones(){
+    history.push(`/add-milestone?routeId=${routeId}`);
+  }
+
 
 
   return (
@@ -169,6 +176,8 @@ export const RouteDetails = () => {
                   })}
                 </Accordion>
 
+                <br/>
+                <div> <Button data-testid="details" className="button" label="Details" onClick={() => addMilestones()}>{t('addMilestone.title')}</Button> </div>
               </FullGridSize>
 
               {images && images.length &&
@@ -206,7 +215,7 @@ export const RouteDetails = () => {
  * A React component page that is displayed when there's no valid route. Users can click the button
  * to get back to the home/welcome page.
  */
-const AddMilestoneComponent = () => {
+const AddMilestoneComponent = ({ history }: Props) => {
   const { t } = useTranslation();
   return (
     <TextEditorWrapper>
@@ -214,7 +223,7 @@ const AddMilestoneComponent = () => {
         <Header>
           <p>{t('addMilestone.title')}</p>
         </Header>
-        <RouteDetails />
+        <RouteDetails history={history}/>
       </TextEditorContainer>
     </TextEditorWrapper>
   );

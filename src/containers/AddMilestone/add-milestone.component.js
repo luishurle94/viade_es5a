@@ -36,6 +36,7 @@ import {
   TextEditorContainer,
   TextEditorWrapper,
   Title,
+  Button
 } from './add-milestone.style';
 import MilestoneMap from './MilestoneMap/milestone-map.component';
 
@@ -52,7 +53,9 @@ if (!webId) {
   });
 }
 
-export const AddMilestone = () => {
+type Props = { history: any };
+
+export const AddMilestone = ({ history }: Props) =>{
   
   let routeId = "";
 
@@ -161,6 +164,10 @@ export const AddMilestone = () => {
           dist = dist * 1.609344
       return dist;
     }
+  }
+
+  function routeDetails() {
+    history.push(`/route-details?routeId=${routeId}`);
   }
 
   async function checkCreateNew() {
@@ -280,13 +287,18 @@ export const AddMilestone = () => {
                                   </AccordionTab>;
                       })}
           </Accordion>
+          
       </FullGridSize>
 
       <FullGridSize>
-
+        
         <Label>
-          {t('addMilestone.routeToAdd')}
+          {t('addMilestone.routeToAdd') }
+
           <Input id="routeToAddId" type="text" size="200" value={routeId} onChange={changeRouteId} />
+          <br/>
+          <div><Button data-testid="details" className="button" label="Details" onClick={() => routeDetails()}>{t('addMilestone.seeRouteDetails')}</Button></div>
+          <br/>
         </Label>
 
         <Label>
@@ -353,7 +365,7 @@ export const AddMilestone = () => {
  * A React component page that is displayed when there's no valid route. Users can click the button
  * to get back to the home/welcome page.
  */
-const AddMilestoneComponent = () => {
+const AddMilestoneComponent = ({ history }: Props) => {
   const { t } = useTranslation();
   return (
     <TextEditorWrapper>
@@ -361,7 +373,7 @@ const AddMilestoneComponent = () => {
         <Header>
           <p>{t('addMilestone.title')}</p>
         </Header>
-        <AddMilestone />
+        <AddMilestone history={history}/>
       </TextEditorContainer>
     </TextEditorWrapper>
   );

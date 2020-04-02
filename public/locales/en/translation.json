@@ -276,6 +276,8 @@
     "routeToAdd": "Route to add the milestone",
     "accordionTitle": "This route already has",
     "accordionEndTtile": "milestones",
+    "seeRouteDetails": "See Details",
+    "seeAllRoutes": "See Routes",
     "notifications": {
       "altitudeNegative": "'Altitude' must be at least zero",
       "altitudeNaN": "'Altitude' must be a number",
@@ -292,6 +294,7 @@
     "title": "Route list",
     "rank": "Rank",
     "details": "Details",
+    "addMilestone": "Milestones",
     "share": "Share",
     "selectFriend": "Select friends to share the route:",
     "send": "Send route"

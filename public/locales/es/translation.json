@@ -277,6 +277,8 @@
     "routeToAdd": "Ruta a la que se añadirá el hito",
     "accordionTitle": "Esta ruta tiene",
     "accordionEndTtile": "hitos",
+    "seeRouteDetails": "Ver Detalles",
+    "seeAllRoutes": "Ver Rutas",
     "notifications": {
       "altitudeNegative": "'Altitud' debe ser al menos cero",
       "altitudeNaN": "'Altitud' debe ser un número",
@@ -293,6 +295,7 @@
     "title": "Lista de rutas",
     "rank": "Dificultad",
     "details": "Detalles",
+    "addMilestone": "Hitos",
     "share": "Compartir",
     "selectFriend": "Selecciona amigos para compartir la ruta:",
     "send": "Enviar ruta"
