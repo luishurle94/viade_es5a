@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import { useTranslation } from 'react-i18next';
 import { RouteService } from '@services';
 import { errorToaster } from '@utils';
 import { Loader } from '@util-components';
 import { DataView } from 'primereact/dataview';
 import { Dialog } from 'primereact/dialog';
 import {
-  TextEditorWrapper,
-  TextEditorContainer,
-  Header,
   Button,
   RouteDetails,
   DialogContent
@@ -119,19 +115,4 @@ export class ListRoutes extends Component {
   }
 }
 
-const ListRoutesComponent = ({ history }: Props) => {
-  const { t } = useTranslation();
-
-  return (
-    <TextEditorWrapper>
-      <TextEditorContainer>
-        <Header>
-          <p>{t('listRoutes.title')}</p>
-        </Header>
-        <ListRoutes t={t} history={history} />
-      </TextEditorContainer>
-    </TextEditorWrapper>
-  );
-};
-
-export default ListRoutesComponent;
+export default ListRoutes;

@@ -67,7 +67,8 @@
     "tictactoe": "Juego",
     "add-route": "Añadir Ruta",
     "add-milestone": "Añadir Hito",
-    "list-routes": "Lista de rutas"
+    "list-routes": "Lista de rutas",
+    "list-shared-routes": "Lista de rutas compartidas"
   },
   "footer": {
     "version": "Versión"
