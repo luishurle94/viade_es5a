@@ -67,10 +67,18 @@ export const remove = async (webId) => {
 }
 
 export const link = async (webId, obj, lit, predicate) => {
+  if (!isValidUrl(webId)) {
+    const appPath = await SolidHelper.getAppPathStorage(await currentUserId());
+    webId = `${appPath}${webId}`;
+  }console.log([webId, obj, lit, predicate])
   await SolidHelper.linkToGraph(webId, obj, lit, predicate);
 }
 
 export const unlink = async(webId, predicate, url) => {
+  if (!isValidUrl(webId)) {
+    const appPath = await SolidHelper.getAppPathStorage(await currentUserId());
+    webId = `${appPath}${webId}`;
+  }
   return await SolidHelper.unlink(webId, predicate, url);
 }
 
@@ -80,6 +88,10 @@ export const unlink = async(webId, predicate, url) => {
  */
 export const get = async (webId, context) => {
   try {
+    if (!isValidUrl(webId)) {
+      const appPath = await SolidHelper.getAppPathStorage(await currentUserId());
+      webId = `${appPath}${webId}`;
+    }console.log(webId)
     return await SolidHelper.fetchRawData(webId, context);
   } catch (e) {
     return undefined;
@@ -165,3 +177,12 @@ export const checkParams = async (createDocument, webId, parentWebId, parentFile
     return await SolidHelper.createFile(webId, body, mimeType);
   }
   
+  const isValidUrl = (string) => {
+    try {
+      new URL(string);
+    } catch (_) {
+      return false;  
+    }
+  
+    return true;
+  }
