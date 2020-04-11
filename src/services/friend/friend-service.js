@@ -31,3 +31,12 @@ export const getAll = async (getData = true) => {
   }
   return res;
 }
+
+/**
+ * Add friend
+ * @param {String} webId friend 
+ * @returns boolean if action is exectuted sucesfully
+ */
+export const add = async (webId) => {
+  return await SolidAdapter.addFriend(webId);
+}
