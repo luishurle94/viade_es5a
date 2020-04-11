@@ -295,9 +295,11 @@
   "listRoutes": {
     "title": "Lista de rutas",
     "rank": "Dificultad",
+    "createdBy": "Autor",
     "details": "Detalles",
     "addMilestone": "Hitos",
     "share": "Compartir",
+    "delete": "Eliminar",
     "selectFriend": "Selecciona amigos para compartir la ruta:",
     "send": "Enviar ruta",
     "notificationTitle": "Invitación a Ruta Viade",

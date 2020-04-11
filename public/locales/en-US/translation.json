@@ -296,9 +296,11 @@
   "listRoutes": {
     "title": "Route list",
     "rank": "Rank",
+    "createdBy": "Author",
     "addMilestone": "Milestones",
     "details": "Details",
     "share": "Share",
+    "delete": "Delete",
     "selectFriend": "Select friends to share the route:",
     "send": "Send route",
     "notificationTitle": "Viade route invitation",
