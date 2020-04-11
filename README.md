@@ -28,6 +28,11 @@ In this moment, you can check if installation has been completed succesfully run
 npm start
 ```
 
+### Running with Docker
+```
+docker run -it --rm arquisoft/viade_es5a
+```
+
 ### Running the tests
 
 Currently, we are testing with a framework called Jest. 
