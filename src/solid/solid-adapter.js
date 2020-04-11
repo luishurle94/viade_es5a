@@ -70,7 +70,7 @@ export const link = async (webId, obj, lit, predicate) => {
   if (!isValidUrl(webId)) {
     const appPath = await SolidHelper.getAppPathStorage(await currentUserId());
     webId = `${appPath}${webId}`;
-  }console.log([webId, obj, lit, predicate])
+  }
   await SolidHelper.linkToGraph(webId, obj, lit, predicate);
 }
 
@@ -91,7 +91,7 @@ export const get = async (webId, context) => {
     if (!isValidUrl(webId)) {
       const appPath = await SolidHelper.getAppPathStorage(await currentUserId());
       webId = `${appPath}${webId}`;
-    }console.log(webId)
+    }
     return await SolidHelper.fetchRawData(webId, context);
   } catch (e) {
     return undefined;

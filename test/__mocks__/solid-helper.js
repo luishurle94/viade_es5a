@@ -10,6 +10,7 @@ export default jest.mock('../../src/solid/solid-helper', () => {
   files.push(HashHelper.hash('soy_una_imagen'))
   files.push(HashHelper.hash('soy_un_comentario'))
   files.push(HashHelper.hash('soy_un_amigo'))
+  files.push('data.ttl')
 
   links.push({
     obj: 'soy_una_ruta',
@@ -84,6 +85,12 @@ export default jest.mock('../../src/solid/solid-helper', () => {
     predicate: 'vcard_fn'
   })
 
+  links.push({
+    obj: 'soy_una_ruta_compartida',
+    webId: 'soy_una_ruta_compartida',
+    predicate: 'schema:name'
+  });
+
   // throw new Error(9)
   const createInitialStructure = jest.fn(async (webId) => {
     return true;
@@ -104,6 +111,7 @@ export default jest.mock('../../src/solid/solid-helper', () => {
   });
 
   const linkToGraph = jest.fn(async (webId, obj, lit, predicate) => {
+    webId = webId.replace(await getAppPathStorage(webId), '');
     if (obj) {
       links.push({
         obj: obj,
@@ -114,8 +122,9 @@ export default jest.mock('../../src/solid/solid-helper', () => {
   });
 
   const unlink = jest.fn(async (webId, predicate, url) => {
+    webId = webId.replace(await getAppPathStorage(webId), '');
     try {
-      if (!files.includes(webId)) {
+      if (!files.map(f => f.toString()).includes(webId)) {
         return false;
       }
 
@@ -130,7 +139,8 @@ export default jest.mock('../../src/solid/solid-helper', () => {
 
   const fetchRawData = jest.fn(async (url, context) => {
     try {
-      const res = files.filter(f => f.toString().includes(url));
+      url = url.replace(await getAppPathStorage(url), '');
+      const res = files.filter(f => f.toString().includes(url.toString()));
       if (res && res.length < 0) {
         throw new Error('404');
       }

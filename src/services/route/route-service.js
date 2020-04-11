@@ -18,7 +18,7 @@ export const add = async (route) => {
  * @param {String} webId route 
  */
 export const remove = async (webId) => {
-  return SolidAdapter.remove(webId);
+  return await SolidAdapter.remove(webId);
 }
 
 /**
@@ -104,6 +104,9 @@ export const getAllShared = async (getData = true) => {
  * @param {boolean} getData return url or milestone array
  */
 export const share = async (route, friendId) => {
+  if (!route || !friendId || !route.webId) {
+    return false;
+  }
   const routeRes = await SolidAdapter.share(friendId, route.webId);
   if (routeRes) {
     // share linked elements
