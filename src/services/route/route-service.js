@@ -120,3 +120,19 @@ export const share = async (route, friendId) => {
   }
   return false;
 }
+
+export const removeShared = async (webId) => {
+  const res = SolidAdapter.unlink('data.ttl', await SolidAdapter.getPredicate(sharedRouteShape.shape[0], sharedRouteShape), webId);
+  if (!res) {
+    return false;
+  }
+
+  const notifications = await SolidAdapter.getAll('/inbox');
+  for(let notification of notifications) {
+    const res = await NotificationService.get(notification);
+    if (res && res.url && res.url === webId) {
+      return SolidAdapter.remove(notification);
+    }
+  }
+  return true;
+}
