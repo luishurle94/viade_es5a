@@ -49,8 +49,8 @@ describe.only('Get data', () => {
 describe.only('Get all files', () => {
   test('list one', async () => {
     expect((await SolidAdapter.getAll()).length).toStrictEqual(1);
-    expect((await SolidAdapter.getAll('aaa')).length).toStrictEqual(2);
-    expect((await SolidAdapter.getAll('1324541791')).length).toStrictEqual(1);
+    expect((await SolidAdapter.getAll('aaa')).length).toStrictEqual(0);
+    expect((await SolidAdapter.getAll('1324541791')).length).toStrictEqual(0);
   });
 });
 
