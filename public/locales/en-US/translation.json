@@ -299,7 +299,10 @@
     "details": "Details",
     "share": "Share",
     "selectFriend": "Select friends to share the route:",
-    "send": "Send route"
+    "send": "Send route",
+    "notificationTitle": "Viade route invitation",
+    "shared": "Route has been shared succesfully.",
+    "error": "Friend has problems with inboxes. It has not completed succesfully."
   },
   "file": {
     "dropzone": {
