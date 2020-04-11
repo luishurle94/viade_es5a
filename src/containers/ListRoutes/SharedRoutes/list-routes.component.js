@@ -6,9 +6,12 @@ import {
   Header
 } from '../list-routes.style';
 import {ListRoutes} from '../list-routes.component';
+import { RouteService } from '@services';
+import { useNotification } from '@inrupt/solid-react-components';
 
-const ListSharedRoutesComponent = ({ history }: Props) => {
+const ListSharedRoutesComponent = ({ history, webId }: Props) => {
   const { t } = useTranslation();
+  const { createNotification } = useNotification(webId);
 
   return (
     <TextEditorWrapper>
@@ -16,7 +19,7 @@ const ListSharedRoutesComponent = ({ history }: Props) => {
         <Header>
           <p>{t('listRoutes.title')}</p>
         </Header>
-        <ListRoutes t={t} history={history} />
+        <ListRoutes t={t} history={history} createNotification={createNotification} getAll={RouteService.getAllShared}/>
       </TextEditorContainer>
     </TextEditorWrapper>
   );

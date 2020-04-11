@@ -50,7 +50,7 @@ describe('List routes', () => {
         <Header>
           <p>{t('listRoutes.title')}</p>
         </Header>
-      <ListRoutes t={t} history = {history}/>
+      <ListRoutes t={t} history = {history} getAll = {RouteService.getAll}/>
       </TextEditorContainer>
     </TextEditorWrapper>
   );
@@ -62,14 +62,14 @@ describe('List routes', () => {
   });
 
   test('route list', () => {
-    const {getAllByTestId} = render(<ListRoutes t={t} />);
+    const {getAllByTestId} = render(<ListRoutes t={t} getAll = {RouteService.getAll}/>);
     const routeNames = getAllByTestId('routeName').map(li => li.textContent);
     expect(routeNames.length).toBe(4);
     expect(routeNames).toEqual(routes.map(r => r.name));
   });
 
   test('details button', () => {
-    let wrapper = mount(<ListRoutes t={t} history={history}/>);
+    let wrapper = mount(<ListRoutes t={t} history={history} getAll = {RouteService.getAll}/>);
     let instance = wrapper.instance();
     let r1 = new Route('Ruta 1', 'Descripción 1', 10, 10, 5);
     r1.webId = 'RutaId1';
@@ -90,7 +90,7 @@ describe('List routes', () => {
   });
 
   test('share button', () => {
-    let wrapper = mount(<ListRoutes t={t} />);
+    let wrapper = mount(<ListRoutes t={t} getAll = {RouteService.getAll}/>);
     let instance = wrapper.instance();
     let r1 = new Route('Ruta 1', 'Descripción 1', 10, 10, 5);
     instance.componentDidMount = () => {
@@ -107,7 +107,7 @@ describe('List routes', () => {
   });
 
   test('send button in friends dialog', () => {
-    let wrapper = mount(<ListRoutes t={t} />);
+    let wrapper = mount(<ListRoutes t={t} getAll = {RouteService.getAll}/>);
     let instance = wrapper.instance();
     let r1 = new Route('Ruta 1', 'Descripción 1', 10, 10, 5);
     instance.componentDidMount = () => {
