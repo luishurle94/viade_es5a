@@ -74,7 +74,6 @@ export class Dropzone extends Component {
           className="FileInput"
           type="file"
           multiple
-          accept="image/*"
           onChange={this.onFilesAdded}
         />
         <img

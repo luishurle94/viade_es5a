@@ -299,17 +299,28 @@
     "details": "Details",
     "share": "Share",
     "selectFriend": "Select friends to share the route:",
-    "send": "Send route"
+    "send": "Send route",
+    "edit": "Edit"
   },
   "file": {
     "dropzone": {
-      "upload": "Uplaod media"
+      "upload": "Upload media"
     },
+    "description1": "Select the files to be stored in the path.",
+    "description2": "Click the upload button when you are done.",
+    "description3": "All files types are supported.",
     "success": "Upload completed succesfully.",
     "error": "There has been some problem uploading. Try later."
   },
   "routeDetails":{
     "title": "Route Information",
-    "media": "Media files"
+    "media": "Media files",
+    "images": "Images",
+    "other": "Other files"
+  },
+  "media": {
+    "webId": "Media file",
+    "href": "URL",
+    "createdAt": "Creation date"
   }
 }
