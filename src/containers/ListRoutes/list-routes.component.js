@@ -77,7 +77,7 @@ export class ListRoutes extends Component {
             <div className="p-grid">
               {route.description && <div className="p-col-12">{route.description}</div>}
               {route.rank && <div className="p-col-12">{this.props.t('listRoutes.rank')}: {route.rank}</div>}
-              {route.createdBy && route.createdBy !== this.props.webId && <div className="p-col-12">{this.props.t('listRoutes.createdBy')}: {route.createdBy}</div>}
+              {route.createdBy && route.createdBy !== this.props.webId && <div data-testid="createdBy" className="p-col-12">{this.props.t('listRoutes.createdBy')}: {route.createdBy}</div>}
             </div>
             <div className="buttons">
               <div className="flex-buttons">
