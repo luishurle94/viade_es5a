@@ -1,16 +1,18 @@
 import { notification } from '@utils';
 import { NotificationTypes } from '@inrupt/solid-react-components';
 import auth from 'solid-auth-client';
-
+import { SolidAdapter } from "@solid-services";
+import inboxShape from '@contexts/inbox-shape.json';
 
 /**
  * Publish message
  * @param {*} content 
  * @param {String} webId receiver user 
  */
-export const publish = async (createNotification, content, webId, type) => {
+export const publish = async (createNotification, content, webId, type, url) => {
   try {
     type = type || NotificationTypes.ANNOUNCE;
+    url = url || `${window.location.href}`;
 
     const session = await auth.currentSession();
 
@@ -31,7 +33,7 @@ export const publish = async (createNotification, content, webId, type) => {
         summary: content.summary,
         actor: session.webId,
         object: content.url,
-        target: window.location.href
+        target: url
       }, to.path, type, license);
     }
     
@@ -40,6 +42,10 @@ export const publish = async (createNotification, content, webId, type) => {
     console.error(e);
     return false;
   }
+}
+
+export const get = async (webId) => {
+  return await SolidAdapter.get(webId, inboxShape);
 }
 
 /**

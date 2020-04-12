@@ -1,3 +1,7 @@
-import ListRoutes from './list-routes.component';
+import ListOwnRoutes from './OwnRoutes/list-routes.component';
+import ListSharedRoutes from './SharedRoutes/list-routes.component';
 
-export default ListRoutes;
+export {
+  ListOwnRoutes, 
+  ListSharedRoutes
+};

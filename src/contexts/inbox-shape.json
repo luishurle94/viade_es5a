@@ -1,0 +1,15 @@
+{
+    "@context": {
+      "n0": "https://www.w3.org/ns/activitystreams#"
+    },
+    "shape": [
+      {
+        "prefix": "n0",
+        "predicate": "object",
+        "object": "url",
+        "literal": false,
+        "type": "webId"
+      }
+    ]
+  }
+  

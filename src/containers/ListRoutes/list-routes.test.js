@@ -24,10 +24,19 @@ Enzyme.configure({ adapter: new Adapter() });
 
 jest.spyOn(RouteService, 'getAll').mockImplementationOnce(() => {
   return Promise.resolve([
-    new Route('Ruta 1', 'Descripción 1', 10, 10, 5),
-    new Route('Ruta 2', 'Descripción 2', 10, 10, 4),
-    new Route('Ruta 3', 'Descripción 3', 10, 10, 3),
-    new Route('Ruta 4', 'Descripción 4', 10, 10, 2)
+    new Route('Ruta 1', 'Descripción 1', 10, 10, 5, 'Isabel'),
+    new Route('Ruta 2', 'Descripción 2', 10, 10, 4, 'Isabel'),
+    new Route('Ruta 3', 'Descripción 3', 10, 10, 3, 'Isabel'),
+    new Route('Ruta 4', 'Descripción 4', 10, 10, 2, 'Isabel')
+  ])
+})
+
+jest.spyOn(RouteService, 'getAllShared').mockImplementationOnce(() => {
+  return Promise.resolve([
+    new Route('Ruta 1', 'Descripción 1', 10, 10, 5, 'Javier'),
+    new Route('Ruta 2', 'Descripción 2', 10, 10, 4, 'Javier'),
+    new Route('Ruta 3', 'Descripción 3', 10, 10, 3, 'Javier'),
+    new Route('Ruta 4', 'Descripción 4', 10, 10, 2, 'Javier')
   ])
 })
 
@@ -50,26 +59,19 @@ describe('List routes', () => {
         <Header>
           <p>{t('listRoutes.title')}</p>
         </Header>
-      <ListRoutes t={t} history = {history}/>
+      <ListRoutes t={t} history = {history} webId={'Isabel'} getAll = {RouteService.getAll}/>
       </TextEditorContainer>
     </TextEditorWrapper>
   );
 
-  const {container2} = render(<RouteDetails/>)
+  const {container2} = render(<RouteDetails/>);
 
   test('should render without crashing', () => {
     expect(container).toBeTruthy();
   });
 
-  test('route list', () => {
-    const {getAllByTestId} = render(<ListRoutes t={t} />);
-    const routeNames = getAllByTestId('routeName').map(li => li.textContent);
-    expect(routeNames.length).toBe(4);
-    expect(routeNames).toEqual(routes.map(r => r.name));
-  });
-
   test('details button', () => {
-    let wrapper = mount(<ListRoutes t={t} history={history}/>);
+    let wrapper = mount(<ListRoutes t={t} history={history} getAll = {RouteService.getAll}/>);
     let instance = wrapper.instance();
     let r1 = new Route('Ruta 1', 'Descripción 1', 10, 10, 5);
     r1.webId = 'RutaId1';
@@ -89,8 +91,28 @@ describe('List routes', () => {
     expect(history.location.search).toBe('?routeId=RutaId1');
   });
 
+  test('delete route', () => {
+    let wrapper = mount(<ListRoutes t={t} getAll = {RouteService.getAll}/>);
+    let instance = wrapper.instance();
+    let r1 = new Route('Ruta 1', 'Descripción 1', 10, 10, 5);
+    instance.componentDidMount = () => {
+      return [
+        r1,
+        new Route('Ruta 2', 'Descripción 2', 10, 10, 4),
+        new Route('Ruta 3', 'Descripción 3', 10, 10, 3),
+        new Route('Ruta 4', 'Descripción 4', 10, 10, 2)
+      ]
+    };
+    instance.setState({routes: instance.componentDidMount()});
+    const spy = jest.spyOn(instance, 'delete').mockImplementationOnce((route) => {
+      instance.setState({routes: instance.state.routes.filter(r => r!== route)})
+    });
+    instance.delete(r1);
+    expect(instance.state.routes.length).toBe(3);
+  })
+
   test('share button', () => {
-    let wrapper = mount(<ListRoutes t={t} />);
+    let wrapper = mount(<ListRoutes t={t} getAll = {RouteService.getAll}/>);
     let instance = wrapper.instance();
     let r1 = new Route('Ruta 1', 'Descripción 1', 10, 10, 5);
     instance.componentDidMount = () => {
@@ -107,7 +129,7 @@ describe('List routes', () => {
   });
 
   test('send button in friends dialog', () => {
-    let wrapper = mount(<ListRoutes t={t} />);
+    let wrapper = mount(<ListRoutes t={t} getAll = {RouteService.getAll}/>);
     let instance = wrapper.instance();
     let r1 = new Route('Ruta 1', 'Descripción 1', 10, 10, 5);
     instance.componentDidMount = () => {
@@ -123,4 +145,5 @@ describe('List routes', () => {
     expect(instance.state.visible).toBeFalsy();
     expect(instance.state.selectedRoute).toBeFalsy();
   })
+
 });
