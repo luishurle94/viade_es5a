@@ -38,7 +38,7 @@ describe('List friends', () => {
   });
 
   test('selected friends', () => {
-    let wrapper = shallow(<ListFriends />);
+    let wrapper = shallow(<ListFriends selected={()=> {}} />);
     let instance = wrapper.instance();
     instance.componentDidMount = () => {
       return [new Friend().webId = 'Amigo1WebId']

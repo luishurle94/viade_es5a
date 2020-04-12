@@ -66,7 +66,8 @@
     "tictactoe": "Game",
     "add-route": "Add Route",
     "add-milestone": "Add Milestone",
-    "list-routes": "Routes list"
+    "list-routes": "Routes list",
+    "list-shared-routes": "Shared routes list"
   },
   "footer": {
     "version": "Version"
@@ -298,11 +299,16 @@
     "title": "Route list",
     "rank": "Rank",
     "details": "Details",
+    "createdBy": "Author",
     "addMilestone": "Milestones",
     "share": "Share",
+    "delete": "Delete",
     "selectFriend": "Select friends to share the route:",
     "send": "Send route",
-    "edit": "Edit"
+    "edit": "Edit",
+    "notificationTitle": "Viade route invitation",
+    "shared": "Route has been shared succesfully.",
+    "error": "Friend has problems with inboxes. It has not completed succesfully."
   },
   "file": {
     "dropzone": {

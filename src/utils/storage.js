@@ -40,6 +40,19 @@ export const getAppStorage = async webId => {
   return `${podStoragePathValue}${appPath}`;
 };
 
+export const getStorage = async webId => {
+  const podStoragePath = await data[webId].storage;
+  let podStoragePathValue =
+    podStoragePath && podStoragePath.value.trim().length > 0 ? podStoragePath.value : '';
+
+  // Make sure that the path ends in a / so it is recognized as a folder path
+  if (podStoragePathValue && !podStoragePathValue.endsWith('/')) {
+    podStoragePathValue = `${podStoragePathValue}/`;
+  }
+
+  return `${podStoragePathValue}`;
+};
+
 /**
  *  Check and create the initial app files and folders
  * @param folderPath

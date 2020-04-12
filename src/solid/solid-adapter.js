@@ -88,11 +88,15 @@ export const get = async (webId, context) => {
 
 export const getAll = async (folder) => {
   try {
-    folder = folder || '';
-
     const webId = await currentUserId();
-    const appPath = await SolidHelper.getAppPathStorage(webId);
-    const documentsUri = `${appPath}${folder}`;
+    let appPath;
+    if (folder) {
+      appPath = await SolidHelper.getPathStorage(webId);
+    } else {
+      appPath = await SolidHelper.getAppPathStorage(webId);
+    }
+
+    const documentsUri = `${appPath}${folder ? folder : ''}`;
 
     return await SolidHelper.fetchFilesData(documentsUri);
   } catch (e) {
@@ -100,8 +104,9 @@ export const getAll = async (folder) => {
   }
 }
 
-export const share = async (webId, friendId, shareUrl) => {
+export const share = async (friendId, shareUrl) => {
   try {
+    const webId = await currentUserId()
     const permissions = [
     {
         agents: [friendId],

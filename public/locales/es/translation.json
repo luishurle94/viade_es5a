@@ -67,7 +67,8 @@
     "tictactoe": "Juego",
     "add-route": "Añadir Ruta",
     "add-milestone": "Añadir Hito",
-    "list-routes": "Lista de rutas"
+    "list-routes": "Lista de rutas",
+    "list-shared-routes": "Lista de rutas compartidas"
   },
   "footer": {
     "version": "Versión"
@@ -298,12 +299,17 @@
   "listRoutes": {
     "title": "Lista de rutas",
     "rank": "Dificultad",
+    "createdBy": "Autor",
     "details": "Detalles",
     "addMilestone": "Hitos",
     "share": "Compartir",
+    "delete": "Eliminar",
     "selectFriend": "Selecciona amigos para compartir la ruta:",
     "send": "Enviar ruta",
-    "edit": "Editar"
+    "edit": "Editar",
+    "notificationTitle": "Invitación a Ruta Viade",
+    "shared": "La ruta se ha compartido correctamente.",
+    "error": "Tu amigo tiene problemas con la bandeja de entrada. No se ha podido completar correctamente la operación."
   },
   "file": {
     "dropzone": {

@@ -14,6 +14,12 @@ export const NavigationItems = [
     label: 'navBar.list-routes',
     to: '/list-routes'
   },
+  {
+    id: 'list-shared-routes',
+    icon: 'img/list-shared.png',
+    label: 'navBar.list-shared-routes',
+    to: '/list-shared-routes'
+  },
 ];
 
 export const ProfileOptions = [
