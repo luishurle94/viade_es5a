@@ -15,7 +15,8 @@ import {
 import {
   AddMilestone,
   AddRoute,
-  ListRoutes,
+  ListOwnRoutes,
+  ListSharedRoutes,
   Login,
   PageNotFound,
   Profile,
@@ -56,7 +57,12 @@ const privateRoutes = [
   {
     id: 'list-routes',
     path: '/list-routes',
-    component: ListRoutes
+    component: ListOwnRoutes
+  },
+  {
+    id: 'list-shared-routes',
+    path: '/list-shared-routes',
+    component: ListSharedRoutes
   },
 ];
 

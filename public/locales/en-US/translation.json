@@ -67,7 +67,8 @@
     "tictactoe": "Game",
     "add-route": "Add Route",
     "add-milestone": "Add Milestone",
-    "list-routes": "Routes list"
+    "list-routes": "Routes list",
+    "list-shared-routes": "Shared routes list"
   },
   "footer": {
     "version": "Version"
@@ -295,9 +296,11 @@
   "listRoutes": {
     "title": "Route list",
     "rank": "Rank",
+    "createdBy": "Author",
     "addMilestone": "Milestones",
     "details": "Details",
     "share": "Share",
+    "delete": "Delete",
     "selectFriend": "Select friends to share the route:",
     "send": "Send route",
     "notificationTitle": "Viade route invitation",

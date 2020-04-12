@@ -34,7 +34,7 @@ export class ListRoutes extends Component {
   }
 
   componentDidMount() {
-    RouteService.getAll(true)
+    this.props.getAll(true)
       .then(list => {
         if (list) {
           list = list.filter(i => i !== null && i !== undefined);
@@ -57,6 +57,15 @@ export class ListRoutes extends Component {
     this.props.history.push(`add-milestone?routeId=${route.webId}`);
   }
 
+  async delete(route) {
+    if (route.createdBy === this.props.webId)
+      await RouteService.remove(route.webId);
+    if (route.createdBy && route.createdBy !== this.props.webId)
+      await RouteService.removeShared(route.webId);
+
+    this.props.history.push(this.props.history.location)
+  }
+
   itemTemplate(route) {
     if (!route) {
       return (
@@ -72,12 +81,18 @@ export class ListRoutes extends Component {
             <div className="p-grid">
               {route.description && <div className="p-col-12">{route.description}</div>}
               {route.rank && <div className="p-col-12">{this.props.t('listRoutes.rank')}: {route.rank}</div>}
+              {route.createdBy && route.createdBy !== this.props.webId && <div data-testid="createdBy" className="p-col-12">{this.props.t('listRoutes.createdBy')}: {route.createdBy}</div>}
             </div>
             <div className="buttons">
               <div className="flex-buttons">
                 <div><Button id="details" data-testid="details" className="button" label="Details" onClick={() => this.seeDetails(route)}>{this.props.t('listRoutes.details')}</Button></div>
-                <div><Button data-testid="addMilestone" className="button" label="addMilestone" onClick={() => this.goToAddMilestone(route)}>{this.props.t('listRoutes.addMilestone')}</Button></div>
-                <div><Button data-testid="share" className="button" label="Share" onClick={() => this.share(route)}>{this.props.t('listRoutes.share')}</Button></div>
+                {route.createdBy === this.props.webId &&
+                  <div><Button data-testid="addMilestone" className="button" label="addMilestone" onClick={() => this.goToAddMilestone(route)}>{this.props.t('listRoutes.addMilestone')}</Button></div>
+                }
+                {route.createdBy === this.props.webId &&
+                  <div><Button data-testid="share" className="button" label="Share" onClick={() => this.share(route)}>{this.props.t('listRoutes.share')}</Button></div>
+                }
+                <div><Button data-testid="delete" className="button" label="Delete" onClick={() => this.delete(route)}>{this.props.t('listRoutes.delete')}</Button></div>
               </div>
             </div>
           </div>
@@ -90,7 +105,7 @@ export class ListRoutes extends Component {
     if (this.state.selectedRoute) {
       return (
         <DialogContent>
-          <ListFriends selected={this.selectedFriends.bind(this)}/>
+          <ListFriends selected={this.selectedFriends.bind(this)} />
           <Button data-testid="send" className="button" label="send" onClick={() => this.sendButton()}>{this.props.t('listRoutes.send')}</Button>
         </DialogContent>
       );
@@ -103,7 +118,7 @@ export class ListRoutes extends Component {
 
   async sendButton() {
     let everythingNoError = true;
-    for(const friend of this.state.selectedFriends) {
+    for (const friend of this.state.selectedFriends) {
       const res = await RouteService.share(this.state.selectedRoute, friend.webId + 'me');
       if (res) {
         const notificationContent = {
