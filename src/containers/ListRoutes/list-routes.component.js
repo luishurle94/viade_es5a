@@ -54,7 +54,7 @@ export class ListRoutes extends Component {
   }
 
   goToAddMilestone(route) {
-    this.props.history.push(`add-milestone?routeId=${route.webId}`);
+    this.props.history.push(`route-edit?routeId=${route.webId}`);
   }
 
   async delete(route) {
@@ -87,7 +87,7 @@ export class ListRoutes extends Component {
               <div className="flex-buttons">
                 <div><Button id="details" data-testid="details" className="button" label="Details" onClick={() => this.seeDetails(route)}>{this.props.t('listRoutes.details')}</Button></div>
                 {route.createdBy === this.props.webId &&
-                  <div><Button data-testid="addMilestone" className="button" label="addMilestone" onClick={() => this.goToAddMilestone(route)}>{this.props.t('listRoutes.addMilestone')}</Button></div>
+                  <div><Button data-testid="addMilestone" className="button" label="addMilestone" onClick={() => this.goToAddMilestone(route)}>{this.props.t('listRoutes.edit')}</Button></div>
                 }
                 {route.createdBy === this.props.webId &&
                   <div><Button data-testid="share" className="button" label="Share" onClick={() => this.share(route)}>{this.props.t('listRoutes.share')}</Button></div>

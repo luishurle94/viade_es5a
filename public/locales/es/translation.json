@@ -292,6 +292,10 @@
       "errorLoadingMilestones": "¡Ups! Ha ocurrido un error al cargar tus hitos..."
     }
   },
+  "editRoute": {
+    "title": "Editar Ruta",
+    "upload": "Subir multimedia"
+  },
   "listRoutes": {
     "title": "Lista de rutas",
     "rank": "Dificultad",
@@ -302,6 +306,7 @@
     "delete": "Eliminar",
     "selectFriend": "Selecciona amigos para compartir la ruta:",
     "send": "Enviar ruta",
+    "edit": "Editar",
     "notificationTitle": "Invitación a Ruta Viade",
     "shared": "La ruta se ha compartido correctamente.",
     "error": "Tu amigo tiene problemas con la bandeja de entrada. No se ha podido completar correctamente la operación."
@@ -310,11 +315,21 @@
     "dropzone": {
       "upload": "Subir archivos multimedia"
     },
+    "description1": "Seleccione los ficheros que se deseen almacenar en la ruta.",
+    "description2": "Pulse el botón de subir para finalizar.",
+    "description3": "Todos los tipos de ficheros son compatibles.",
     "success": "Subida completada correctamente.",
     "error": "Ha habido alguna problemas. Vuelvalo a intentar más adelante."
   },
   "routeDetails":{
     "title": "Información de la Ruta",
-    "media": "Archivos multimedia"
+    "media": "Archivos multimedia",
+    "images": "Imágenes",
+    "other": "Otros ficheros"
+  },
+  "media": {
+    "webId": "Fichero multimedia",
+    "href": "URL",
+    "createdAt": "Fecha de creación"
   }
 }

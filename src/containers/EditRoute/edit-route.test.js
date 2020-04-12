@@ -1,14 +1,14 @@
 import React from 'react';
 import { render, cleanup, queryByAttribute, fireEvent, getByTestId, act } from 'react-testing-library';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { AddMilestone } from './add-milestone.component';
+import { EditRoute, EditRouteComponent } from './edit-route.component';
 import { MilestoneMap } from './MilestoneMap/milestone-map.component';
 import { useTranslation } from 'react-i18next';
 import {
   TextEditorWrapper,
   TextEditorContainer,
   Header
-} from './add-milestone.style';
+} from './edit-route.style';
 
 describe('Add Milestone', () => {
   afterAll(cleanup);
@@ -21,7 +21,7 @@ describe('Add Milestone', () => {
         <Header>
           <p>{t('addMilestone.title')}</p>
         </Header>
-        <AddMilestone />
+        <EditRoute />
       </TextEditorContainer>
     </TextEditorWrapper>
   );
@@ -63,7 +63,7 @@ describe('Add Milestone', () => {
   
   it("Submission test wrong coordinates", () => {
 
-    const { container, rerender } = render(<AddMilestone />);
+    const { container, rerender } = render(<EditRoute />);
     const inputName = getByTestId(container, "nameId");
     const inputDescription = getByTestId(container, "descriptionId");
     const latitude = getByTestId(container, "latitudeId");
@@ -87,14 +87,14 @@ describe('Add Milestone', () => {
       expect(longitude.value).toEqual("");
       expect(altitude.value).toEqual("");
 
-      rerender(<AddMilestone />);
+      rerender(<EditRoute />);
     });
   });
 
     
   it("Submission test correct inputs", () => {
 
-    const { container, rerender } = render(<AddMilestone />);
+    const { container, rerender } = render(<EditRoute />);
     const inputName = getByTestId(container, "nameId");
     const inputDescription = getByTestId(container, "descriptionId");
     const latitude = getByTestId(container, "latitudeId");
@@ -118,13 +118,13 @@ describe('Add Milestone', () => {
       expect(longitude.value).toEqual("111");
       expect(altitude.value).toEqual("3");
 
-      rerender(<AddMilestone />);
+      rerender(<EditRoute />);
     });
   });
       
   it("Submission test blank inputs", () => {
 
-    const { container, rerender } = render(<AddMilestone />);
+    const { container, rerender } = render(<EditRoute />);
     const inputName = getByTestId(container, "nameId");
     const inputDescription = getByTestId(container, "descriptionId");
     const latitude = getByTestId(container, "latitudeId");
@@ -148,13 +148,13 @@ describe('Add Milestone', () => {
       expect(longitude.value).toEqual("");
       expect(altitude.value).toEqual("");
 
-      rerender(<AddMilestone />);
+      rerender(<EditRoute />);
     });
   });
 
   it("Radio buttons test", () => {
 
-    const { container, rerender } = render(<AddMilestone />);
+    const { container, rerender } = render(<EditRoute />);
     const firstRadioButton = getByTestId(container, "radio1Id");
     const secondRadioButton = getByTestId(container, "radio2Id");
 
@@ -164,14 +164,14 @@ describe('Add Milestone', () => {
     act(() => {
       expect(firstRadioButton.checked).toEqual(true);
       expect(secondRadioButton.checked).toEqual(false);
-      rerender(<AddMilestone />);
+      rerender(<EditRoute />);
     });
   });  
 
   
   it("Radio buttons click test", () => {
 
-    const { container, rerender } = render(<AddMilestone />);
+    const { container, rerender } = render(<EditRoute />);
     const firstRadioButton = getByTestId(container, "radio1Id");
     const secondRadioButton = getByTestId(container, "radio2Id");
 
@@ -180,7 +180,7 @@ describe('Add Milestone', () => {
     act(() => {
       expect(firstRadioButton.checked).toEqual(true);
       expect(secondRadioButton.checked).toEqual(false);
-      rerender(<AddMilestone />);
+      rerender(<EditRoute />);
     });
   });  
 
@@ -200,6 +200,20 @@ describe('Add Milestone Map', () => {
     <Router>
       <MilestoneMap />
     </Router>
+  );
+
+  test('App renders without crashing', () => {
+    expect(container).toBeTruthy();
+  });
+
+
+});
+
+describe('Container', () => {
+  afterAll(cleanup);
+
+  const { container } = render(
+    <EditRouteComponent  history={{}} />
   );
 
   test('App renders without crashing', () => {

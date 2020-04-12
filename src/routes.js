@@ -13,7 +13,7 @@ import {
 } from '@layouts';
 
 import {
-  AddMilestone,
+  EditRoute,
   AddRoute,
   ListOwnRoutes,
   ListSharedRoutes,
@@ -45,9 +45,9 @@ const privateRoutes = [
     component: AddRoute
   },
   {
-    id: 'add-milestone',
-    path: '/add-milestone',
-    component: AddMilestone
+    id: 'route-edit',
+    path: '/route-edit',
+    component: EditRoute
   },
   {
     id: 'route-details',

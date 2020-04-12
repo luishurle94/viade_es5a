@@ -293,6 +293,10 @@
     }
 
   },
+  "editRoute": {
+    "title": "Edit Route",
+    "upload": "Upload Media"
+  },
   "listRoutes": {
     "title": "Route list",
     "rank": "Rank",
@@ -303,19 +307,30 @@
     "delete": "Delete",
     "selectFriend": "Select friends to share the route:",
     "send": "Send route",
+    "edit": "Edit",
     "notificationTitle": "Viade route invitation",
     "shared": "Route has been shared succesfully.",
     "error": "Friend has problems with inboxes. It has not completed succesfully."
   },
   "file": {
     "dropzone": {
-      "upload": "Uplaod media"
+      "upload": "Upload media"
     },
+    "description1": "Select the files to be stored in the path.",
+    "description2": "Click the upload button when you are done.",
+    "description3": "All files types are supported.",
     "success": "Upload completed succesfully.",
     "error": "There has been some problem uploading. Try later."
   },
   "routeDetails":{
     "title": "Route Information",
-    "media": "Media files"
+    "media": "Media files",
+    "images": "Images",
+    "other": "Other files"
+  },
+  "media": {
+    "webId": "Media file",
+    "href": "URL",
+    "createdAt": "Creation date"
   }
 }
