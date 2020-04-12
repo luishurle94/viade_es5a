@@ -292,6 +292,10 @@
     }
 
   },
+  "editRoute": {
+    "title": "Edit Route",
+    "upload": "Upload Media"
+  },
   "listRoutes": {
     "title": "Route list",
     "rank": "Rank",

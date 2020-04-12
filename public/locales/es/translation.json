@@ -291,6 +291,10 @@
       "errorLoadingMilestones": "¡Ups! Ha ocurrido un error al cargar tus hitos..."
     }
   },
+  "editRoute": {
+    "title": "Editar Ruta",
+    "upload": "Subir multimedia"
+  },
   "listRoutes": {
     "title": "Lista de rutas",
     "rank": "Dificultad",

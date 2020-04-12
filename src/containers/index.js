@@ -1,4 +1,4 @@
-import AddMilestone from './AddMilestone';
+import EditRoute from './EditRoute';
 import AddRoute from './AddRoute';
 import ListFriends from './ListFriends';
 import ListRoutes from './ListRoutes';
@@ -16,7 +16,7 @@ export {
   Welcome,
   Profile,
   AddRoute,
-  AddMilestone,
+  EditRoute,
   ListRoutes,
   ListFriends
 };

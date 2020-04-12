@@ -53,6 +53,7 @@ export const RouteDetails = ({ history }: Props) => {
 
   const [route, setRoute] = useState(null);
   const [images, setImages] = useState(null);
+  const [files, setOtherFiles] = useState(null);
   const [renderedName, setRenderedName] = useState('');
   const [renderedDescription, setRenderedDescription] = useState('');
   const [renderedDistance, setRenderedDistance] = useState(0);
@@ -100,15 +101,21 @@ export const RouteDetails = ({ history }: Props) => {
           }
         }
         if (fetch.mediaObject && fetch.mediaObject.length) {
-          const fetchData = fetch.mediaObject.filter(m => m && m.href).map(function (m) {
+          const fetchData = fetch.mediaObject.filter(m => m && m.href);
+          let fetchImages = fetchData.filter(m => isValidImageURL(m.href));
+          const otherFiles = fetchData.filter((f) => !fetchImages.includes(f));
+
+          fetchImages = fetchImages.map(function (m) {
             return {
               previewImageSrc: m.href,
               thumbnailImageSrc: m.href,
-              title: `${m.href.split('/media/').pop().substring(0, 27)}...`,
+              title: formatUrl(m.href),
               alt: new Date(m.createdAt).toLocaleDateString()
             }
           });
-          setImages(fetchData)
+
+          setOtherFiles(otherFiles);
+          setImages(fetchImages);
         }
         setLoading(false);
         setRoute(fetch)
@@ -122,6 +129,16 @@ export const RouteDetails = ({ history }: Props) => {
     return undefined;
   }
 
+  function isValidImageURL(str){
+    if ( typeof str !== 'string' ) return false;
+    return !!str.match(/\w+\.(jpg|jpeg|gif|png|tiff|bmp|svg)$/gi);
+  }
+
+  function formatUrl(str, split='/media/') {
+    str = str.split(split).pop();
+    return str.length > 27 ? `${str.substring(0, 27)}...` : str;
+  }
+
   function updateMarker(milestone) {
     let lat = renderedMilestones[milestone.index].latitude;
     let lng = renderedMilestones[milestone.index].longitude;
@@ -132,7 +149,7 @@ export const RouteDetails = ({ history }: Props) => {
   }
 
   function addMilestones(){
-    history.push(`/add-milestone?routeId=${routeId}`);
+    history.push(`/route-edit?routeId=${routeId}`);
   }
 
 
@@ -151,11 +168,14 @@ export const RouteDetails = ({ history }: Props) => {
                 </Title>
                 <p> <span>{t('addMilestone.name') + ': '}</span> {renderedName}</p>
                 <p> <span>{t('addMilestone.description') + ': '}</span> {renderedDescription}</p>
-                <p> <span>{t('addMilestone.distance') + ': '}</span> {renderedDistance}</p>
-                <p> <span>{t('addMilestone.slope') + ': '}</span>{renderedSlope}</p>
-                <p> <span>{t('addRoute.rank') + ': '}</span> {renderedRank}</p>
-                <p> <span>{t('addRoute.creator') + ': '}</span> {renderedCreatedBy}</p>
+                { renderedDistance !== 0 && <p> <span>{t('addMilestone.distance') + ': '}</span> {renderedDistance}</p> }
+                { renderedSlope !== 0 && <p> <span>{t('addMilestone.slope') + ': '}</span>{renderedSlope}</p> }
+                { renderedRank !== 0 && <p> <span>{t('addRoute.rank') + ': '}</span> {renderedRank}</p> }
+                <p> <span>{t('addRoute.creator') + ': '}</span><a href={renderedCreatedBy}>{renderedCreatedBy}</a></p>
                 <p> <span>{t('addRoute.createdAt') + ': '}</span> {renderedCreatedAt}</p>
+
+                <br/>
+                <div> <Button data-testid="details" className="button, block" label="Details" onClick={() => addMilestones()}>{t('editRoute.title')}</Button> </div>
               </FullGridSize>
 
               <Title id="tituloHito">
@@ -167,31 +187,56 @@ export const RouteDetails = ({ history }: Props) => {
                 <Accordion activeIndex="0" onTabOpen={(a, b) => updateMarker(a)}>
                   {renderedMilestones.filter(m => m).sort((a, b) => a.order - b.order).map(function (milestone, key) {
                     return <AccordionTab key={key} header={milestone.name || milestone.order}>
-                      { milestone.description && <p> {t('addMilestone.description') + ': '} {milestone.description}</p> }
-                      { milestone.distance && <p> {t('addMilestone.distance') + ': '} {milestone.distance}</p> }
-                      <p> {t('addMilestone.altitude') + ': '} {milestone.slope}</p> 
-                      <p> {t('addMilestone.latitude') + ': '} {milestone.latitude}</p> 
-                      <p> {t('addMilestone.longitude') + ': '} {milestone.longitude}</p> 
+                      { milestone.description && <p> <b>{t('addMilestone.description') + ': '}</b> {milestone.description}</p> }
+                      { milestone.distance !== 0 && <p> <b></b>{t('addMilestone.distance') + ': '} {milestone.distance}</p> }
+                      <p> <b>{t('addMilestone.altitude') + ': '}</b> {milestone.slope}</p> 
+                      <p> <b>{t('addMilestone.latitude') + ': '}</b> {milestone.latitude}</p> 
+                      <p> <b>{t('addMilestone.longitude') + ': '}</b> {milestone.longitude}</p> 
                     </AccordionTab>;
                   })}
                 </Accordion>
-
-                <br/>
-                <div> <Button data-testid="details" className="button" label="Details" onClick={() => addMilestones()}>{t('addMilestone.title')}</Button> </div>
               </FullGridSize>
 
-              {images && images.length &&
-                <div>
+              <FullGridSize>
+                { ((images && images.length > 0) || (files && files.length > 0)) &&
                   <Title id="tituloGaleria">
-                    {t('routeDetails.media')}
-                    <br />
-                  </Title>
-
-                  <FullGridSize id="galeria">
-                    <GalleriaComponent images={images} activeIndex={0} isAutoPlayActive={false} isPreviewFullScreen={false} />
-                  </FullGridSize>
-                </div>
-              }
+                      {t('routeDetails.media')}
+                      <br />
+                    </Title>
+                }
+              </FullGridSize>
+              <FullGridSize>
+                { images && images.length > 0 &&
+                  <div>
+                    <h5>
+                      {t('routeDetails.images')}
+                    </h5>
+                    <FullGridSize id="galeria">
+                      <GalleriaComponent images={images} activeIndex={0} isAutoPlayActive={false} isPreviewFullScreen={false} />
+                    </FullGridSize>
+                  </div>
+                }
+              </FullGridSize>
+              <FullGridSize>
+                { files && files.length > 0 &&
+                  <div>
+                    <h5>
+                      {t('routeDetails.other')}
+                    </h5>
+                    <FullGridSize id="otherFiles">
+                      <Accordion activeIndex="0">
+                        {files.sort((a, b) => a.createdAt - b.createdAt).map(function (file, key) {
+                          return <AccordionTab key={key} header={formatUrl(file.href)}>
+                            { file.webId && <p><span>{t('media.webId') + ': '}</span> <a href={file.webId}>{ formatUrl(file.webId, '/viade/') }</a></p> }
+                            { file.href && <p><span>{t('media.href') + ': '}</span> <a href={file.href}> { formatUrl(file.href) }</a></p> }
+                            { file.createdAt && <p> <span>{t('media.createdAt') + ': '}</span> { new Date(file.createdAt).toLocaleDateString().toString() }</p> }
+                          </AccordionTab>;
+                        })}
+                      </Accordion>
+                    </FullGridSize>
+                  </div>
+                }
+              </FullGridSize>
             </div>
           </Card>
           <div>

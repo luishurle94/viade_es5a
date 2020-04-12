@@ -102,7 +102,7 @@ defineFeature(feature, test => {
     then('nos añade la ruta', async () => {
 
         let currentPage = page.url().split("?")[0];
-        expect(currentPage).toBe("http://localhost:3000/#/add-milestone")
+        expect(currentPage).toBe("http://localhost:3000/#/route-edit")
         
     });
 

@@ -35,7 +35,7 @@ describe('Add Route', () => {
     const nameInput = getById(container, 'nameId');
     const query = 'Manhattan Route';
     const mockChange = jest.fn();
-    expect(nameInput.value).toEqual('R01');
+    expect(nameInput.value).toEqual('');
     nameInput.onChange = mockChange;
 
     fireEvent.change(nameInput, { target: { value: query } });
@@ -61,7 +61,7 @@ describe('Add Route', () => {
     const rankInput = getById(container, 'rankId');
     const query = '10';
     const mockChange = jest.fn();
-    expect(rankInput.value).toEqual('5');
+    expect(rankInput.value).toEqual('');
     rankInput.onChange = mockChange;
 
     fireEvent.change(rankInput, { target: { value: query } });

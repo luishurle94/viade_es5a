@@ -290,6 +290,10 @@
       "errorLoadingMilestones": "Oops! There was an error loading your milestones..."
     }
   },
+  "editRoute": {
+    "title": "Edit Route",
+    "upload": "Upload Media"
+  },
   "listRoutes": {
     "title": "Route list",
     "rank": "Rank",
