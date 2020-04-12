@@ -1,0 +1,15 @@
+{
+    "@context": {
+      "schema": "http://schema.org/"
+    },
+    "shape": [
+      {
+        "prefix": "schema",
+        "predicate": "hasPart",
+        "object": "url",
+        "literal": false,
+        "type": "Array"
+      }
+    ]
+  }
+  

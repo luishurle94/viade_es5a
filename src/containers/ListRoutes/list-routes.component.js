@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import { useTranslation } from 'react-i18next';
 import { RouteService, NotificationService } from '@services';
-import { NotificationTypes } from '@inrupt/solid-react-components';
+import { useNotification, NotificationTypes } from '@inrupt/solid-react-components';
 import { successToaster, errorToaster } from '@utils';
 import { Loader } from '@util-components';
 import { DataView } from 'primereact/dataview';
 import { Dialog } from 'primereact/dialog';
 import {
+  TextEditorWrapper,
+  TextEditorContainer,
+  Header,
   Button,
   RouteDetails,
   DialogContent
@@ -159,4 +163,20 @@ export class ListRoutes extends Component {
   }
 }
 
-export default ListRoutes;
+const ListRoutesComponent = ({ history, webId }: Props) => {
+  const { t } = useTranslation();
+  const { createNotification } = useNotification(webId);
+
+  return (
+    <TextEditorWrapper>
+      <TextEditorContainer>
+        <Header>
+          <p>{t('listRoutes.title')}</p>
+        </Header>
+        <ListRoutes t={t} history={history} createNotification={createNotification} />
+      </TextEditorContainer>
+    </TextEditorWrapper>
+  );
+};
+
+export default ListRoutesComponent;

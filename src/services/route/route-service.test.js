@@ -56,7 +56,7 @@ describe.only('Remove route', () => {
 describe.only('Get route', () => {
   test('should get sucessfully', async () => {
     expect(await RouteService.get(HashHelper.hash('soy_una_ruta'))).toBeTruthy();
-    expect(await RouteService.get(HashHelper.hash('soy_una_ruta'), true, true, true)).toBeTruthy();
+    expect(await RouteService.get(HashHelper.hash('soy_una_ruta'), false, false, false)).toBeTruthy();
   });
 
   test('should return undefined', async () => {
@@ -70,6 +70,40 @@ describe.only('Get all routes', () => {
   test('should get sucessfully', async () => {
     expect(await RouteService.getAll()).toBeTruthy();
     expect(await RouteService.getAll(false)).toBeTruthy();
+  });
+
+});
+
+describe.only('Get all shared routes', () => {
+
+  test('should get sucessfully', async () => {
+    expect(await RouteService.getAllShared()).toBeTruthy();
+    expect(await RouteService.getAllShared(false)).toBeTruthy();
+  });
+
+});
+
+describe.only('Sharing route', () => {
+
+  test('should share sucessfully', async () => {
+    const route = new Route();
+    route.webId = 'webID';
+    route.milestones = [' prueba' ]
+    route.media = [' prueba' ]
+    route.messages = [' prueba' ]
+    expect(await RouteService.share(route, HashHelper.hash('soy_un_amigo'))).toBeTruthy();
+  });
+
+  test('should fail. ', async () => {
+    expect(await RouteService.share(new Route())).toBeFalsy();
+    expect(await RouteService.share('aaaa', 'aaaaa')).toBeFalsy();
+  });
+
+});
+
+describe.only('Remove shared route', () => {
+  test('should remove sucessfully', async () => {
+    expect(await RouteService.removeShared('soy_una_ruta_compartida')).toBe(true);
   });
 
 });
