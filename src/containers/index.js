@@ -17,7 +17,6 @@ export {
   Profile,
   AddRoute,
   EditRoute,
-  ListRoutes,
   ListOwnRoutes,
   ListSharedRoutes,
   ListFriends

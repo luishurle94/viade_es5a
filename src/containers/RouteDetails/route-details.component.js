@@ -188,7 +188,7 @@ export const RouteDetails = ({ history }: Props) => {
                   {renderedMilestones.filter(m => m).sort((a, b) => a.order - b.order).map(function (milestone, key) {
                     return <AccordionTab key={key} header={milestone.name || milestone.order}>
                       { milestone.description && <p> <b>{t('addMilestone.description') + ': '}</b> {milestone.description}</p> }
-                      { milestone.distance !== 0 && <p> <b></b>{t('addMilestone.distance') + ': '} {milestone.distance}</p> }
+                      { milestone.distance && <p> <b>{t('addMilestone.distance') + ': '}</b> {milestone.distance}</p> }
                       <p> <b>{t('addMilestone.altitude') + ': '}</b> {milestone.slope}</p> 
                       <p> <b>{t('addMilestone.latitude') + ': '}</b> {milestone.latitude}</p> 
                       <p> <b>{t('addMilestone.longitude') + ': '}</b> {milestone.longitude}</p> 
