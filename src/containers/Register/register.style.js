@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { Panel } from '@util-components';
 
 export const RegisterWrapper = styled.section`

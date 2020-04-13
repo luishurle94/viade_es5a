@@ -4,13 +4,13 @@
 export const NavigationItems = [
   {
     id: 'add-route',
-    icon: 'img/icon/route.png',
+    icon: 'img/icon/route-add.svg',
     label: 'navBar.add-route',
     to: '/add-route'
   },
   {
     id: 'list-routes',
-    icon: 'img/bars-nav.svg',
+    icon: 'img/icon/route-list.svg',
     label: 'navBar.list-routes',
     to: '/list-routes'
   },

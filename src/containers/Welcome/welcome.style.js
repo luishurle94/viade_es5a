@@ -1,10 +1,16 @@
 import styled from 'styled-components';
+
+import {
+  GradientBackground,
+  Panel,
+} from '@util-components';
+
 import { media } from '../../utils';
 
-export const WelcomeWrapper = styled.section`
+export const WelcomeWrapper = styled(GradientBackground)`
   width: 100%;
-  background-image: url('img/concentric-hex-pattern_2x.png');
-  background-repeat: repeat;
+  /**background-image: url('img/concentric-hex-pattern_2x.png');
+  background-repeat: repeat;*/
   padding: 50px 0;
 
   h3 {
@@ -18,8 +24,9 @@ export const WelcomeWrapper = styled.section`
   }
 `;
 
-export const WelcomeCard = styled.div`
+export const WelcomeCard = styled(Panel)`
   background-color: #fff;
+  background-image:none;
   margin: 30px auto;
 
   //Overriding the style guide card flexbox settings
