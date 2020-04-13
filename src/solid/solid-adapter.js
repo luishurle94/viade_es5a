@@ -169,15 +169,15 @@ export const checkParams = async (createDocument, webId, parentWebId, parentFile
   return {createDocument, webId, parentWebId, parentFilename, parentPredicate, folder};
 }
 
-  export const getFriends = async (webId) => {
-    return await SolidHelper.getFriends(webId);
-  }
-  
-  export const createFile = async (webId, body, mimeType) => {
-    return await SolidHelper.createFile(webId, body, mimeType);
-  }
-  
-  const isValidUrl = (string) => {
+export const getFriends = async (webId) => {
+  return await SolidHelper.getFriends(webId);
+}
+
+export const createFile = async (webId, body, mimeType) => {
+  return await SolidHelper.createFile(webId, body, mimeType);
+}
+
+const isValidUrl = (string) => {
     try {
       new URL(string);
     } catch (_) {
@@ -186,3 +186,4 @@ export const checkParams = async (createDocument, webId, parentWebId, parentFile
   
     return true;
   }
+

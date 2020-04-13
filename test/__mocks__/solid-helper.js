@@ -1,5 +1,5 @@
 import 'jest';
-import { HashHelper} from '@utils'
+import { HashHelper } from '@utils'
 
 export default jest.mock('../../src/solid/solid-helper', () => {
   let files = [];
@@ -24,17 +24,17 @@ export default jest.mock('../../src/solid/solid-helper', () => {
     predicate: 'foaf:name'
   });
   links.push({
-    obj: -10 ,
+    obj: -10,
     webId: HashHelper.hash('soy_un_hito'),
     predicate: 'schema:latitude'
   });
   links.push({
-    obj: 10 ,
+    obj: 10,
     webId: HashHelper.hash('soy_un_hito'),
     predicate: 'schema:longitude'
   });
   links.push({
-    obj: 11 ,
+    obj: 11,
     webId: HashHelper.hash('soy_un_hito'),
     predicate: 'schema:elevation'
   });
@@ -45,17 +45,17 @@ export default jest.mock('../../src/solid/solid-helper', () => {
     predicate: 'foaf:name'
   });
   links.push({
-    obj: -11 ,
+    obj: -11,
     webId: HashHelper.hash('soy_un_hito2'),
     predicate: 'schema:latitude'
   });
   links.push({
-    obj: 11 ,
+    obj: 11,
     webId: HashHelper.hash('soy_un_hito2'),
     predicate: 'schema:longitude'
   });
   links.push({
-    obj: 12 ,
+    obj: 12,
     webId: HashHelper.hash('soy_un_hito2'),
     predicate: 'schema:elevation'
   });
