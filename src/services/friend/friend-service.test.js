@@ -43,3 +43,13 @@ describe.only('Get all friends', () => {
     expect(await FriendService.getAll(false)).toBeTruthy();
   });
 });
+
+describe.only('Add a friend', () => {
+test('should add successfully', async () => {
+  expect(await FriendService.add('https://isafdezpe.solid.community/profile/card#me')).toBeTruthy();
+})
+
+test('should not add successfully', async () => {
+  expect(await FriendService.add()).toBeFalsy();
+})
+});
