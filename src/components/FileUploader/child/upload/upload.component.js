@@ -23,13 +23,14 @@ export class Upload extends Component {
   }
 
   onFilesAdded(files) {
+    this.setState({ successfullUploaded: false });
     this.setState(prevState => ({
       files: prevState.files.concat(files)
     }));
   }
 
   async uploadFiles() {
-    this.setState({ uploadProgress: {}, uploading: true });
+    this.setState({ successfullUploaded: false, uploadProgress: {}, uploading: true });
     this.setState({
       isLoading: true
     })
@@ -79,10 +80,11 @@ export class Upload extends Component {
             />
           </div>
           <div className="Files">
+            { this.state.successfullUploaded && <p><b>{ this.props.t('file.success') }</b></p> }
             {this.state.files.map(file => {
               return (
                 <div key={file.name} className="Row" data-testif="file">
-                  <span className="Filename">{file.name}</span>
+                  <span className="Filename">{file.name.substring(0, 20)}</span>
                 </div>
               );
             })}
@@ -90,6 +92,11 @@ export class Upload extends Component {
         </div>
         <div className="Actions">{this.renderActions()}</div>
         {this.state.uploading && <Loader absolute />}
+        <ul>
+          <li><i>- { this.props.t('file.description1') }</i></li>
+          <li><i>- { this.props.t('file.description2') }</i></li>
+          <li><i>- { this.props.t('file.description3') }</i></li>
+        </ul>
       </div>
     );
   }

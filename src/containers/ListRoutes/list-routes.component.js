@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { useTranslation } from 'react-i18next';
-import { RouteService } from '@services';
-import { errorToaster } from '@utils';
+import { RouteService, NotificationService } from '@services';
+import { useNotification, NotificationTypes } from '@inrupt/solid-react-components';
+import { successToaster, errorToaster } from '@utils';
 import { Loader } from '@util-components';
 import { DataView } from 'primereact/dataview';
 import { Dialog } from 'primereact/dialog';
@@ -27,12 +28,13 @@ export class ListRoutes extends Component {
       sortKey: null,
       sortOrder: null,
       rows: 5,
+      selectedFriends: []
     };
     this.itemTemplate = this.itemTemplate.bind(this);
   }
 
   componentDidMount() {
-    RouteService.getAll(true)
+    this.props.getAll(true)
       .then(list => {
         if (list) {
           list = list.filter(i => i !== null && i !== undefined);
@@ -52,7 +54,16 @@ export class ListRoutes extends Component {
   }
 
   goToAddMilestone(route) {
-    this.props.history.push(`add-milestone?routeId=${route.webId}`);
+    this.props.history.push(`route-edit?routeId=${route.webId}`);
+  }
+
+  async delete(route) {
+    if (route.createdBy === this.props.webId)
+      await RouteService.remove(route.webId);
+    if (route.createdBy && route.createdBy !== this.props.webId)
+      await RouteService.removeShared(route.webId);
+
+    this.props.history.push(this.props.history.location)
   }
 
   itemTemplate(route) {
@@ -70,12 +81,18 @@ export class ListRoutes extends Component {
             <div className="p-grid">
               {route.description && <div className="p-col-12">{route.description}</div>}
               {route.rank && <div className="p-col-12">{this.props.t('listRoutes.rank')}: {route.rank}</div>}
+              {route.createdBy && route.createdBy !== this.props.webId && <div data-testid="createdBy" className="p-col-12">{this.props.t('listRoutes.createdBy')}: {route.createdBy}</div>}
             </div>
             <div className="buttons">
               <div className="flex-buttons">
                 <div><Button id="details" data-testid="details" className="button" label="Details" onClick={() => this.seeDetails(route)}>{this.props.t('listRoutes.details')}</Button></div>
-                <div><Button data-testid="addMilestone" className="button" label="addMilestone" onClick={() => this.goToAddMilestone(route)}>{this.props.t('listRoutes.addMilestone')}</Button></div>
-                <div><Button data-testid="share" className="button" label="Share" onClick={() => this.share(route)}>{this.props.t('listRoutes.share')}</Button></div>
+                {route.createdBy === this.props.webId &&
+                  <div><Button data-testid="addMilestone" className="button" label="addMilestone" onClick={() => this.goToAddMilestone(route)}>{this.props.t('listRoutes.edit')}</Button></div>
+                }
+                {route.createdBy === this.props.webId &&
+                  <div><Button data-testid="share" className="button" label="Share" onClick={() => this.share(route)}>{this.props.t('listRoutes.share')}</Button></div>
+                }
+                <div><Button data-testid="delete" className="button" label="Delete" onClick={() => this.delete(route)}>{this.props.t('listRoutes.delete')}</Button></div>
               </div>
             </div>
           </div>
@@ -88,15 +105,42 @@ export class ListRoutes extends Component {
     if (this.state.selectedRoute) {
       return (
         <DialogContent>
-          <ListFriends />
+          <ListFriends selected={this.selectedFriends.bind(this)} />
           <Button data-testid="send" className="button" label="send" onClick={() => this.sendButton()}>{this.props.t('listRoutes.send')}</Button>
         </DialogContent>
       );
     }
   }
 
-  sendButton() {
-    errorToaster('This funcionality is not implemented yet');
+  selectedFriends(friends) {
+    this.setState({ selectedFriends: friends })
+  }
+
+  async sendButton() {
+    let everythingNoError = true;
+    for (const friend of this.state.selectedFriends) {
+      const res = await RouteService.share(this.state.selectedRoute, friend.webId + 'me');
+      if (res) {
+        const notificationContent = {
+          title: this.props.t('listRoutes.notificationTitle'),
+          summary: this.state.selectedRoute.name,
+          url: this.state.selectedRoute.webId
+        };
+        const url = `${window.location.href.replace('list-routes', 'route-details')}?routeId=${this.state.selectedRoute.webId}`
+        const publish = await NotificationService.publish(this.props.createNotification, notificationContent, friend.webId + 'me', NotificationTypes.INVITE, url);
+        if (!publish) {
+          everythingNoError = false;
+        }
+      } else {
+        everythingNoError = false;
+      }
+    }
+
+    if (everythingNoError) {
+      successToaster(this.props.t('listRoutes.shared'))
+    } else {
+      errorToaster(this.props.t('listRoutes.error'))
+    }
     this.setState({ selectedRoute: null, visible: false })
   }
 
@@ -119,8 +163,9 @@ export class ListRoutes extends Component {
   }
 }
 
-const ListRoutesComponent = ({ history }: Props) => {
+const ListRoutesComponent = ({ history, webId }: Props) => {
   const { t } = useTranslation();
+  const { createNotification } = useNotification(webId);
 
   return (
     <TextEditorWrapper>
@@ -128,7 +173,7 @@ const ListRoutesComponent = ({ history }: Props) => {
         <Header>
           <p>{t('listRoutes.title')}</p>
         </Header>
-        <ListRoutes t={t} history={history} />
+        <ListRoutes t={t} history={history} createNotification={createNotification} />
       </TextEditorContainer>
     </TextEditorWrapper>
   );

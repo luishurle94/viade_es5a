@@ -105,6 +105,14 @@ export const getAppPathStorage = async (webId) => {
   return await storageHelper.getAppStorage(webId);
 }
 
+export const getPathStorage = async (webId) => {
+  return await storageHelper.getStorage(webId);
+}
+
+export const createInitialFiles = async (webId) => {
+  await storageHelper.createInitialFiles(webId);
+}
+
 export const getPredicate = (field, context) => {
   const prefix = context['@context'][field.prefix];
   return `${prefix}${field.predicate}`;
