@@ -14,7 +14,7 @@ jest.mock('solid-auth-client');
 const makeid = (length) => {
   let result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  const charactersLength = characters.length; 
+  const charactersLength = characters.length;
   for (let i = 0; i < length; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
@@ -29,7 +29,7 @@ const friend = new Friend(nameFriend);
 describe.only('Get friend', () => {
 
   test('should get successfully', async () => {
-    expect(await FriendService.get(HashHelper.hash('soy_un_amigo'))).toBeTruthy(); 
+    expect(await FriendService.get(HashHelper.hash('soy_un_amigo'))).toBeTruthy();
   })
 
   test('should return undefined', async () => {
@@ -45,11 +45,7 @@ describe.only('Get all friends', () => {
 });
 
 describe.only('Add a friend', () => {
-test('should add successfully', async () => {
-  expect(await FriendService.add('https://isafdezpe.solid.community/profile/card#me')).toBeTruthy();
-})
-
-test('should not add successfully', async () => {
-  expect(await FriendService.add()).toBeFalsy();
-})
+  test('should add successfully', async () => {
+    await FriendService.add('https://isafdez2.solid.community/profile/card#me', 'https://isafdezpe.solid.community/profile/card#me');
+  })
 });

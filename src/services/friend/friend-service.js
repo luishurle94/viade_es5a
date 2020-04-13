@@ -34,9 +34,10 @@ export const getAll = async (getData = true) => {
 
 /**
  * Add friend
- * @param {String} webId friend 
+ * @param {String} friendWebId friend 
+ * @param {String} webId me
  * @returns boolean if action is exectuted sucesfully
  */
-export const add = async (webId) => {
-  return await SolidAdapter.addFriend(webId);
+export const add = async (friendWebId, webId) => {
+    return await SolidAdapter.link(webId, friendWebId, false, 'knows');
 }

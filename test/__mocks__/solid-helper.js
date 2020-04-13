@@ -198,18 +198,6 @@ export default jest.mock('../../src/solid/solid-helper', () => {
     return friend;
   })
 
-  const addFriend = jest.fn(async (friendWebId, webId) => {
-    if (friendWebId && webId) {
-      let friends = [];
-      let friend = {};
-      friend.webId = friendWebId;
-      friend.image = 'https://image.shutterstock.com/image-vector/profile-placeholder-image-gray-silhouette-260nw-1153673752.jpg';
-      friends.push(friend);
-      return true;
-    }
-    return false;
-  })
-
   const createFile = async (webId, body, mimeType) => {
     if (body && body === '404') {
       return false;
@@ -230,7 +218,6 @@ export default jest.mock('../../src/solid/solid-helper', () => {
     getPredicate,
     getFriends,
     getFriendData,
-    createFile,
-    addFriend
+    createFile
   }
 });

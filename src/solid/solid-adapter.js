@@ -160,11 +160,6 @@ export const createFile = async (webId, body, mimeType) => {
   return await SolidHelper.createFile(webId, body, mimeType);
 }
 
-export const addFriend = async (friendWebId) => {
-  const session = await auth.currentSession();
-  return await SolidHelper.addFriend(friendWebId, session.webId);
-}
-  
 const isValidUrl = (string) => {
   try {
     new URL(string);

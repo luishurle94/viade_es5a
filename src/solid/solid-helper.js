@@ -136,14 +136,3 @@ export const createFile = async (webId, body, mimeType) => {
     return false;
   }
 }
-
-export const addFriend = async (friendWebId, webId) => {
-  try {
-    const me = ldflex[webId];
-    const friend = ldflex[friendWebId];
-    await me.friends.add(friend);
-    return true;
-  } catch (e) {
-    return false;
-  }  
-}
