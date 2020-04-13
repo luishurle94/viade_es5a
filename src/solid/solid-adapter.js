@@ -165,3 +165,12 @@ export const addFriend = async (friendWebId) => {
   return await SolidHelper.addFriend(friendWebId, session.webId);
 }
   
+const isValidUrl = (string) => {
+  try {
+    new URL(string);
+  } catch (_) {
+    return false;  
+  }
+
+  return true;
+}
