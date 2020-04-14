@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNotification } from '@inrupt/solid-react-components';
 import { Loader } from '@util-components';
 import { DataView } from 'primereact/dataview';
 import {
@@ -74,7 +73,6 @@ export class FriendDetails extends Component {
 
 const ListFriendsComponent = ({ history, webId }: Props) => {
   const { t } = useTranslation();
-  const { createNotification } = useNotification(webId);
 
   return (
     <TextEditorWrapper>
@@ -82,7 +80,7 @@ const ListFriendsComponent = ({ history, webId }: Props) => {
         <Header>
           <p>{t('listFriendData.title')}</p>
         </Header>
-        <FriendDetails t={t} history={history} createNotification={createNotification} />
+        <FriendDetails t={t} history={history} />
       </TextEditorContainer>
     </TextEditorWrapper>
   );

@@ -9,7 +9,7 @@ import {
 } from './list-friend-data.style';
 import { useNotification } from '@inrupt/solid-react-components';
 
-const ListFriendsData = ({ history, webId }: Props) => {
+export const ListFriendsData = ({ history, webId }: Props) => {
   const { t } = useTranslation();
   const { createNotification } = useNotification(webId);
 
