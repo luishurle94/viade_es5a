@@ -26,7 +26,7 @@ export const getAll = async (getData = true) => {
 
   const res = [];
   for(let u of list) {
-    const r = await get(u);
+    const r = await get(u.webId);
     res.push(r);
   }
   return res;

@@ -54,7 +54,7 @@ export const Button = styled.button`
   }
 `;
 
-export const RouteDetails = styled.div`
+export const FriendDetailsWrapper = styled.div`
   display: grid;
   border: 0.5px groove;
   padding: 10px;

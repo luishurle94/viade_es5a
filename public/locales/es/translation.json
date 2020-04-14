@@ -313,7 +313,8 @@
     "error": "Tu amigo tiene problemas con la bandeja de entrada. No se ha podido completar correctamente la operación."
   },
   "listFriendData": {
-    "title": "Lista de amigos"
+    "title": "Lista de amigos",
+    "unnamedFriend": "Amigo"
   },
   "file": {
     "dropzone": {
