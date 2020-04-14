@@ -2,6 +2,7 @@
   "@context": {
     "@vocab": "http://xmlns.com/foaf/0.1/",
     "friends": "knows",
+    "foaf": "http://xmlns.com/foaf/0.1/",
     "vcard": "https://www.w3.org/2006/vcard/ns#",
     "solid": "http://www.w3.org/ns/solid/terms#"
   },
@@ -22,7 +23,7 @@
     },
     {
       "prefix": "vcard",
-      "predicate": "hasFoto",
+      "predicate": "hasPhoto",
       "object": "image",
       "literal": false,
       "type": "String"

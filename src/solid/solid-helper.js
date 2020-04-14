@@ -69,6 +69,7 @@ export const fetchRawData = async (url, context) => {
 
     return data;
   } catch (error) {
+    console.log(error)
     throw error;
   }
 }

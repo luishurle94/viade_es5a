@@ -17,6 +17,7 @@ import {
   AddRoute,
   ListOwnRoutes,
   ListSharedRoutes,
+  ListFriendsData,
   Login,
   PageNotFound,
   Profile,
@@ -63,7 +64,11 @@ const privateRoutes = [
     id: 'list-shared-routes',
     path: '/list-shared-routes',
     component: ListSharedRoutes
-  },
+  },  {
+    id: 'list-friends',
+    path: '/list-friends',
+    component: ListFriendsData
+  }
 ];
 
 const Routes = () => (
