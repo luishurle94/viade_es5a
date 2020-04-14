@@ -1,7 +1,7 @@
 import 'jest'
 import { defineFeature, loadFeature } from 'jest-cucumber';
 
-const feature = loadFeature('./feature/features/addroute.feature');
+const feature = loadFeature('./feature/features/listFriends.feature');
 const puppeteer = require('puppeteer')
 let browser = null;
 let page = null;
@@ -12,9 +12,9 @@ defineFeature(feature, test => {
     jest.setTimeout(1200000);
   });
 
-  test('Añadiendo una ruta en la aplicación', ({ given, when, then }) => {
+  test('Listando mis amigos', ({ given, when, then }) => {
     
-    given('Soy un usuario en sesión que añade una ruta', async () => {
+    given('Soy un usuario en sesión', async () => {
       browser = await puppeteer.launch({
         headless: false
       })
@@ -67,51 +67,19 @@ defineFeature(feature, test => {
 
     });
 
-    when('relleno el formulario', async () => {
+    when('voy a la lista de amigos', async () => {
 
-        await page.goto("http://localhost:3000/#/add-route", {
-          waitUntil: 'networkidle2'
-        });
-
-        await page.waitForSelector("[id='nameId']", {visible: true});
-        await page.type("[id='nameId']", "Ruta " + new Date());
-  
-        await page.waitFor(500);
-        
-        await page.waitForSelector("[id='descriptionId']", {visible: true});
-        await page.type("[id='descriptionId']", "Estoy escribiendo esto con la mente....");
-
-        await page.waitFor(500);
-
-        await page.waitForSelector("[id='rankId']", {visible: true});
-        await page.type("[id='rankId']", "7");
-
-        await page.waitFor(500);
-
-        await page.evaluate(() => {
-          let btns = [...document.querySelectorAll("[id='submitId']")];
-          btns.forEach(function (btn) {
-            if (btn.value == "Enviar"){
-              btn.click();
-            }
-              
-          });
-        });
-
-        await page.waitForNavigation({
+        await page.goto("http://localhost:3000/#/list-friends", {
           waitUntil: 'networkidle2'
         });
 
     });
 
-    then('nos añade la ruta', async () => {
-
-        let currentPage = page.url().split("?")[0];
-        expect(currentPage).toBe("http://localhost:3000/#/route-edit")
-        
+    then('veo a mis amigos', async () => {
+      await page.waitFor(500);
+      await page.waitForSelector(".p-col-12", {visible: true});      
     });
-
-    
+   
 
   });
 
