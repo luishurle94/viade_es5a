@@ -5,6 +5,7 @@ import { render, cleanup, fireEvent } from 'react-testing-library';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history'
 import { ListRoutes } from '../list-routes.component';
+import ListSharedRoutesComponent from './list-routes.component';
 import {
   TextEditorWrapper,
   TextEditorContainer,
@@ -44,17 +45,8 @@ describe('List routes', () => {
   const history = createMemoryHistory();
 
   const { container, queryByText, getByTestId } = render(
-    <TextEditorWrapper>
-      <TextEditorContainer>
-        <Header>
-          <p>{t('listRoutes.title')}</p>
-        </Header>
-      <ListRoutes t={t} history = {history} webId={'Isabel'} getAll = {RouteService.getAllShared}/>
-      </TextEditorContainer>
-    </TextEditorWrapper>
-  );
-
-  const {container2} = render(<RouteDetails/>);
+    <ListSharedRoutesComponent history={history} webId={'Isabel'} />
+  )
 
   test('should render without crashing', () => {
     expect(container).toBeTruthy();

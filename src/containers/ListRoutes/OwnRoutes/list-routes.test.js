@@ -5,13 +5,14 @@ import { render, cleanup, fireEvent } from 'react-testing-library';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history'
 import { ListRoutes } from '../list-routes.component';
+import ListOwnRoutesComponent from './list-routes.component';
 import {
   TextEditorWrapper,
   TextEditorContainer,
   Header,
   RouteDetails
 } from '../list-routes.style';
-import {Route} from '@models'
+import { Route } from '@models'
 
 import { RouteService } from '@services';
 
@@ -41,35 +42,26 @@ describe('List routes', () => {
     new Route('Ruta 4', 'Descripción 4', 10, 10, 2)
   ];
 
-  const { t } = useTranslation();  
+  const { t } = useTranslation();
   const history = createMemoryHistory();
 
   const { container, queryByText, getByTestId } = render(
-    <TextEditorWrapper>
-      <TextEditorContainer>
-        <Header>
-          <p>{t('listRoutes.title')}</p>
-        </Header>
-      <ListRoutes t={t} history = {history} webId={'Isabel'} getAll = {RouteService.getAll}/>
-      </TextEditorContainer>
-    </TextEditorWrapper>
-  );
-
-  const {container2} = render(<RouteDetails/>);
+    <ListOwnRoutesComponent history={history} webId={'Isabel'} />
+  )
 
   test('should render without crashing', () => {
     expect(container).toBeTruthy();
   });
 
   test('route list', () => {
-    const {getAllByTestId} = render(<ListRoutes t={t} getAll = {RouteService.getAll}/>);
+    const { getAllByTestId } = render(<ListRoutes t={t} getAll={RouteService.getAll} />);
     const routeNames = getAllByTestId('routeName').map(li => li.textContent);
     expect(routeNames.length).toBe(4);
     expect(routeNames).toEqual(routes.map(r => r.name));
   });
 
   test('list own routes buttons', () => {
-    const {getAllByTestId} = render(<ListRoutes t={t} webId={'Isabel'} getAll = {RouteService.getAll}/>);
+    const { getAllByTestId } = render(<ListRoutes t={t} webId={'Isabel'} getAll={RouteService.getAll} />);
     let buttons = getAllByTestId('details');
     expect(buttons.length).toBe(4);
     buttons = getAllByTestId('addMilestone');
