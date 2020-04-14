@@ -130,7 +130,7 @@ export const getFriendData = async (webId) => {
   let friend = {};
   let data = ldflex[webId];
   friend.fn = `${await data.vcard_fn}`;
-  friend.webId = `${await data["solid:account"]}`.concat("profile/card#");
+  friend.webId = `${await data["solid:account"]}`.concat("profile/card#me");
   friend.image = `${await data["vcard:hasPhoto"]}`;
   return friend;
 }
