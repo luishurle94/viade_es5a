@@ -54,6 +54,19 @@ export const Button = styled.button`
   }
 `;
 
+export const MainButton = styled.button`
+  max-width: 128px;
+  display: inline-block;
+  background-color: #7C4DFF;
+  color: white;
+  text-align: center;
+  height: 60px;
+
+  &:first-child {
+    margin-right: 10px;
+  }
+`;
+
 export const FriendDetailsWrapper = styled.div`
   display: grid;
   border: 0.5px groove;
@@ -90,6 +103,11 @@ export const FriendDetailsWrapper = styled.div`
     
   }
 
+`;
+
+export const Input = styled.input`
+  margin: 5px;
+  max-width: 400px;
 `;
 
 export const DialogContent = styled.div`

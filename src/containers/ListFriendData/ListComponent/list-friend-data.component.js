@@ -17,27 +17,33 @@ export class FriendDetails extends Component {
     super(props);
     this.state = {
       layout: 'list',
-      rows: 5
+      rows: 5,
+      list: props.getAll
     };
     this.itemTemplate = this.itemTemplate.bind(this);
   }
 
-  componentDidMount() {
-    this.props.getAll(true)
+  componentWillReceiveProps(nextProps){
+
+    this.setState({list: nextProps.getAll, isLoading: true}, () => {
+      this.state.list
       .then(list => {
         if (list) {
-          list = list.filter(i => i !== null && i !== undefined);
+          list = list.filter(i => i !== null && i !== undefined).map(obj => { return {...obj, profile: obj.webId.concat('profile/card#me')} });
           let l = list.length > 5 ? 5 : list.length;
-          this.setState({ friends: list, rows: l });
-
+          this.setState({ friends: list, list: list, rows: l, isLoading: false });
+          
         }
       }).catch(err => console.error(err));
+    });
+
+
   }
+
 
   itemTemplate(friend) {
     if (!friend) {
-      return (
-        <div className="p-col-12"></div>
+      return (<div className="p-col-12"></div>
       );
     }
     return (
@@ -47,7 +53,7 @@ export class FriendDetails extends Component {
           {!friend.name && <div data-testid="friendName" className="p-col-12"><b>{this.props.t('listFriendData.unnamedFriend')}</b></div>}
           <div className="content">
             <div className="p-grid">
-              {friend.webId && <div className="p-col-12">{friend.webId}</div>}
+              {friend.profile && <a className="p-col-12" href ={friend.profile}>{friend.profile}</a>}
             </div>
           </div>
         </FriendDetailsWrapper>
@@ -64,7 +70,7 @@ export class FriendDetails extends Component {
               itemTemplate={this.itemTemplate} paginatorPosition={'both'} paginator={true} rows={this.state.rows} />
           </div>
         }
-        {!this.state.friends && <Loader />}
+        { (!this.state.friends || this.state.isLoading) &&  <Loader />}
       </div>
 
     );

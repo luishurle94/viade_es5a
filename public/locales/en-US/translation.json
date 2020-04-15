@@ -315,7 +315,13 @@
   },
   "listFriendData": {
     "title": "Friend list",
-    "unnamedFriend": "Friend"
+    "unnamedFriend": "Friend",
+    "add": "Add Friend",
+    "addTitle": "Introduce your friend's webId",
+    "addButton": "Add",
+    "error": "Oops! There has been a problem adding your friend",
+    "success": "Your friend has been added",
+    "invalidUrl": "You must provide a valid webId"
   },
   "file": {
     "dropzone": {

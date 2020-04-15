@@ -29,11 +29,6 @@ jest.spyOn(FriendService, 'getAll').mockImplementationOnce(() => {
 describe('List friends', () => {
   afterAll(cleanup);
 
-  const myFriends = [
-    new Friend('https://uo264046.solid.community/profile/card#me', 'Adri', undefined),
-    new Friend('https://adrian99.solid.community/profile/card#me', 'Adri99', undefined)
-  ];
-
   const { t } = useTranslation();  
   const history = createMemoryHistory();
 
@@ -52,13 +47,6 @@ describe('List friends', () => {
 
   test('should render without crashing', () => {
     expect(container).toBeTruthy();
-  });
- 
-  test('all friends must be listed', () => {
-    const {getAllByTestId} = render(<FriendDetails t={t} webId={'https://uo264046.solid.community/profile/card#me'} history={history} getAll={FriendService.getAll}/>);
-    const routeNames = getAllByTestId('friendName').map(li => li.textContent);
-    expect(routeNames.length).toBe(2);
-    expect(routeNames).toEqual(myFriends.map(r => r.name));
   });
 
 });

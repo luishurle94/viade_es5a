@@ -314,7 +314,13 @@
   },
   "listFriendData": {
     "title": "Lista de amigos",
-    "unnamedFriend": "Amigo"
+    "unnamedFriend": "Amigo",
+    "add": "Añadir Amigo",
+    "addTitle": "Introduce el webId de tu amigo",
+    "addButton": "Añadir",
+    "error": "¡Ups! Ha habido un error al añadir tu amigo",
+    "success": "Tu amigo ha sido añadido",
+    "invalidUrl": "Debes proporcionar un webId válido"
   },
   "file": {
     "dropzone": {

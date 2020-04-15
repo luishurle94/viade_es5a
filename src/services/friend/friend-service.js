@@ -27,7 +27,10 @@ export const getAll = async (getData = true) => {
   const res = [];
   for(let u of list) {
     const r = await get(u.webId);
-    res.push(r);
+    if(r){
+      res.push(r);
+    }
+      
   }
   return res;
 }
@@ -39,5 +42,10 @@ export const getAll = async (getData = true) => {
  * @returns boolean if action is exectuted sucesfully
  */
 export const add = async (friendWebId, webId) => {
-    return await SolidAdapter.link(webId, friendWebId, false, 'knows');
+    try {
+      return await SolidAdapter.link(webId, friendWebId, false, 'knows');
+    } catch(e){
+      console.log(e)
+    }
+    
 }
