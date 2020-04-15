@@ -4,6 +4,7 @@ import {
   GradientBackground,
   Panel,
 } from '@util-components';
+
 import { media } from '@utils';
 
 export const TextEditorWrapper = styled(GradientBackground)`
