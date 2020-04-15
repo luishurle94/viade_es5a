@@ -62,18 +62,6 @@ export const AddRoute = ({ webId, history }: Props) => {
     values[1] = event.target.value;
   }
 
-  function checkRank(event) {
-
-    values[3] = event.target.value;
-    if(Number.parseInt(event.target.value) < Number.parseInt(event.target.min) 
-      || Number.parseInt(event.target.value) > Number.parseInt(event.target.max)) {
-      errorToaster(t('addRoute.notifications.rank'));
-      errors[3] = true;
-    } else{
-      errors[3] = false;
-    }
-  }
-
   async function checkSubmit(event){
     event.preventDefault();
 
@@ -95,7 +83,7 @@ export const AddRoute = ({ webId, history }: Props) => {
       if(res && res.added === true && res.webId){
         setIsLoading(false);
         successToaster(t('addRoute.notifications.correct'));
-        history.push(`/add-milestone?routeId=${res.webId}`);
+        history.push(`/route-edit?routeId=${res.webId}`);
 
       } else {
         setIsLoading(false);
@@ -125,7 +113,7 @@ export const AddRoute = ({ webId, history }: Props) => {
       <FullGridSize>
         <Label>
           {t('addRoute.name') + '*'}
-          <Input id="nameId" data-testid="nameId" type="text" size="200" defaultValue="R01" onBlur={checkName} />
+          <Input id="nameId" data-testid="nameId" type="text" size="200" defaultValue="" onBlur={checkName} />
         </Label>
 
           <Label>
@@ -134,8 +122,8 @@ export const AddRoute = ({ webId, history }: Props) => {
           </Label>
 
         <Label>
-          {t('addRoute.rank') + '*'}
-          <Input id="rankId" data-testid="rankId" type="number" min="0" max="10" defaultValue={5} onBlur={checkRank} size="200"/>
+          {t('addRoute.rank')}
+          <Input id="rankId" data-testid="rankId" type="number" min="0" max="10" size="200"/>
         </Label>
 
         <Input id="submitId" data-testid="submitId" type="submit" className="ids-link-filled ids-link-filled--primary button" value={t('addRoute.submit')} />
