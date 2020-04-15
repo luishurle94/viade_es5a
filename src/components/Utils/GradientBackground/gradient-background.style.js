@@ -4,8 +4,7 @@ export const Gradient = styled.div`
   background-image: linear-gradient(#00F8A9, #4F7DEC);
   background-repeat: no-repeat;
   box-sizing: border-box;
-  height: 100%;
-  width: 100%;
+  background-size: cover;
   position: relative;
 
   &::before {

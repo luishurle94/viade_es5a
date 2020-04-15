@@ -8,6 +8,8 @@ export const CenterContainerWrapper = styled.section`
   justify-content: center;
   align-items: center;
   text-align: center;
+  min-height: 100vh;
+  
 
   h1 {
     box-sizing: border-box;

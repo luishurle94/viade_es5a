@@ -1,15 +1,20 @@
 import styled from 'styled-components';
 
-export const ProfileWrapper = styled.section`
+import {
+  GradientBackground,
+  Panel,
+} from '@util-components';
+
+export const ProfileWrapper = styled(GradientBackground)`
+  background-repeat: repeat;
   display: flex;
   flex: 1 0 auto;
   align-items: center;
   justify-content: center;
-  background-image: url('img/concentric-hex-pattern_2x.png');
-  background-repeat: repeat;
   padding: 60px 0;
+  margin: auto;
 `;
-export const ProfileContainer = styled.div`
+export const ProfileContainer = styled(Panel)`
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
   background-color: white;
   max-width: 900px;

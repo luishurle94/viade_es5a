@@ -9,11 +9,9 @@ import {
 import { RouteDetailsMapContainer } from './route-details-map.style';
 
 const mapStyles = {
-  flex: 1,
-    // width: '375%',
-    // height: '250%',
-  };
-  
+  width: '115%',
+  height: '100%',
+};
 
 export class RouteDetailsMap extends Component  {
 

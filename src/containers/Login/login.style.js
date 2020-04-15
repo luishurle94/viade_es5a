@@ -6,6 +6,9 @@ import {
 } from '@util-components';
 
 export const LoginWrapper = styled(GradientBackground)`
+  height: 100%;
+  height:auto;
+  background-size: auto;
   h1 {
     color: #06016B;
   }
@@ -17,6 +20,9 @@ export const LoginPanel = styled(Panel)``;
 export const PanelBody = styled.div`
   display: grid;
   flex-direction: column;
+  witdh: 100px;
+  
+  
   
   .provider-login-component {
     div[role='option'] {

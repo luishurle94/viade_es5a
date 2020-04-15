@@ -158,8 +158,8 @@ export const RouteDetails = ({ history }: Props) => {
     <div>
 
       <Form>
-        <div style={flexStyle}>
-          <Card style={{ minWidth: '450px', maxWidth: '450px' }}>
+        <div style={flexStyle} className="p-grid">
+          <Card className="p-col-12 p-md-6 p-lg-3" style={{ minWidth: '450px', maxWidth: '450px' }}>
             <div style={{ overflowY: 'auto', height: '78vh', paddingRight: '16px' }}>
               <FullGridSize>
                 <Title id="tituloRuta">
@@ -240,7 +240,7 @@ export const RouteDetails = ({ history }: Props) => {
             </div>
           </Card>
           <div>
-            <RouteDetailsMap
+            <RouteDetailsMap className="p-col-12 p-md-6 p-lg-3"
               lat={mapLat}
               long={mapLng}
               route={route}

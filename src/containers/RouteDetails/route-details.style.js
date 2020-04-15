@@ -65,6 +65,8 @@ export const TextArea = styled.textarea`
 `;
 
 export const Form = styled.form`
+  background-image: linear-gradient(#00F8A9, #4F7DEC), url('img/background-pattern2.svg');
+  background-size: cover;
   padding: 20px 40px;
   align-items: center;
   display: grid;
@@ -75,6 +77,7 @@ export const Form = styled.form`
   ${media.tablet`
     grid-template-columns: 1fr 1fr;
   `}
+  
 `;
 
 export const Button = styled.button`
