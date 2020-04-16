@@ -28,7 +28,8 @@ import {
   Title,
   Button
 } from './route-details.style';
-import RouteDetailsMap from './RouteDetailsMap/index';
+import RouteDetailsMap from './RouteDetailsMap';
+import { Chat } from '@containers';
 
 const flexStyle = {
   'display': 'flex',
@@ -40,7 +41,7 @@ const flexStyle = {
 
 type Props = { history: any };
 
-export const RouteDetails = ({ history }: Props) => {
+export const RouteDetails = ({ history, webId }: Props) => {
 
   let routeId = "";
 
@@ -77,7 +78,7 @@ export const RouteDetails = ({ history }: Props) => {
   async function obtainChildren() {
     setLoading(true);
     try {
-      const fetch = await RouteService.get(routeId, false, false);
+      const fetch = await RouteService.get(routeId, false, false, false);
       if (fetch) {
         setRenderedName(fetch.name);
         setRenderedDescription(fetch.description);
@@ -250,6 +251,9 @@ export const RouteDetails = ({ history }: Props) => {
       </div>
         {isLoading && <Loader absolute />}
       </Form>
+      { route && <div>
+        <Chat route={route} t={t} webId={webId} id={route.webId}></Chat>
+      </div> }
     </div>
   );
 };
@@ -260,7 +264,7 @@ export const RouteDetails = ({ history }: Props) => {
  * A React component page that is displayed when there's no valid route. Users can click the button
  * to get back to the home/welcome page.
  */
-const AddMilestoneComponent = ({ history }: Props) => {
+const AddMilestoneComponent = ({ history, webId }: Props) => {
   const { t } = useTranslation();
   return (
     <TextEditorWrapper>
@@ -268,7 +272,7 @@ const AddMilestoneComponent = ({ history }: Props) => {
         <Header>
           <p>{t('addMilestone.title')}</p>
         </Header>
-        <RouteDetails history={history}/>
+        <RouteDetails history={history} webId={webId}/>
       </TextEditorContainer>
     </TextEditorWrapper>
   );

@@ -7,6 +7,7 @@ import PageNotFound from './PageNotFound';
 import Profile from './Profile';
 import Register, { RegistrationSuccess } from './Register';
 import Welcome from './Welcome';
+import Chat from './Chat';
 
 export {
   Login,
@@ -19,5 +20,6 @@ export {
   EditRoute,
   ListOwnRoutes,
   ListSharedRoutes,
-  ListFriends
+  ListFriends,
+  Chat
 };
