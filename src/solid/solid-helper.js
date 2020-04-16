@@ -121,18 +121,25 @@ export const getFriends = async (webId) => {
   const me = ldflex[webId];
   let friends = [];
   for await (const name of me.friends) {
-    friends.push(await getFriendData(name));
+    const friend = await getFriendData(name);
+    if (friend) {
+      friends.push(friend);
+    }
   }
   return friends;
 }
 
 export const getFriendData = async (webId) => {
-  let friend = {};
-  let data = ldflex[webId];
-  friend.fn = `${await data.vcard_fn}`;
-  friend.webId = `${await data["solid:account"]}`.concat("profile/card#me");
-  friend.image = `${await data["vcard:hasPhoto"]}`;
-  return friend;
+  try {
+    let friend = {};
+    let data = ldflex[webId];
+    friend.fn = `${await data.vcard_fn}`;
+    friend.webId = `${await data["solid:account"]}`.concat("profile/card#me");
+    friend.image = `${await data["vcard:hasPhoto"]}`;
+    return friend;
+  } catch (e) {
+    return undefined;
+  }
 }
 
 export const createFile = async (webId, body, mimeType) => {
