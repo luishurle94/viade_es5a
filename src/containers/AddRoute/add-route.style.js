@@ -61,7 +61,7 @@ export const Form = styled.form`
   padding: 20px 40px;
   align-items: center;
   display: grid;
-  border-color:#050505;
+  
   grid-template-columns: 1fr;
   grid-gap: 20px 40px;
   ${media.tablet`
@@ -72,7 +72,6 @@ export const Form = styled.form`
 export const Button = styled.button`
   max-width: 128px;
   display: inline-block;
-
   &:first-child {
     margin-right: 10px;
   }
