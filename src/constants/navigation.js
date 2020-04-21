@@ -21,7 +21,7 @@ export const NavigationItems = [
     to: '/list-shared-routes'
   },{
     id: 'list-friends',
-    icon: 'img/list-friends.png',
+    icon: 'img/icon/amigo.svg',
     label: 'navBar.list-friends',
     to: '/list-friends'
   }
