@@ -17,7 +17,7 @@ export class FriendDetails extends Component {
     super(props);
     this.state = {
       layout: 'list',
-      rows: 5,
+      rows: 4,
       list: props.getAll
     };
     this.itemTemplate = this.itemTemplate.bind(this);
@@ -25,13 +25,14 @@ export class FriendDetails extends Component {
 
   componentWillReceiveProps(nextProps){
 
-    this.setState({list: nextProps.getAll, isLoading: true}, () => {
+    this.setState({list: nextProps.getAll, isLoading: true, rows: this.state.rows }, () => {
       this.state.list
       .then(list => {
         if (list) {
           list = list.filter(i => i !== null && i !== undefined).map(obj => { return {...obj, profile: obj.webId.concat('profile/card#me')} });
-          let l = list.length > 5 ? 5 : list.length;
-          this.setState({ friends: list, list: list, rows: l, isLoading: false });
+          console.log(list.length)
+
+          this.setState({ friends: list, list: list, isLoading: false });
           
         }
       }).catch(err => console.error(err));
