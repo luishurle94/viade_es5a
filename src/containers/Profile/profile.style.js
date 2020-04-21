@@ -14,7 +14,7 @@ export const ProfileWrapper = styled(GradientBackground)`
   padding: 60px 0;
   margin: auto;
 `;
-export const ProfileContainer = styled(Panel)`
+export const ProfileContainer = styled.div`
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
   background-color: white;
   max-width: 900px;
@@ -23,13 +23,12 @@ export const ProfileContainer = styled(Panel)`
   flex: 1 0 auto;
 `;
 
-export const Header = styled.div`
+export const Header = styled(Panel)`
   display: flex;
   position: relative;
   align-items: center;
   justify-content: center;
-  background-image: url('img/pattern-geo.png'),
-    linear-gradient(135deg, #7c4dff 0%, #18a9e6 50%, #01c9ea 100%);
+  background-image: linear-gradient(135deg, #7c4dff 0%, #18a9e6 50%, #01c9ea 100%);
   background-repeat: repeat, no-repeat;
   padding: 30px 20px;
 

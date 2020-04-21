@@ -16,7 +16,7 @@ export const NavigationItems = [
   },
   {
     id: 'list-shared-routes',
-    icon: 'img/list-shared.png',
+    icon: 'img/icon/share.svg',
     label: 'navBar.list-shared-routes',
     to: '/list-shared-routes'
   },{
