@@ -36,6 +36,7 @@ export class ListRoutes extends Component {
   componentDidMount() {
     this.props.getAll(true)
       .then(list => {
+        console.log(list)
         if (list) {
           list = list.filter(i => i !== null && i !== undefined);
           let l = list.length > 5 ? 5 : list.length;
@@ -119,7 +120,7 @@ export class ListRoutes extends Component {
   async sendButton() {
     let everythingNoError = true;
     for (const friend of this.state.selectedFriends) {
-      const res = await RouteService.share(this.state.selectedRoute, friend.webId + 'me');
+      const res = await RouteService.share(this.state.selectedRoute, friend.webId);
       if (res) {
         const notificationContent = {
           title: this.props.t('listRoutes.notificationTitle'),
@@ -127,7 +128,7 @@ export class ListRoutes extends Component {
           url: this.state.selectedRoute.webId
         };
         const url = `${window.location.href.replace('list-routes', 'route-details')}?routeId=${this.state.selectedRoute.webId}`
-        const publish = await NotificationService.publish(this.props.createNotification, notificationContent, friend.webId + 'me', NotificationTypes.INVITE, url);
+        const publish = await NotificationService.publish(this.props.createNotification, notificationContent, friend.webId, NotificationTypes.INVITE, url);
         if (!publish) {
           everythingNoError = false;
         }

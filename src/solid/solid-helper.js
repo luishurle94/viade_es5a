@@ -53,6 +53,7 @@ export const unlink = async (webId, predicate, url) => {
 
 export const fetchRawData = async (url, context) => {
   try {
+    
     const obj = await ldflexHelper.fetchLdflexDocument(url);
     if (!obj) throw new Error('404');
 
@@ -60,11 +61,15 @@ export const fetchRawData = async (url, context) => {
     data.webId = url;
     for await (const field of context.shape) {
       for await (const fieldData of obj[getPredicate(field, context)]) {
+        
         data = {
           ...data, [field.object]: fieldData && field.type &&
             SolidTypesHelper.transformTypes(field.type, fieldData.value, data[field.object])
         };
+
       }
+      
+
     }
 
     return data;
@@ -122,18 +127,25 @@ export const getFriends = async (webId) => {
   const me = ldflex[webId];
   let friends = [];
   for await (const name of me.friends) {
-    friends.push(await getFriendData(name));
+    const friend = await getFriendData(name);
+    if (friend) {
+      friends.push(friend);
+    }
   }
   return friends;
 }
 
 export const getFriendData = async (webId) => {
-  let friend = {};
-  let data = ldflex[webId];
-  friend.fn = `${await data.vcard_fn}`;
-  friend.webId = `${await data["solid:account"]}`.concat("profile/card#");
-  friend.image = `${await data["vcard:hasPhoto"]}`;
-  return friend;
+  try {
+    let friend = {};
+    let data = ldflex[webId];
+    friend.fn = `${await data.vcard_fn}`;
+    friend.webId = `${await data["solid:account"]}`.concat("profile/card#me");
+    friend.image = `${await data["vcard:hasPhoto"]}`;
+    return friend;
+  } catch (e) {
+    return undefined;
+  }
 }
 
 export const createFile = async (webId, body, mimeType) => {
