@@ -16,9 +16,9 @@ export const createAndGetDocument = async (url, createDocument) => {
   return !createDocument ? await ldflexHelper.resourceExists(url) : await ldflexHelper.createNonExistentDocument(url);
 }
 
-export const link = async (webId, obj, lit, filename, folder, predicate) => {
+export const link = async (webId, obj, lit, filename, folder, predicate, privatePath = true) => {
   try {
-    let url = `${await getAppPathStorage(webId)}${folder}${filename}`;
+    let url = `${await getAppPathStorage(webId, privatePath)}${folder}${filename}`;
     if (!await ldflexHelper.resourceExists(url))
       return false;
     await linkToGraph(url, obj, lit, predicate);
@@ -66,7 +66,6 @@ export const fetchRawData = async (url, context) => {
         };
       }
     }
-
     return data;
   } catch (error) {
     throw error;
@@ -101,8 +100,8 @@ export const deleteFile = async (url) => {
   }
 }
 
-export const getAppPathStorage = async (webId) => {
-  return await storageHelper.getAppStorage(webId);
+export const getAppPathStorage = async (webId, privatePath = true) => {
+  return await storageHelper.getAppStorage(webId, privatePath);
 }
 
 export const getPathStorage = async (webId) => {
@@ -122,18 +121,25 @@ export const getFriends = async (webId) => {
   const me = ldflex[webId];
   let friends = [];
   for await (const name of me.friends) {
-    friends.push(await getFriendData(name));
+    const friend = await getFriendData(name);
+    if (friend) {
+      friends.push(friend);
+    }
   }
   return friends;
 }
 
 export const getFriendData = async (webId) => {
-  let friend = {};
-  let data = ldflex[webId];
-  friend.fn = `${await data.vcard_fn}`;
-  friend.webId = `${await data["solid:account"]}`.concat("profile/card#");
-  friend.image = `${await data["vcard:hasPhoto"]}`;
-  return friend;
+  try {
+    let friend = {};
+    let data = ldflex[webId];
+    friend.fn = `${await data.vcard_fn}`;
+    friend.webId = `${await data["solid:account"]}`.concat("profile/card#me");
+    friend.image = `${await data["vcard:hasPhoto"]}`;
+    return friend;
+  } catch (e) {
+    return undefined;
+  }
 }
 
 export const createFile = async (webId, body, mimeType) => {

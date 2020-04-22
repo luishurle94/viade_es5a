@@ -326,7 +326,13 @@
     "title": "Route Information",
     "media": "Media files",
     "images": "Images",
-    "other": "Other files"
+    "other": "Other files",
+    "chat": {
+      "title": "Messages",
+      "subtitle": "{{routeName}}",
+      "placeholder": "Type a message...",
+      "error": "There have been problems posting the message. Try again later."
+    }
   },
   "media": {
     "webId": "Media file",
