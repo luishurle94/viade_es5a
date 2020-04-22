@@ -5,17 +5,29 @@ import {
   cleanup,
   queryByAttribute,
   render,
+  fireEvent, 
+  getByTestId
 } from 'react-testing-library';
 
+import {
+  Header,
+  TextEditorContainer,
+  TextEditorWrapper
+} from './route-details.style';
+import { useTranslation } from 'react-i18next';
 import { RouteDetails } from './route-details.component';
+import { createMemoryHistory } from 'history';
 
 describe('Add Route', () => {
   afterAll(cleanup);
 
+  const history = createMemoryHistory();
   const getById = queryByAttribute.bind(null, 'id');
+  const { t } = useTranslation();
+
   const { container } = render(
     <Router>
-      <RouteDetails />
+      <RouteDetails history={history} />
     </Router>
   );
 
@@ -23,7 +35,6 @@ describe('Add Route', () => {
     expect(container).toBeTruthy();
   });
 
-  //tituloRuta, tituloHito, hitos, mapaDetalles
 
   test('Inputs render properly', async () => {
 
@@ -33,7 +44,13 @@ describe('Add Route', () => {
 
     expect(tRuta).not.toEqual(null);
     expect(tHito).not.toEqual(null); 
-    expect(hitos).not.toEqual(null); 
+    expect(hitos).not.toEqual(null);
+
+  });
+
+  test('Submission test', async () => {
+    const submitButton = getByTestId(container, 'details');
+    fireEvent.click(submitButton);
 
   });
 
