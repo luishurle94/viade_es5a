@@ -38,24 +38,6 @@ export class RouteDetailsMap extends Component  {
      componentWillUnmount() {
       this._isMounted = false;
     }
-
-  
-
-    fetchData = (lat, lng) => {
-      // setTimeout(() => {
-      //   this.setState({
-      //     lat : this.props.lat,
-      //     lng : this.props.long,
-      //     route: this.props.route
-      //   });
-      // }, 5000);
-    };
-  
-    componentDidUpdate(prevProps) {
-      if (prevProps.lat !== this.props.lat || prevProps.lng !== this.props.long) {
-        this.fetchData(this.props.lat, this.props.long);
-      }
-    }
     
     onReady = ({ google }, map) => {
       this.loadGeoJson(map);
