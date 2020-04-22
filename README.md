@@ -28,6 +28,20 @@ In this moment, you can check if installation has been completed succesfully run
 npm start
 ```
 
+### Running with Docker
+#### Using Docker image
+This will enable you to try ViaDe App on http://localhost/viade_es5a.
+```
+docker run -it --rm jaluma/viade_es5a
+```
+
+#### Using Docker-Compose
+Additional, we can launch it with SolidServer on https://localhost:8443.
+```
+docker-compose -f docker-compose.yml up
+```
+
+
 ### Running the tests
 
 Currently, we are testing with a framework called Jest. 
