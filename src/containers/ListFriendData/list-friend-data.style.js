@@ -60,7 +60,7 @@ export const Button = styled.button`
 export const MainButton = styled.button`
   max-width: 128px;
   display: inline-block;
-  background-color: #7C4DFF;
+  background-color: #4B7FEB;
   color: white;
   text-align: center;
   height: 60px;
