@@ -11,27 +11,27 @@ import * as SolidHelper from './solid-helper'
  * @param {String} webId user
  * @param {String} parentWebId parent webId
  */
-export const create = async (obj, context, createDocumentP, webIdP, parentWebIdP, parentFilenameP, parentPredicateP, folderP) => {
+export const create = async (obj, context, createDocumentP, webIdP, parentWebIdP, parentFilenameP, parentPredicateP, folderP, privatePath = true) => {
   try {
     const {createDocument, webId, parentWebId, parentFilename, parentPredicate, folder} = await checkParams(createDocumentP, webIdP, parentWebIdP, parentFilenameP, parentPredicateP, folderP);    
 
     // check if structure is created
     if (await SolidHelper.createInitialStructure(webId)) {
-      return await insert(obj, context, createDocument, obj.getIdentifier(), webId, parentWebId, parentFilename, parentPredicate, folder);
+      return await insert(obj, context, createDocument, obj.getIdentifier(), webId, parentWebId, parentFilename, parentPredicate, folder, privatePath);
     }    
   } catch (e) {
     console.error(e)
   }
-  
+
   return {
     added: false
   };
 }
 
-export const insert = async (obj, context, createDocumentP, filename, webIdP, parentWebIdP, parentFilenameP, parentPredicateP, folderP) => {
+export const insert = async (obj, context, createDocumentP, filename, webIdP, parentWebIdP, parentFilenameP, parentPredicateP, folderP, privatePath) => {
   const {createDocument, webId, parentWebId, parentFilename, parentPredicate, folder} = await checkParams(createDocumentP, webIdP, parentWebIdP, parentFilenameP, parentPredicateP,folderP);    
 
-  const appPath = await SolidHelper.getAppPathStorage(webId);
+  const appPath = await SolidHelper.getAppPathStorage(webId, privatePath);
   const path = `${HashHelper.hash(filename)}.ttl`;
   const documentUri = `${appPath}${folder}${path}`;
 
@@ -47,7 +47,7 @@ export const insert = async (obj, context, createDocumentP, filename, webIdP, pa
   if (newDocument.ok) {
     for await (const field of context.shape) {
         const data = obj[field.object];
-        await SolidHelper.link(webId, data, field.literal, path, folder, SolidHelper.getPredicate(field, context));
+        await SolidHelper.link(webId, data, field.literal, path, folder, SolidHelper.getPredicate(field, context), privatePath);
     }
     
     // create link with parent. IT CAN'T BE A LITERAL, IT'S A REFERENCE

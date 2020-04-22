@@ -16,9 +16,9 @@ export const createAndGetDocument = async (url, createDocument) => {
   return !createDocument ? await ldflexHelper.resourceExists(url) : await ldflexHelper.createNonExistentDocument(url);
 }
 
-export const link = async (webId, obj, lit, filename, folder, predicate) => {
+export const link = async (webId, obj, lit, filename, folder, predicate, privatePath = true) => {
   try {
-    let url = `${await getAppPathStorage(webId)}${folder}${filename}`;
+    let url = `${await getAppPathStorage(webId, privatePath)}${folder}${filename}`;
     if (!await ldflexHelper.resourceExists(url))
       return false;
     await linkToGraph(url, obj, lit, predicate);
@@ -71,7 +71,6 @@ export const fetchRawData = async (url, context) => {
       
 
     }
-
     return data;
   } catch (error) {
     throw error;
@@ -106,8 +105,8 @@ export const deleteFile = async (url) => {
   }
 }
 
-export const getAppPathStorage = async (webId) => {
-  return await storageHelper.getAppStorage(webId);
+export const getAppPathStorage = async (webId, privatePath = true) => {
+  return await storageHelper.getAppStorage(webId, privatePath);
 }
 
 export const getPathStorage = async (webId) => {
