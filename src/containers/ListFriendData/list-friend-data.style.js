@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import {
   GradientBackground,
   Panel,
@@ -9,6 +10,7 @@ export const TextEditorWrapper = styled(GradientBackground)`
   flex: 1 0 auto;
   align-items: center;
   justify-content: center;
+  background-repeat: repeat;
   padding: 60px 0;
 `;
 export const TextEditorContainer = styled(Panel)`
@@ -59,13 +61,29 @@ export const Button = styled.button`
   }
 `;
 
-export const RouteDetails = styled.div`
+export const MainButton = styled.button`
+  max-width: 128px;
+  display: inline-block;
+  background-color: #4B7FEB;
+  color: white;
+  text-align: center;
+  height: 60px;
+  margin: 10px 0;
+  &:first-child {
+    margin-right: 10px;
+  }
+  &:hover {
+    color: white;
+    background-color: #406dc9;
+  }
+`;
+
+export const FriendDetailsWrapper = styled.div`
   display: grid;
   border: 0.5px groove;
   padding: 10px;
   font-size: 1.2rem;
-  text-align:left;
-  
+
   .content {
     display:flex;
     font-size: 1rem;
@@ -92,10 +110,13 @@ export const RouteDetails = styled.div`
 
   .button {
     width: 90px;
-    
-    
   }
 
+`;
+
+export const Input = styled.input`
+  margin: 5px;
+  max-width: 400px;
 `;
 
 export const DialogContent = styled.div`

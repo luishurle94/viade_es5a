@@ -64,7 +64,7 @@ class Chat extends Component {
           subtitle={this.props.t('routeDetails.chat.subtitle', {routeName: this.props.route.name })}
           senderPlaceHolder={this.props.t('routeDetails.chat.placeholder')}
         />
-        {this.state.loading && <Loader absolute />}
+        {this.state.loading && <Loader />}
       </div>
     );
   } 

@@ -4,22 +4,27 @@
 export const NavigationItems = [
   {
     id: 'add-route',
-    icon: 'img/icon/route.png',
+    icon: 'img/icon/route-add.svg',
     label: 'navBar.add-route',
     to: '/add-route'
   },
   {
     id: 'list-routes',
-    icon: 'img/bars-nav.svg',
+    icon: 'img/icon/route-list.svg',
     label: 'navBar.list-routes',
     to: '/list-routes'
   },
   {
     id: 'list-shared-routes',
-    icon: 'img/list-shared.png',
+    icon: 'img/icon/share.svg',
     label: 'navBar.list-shared-routes',
     to: '/list-shared-routes'
-  },
+  },{
+    id: 'list-friends',
+    icon: 'img/icon/amigo.svg',
+    label: 'navBar.list-friends',
+    to: '/list-friends'
+  }
 ];
 
 export const ProfileOptions = [

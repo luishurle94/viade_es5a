@@ -1,6 +1,7 @@
 import EditRoute from './EditRoute';
 import AddRoute from './AddRoute';
 import ListFriends from './ListFriends';
+import ListFriendsData from './ListFriendData';
 import { ListOwnRoutes, ListSharedRoutes} from './ListRoutes';
 import Login from './Login';
 import PageNotFound from './PageNotFound';
@@ -21,5 +22,6 @@ export {
   ListOwnRoutes,
   ListSharedRoutes,
   ListFriends,
+  ListFriendsData,
   Chat
 };

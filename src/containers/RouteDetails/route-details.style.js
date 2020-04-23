@@ -65,16 +65,34 @@ export const TextArea = styled.textarea`
 `;
 
 export const Form = styled.form`
-  padding: 20px 40px;
-  align-items: center;
-  display: grid;
   grid-template-columns: 1fr;
-  width: 130vw;
-  height: 85vh;
+  padding: 20px 40px;
+  width: 100%;
+  height: 100%;
   grid-gap: 20px 40px;
   ${media.tablet`
     grid-template-columns: 1fr 1fr;
   `}
+  
+`;
+
+export const Details = styled.div`
+  background-image: linear-gradient(#00F8A9, #4F7DEC);
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  background-size: cover;
+  display: flex;
+  flex: 0 0 100%;  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('img/background-pattern2.svg');
+    filter: opacity(30%);
+  }
 `;
 
 export const Button = styled.button`

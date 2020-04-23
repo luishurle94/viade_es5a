@@ -53,6 +53,7 @@ export const unlink = async (webId, predicate, url) => {
 
 export const fetchRawData = async (url, context) => {
   try {
+    
     const obj = await ldflexHelper.fetchLdflexDocument(url);
     if (!obj) throw new Error('404');
 
@@ -60,11 +61,15 @@ export const fetchRawData = async (url, context) => {
     data.webId = url;
     for await (const field of context.shape) {
       for await (const fieldData of obj[getPredicate(field, context)]) {
+        
         data = {
           ...data, [field.object]: fieldData && field.type &&
             SolidTypesHelper.transformTypes(field.type, fieldData.value, data[field.object])
         };
+
       }
+      
+
     }
     return data;
   } catch (error) {
