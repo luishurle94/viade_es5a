@@ -22,7 +22,17 @@ route.messagesObject = messages;
 describe('Chat component', () => {
   afterAll(cleanup);
 
-  it('test', () => {});
+  it('Load Messages', () => {
+    const instance = new Chat({route: route});
+    instance.loadMessages();
+    expect(instance.state.messages.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it('New Message', () => {
+    const instance = new Chat({route: route});
+    instance.handleNewUserMessage('message');
+    expect(instance.state.messages.length).toBeGreaterThanOrEqual(3);
+  });
 
   // const { container } = render(<div><Chat route={route} t={() => {}} webId={'soy:yo'} id={route.webId}></Chat></div>);
 

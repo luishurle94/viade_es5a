@@ -19,6 +19,8 @@ import { ListFriends } from '../index';
 
 export class ListRoutes extends Component {
 
+  _isMounted = false;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -34,15 +36,19 @@ export class ListRoutes extends Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
     this.props.getAll(true)
       .then(list => {
-        if (list) {
+        if (list && this._isMounted) {
           list = list.filter(i => i !== null && i !== undefined);
           let l = list.length > 5 ? 5 : list.length;
           this.setState({ routes: list, rows: l });
-
         }
       }).catch(err => console.error(err));
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   share(route) {

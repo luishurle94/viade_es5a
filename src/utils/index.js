@@ -7,6 +7,7 @@ import * as storageHelper from './storage';
 import * as permissionHelper from './permissions';
 import * as HashHelper from './hash';
 import * as GeoJsonHelper from './geojson';
+import * as DistanceHelper from './distance';
 
 function* entries(obj) {
   for (const key of Object.keys(obj)) {
@@ -25,5 +26,6 @@ export {
   notification,
   permissionHelper,
   HashHelper,
-  GeoJsonHelper
+  GeoJsonHelper,
+  DistanceHelper
 };

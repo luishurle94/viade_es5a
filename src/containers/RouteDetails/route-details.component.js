@@ -122,6 +122,9 @@ export const RouteDetails = ({ history, webId }: Props) => {
         setLoading(false);
         setRoute(fetch)
         return fetch;
+      } else {
+        setLoading(false);
+        errorToaster(t('addMilestone.notifications.errorLoadingMilestones'));
       }
     } catch (error) {
       console.error(error)

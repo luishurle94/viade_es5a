@@ -62,6 +62,7 @@ class Chat extends Component {
           handleNewUserMessage={this.handleNewUserMessage}
           title={this.props.t('routeDetails.chat.title')}
           subtitle={this.props.t('routeDetails.chat.subtitle', {routeName: this.props.route.name })}
+          autofocus={true}
           senderPlaceHolder={this.props.t('routeDetails.chat.placeholder')}
         />
         {this.state.loading && <Loader />}
