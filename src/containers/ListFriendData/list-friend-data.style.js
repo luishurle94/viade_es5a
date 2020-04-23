@@ -27,7 +27,7 @@ export const Header = styled.div`
   position: relative;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(135deg, #7c4dff 0%, #18a9e6 50%, #01c9ea 100%);
+  background-image: linear-gradient(135deg, #00F8A9 0%, #4F7DEC 50%, #00F8A9 100%);
   background-repeat: repeat, no-repeat;
   padding: 30px 20px;
   font-size: 50px;
@@ -55,6 +55,10 @@ export const Button = styled.button`
   &:first-child {
     margin-right: 10px;
   }
+  &:hover {
+    color: white;
+    background-color: #406dc9;
+  }
 `;
 
 export const MainButton = styled.button`
@@ -64,9 +68,13 @@ export const MainButton = styled.button`
   color: white;
   text-align: center;
   height: 60px;
-
+  margin: 10px 0;
   &:first-child {
     margin-right: 10px;
+  }
+  &:hover {
+    color: white;
+    background-color: #406dc9;
   }
 `;
 
@@ -102,8 +110,6 @@ export const FriendDetailsWrapper = styled.div`
 
   .button {
     width: 90px;
-    
-    
   }
 
 `;

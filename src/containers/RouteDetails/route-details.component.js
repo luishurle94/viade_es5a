@@ -26,7 +26,8 @@ import {
   TextEditorContainer,
   TextEditorWrapper,
   Title,
-  Button
+  Button,
+  Details
 } from './route-details.style';
 import RouteDetailsMap from './RouteDetailsMap';
 import { Chat } from '@containers';
@@ -156,7 +157,7 @@ export const RouteDetails = ({ history, webId }: Props) => {
 
 
   return (
-    <div>
+    <Details>
 
       <Form>
         <div style={flexStyle} className="p-grid">
@@ -176,7 +177,7 @@ export const RouteDetails = ({ history, webId }: Props) => {
                 <p> <span>{t('addRoute.createdAt') + ': '}</span> {renderedCreatedAt}</p>
 
                 <br/>
-                <div> <Button data-testid="details" className="button, block" label="Details" onClick={() => addMilestones()}>{t('editRoute.title')}</Button> </div>
+                { renderedCreatedBy && webId && renderedCreatedBy === webId && <div> <Button data-testid="details" className="button, block" label="Details" onClick={() => addMilestones()}>{t('editRoute.title')}</Button> </div> }
               </FullGridSize>
 
               <Title id="tituloHito">
@@ -240,21 +241,20 @@ export const RouteDetails = ({ history, webId }: Props) => {
               </FullGridSize>
             </div>
           </Card>
-          <div>
+          <div className="map">
             <RouteDetailsMap className="p-col-12 p-md-6 p-lg-3"
               lat={mapLat}
               long={mapLng}
               route={route}
             />
           </div>
-        }
       </div>
-        {isLoading && <Loader absolute />}
       </Form>
+      {isLoading && <Loader absolute />}
       { route && <div>
         <Chat route={route} t={t} webId={webId} id={route.webId}></Chat>
       </div> }
-    </div>
+    </Details>
   );
 };
 

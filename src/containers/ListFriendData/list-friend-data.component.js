@@ -71,7 +71,7 @@ export const ListFriendsData = ({ history, webId }: Props) => {
         <Header>
           <p>{t('listFriendData.title')}</p>
         </Header>
-        <MainButton data-testid="send" className="button" label="send" onClick={() => setVisible(true)}>{t('listFriendData.add')}</MainButton>
+        <MainButton data-testid="send" className="button, block" label="send" onClick={() => setVisible(true)}>{t('listFriendData.add')}</MainButton>
         <Dialog header={t('listFriendData.addTitle')} visible={isVisible} width="225px" modal={true} onHide={() => setVisible(false)}>
           {renderFriendsDialog()}
         </Dialog>
