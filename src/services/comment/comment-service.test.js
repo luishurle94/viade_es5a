@@ -17,12 +17,12 @@ const comment = new Comment('aaaaaaa', new Date(), 'me');
 describe.only('Add comment', () => {
   CommentService.default = jest.fn();
   test('should add sucessfully', async () => {
-    expect(await CommentService.publishComment(rName, comment)).toBe(true);
+    expect((await CommentService.publishComment(rName, comment)).added).toBe(true);
   });
 
   test('should return false because params are incorrect', async () => {
-    expect(await CommentService.publishComment(rName)).toBe(false);
-    expect(await CommentService.publishComment()).toBe(false);
+    expect((await CommentService.publishComment(rName)).added).toBe(false);
+    expect((await CommentService.publishComment()).added).toBe(false);
   });
 
 });

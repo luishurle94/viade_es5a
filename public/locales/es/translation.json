@@ -336,7 +336,13 @@
     "title": "Información de la Ruta",
     "media": "Archivos multimedia",
     "images": "Imágenes",
-    "other": "Otros ficheros"
+    "other": "Otros ficheros",
+    "chat": {
+      "title": "Comentarios",
+      "subtitle": "{{routeName}}",
+      "placeholder": "Escribe un comentario",
+      "error": "Ha habido problemas publicando el mensaje. Intentelo más adelante."
+    }
   },
   "media": {
     "webId": "Fichero multimedia",

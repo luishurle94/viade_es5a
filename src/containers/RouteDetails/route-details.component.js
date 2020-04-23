@@ -26,9 +26,11 @@ import {
   TextEditorContainer,
   TextEditorWrapper,
   Title,
-  Button
+  Button,
+  Details
 } from './route-details.style';
-import RouteDetailsMap from './RouteDetailsMap/index';
+import RouteDetailsMap from './RouteDetailsMap';
+import { Chat } from '@containers';
 
 const flexStyle = {
   'display': 'flex',
@@ -40,7 +42,7 @@ const flexStyle = {
 
 type Props = { history: any };
 
-export const RouteDetails = ({ history }: Props) => {
+export const RouteDetails = ({ history, webId }: Props) => {
 
   let routeId = "";
 
@@ -77,7 +79,7 @@ export const RouteDetails = ({ history }: Props) => {
   async function obtainChildren() {
     setLoading(true);
     try {
-      const fetch = await RouteService.get(routeId, false, false);
+      const fetch = await RouteService.get(routeId, false, false, false);
       if (fetch) {
         setRenderedName(fetch.name);
         setRenderedDescription(fetch.description);
@@ -120,6 +122,9 @@ export const RouteDetails = ({ history }: Props) => {
         setLoading(false);
         setRoute(fetch)
         return fetch;
+      } else {
+        setLoading(false);
+        errorToaster(t('addMilestone.notifications.errorLoadingMilestones'));
       }
     } catch (error) {
       console.error(error)
@@ -155,7 +160,7 @@ export const RouteDetails = ({ history }: Props) => {
 
 
   return (
-    <div>
+    <Details>
 
       <Form>
         <div style={flexStyle} className="p-grid">
@@ -175,7 +180,7 @@ export const RouteDetails = ({ history }: Props) => {
                 <p> <span>{t('addRoute.createdAt') + ': '}</span> {renderedCreatedAt}</p>
 
                 <br/>
-                <div> <Button data-testid="details" className="button, block" label="Details" onClick={() => addMilestones()}>{t('editRoute.title')}</Button> </div>
+                { renderedCreatedBy && webId && renderedCreatedBy === webId && <div> <Button data-testid="details" className="button, block" label="Details" onClick={() => addMilestones()}>{t('editRoute.title')}</Button> </div> }
               </FullGridSize>
 
               <Title id="tituloHito">
@@ -239,18 +244,20 @@ export const RouteDetails = ({ history }: Props) => {
               </FullGridSize>
             </div>
           </Card>
-          <div>
+          <div className="map">
             <RouteDetailsMap className="p-col-12 p-md-6 p-lg-3"
               lat={mapLat}
               long={mapLng}
               route={route}
             />
           </div>
-        }
       </div>
-        {isLoading && <Loader absolute />}
       </Form>
-    </div>
+      {isLoading && <Loader absolute />}
+      { route && <div>
+        <Chat route={route} t={t} webId={webId} id={route.webId}></Chat>
+      </div> }
+    </Details>
   );
 };
 
@@ -260,7 +267,7 @@ export const RouteDetails = ({ history }: Props) => {
  * A React component page that is displayed when there's no valid route. Users can click the button
  * to get back to the home/welcome page.
  */
-const AddMilestoneComponent = ({ history }: Props) => {
+const AddMilestoneComponent = ({ history, webId }: Props) => {
   const { t } = useTranslation();
   return (
     <TextEditorWrapper>
@@ -268,7 +275,7 @@ const AddMilestoneComponent = ({ history }: Props) => {
         <Header>
           <p>{t('addMilestone.title')}</p>
         </Header>
-        <RouteDetails history={history}/>
+        <RouteDetails history={history} webId={webId}/>
       </TextEditorContainer>
     </TextEditorWrapper>
   );

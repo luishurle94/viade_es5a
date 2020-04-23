@@ -87,8 +87,8 @@ export default jest.mock('../../src/solid/solid-helper', () => {
 
   links.push({
     obj: 'soy_una_ruta_compartida',
-    webId: 'soy_una_ruta_compartida',
-    predicate: 'schema:name'
+    webId: 'data.ttl',
+    predicate: 'schema:hasPart'
   });
 
   // throw new Error(9)

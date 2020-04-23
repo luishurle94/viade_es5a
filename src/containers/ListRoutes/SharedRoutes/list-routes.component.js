@@ -19,7 +19,7 @@ const ListSharedRoutesComponent = ({ history, webId }: Props) => {
         <Header>
           <p>{t('listRoutes.title')}</p>
         </Header>
-        <ListRoutes t={t} webId={webId} history={history} createNotification={createNotification} getAll={RouteService.getAllShared}/>
+        <ListRoutes t={t} webId={webId} history={history} createNotification={createNotification} getAll={RouteService.getAllShared} callback={RouteService.saveSharedRoute}/>
       </TextEditorContainer>
     </TextEditorWrapper>
   );

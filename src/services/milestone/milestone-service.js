@@ -13,9 +13,12 @@ import routeShape from '@contexts/route-shape.json';
 export const add = async (routeId, milestone) => {
   // get route
   const route = await RouteService.get(routeId);
+  if (!route) {
+    return false;
+  }
   // Only create node and link with route
-  const field = routeShape.shape.filter(s => s.object === 'milestones')[0];
-  return SolidAdapter.create(milestone, milestoneShape, true, null, routeId, route.getIdentifier(), await SolidAdapter.getPredicate(field, routeShape), field.object);
+  const field = routeShape.shape.filter(s => s.object === 'milestones').pop();
+  return await SolidAdapter.create(milestone, milestoneShape, true, null, routeId, route.getIdentifier(), await SolidAdapter.getPredicate(field, routeShape), field.object);
 }
 
 /**

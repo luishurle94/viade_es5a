@@ -63,26 +63,8 @@ export const getAll = async (getData = true) => {
 }
 
 export const getAllShared = async (getData = true) => {
-  // from notifications
-  const notifications = await SolidAdapter.getAll('/inbox');
-  let routeUrls = [];
-  for(let notification of notifications) {
-    const webId = await NotificationService.get(notification);
-    if (routeUrls.indexOf(webId.url) < 0) {
-      routeUrls.push(webId.url);
-    }
-  }
 
-  // from persistance
-  const persistance = await SolidAdapter.get('data.ttl', sharedRouteShape);
-  if (persistance && persistance.url) {
-    for(let route of persistance.url) {
-      if (routeUrls.indexOf(route.webId) < 0) {
-        await SolidAdapter.link('data.ttl', route, sharedRouteShape.shape[0].literal, await SolidAdapter.getPredicate(sharedRouteShape.shape[0], sharedRouteShape))
-        routeUrls.push(route);
-      } 
-    }
-  }
+  const routeUrls = await diffSharedRoute(async (route) => route);
 
   // return list with url
   if (!getData) {
@@ -97,6 +79,38 @@ export const getAllShared = async (getData = true) => {
       res.push(r);
   }
   return res;
+}
+
+export const saveSharedRoute = async () => {
+  diffSharedRoute(async (route) => {
+    await SolidAdapter.link('data.ttl', route, sharedRouteShape.shape[0].literal, await SolidAdapter.getPredicate(sharedRouteShape.shape[0], sharedRouteShape))
+  });
+}
+
+const diffSharedRoute = async (callback) => {
+  // from notifications
+  const notifications = await SolidAdapter.getAll('/inbox');
+  let routeUrls = [];
+  for(let notification of notifications) {
+    const webId = await NotificationService.get(notification);
+    if (routeUrls.indexOf(webId.url) < 0) {
+      const res = await callback(webId.url);
+      if (res) {
+        routeUrls.push(webId.url);
+      }
+    }
+  }
+
+  // from persistance
+  const persistance = await SolidAdapter.get('data.ttl', sharedRouteShape);
+  if (persistance && persistance.url) {
+    for(let route of persistance.url) {
+      if (routeUrls.indexOf(route) < 0) {
+        routeUrls.push(route);
+      } 
+    }
+  }
+  return routeUrls;
 }
 
 /**
@@ -125,7 +139,7 @@ export const share = async (route, friendId) => {
 }
 
 export const removeShared = async (webId) => {
-  const res = SolidAdapter.unlink('data.ttl', await SolidAdapter.getPredicate(sharedRouteShape.shape[0], sharedRouteShape), webId);
+  const res = await SolidAdapter.unlink('data.ttl', await SolidAdapter.getPredicate(sharedRouteShape.shape[0], sharedRouteShape), webId);
   if (!res) {
     return false;
   }

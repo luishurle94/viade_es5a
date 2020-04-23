@@ -55,3 +55,50 @@ input[type="number"], textarea {
   font-size: 16px;
   text-align: center;
 }
+
+.rcw-conversation-container > .rcw-header {
+  background-color: #41a4d5;
+}
+
+.rcw-launcher {
+  background-color: #02d693 !important;
+  margin-bottom: 50px;
+  box-shadow: 0 0 1000px #02d693;
+}
+
+.rcw-title {
+  color: #222;
+}
+
+.ids-button-filled--primary, .ids-link-filled--primary {
+  background-color: #4B7FEB !important;
+  border: 1px solid #DAE0E6 !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  font-size: .8em;
+  padding: 0.5em 1em;
+  transition: 0.25s all ease-in-out;
+  outline: none;
+}
+
+.ids-button-filled--primary:hover {
+  background-color: #41a4d5 !important;
+}
+
+.ids-button, .ids-link {
+  display: block !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  padding: 14px 28px !important;
+  font-size: 16px !important;
+}
+
+.ids-link-filled--primary:hover {
+  color: white !important;
+  background-color: #4B7FEB !important;
+}
+
+.map {
+  min-width: 80vh;
+  width: 100%;
+}

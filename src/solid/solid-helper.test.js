@@ -9,10 +9,8 @@ jest.mock('../utils/storage');
 
 describe.only('Get storage and predicate', () => {
   test('get storage path', async () => {
-    SolidHelper.getAppPathStorage("https://jaluma.inrupt.net/profile/card#me").then(res => {
-      expect(res).toBe("https://jaluma.inrupt.net");
-    });
-
+    const res = await SolidHelper.getAppPathStorage("https://jaluma.inrupt.net/profile/card#me");
+    expect(res).toBe("https://jaluma.inrupt.net/profile/card#me");
   });
 
   test('get predicate', async () => {
