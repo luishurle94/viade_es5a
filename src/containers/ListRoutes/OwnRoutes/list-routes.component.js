@@ -17,7 +17,7 @@ const ListOwnRoutesComponent = ({ history, webId }: Props) => {
     <TextEditorWrapper>
       <TextEditorContainer>
         <Header>
-          <p>{t('listRoutes.title')}</p>
+          <p className={'header'}>{t('listRoutes.title')}</p>
         </Header>
         <ListRoutes t={t} webId={webId} history={history} createNotification={createNotification} getAll={RouteService.getAll}/>
       </TextEditorContainer>

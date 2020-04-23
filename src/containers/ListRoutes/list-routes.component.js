@@ -180,7 +180,7 @@ const ListRoutesComponent = ({ history, webId }: Props) => {
     <TextEditorWrapper>
       <TextEditorContainer>
         <Header>
-          <p>{t('listRoutes.title')}</p>
+          <p className={'header'}>{t('listRoutes.title')}</p>
         </Header>
         <ListRoutes t={t} history={history} createNotification={createNotification} />
       </TextEditorContainer>

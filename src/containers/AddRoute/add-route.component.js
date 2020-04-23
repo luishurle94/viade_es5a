@@ -145,7 +145,7 @@ const AddRouteComponent = ({ webId, history }: Props) => {
     <TextEditorWrapper>
       <TextEditorContainer>
         <Header>
-          <p>{t('addRoute.title')}</p>
+          <p className={'header'}>{t('addRoute.title')}</p>
         </Header>
         <AddRoute webId={webId} history={history} />
       </TextEditorContainer>

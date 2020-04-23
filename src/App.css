@@ -102,3 +102,7 @@ input[type="number"], textarea {
   min-width: 80vh;
   width: 100%;
 }
+
+.header {
+  font-size: 1em !important;
+}
