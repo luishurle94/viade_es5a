@@ -244,7 +244,7 @@ export const EditRoute = ({ history, routeId }: Props) =>{
 
     } catch(error) {
       errorToaster(t('addMilestone.notifications.errorLoadingMilestones'));
-      console.log(error)
+      console.error(error)
     }
 
   }

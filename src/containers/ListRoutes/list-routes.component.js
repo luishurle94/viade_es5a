@@ -36,7 +36,6 @@ export class ListRoutes extends Component {
   componentDidMount() {
     this.props.getAll(true)
       .then(list => {
-        console.log(list)
         if (list) {
           list = list.filter(i => i !== null && i !== undefined);
           let l = list.length > 5 ? 5 : list.length;

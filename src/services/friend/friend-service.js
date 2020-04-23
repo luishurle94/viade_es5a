@@ -45,7 +45,7 @@ export const add = async (friendWebId, webId) => {
     try {
       return await SolidAdapter.link(webId, friendWebId, false, 'knows');
     } catch(e){
-      console.log(e)
+      console.error(e)
     }
     
 }

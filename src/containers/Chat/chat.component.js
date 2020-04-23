@@ -28,7 +28,7 @@ class Chat extends Component {
     this.setState({
       loading: true
     })
-    const message = new Comment(newMessage, new Date().toISOString(), this.props.webId);console.log([message, message.getIdentifier()])
+    const message = new Comment(newMessage, new Date().toISOString(), this.props.webId);
     const res = await CommentService.publishComment(this.props.route.webId, message);
     if (res.added) {
       this.setState({

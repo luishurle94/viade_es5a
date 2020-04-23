@@ -30,7 +30,6 @@ export class FriendDetails extends Component {
       .then(list => {
         if (list) {
           list = list.filter(i => i !== null && i !== undefined).map(obj => { return {...obj, profile: obj.webId.concat('profile/card#me')} });
-          console.log(list.length)
 
           this.setState({ friends: list, list: list, isLoading: false });
           
