@@ -40,10 +40,10 @@ export const linkToGraph = async (webId, obj, lit, predicate) => {
 
 export const unlink = async (webId, predicate, url) => {
   try {
-    if (!await ldflexHelper.resourceExists(webId))
+    if (!await ldflexHelper.resourceExists(webId)) {
       return false;
-
-    await ldflex[webId][predicate].remove(namedNode(url));
+    }
+    await ldflex[webId][predicate].delete(namedNode(url));
     return true;
   } catch (e) {
     return false;

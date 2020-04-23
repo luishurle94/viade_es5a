@@ -162,7 +162,7 @@ export const checkParams = async (createDocument, webId, parentWebId, parentFile
       parentFilename = HashHelper.hash(parentFilename);
     } 
   } else {
-    parentFilename = 'data';
+    parentFilename = 'settings';
   }
   if (parentFilename && !parentFilename.toString().includes('.ttl'))  parentFilename = `${parentFilename}.ttl`
   parentPredicate = parentPredicate || 'schema:hasPart';
