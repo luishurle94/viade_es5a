@@ -27,6 +27,7 @@ describe.only('Welcome', () => {
   });
 
   test('renders with styled components', () => {
+    expect(getByTestId('input-file')).toBeTruthy();
     expect(getByTestId('welcome-logo')).toBeTruthy();
     expect(getByTestId('welcome-profile')).toBeTruthy();
     expect(getByTestId('welcome-detail')).toBeTruthy();

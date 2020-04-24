@@ -36,7 +36,7 @@ export const ListFriendsData = ({ history, webId }: Props) => {
       return (
         <DialogContent>
           <Input id="nameId" data-testid="nameId" type="text" size="200" defaultValue="" onBlur={(event) => setFriendUrl(event.target.value.trim())} />
-          <Button data-testid="send" className="button" label="send" onClick={sendButton.bind(ListFriendsData)}>{t('listFriendData.addButton')}</Button>
+          <Button data-testid="sendDialog" className="button" label="send" onClick={sendButton.bind(ListFriendsData)}>{t('listFriendData.addButton')}</Button>
         </DialogContent>
       );
 
