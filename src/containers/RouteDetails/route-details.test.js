@@ -27,7 +27,7 @@ describe('Add Route', () => {
 
   const { container } = render(
     <Router>
-      <RouteDetails history={history} />
+      <RouteDetails history={history} webId={'https://fakeadri.solid.community/private/viade/108874618.ttl'} />
     </Router>
   );
 
@@ -48,10 +48,6 @@ describe('Add Route', () => {
 
   });
 
-  test('Submission test', async () => {
-    const submitButton = getByTestId(container, 'details');
-    fireEvent.click(submitButton);
 
-  });
 
 });

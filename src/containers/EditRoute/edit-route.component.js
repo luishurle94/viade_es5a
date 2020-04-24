@@ -352,7 +352,7 @@ export const EditRouteComponent = ({ history }: Props) => {
             <EditRoute history={history} routeId={routeId}/>
           </TabPanel>
           <TabPanel header={t('editRoute.upload')}>
-            <Form>
+            <Form id="uploadTab">
               <FullGridSize>
                 <FullGridSize>
                   <FileUploader webId={webId} routeId={routeId} t={t} />

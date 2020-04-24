@@ -81,10 +81,7 @@ defineFeature(feature, test => {
         await page.waitForSelector("[id='descriptionId']", {visible: true});
         await page.type("[id='descriptionId']", "Estoy escribiendo esto con la mente....");
 
-        await page.waitFor(500);
 
-        await page.waitForSelector("[id='rankId']", {visible: true});
-        await page.type("[id='rankId']", "7");
 
         await page.waitFor(500);
 

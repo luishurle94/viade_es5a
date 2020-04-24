@@ -114,7 +114,7 @@ defineFeature(feature, test => {
 
     then('contacta con el POD para añadirnos el hito', async () => {
 
-      await page.waitForSelector(".sc-kvZOFW.fLcXSx", {visible: true});
+      await page.waitForSelector(".sc-kvZOFW.loleYq", {visible: true, timeout: 120000});
  
     });
 
