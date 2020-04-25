@@ -3,13 +3,14 @@ import mediaShape from '@contexts/media-shape.json';
 import { RouteService } from '@services';
 import { SolidAdapter } from "@solid-services";
 import { MediaFactory } from "@factories";
+import { HashHelper } from '@utils';
 /**
  * Add image
  * @param {String} routeId 
  * @param {Media} media 
  */
-export const addMedia = async (routeId, media) => {
-  if (!media) {
+export const addMedia = async (routeId, media) => {console.log(media)
+  if (!media || !media.href) {
     return false;
   }
   // get route
@@ -25,7 +26,17 @@ export const addMedia = async (routeId, media) => {
   }
 
   //create ttl file
-  const res = await SolidAdapter.create(media, mediaShape, true, media.createdBy);
+  let res = await SolidAdapter.create(media, mediaShape, true, media.createdBy);console.log(res)
+  if (!res) {
+    return false;
+  }
+  if (res && !res.added) {
+    // check if exist
+    res = await get(`${HashHelper.hash(media.getIdentifier())}.ttl`);
+    if (!res) {
+      return false;
+    }
+  }
 
   const field = routeShape.shape.filter(s => s.object === 'media').pop();
   const predicate = await SolidAdapter.getPredicate(field, routeShape);

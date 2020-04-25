@@ -36,7 +36,10 @@ export class Upload extends Component {
     })
     try {
       for(const file of this.state.files) {
-        await this.sendRequest(file);
+        const res = await this.sendRequest(file);
+        if (res === false) {
+          console.error(file)
+        }
       }
 
       this.setState({ successfullUploaded: true, uploading: false, files: [] });
@@ -53,7 +56,7 @@ export class Upload extends Component {
       const webId = this.props.webId;
       return await MediaService.addMedia(this.props.routeId, new Media(MediaService.getHref(webId, file.name), file, new Date(), webId, file.type));
     }
-    return Promise.resolve();
+    return Promise.resolve(false);
   }
 
   renderActions() {

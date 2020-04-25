@@ -62,6 +62,10 @@ export const AddRoute = ({ webId, history }: Props) => {
     values[1] = event.target.value;
   }
 
+  function checkRank(event){
+    values[3] = event.target.value;
+  }
+
   async function checkSubmit(event){
     event.preventDefault();
 
@@ -123,7 +127,7 @@ export const AddRoute = ({ webId, history }: Props) => {
 
         <Label>
           {t('addRoute.rank')}
-          <Input id="rankId" data-testid="rankId" type="number" min="0" max="10" size="200"/>
+          <Input id="rankId" data-testid="rankId" type="number" min="0" max="10" size="200" onChange={checkRank}/>
         </Label>
 
         <Input id="submitId" data-testid="submitId" type="submit" className="ids-link-filled ids-link-filled--primary button" value={t('addRoute.submit')} />
