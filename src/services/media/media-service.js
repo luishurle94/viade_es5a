@@ -26,9 +26,6 @@ export const addMedia = async (routeId, media) => {
 
   //create ttl file
   const res = await SolidAdapter.create(media, mediaShape, true, media.createdBy);
-  if (!res && !res.added) {
-    return false;
-  }
 
   const field = routeShape.shape.filter(s => s.object === 'media').pop();
   const predicate = await SolidAdapter.getPredicate(field, routeShape);

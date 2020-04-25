@@ -2,7 +2,7 @@ import { SolidAdapter } from "@solid-services";
 import routeShape from '@contexts/route-shape.json';
 import sharedRouteShape from '@contexts/shared.route-shape.json';
 import { RouteFactory } from '@factories';
-import { NotificationService } from '@services';
+import { NotificationService, MediaService } from '@services';
 
 /**
  * Add route
@@ -121,21 +121,31 @@ export const share = async (route, friendId) => {
   if (!route || !friendId || !route.webId) {
     return false;
   }
-  const routeRes = await SolidAdapter.share(friendId, route.webId);
-  if (routeRes) {
+  try {
+    await SolidAdapter.share(friendId, route.webId);
+
     // share linked elements
     for (let milestone of route.milestones) {
       await SolidAdapter.share(friendId, milestone);
     }
     for (let media of route.media) {
-      await SolidAdapter.share(friendId, media);
+      const entity = await MediaService.get(media);
+      if (entity && entity.href) {
+        await SolidAdapter.share(friendId, media);
+        await SolidAdapter.share(friendId, entity.href);
+      }
     }
     for (let comment of route.messages) {
       await SolidAdapter.share(friendId, comment);
     }
     return true;
+  } catch(e) {
+    console.error(e);
+    return false;
   }
-  return false;
+
+  // }
+
 }
 
 export const removeShared = async (webId) => {

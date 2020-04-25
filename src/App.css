@@ -106,3 +106,7 @@ input[type="number"], textarea {
 .header {
   font-size: 1em !important;
 }
+
+.p-button[data-testid="fullscreen"] {
+  display: none !important;
+}

@@ -17,7 +17,7 @@ const ListSharedRoutesComponent = ({ history, webId }: Props) => {
     <TextEditorWrapper>
       <TextEditorContainer>
         <Header>
-          <p className={'header'}>{t('listRoutes.title')}</p>
+          <p className={'header'}>{t('navBar.list-shared-routes')}</p>
         </Header>
         <ListRoutes t={t} webId={webId} history={history} createNotification={createNotification} getAll={RouteService.getAllShared} callback={RouteService.saveSharedRoute}/>
       </TextEditorContainer>

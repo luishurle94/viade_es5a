@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import { useTranslation } from 'react-i18next';
 import { RouteService, NotificationService } from '@services';
-import { useNotification, NotificationTypes } from '@inrupt/solid-react-components';
+import { NotificationTypes } from '@inrupt/solid-react-components';
 import { successToaster, errorToaster } from '@utils';
 import { Loader } from '@util-components';
 import { DataView } from 'primereact/dataview';
 import { Dialog } from 'primereact/dialog';
 import {
-  TextEditorWrapper,
-  TextEditorContainer,
-  Header,
   Button,
   RouteDetails,
   DialogContent
@@ -27,6 +23,8 @@ export class ListRoutes extends Component {
       layout: 'list',
       selectedRoute: null,
       visible: false,
+      sharing: false,
+      loading: false,
       sortKey: null,
       sortOrder: null,
       rows: 5,
@@ -37,17 +35,21 @@ export class ListRoutes extends Component {
 
   componentDidMount() {
     this._isMounted = true;
+    this.setState({loading: true})
     this.props.getAll(true)
       .then(list => {
         if (list && this._isMounted) {
           list = list.filter(i => i !== null && i !== undefined);
           let l = list.length > 5 ? 5 : list.length;
-          this.setState({ routes: list, rows: l });
+          this.setState({ loading: false, routes: list, rows: l });
           if (this.props.callback) {
             this.props.callback();
           }
         }
-      }).catch(err => console.error(err));
+      }).catch(err => {
+        this.setState({loading: false})
+        console.error(err)
+      });
   }
 
   componentWillUnmount() {
@@ -67,12 +69,18 @@ export class ListRoutes extends Component {
   }
 
   async delete(route) {
-    if (route.createdBy === this.props.webId)
-      await RouteService.remove(route.webId);
-    if (route.createdBy && route.createdBy !== this.props.webId)
-      await RouteService.removeShared(route.webId);
+    try {
+      this.setState({ loading: true });
+      if (route.createdBy === this.props.webId)
+        await RouteService.remove(route.webId);
+      if (route.createdBy && route.createdBy !== this.props.webId)
+        await RouteService.removeShared(route.webId);
 
-    this.props.history.push(this.props.history.location)
+      this.componentDidMount();
+    } catch(e) {
+      this.setState({ loading: false })
+      errorToaster(this.state.t('file.error'))
+    }
   }
 
   itemTemplate(route) {
@@ -116,6 +124,7 @@ export class ListRoutes extends Component {
         <DialogContent>
           <ListFriends selected={this.selectedFriends.bind(this)} />
           <Button data-testid="send" className="button" label="send" onClick={() => this.sendButton()}>{this.props.t('listRoutes.send')}</Button>
+          {this.state.sharing && <Loader />}
         </DialogContent>
       );
     }
@@ -126,6 +135,9 @@ export class ListRoutes extends Component {
   }
 
   async sendButton() {
+    this.setState({
+      sharing: true
+    });
     let everythingNoError = true;
     for (const friend of this.state.selectedFriends) {
       const res = await RouteService.share(this.state.selectedRoute, friend.webId);
@@ -144,6 +156,10 @@ export class ListRoutes extends Component {
         everythingNoError = false;
       }
     }
+
+    this.setState({
+      sharing: false
+    });
 
     if (everythingNoError) {
       successToaster(this.props.t('listRoutes.shared'))
@@ -165,27 +181,9 @@ export class ListRoutes extends Component {
         <Dialog header={this.props.t('listRoutes.selectFriend')} visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({ visible: false })}>
           {this.renderFriendsDialog()}
         </Dialog>
-        {!this.state.routes && <Loader />}
+        {this.state.loading && <Loader />}
       </div>
 
     );
   }
 }
-
-const ListRoutesComponent = ({ history, webId }: Props) => {
-  const { t } = useTranslation();
-  const { createNotification } = useNotification(webId);
-
-  return (
-    <TextEditorWrapper>
-      <TextEditorContainer>
-        <Header>
-          <p className={'header'}>{t('listRoutes.title')}</p>
-        </Header>
-        <ListRoutes t={t} history={history} createNotification={createNotification} />
-      </TextEditorContainer>
-    </TextEditorWrapper>
-  );
-};
-
-export default ListRoutesComponent;
