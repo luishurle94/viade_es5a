@@ -1,8 +1,6 @@
 [[section-design-decisions]]
 == Design Decisions
 
-Work in progress..
-
 In this section we will talk about the design decisions made to implement our routes application.
 
 * For the project interface, we are going to use Bootstrap libraries along with Solid React components and PrimeReact.

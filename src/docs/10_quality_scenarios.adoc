@@ -14,7 +14,7 @@ There are numerous quality requirements but then the most essential and which we
 
 === Quality Tree
 
-image::10-Quality-Tree.png["Possible topics for crosscutting concepts"]
+image::10-Quality-Tree.PNG["Possible topics for crosscutting concepts"]
 
 === Quality Scenarios
 

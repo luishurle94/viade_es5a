@@ -33,7 +33,7 @@ endif::basebackend-html[]
 ****
 [NOTE]
 ====
-This version of the documentation is currently in WIP.
+This project is based on live documentation, currently in WIP.
 ====
 ****
 
