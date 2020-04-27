@@ -1,0 +1,351 @@
+{
+  "appPermission": {
+    "message": "The application permissions are not properly set. Please add additional permissions and try again",
+    "link": {
+      "label": "Learn more",
+      "href": "https://solidsdk.inrupt.net/public/general/en/app-permissions.html"
+    }
+  },
+  "notifications": {
+    "success": "Success",
+    "error": "Error",
+    "unknownError": "An unknown error has occurred",
+    "404": "Editing a new document.",
+    "errorLoading": "There was an error loading your file, please try again.",
+    "errorSaving": "There was an error saving your file, please try again.",
+    "errorFetching": "Error fetching document.",
+    "accessGranted": "Co-editor now has read/write access.",
+    "errorGrantingAccess": "There was an error giving access to your file, please try again.",
+    "saved": "Your file was saved successfully.",
+    "notEditable": "(not editable)",
+    "notSharable": "(log in and load a doc on your own pod to give others access)"
+  },
+  "login": {
+    "title": "Hi! Welcome to Viade.",
+    "loginTitle": "Log in",
+    "register": "Register for a solid identity",
+    "solidHelp": "What is a Solid Identity?",
+    "providerPlaceholder": "Select ID Provider",
+    "selectPlaceholder": "Select ID Provider",
+    "inputPlaholder": "WebID",
+    "formButtonText": "Log In",
+    "btnTxtWebId": "Log In with WebId",
+    "btnTxtProvider": "Log In with Provider",
+    "errors": {
+      "unknown": "Something is wrong, please try again...",
+      "webIdNotValid": "WebID is not valid",
+      "emptyProvider": "Solid Provider is required",
+      "emptyWebId": "Valid WebID is required"
+    }
+  },
+  "register": {
+    "title": "Hi! Welcome to Solid.",
+    "step1Title": "Select your Provider",
+    "whatIsAProvider": "What is a provider, and how should I choose one?",
+    "alreadySolid": "I already have a Solid identity",
+    "next": "Next"
+  },
+  "navBar": {
+    "welcome": "Welcome",
+    "logOut": "Log out",
+    "profile": "Profile",
+    "formModelRender": "Form Model Render",
+    "formModelConvert": "Form Model Convert",
+    "text-editor": "Text Editor",
+    "changeLanguage": "Change Language",
+    "languages": {
+      "en": "English (English)",
+      "es": "Español (Spanish)"
+    },
+    "notifications": {
+      "global": "Global",
+      "tictactoe": "TicTacToe Game",
+      "noinbox": "Global inbox not found. Please create one and try again.",
+      "fetchingError": "Error fetching notifications from Pod"
+    },
+    "tictactoe": "Game",
+    "add-route": "Add Route",
+    "add-milestone": "Add Milestone",
+    "list-routes": "Routes list",
+    "list-shared-routes": "Shared routes list",
+    "list-friends": "Friend list"
+  },
+  "footer": {
+    "version": "Version"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "content": "There may be an error in the URL entered into your web browser. Please check the URL and try again. Or the page you're looking for has been moved or deleted",
+    "redirectButton": "Take me back to the welcome page"
+  },
+  "welcome": {
+    "welcome": "Welcome",
+    "doneMessage": "All done ?",
+    "title": "<0>ViaDe powered by <1>Solid.</1></0>",
+    "description": "<0>The goal is to create Viade, a decentralized routes management system based on the <1>solid specifications</1>.</0>",
+    "contactUsTitle": "Contact Us",
+    "contactUsText": "<0>If you have questions or you would like feedback about the ViaDe project please contact <1>Issues Viade_5a<1>.</0>",
+    "contactUsInruptText": "<0>If you have additional questions about of Solid or inrupt’s brand, please contact <1>support@inrupt.com<1>.</0>",
+    "workingInProgress": "<0>The project is working in progress. Take a look at the <1>Github Repository</1> for what’s been implemented as part of the previous releases, and what's currently planned.</0>",
+    "implementing": "This latest release builds on the prior versions:",
+    "upload": "Upload New Photo",
+    "successTitle": "Success",
+    "uploadSuccess": "Profile Image was updated",
+    "uploadingText": "Uploading",
+    "errorTitle": "Error",
+    "errors": {
+      "sizeLimit": "File size exceeds the allowable limit ({{limit}})",
+      "unsupported": "Unsupported media type",
+      "maximumFiles": "Sorry, you have exceeded the maximum number of files allowed per upload"
+    }
+  },
+  "profile": {
+    "successCallback": "Pod updated successfully",
+    "successTitle": "Success",
+    "errorCallback": "Error submitting form",
+    "errorTitle": "Error",
+    "saveBtn": "Save",
+    "resetBtn": "Reset",
+    "addBtn": "+ Add new ",
+    "deleteBtn": "Remove",
+    "dropdownDefaultText": "- Select -",
+    "upload": "Upload New Photo",
+    "uploadSuccess": "Profile Image was updated",
+    "uploadingText": "Uploading",
+    "updateSuccess": "Profile was updated successfully",
+    "nameRequired": "Name is required",
+    "errors": {
+      "default": "Something is wrong, please try again...",
+      "406": "Please ensure the form is valid",
+      "500": "An error has occurred in the server",
+      "sizeLimit": "File size exceeds the allowable limit ({{limit}})",
+      "unsupported": "Unsupported media type",
+      "maximumFiles": "Sorry, you have exceeded the maximum number of files allowed per upload"
+    },
+    "autosaveNotification": "Profile changes are saved immediately. There is no undo.",
+    "warningResolution": "Field value has been updated to:",
+    "minMxNumberInclusive": "Error: Min and max should be ",
+    "minMxNumberExclusive": "Error: Min and max value should be ",
+    "minMaxString": "Error: Min and max should be ",
+    "defaultError": "Error: Field value has wrong format"
+  },
+  "game": {
+    "title": "Tic Tac Toe",
+    "createGamePrompt": "Enter an Opponent and a Game ID",
+    "createGame": "Create Game",
+    "createGameSuccess": "Game created successfully",
+    "resetGameForm": "Reset",
+    "idLabel": "Game ID",
+    "opponentWebIDLabel": "Opponent WebID",
+    "nogames": "No game were found",
+    "invitationAccept": "has invited you to play a game of TicTacToe. Would you like to play?",
+    "invitationTemplate": "<0><0><0>{{- name}}</0> has invited you to play a game of TicTacToe.</0><1>Would you like to play?</1></0>",
+    "invitationAcceptText": "Accept",
+    "invitationDeclineText": "Decline",
+    "deleteConfirmation": "Delete game?",
+    "playingAgainst": "Playing Against:",
+    "token": "Your token:",
+    "tieMsg": "It's a tie",
+    "winnerMsg": "You are the winner!!",
+    "loserMsg": "Better luck next time",
+    "winnerObj": "Winner",
+    "notYourTurn": "Not your turn, please wait for your opponent to play",
+    "status": "Game Status:",
+    "created": "Created",
+    "confirmDelete": "Confirm Delete",
+    "deleteLabel": "Delete",
+    "playLabel": "Play",
+    "yourGames": "Your Games",
+    "otherGames": "Other Games",
+    "errorTitle": "Error",
+    "opponentMissing": "Cannot create game as no Opponent WebID was entered.",
+    "dataError": {
+      "message": "Game data could not be saved, data.ttl was not found",
+      "link": {
+        "label": "Learn More",
+        "href": "https://solidsdk.inrupt.net/public/general/en/data-file-not-found.html"
+      }
+    },
+    "createFolder": {
+      "message": "Error creating game data folder",
+      "link": {
+        "label": "Learn More",
+        "href": "link url"
+      }
+    },
+    "myself": "You cannot play against yourself",
+    "alreadyExists": "file already exists in the Pod. "
+  },
+  "noInboxOpponent": {
+    "message": "Your opponent does not have an inbox in their Pod",
+    "link": {
+      "label": "Learn More",
+      "href": "https://solidsdk.inrupt.net/public/general/en/missing-global-inbox.html"
+    }
+  },
+  "noInboxUser": {
+    "message": "Global inbox not found, please go to your Pod and create one",
+    "link": {
+      "label": "Learn more",
+      "href": "https://solidsdk.inrupt.net/public/general/en/missing-global-inbox.html"
+    }
+  },
+  "errorCreateInbox": {
+    "link": {
+      "label": "Learn more",
+      "href": "https://solidsdk.inrupt.net/public/general/en/app-inbox-cannot-be-created.html"
+    }
+  },
+  "errorFormRender": {
+    "link": {
+      "label": "Learn more",
+      "href": "https://solidsdk.inrupt.net/public/general/en/form-rendering-errors.html"
+    }
+  },
+  "formLanguage": {
+    "shacl": "SHACL",
+    "shaclExtension": "SHACL + RDF Extension",
+    "shex": "ShEx",
+    "shexLayout": "ShEx Layout",
+    "layout": "Layout",
+    "extension": "Extension",
+    "formModel": "Form Model",
+    "copyToClipboard": "Copy to Clipboard",
+    "shaclShape": "SHACL Shape",
+    "shexShape": "ShEx Shape",
+    "input": "Input",
+    "source": "Data Source",
+    "converter": {
+      "title": "Form Model Converter",
+      "convert": "Convert",
+      "copySuccess": "Copied to clipboard"
+    },
+    "renderer": {
+      "title": "Form Model Renderer",
+      "submitBtn": "Generate",
+      "resetBtn": "Reset Model",
+      "viewBtn": "View",
+      "editBtn": "Edit",
+      "viewMode": "View Mode",
+      "editMode": "Edit Mode",
+      "formSaved": "Form successfully saved",
+      "formNotLoaded": "Form could not be rendered",
+      "fieldDeleted": "Form field successfully deleted",
+      "fieldAdded": "New form field successfully added"
+    }
+  },
+  "editor": {
+    "explanation": "This simple text editor enables you to create a plaintext file and save it in a Pod. To make this very clear for the demo you provide a URL as an absolute path to the file in the Pod. The Pod can be the one this App has been logged into or another person's Pod. To write, and read, into another person's Pod the owner will have had to provide you with write permission.",
+    "url": "URL",
+    "friend": "Co-editor's webid",
+    "load": "Load",
+    "save": "Save",
+    "grantAccess": "Grant Access"
+  },
+  "addRoute": {
+    "title": "Add Route",
+    "submit": "Submit",
+    "connection": "Connected as:",
+    "name": "Name",
+    "description": "Description",
+    "distance": "Distance",
+    "slope": "Slope",
+    "rank": "Rank",
+    "creator": "Creator",
+    "createdAt": "Creation date",
+    "notifications": {
+      "nameEmpty": "'Name' field can not be empty",
+      "distanceNegative": "'Distance' must be greater than zero",
+      "slopeNegative": "'Slope' must be at least zero",
+      "rank": "'Rank' must be in range [0 - 10]",
+      "correct": "Saving your route...",
+      "error": "Oops! Some fields of your form are not valid",
+      "errorService": "There was an error saving your route. Maybe if you try again..."
+    }
+  },
+  "addMilestone": {
+    "title": "Add Milestone",
+    "name": "Name",
+    "description": "Description",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "altitude": "Altitude",
+    "slope": "Slope",
+    "distance": "Distance",
+    "createNew": "Create new Milestone",
+    "useExistent": "Use an existent Milestone (Introduce the existent milestone webId)",
+    "mapInfo": "Click on the map to get the latitude and longitud of a point, or insert it manually",
+    "routeToAdd": "Route to add the milestone",
+    "accordionTitle": "This route already has",
+    "accordionEndTtile": "milestones",
+    "seeRouteDetails": "See Details",
+    "seeAllRoutes": "See Routes",
+    "notifications": {
+      "altitudeNegative": "'Altitude' must be at least zero",
+      "altitudeNaN": "'Altitude' must be a number",
+      "latitudeNaN": "'Latitude' must be a number",
+      "longitudeNaN": "'Longitude' must be a number",
+      "existentEmpty": "A milestone webId must be introduced",
+      "routeIdEmpty": "A route webId must be introduced",
+      "correct": "Adding your milestone...",
+      "errorService": "There was an error adding your milestone. Maybe if you try again...",
+      "errorLoadingMilestones": "Oops! There was an error loading your milestones..."
+    }
+  },
+  "editRoute": {
+    "title": "Edit Route",
+    "upload": "Upload Media"
+  },
+  "listRoutes": {
+    "title": "Route list",
+    "rank": "Rank",
+    "details": "Details",
+    "createdBy": "Author",
+    "addMilestone": "Milestones",
+    "share": "Share",
+    "delete": "Delete",
+    "selectFriend": "Select friends to share the route:",
+    "send": "Send route",
+    "edit": "Edit",
+    "notificationTitle": "Viade route invitation",
+    "shared": "Route has been shared succesfully.",
+    "error": "Friend has problems with inboxes. It has not completed succesfully."
+  },
+  "listFriendData": {
+    "title": "Friend list",
+    "unnamedFriend": "Friend",
+    "add": "Add Friend",
+    "addTitle": "Introduce your friend's webId",
+    "addButton": "Add",
+    "error": "Oops! There has been a problem adding your friend",
+    "success": "Your friend has been added",
+    "invalidUrl": "You must provide a valid webId"
+  },
+  "file": {
+    "dropzone": {
+      "upload": "Upload media"
+    },
+    "description1": "Select the files to be stored in the path.",
+    "description2": "Click the upload button when you are done.",
+    "description3": "All files types are supported.",
+    "success": "Upload completed succesfully.",
+    "error": "There has been some problem uploading. Try later."
+  },
+  "routeDetails":{
+    "title": "Route Information",
+    "media": "Media files",
+    "images": "Images",
+    "other": "Other files",
+    "chat": {
+      "title": "Messages",
+      "subtitle": "{{routeName}}",
+      "placeholder": "Type a message...",
+      "error": "There have been problems posting the message. Try again later."
+    }
+  },
+  "media": {
+    "webId": "Media file",
+    "href": "URL",
+    "createdAt": "Creation date"
+  }
+}
