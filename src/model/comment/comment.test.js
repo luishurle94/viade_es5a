@@ -24,7 +24,7 @@ describe.only('Create a new comment', () => {
 
 describe.only('Get identifier', () => {
   test('should return true', () => {
-    expect(`Comentario de prueba_Isabel`).toBe(comment.getIdentifier());
+    expect(`Comentario de prueba_Isabel_${date}`).toBe(comment.getIdentifier());
   });
 
   test('should be undefined', () => {

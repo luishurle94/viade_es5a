@@ -100,7 +100,10 @@ module.exports = {
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
-  // modulePathIgnorePatterns: [],
+  "modulePathIgnorePatterns": [ 
+    "<rootDir>/node_modules/.*/react",
+    "<rootDir>/node_modules/.*/react-dom"
+  ],
 
   // Activates notifications for test results
   // notify: false,

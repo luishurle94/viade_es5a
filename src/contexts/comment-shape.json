@@ -6,7 +6,7 @@
     {
       "prefix": "schema",
       "predicate": "text",
-      "object": "href",
+      "object": "message",
       "literal": true,
       "type": "String"
     },
@@ -22,7 +22,7 @@
       "predicate": "author",
       "object": "createdBy",
       "literal": false,
-      "type": "number"
+      "type": "WebId"
     }
   ]
 }

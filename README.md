@@ -28,6 +28,20 @@ In this moment, you can check if installation has been completed succesfully run
 npm start
 ```
 
+### Running with Docker
+#### Using Docker image
+This will enable you to try ViaDe App on http://localhost/viade_es5a.
+```
+docker run -it --rm jaluma/viade_es5a
+```
+
+#### Using Docker-Compose
+Additional, we can launch it with SolidServer on https://localhost:8443.
+```
+docker-compose -f docker-compose.yml up
+```
+
+
 ### Running the tests
 
 Currently, we are testing with a framework called Jest. 
@@ -95,22 +109,22 @@ Skelenton built using [Solid React Application Generator](https://github.com/inr
 ## To Do
 - [x] Documentation based on Arc42.
   - [x] Initial version.
-  - [ ] Final version.
+  - [x] Final version.
 - [x] Skeleton.
 - [x] Service Layer.
 - [x] Solid Adapter.
 - [ ] Map.
-  - [x] Generate GeoJson from Route.
-  - [x] Load GeoJson in Map.
+  - [x] Generate internal GeoJson from Route.
+  - [ ] Export GeoJson/KML/GPX.
   - [ ] Secure Google Maps API Key.
-- [ ] Management
+- [x] Management
   - [x] Create Route.
   - [x] Create Milestones.
   - [x] List my routes.
   - [x] Details.
-  - [ ] Share route.
-    - [ ] Share routes.
-    - [ ] List shared routes.
-  - [ ] Friends
+  - [x] Share route.
+    - [x] Share routes.
+    - [x] List shared routes.
+  - [x] Friends
     - [x] List friends.
-    - [ ] Add friends.
+    - [x] Add friends.

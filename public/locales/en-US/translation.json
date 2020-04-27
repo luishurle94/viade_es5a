@@ -67,7 +67,9 @@
     "tictactoe": "Game",
     "add-route": "Add Route",
     "add-milestone": "Add Milestone",
-    "list-routes": "Routes list"
+    "list-routes": "Routes list",
+    "list-shared-routes": "Shared routes list",
+    "list-friends": "Friend list"
   },
   "footer": {
     "version": "Version"
@@ -277,6 +279,8 @@
     "routeToAdd": "Route to add the milestone",
     "accordionTitle": "This route already has",
     "accordionEndTtile": "milestones",
+    "seeRouteDetails": "See Details",
+    "seeAllRoutes": "See Routes",
     "notifications": {
       "altitudeNegative": "'Altitude' must be at least zero",
       "altitudeNaN": "'Altitude' must be a number",
@@ -290,23 +294,60 @@
     }
 
   },
+  "editRoute": {
+    "title": "Edit Route",
+    "upload": "Upload Media"
+  },
   "listRoutes": {
     "title": "Route list",
     "rank": "Rank",
+    "createdBy": "Author",
+    "addMilestone": "Milestones",
     "details": "Details",
     "share": "Share",
+    "delete": "Delete",
     "selectFriend": "Select friends to share the route:",
-    "send": "Send route"
+    "send": "Send route",
+    "edit": "Edit",
+    "notificationTitle": "Viade route invitation",
+    "shared": "Route has been shared succesfully.",
+    "error": "Friend has problems with inboxes. It has not completed succesfully."
+  },
+  "listFriendData": {
+    "title": "Friend list",
+    "unnamedFriend": "Friend",
+    "add": "Add Friend",
+    "addTitle": "Introduce your friend's webId",
+    "addButton": "Add",
+    "error": "Oops! There has been a problem adding your friend",
+    "success": "Your friend has been added",
+    "invalidUrl": "You must provide a valid webId"
   },
   "file": {
     "dropzone": {
-      "upload": "Uplaod media"
+      "upload": "Upload media"
     },
+    "description1": "Select the files to be stored in the path.",
+    "description2": "Click the upload button when you are done.",
+    "description3": "All files types are supported.",
     "success": "Upload completed succesfully.",
     "error": "There has been some problem uploading. Try later."
   },
   "routeDetails":{
     "title": "Route Information",
-    "media": "Media files"
+    "media": "Media files",
+    "images": "Images",
+    "other": "Other files",
+    "chat": {
+      "title": "Messages",
+      "subtitle": "{{routeName}}",
+      "placeholder": "Type a message...",
+      "error": "There have been problems posting the message. Try again later."
+    }
+  },
+  "media": {
+    "webId": "Media file",
+    "href": "URL",
+    "createdAt": "Creation date"
   }
 }

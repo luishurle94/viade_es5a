@@ -66,7 +66,7 @@ defineFeature(feature, test => {
 
       expect(page.url()).toBe("http://localhost:3000/#/welcome")
 
-      await page.goto("http://localhost:3000/#/add-milestone?routeId=https://fakeadri.solid.community/public/viade/1727944335.ttl", {
+      await page.goto("http://localhost:3000/#/route-edit?routeId=https://fakeadri.solid.community/public/viade/1727944335.ttl", {
         waitUntil: 'networkidle2'
       });
 
@@ -114,7 +114,7 @@ defineFeature(feature, test => {
 
     then('contacta con el POD para añadirnos el hito', async () => {
 
-      await page.waitForSelector(".sc-kvZOFW.fLcXSx", {visible: true});
+      await page.waitForSelector(".sc-kvZOFW.loleYq", {visible: true, timeout: 120000});
  
     });
 

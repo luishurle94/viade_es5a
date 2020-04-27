@@ -67,7 +67,9 @@
     "tictactoe": "Juego",
     "add-route": "Añadir Ruta",
     "add-milestone": "Añadir Hito",
-    "list-routes": "Lista de rutas"
+    "list-routes": "Lista de rutas",
+    "list-shared-routes": "Lista de rutas compartidas",
+    "list-friends": "Lista de Amigos"
   },
   "footer": {
     "version": "Versión"
@@ -277,6 +279,8 @@
     "routeToAdd": "Ruta a la que se añadirá el hito",
     "accordionTitle": "Esta ruta tiene",
     "accordionEndTtile": "hitos",
+    "seeRouteDetails": "Ver Detalles",
+    "seeAllRoutes": "Ver Rutas",
     "notifications": {
       "altitudeNegative": "'Altitud' debe ser al menos cero",
       "altitudeNaN": "'Altitud' debe ser un número",
@@ -289,23 +293,60 @@
       "errorLoadingMilestones": "¡Ups! Ha ocurrido un error al cargar tus hitos..."
     }
   },
+  "editRoute": {
+    "title": "Editar Ruta",
+    "upload": "Subir multimedia"
+  },
   "listRoutes": {
     "title": "Lista de rutas",
     "rank": "Dificultad",
+    "createdBy": "Autor",
     "details": "Detalles",
+    "addMilestone": "Hitos",
     "share": "Compartir",
+    "delete": "Eliminar",
     "selectFriend": "Selecciona amigos para compartir la ruta:",
-    "send": "Enviar ruta"
+    "send": "Enviar ruta",
+    "edit": "Editar",
+    "notificationTitle": "Invitación a Ruta Viade",
+    "shared": "La ruta se ha compartido correctamente.",
+    "error": "Tu amigo tiene problemas con la bandeja de entrada. No se ha podido completar correctamente la operación."
+  },
+  "listFriendData": {
+    "title": "Lista de amigos",
+    "unnamedFriend": "Amigo",
+    "add": "Añadir Amigo",
+    "addTitle": "Introduce el webId de tu amigo",
+    "addButton": "Añadir",
+    "error": "¡Ups! Ha habido un error al añadir tu amigo",
+    "success": "Tu amigo ha sido añadido",
+    "invalidUrl": "Debes proporcionar un webId válido"
   },
   "file": {
     "dropzone": {
       "upload": "Subir archivos multimedia"
     },
+    "description1": "Seleccione los ficheros que se deseen almacenar en la ruta.",
+    "description2": "Pulse el botón de subir para finalizar.",
+    "description3": "Todos los tipos de ficheros son compatibles.",
     "success": "Subida completada correctamente.",
     "error": "Ha habido alguna problemas. Vuelvalo a intentar más adelante."
   },
   "routeDetails":{
     "title": "Información de la Ruta",
-    "media": "Archivos multimedia"
+    "media": "Archivos multimedia",
+    "images": "Imágenes",
+    "other": "Otros ficheros",
+    "chat": {
+      "title": "Comentarios",
+      "subtitle": "{{routeName}}",
+      "placeholder": "Escribe un comentario",
+      "error": "Ha habido problemas publicando el mensaje. Intentelo más adelante."
+    }
+  },
+  "media": {
+    "webId": "Fichero multimedia",
+    "href": "URL",
+    "createdAt": "Fecha de creación"
   }
 }

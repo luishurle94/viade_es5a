@@ -29,12 +29,12 @@ describe.only('Create a new image', () => {
 describe.only('Get identifier', () => {
     test('should return true', async () => {
       expect(`http://example.com/picture.jpg_me_image/jpg`).toBe(img.getIdentifier());
+      expect(img4.getIdentifier()).toBe('http://example.com/picture.jpg_me_');
     });
 
     test('should be undefined', () => {
       expect(img2.getIdentifier()).toBe(undefined);
       expect(img3.getIdentifier()).toBe(undefined);
-      expect(img4.getIdentifier()).toBe(undefined);
     })
   });
 

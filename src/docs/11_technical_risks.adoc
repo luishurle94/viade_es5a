@@ -1,8 +1,6 @@
 [[section-technical-risks]]
 == Risks and Technical Debts
 
-.Contents
-
 In this section we will find all the risks and technical debts that 
 can arise throughout the project, from start to finish, 
 sorted by priority.

@@ -100,8 +100,17 @@ defineFeature(feature, test => {
 
       await page.waitFor(500);
         
+      await page.waitForSelector("[class='p-tabview-title']", {visible: true});
+      await page.evaluate(() => {
+        let btns = [...document.querySelectorAll("[class='p-tabview-title']")];
+        btns.forEach(function (btn) {
+            btn.click();   
+        });
+      });
+
+
       const input = await page.$('.FileInput')
-      await input.uploadFile('avatar2.jpg')
+      await input.uploadFile('avatar2.jpg') //AQUI
       await input.evaluate(upload => upload.dispatchEvent(new Event('change', { bubbles: true })));
 
     });

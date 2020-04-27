@@ -23,19 +23,23 @@ export class Upload extends Component {
   }
 
   onFilesAdded(files) {
+    this.setState({ successfullUploaded: false });
     this.setState(prevState => ({
       files: prevState.files.concat(files)
     }));
   }
 
   async uploadFiles() {
-    this.setState({ uploadProgress: {}, uploading: true });
+    this.setState({ successfullUploaded: false, uploadProgress: {}, uploading: true });
     this.setState({
       isLoading: true
     })
     try {
       for(const file of this.state.files) {
-        await this.sendRequest(file);
+        const res = await this.sendRequest(file);
+        if (res === false) {
+          console.error(file)
+        }
       }
 
       this.setState({ successfullUploaded: true, uploading: false, files: [] });
@@ -52,7 +56,7 @@ export class Upload extends Component {
       const webId = this.props.webId;
       return await MediaService.addMedia(this.props.routeId, new Media(MediaService.getHref(webId, file.name), file, new Date(), webId, file.type));
     }
-    return Promise.resolve();
+    return Promise.resolve(false);
   }
 
   renderActions() {
@@ -79,10 +83,11 @@ export class Upload extends Component {
             />
           </div>
           <div className="Files">
+            { this.state.successfullUploaded && <p><b>{ this.props.t('file.success') }</b></p> }
             {this.state.files.map(file => {
               return (
                 <div key={file.name} className="Row" data-testif="file">
-                  <span className="Filename">{file.name}</span>
+                  <span className="Filename">{file.name.substring(0, 20)}</span>
                 </div>
               );
             })}
@@ -90,6 +95,11 @@ export class Upload extends Component {
         </div>
         <div className="Actions">{this.renderActions()}</div>
         {this.state.uploading && <Loader absolute />}
+        <ul>
+          <li><i>- { this.props.t('file.description1') }</i></li>
+          <li><i>- { this.props.t('file.description2') }</i></li>
+          <li><i>- { this.props.t('file.description3') }</i></li>
+        </ul>
       </div>
     );
   }

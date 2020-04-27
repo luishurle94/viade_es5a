@@ -11,6 +11,7 @@ import {
   Accordion,
   AccordionTab,
 } from 'primereact/accordion';
+import {TabView,TabPanel} from 'primereact/tabview';
 import { useTranslation } from 'react-i18next';
 import auth from 'solid-auth-client';
 
@@ -24,6 +25,7 @@ import { Loader } from '@util-components';
 import {
   errorToaster,
   successToaster,
+  DistanceHelper
 } from '@utils';
 
 import {
@@ -36,7 +38,8 @@ import {
   TextEditorContainer,
   TextEditorWrapper,
   Title,
-} from './add-milestone.style';
+  Button
+} from './edit-route.style';
 import MilestoneMap from './MilestoneMap/milestone-map.component';
 
 let route;
@@ -52,16 +55,9 @@ if (!webId) {
   });
 }
 
-export const AddMilestone = () => {
-  
-  let routeId = "";
+type Props = { history: any };
 
-  if (window.location.href.split("?")[1]) {
-    const aux = window.location.href.split("?")[1].split("=")[1];
-    if (aux !== routeId) {
-      routeId = aux;
-    }
-  }
+export const EditRoute = ({ history, routeId }: Props) =>{
 
   const [renderedMilestones, setRenderedMilestones] = useState([]);
   const [size, setSize] = useState(0);
@@ -141,26 +137,9 @@ export const AddMilestone = () => {
   }
 
   const isNumber = (n) => n && !isNaN(parseFloat(n)) && !isNaN(n - 0);
-  
-  const calculateDistance = (lat1, lon1, lat2, lon2) => {
-    if ((lat1 === lat2) && (lon1 === lon2)) {
-      return 0;
-    }
-    else {
-      var radlat1 = Math.PI * lat1/180;
-      var radlat2 = Math.PI * lat2/180;
-      var theta = lon1-lon2;
-      var radtheta = Math.PI * theta/180;
-      var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-      if (dist > 1) {
-        dist = 1;
-      }
-      dist = Math.acos(dist);
-      dist = dist * 180/Math.PI;
-      dist = dist * 60 * 1.1515;
-          dist = dist * 1.609344
-      return dist;
-    }
+
+  function routeDetails() {
+    history.push(`/route-details?routeId=${routeId}`);
   }
 
   async function checkCreateNew() {
@@ -208,7 +187,7 @@ export const AddMilestone = () => {
       if(renderedMilestones[size -1].longitude)
         previousLong = renderedMilestones[size -1].longitude;
 
-      distance = calculateDistance(latitude, longitude, previousLat, previousLong)
+      distance = DistanceHelper.calculateDistance(latitude, longitude, previousLat, previousLong)
 
     }
       
@@ -245,7 +224,7 @@ export const AddMilestone = () => {
 
     } catch(error) {
       errorToaster(t('addMilestone.notifications.errorLoadingMilestones'));
-      console.log(error)
+      console.error(error)
     }
 
   }
@@ -253,40 +232,36 @@ export const AddMilestone = () => {
   return ( 
     <Form>
       {!isLoading && 
-      <FullGridSize>
         <FullGridSize>
-          <h5>
-              {t('file.dropzone.upload') }
+          <Title>
+              {t('addMilestone.accordionTitle') + ' ' + renderedMilestones.length + ' ' + t('addMilestone.accordionEndTtile') }
               <br/>
-          </h5>
-          <FileUploader webId={webId} routeId={routeId} t={t} />
+          </Title>
         </FullGridSize>
-
-        <Title>
-            {t('addMilestone.accordionTitle') + ' ' + renderedMilestones.length + ' ' + t('addMilestone.accordionEndTtile') }
-            <br/>
-        </Title>
-      </FullGridSize>
       }
       <FullGridSize>
           <Accordion id="accordionId" activeIndex="0">
                       {renderedMilestones.filter(m => m).sort((a, b) => a.order - b.order).map(function(milestone, key){
                           return <AccordionTab key={key} header= {milestone.name || milestone.order + 1}> 
-                                    { milestone.description && <p> {t('addMilestone.description') + ': '} {milestone.description}</p> }
-                                    { milestone.distance && <p> {t('addMilestone.distance') + ': '} {milestone.distance}</p> }
-                                    <p> {t('addMilestone.altitude') + ': '} {milestone.slope}</p> 
-                                    <p> {t('addMilestone.latitude') + ': '} {milestone.latitude}</p> 
-                                    <p> {t('addMilestone.longitude') + ': '} {milestone.longitude}</p> 
+                                    { milestone.description && <p> <b>{t('addMilestone.description') + ': '}</b> {milestone.description}</p> }
+                                    { milestone.distance && <p> <b>{t('addMilestone.distance') + ': '}</b> {milestone.distance}</p> }
+                                    <p> <b>{t('addMilestone.altitude') + ': '}</b> {milestone.slope}</p> 
+                                    <p> <b>{t('addMilestone.latitude') + ': '}</b> {milestone.latitude}</p> 
+                                    <p> <b>{t('addMilestone.longitude') + ': '}</b> {milestone.longitude}</p> 
                                   </AccordionTab>;
                       })}
           </Accordion>
+          
       </FullGridSize>
 
       <FullGridSize>
-
         <Label>
-          {t('addMilestone.routeToAdd')}
+          {t('addMilestone.routeToAdd') }
+
           <Input id="routeToAddId" type="text" size="200" value={routeId} onChange={changeRouteId} />
+          <br/>
+          <div><Button data-testid="details" className="button, block" label="Details" onClick={() => routeDetails()}>{t('addMilestone.seeRouteDetails')}</Button></div>
+          <br/>
         </Label>
 
         <Label>
@@ -353,18 +328,42 @@ export const AddMilestone = () => {
  * A React component page that is displayed when there's no valid route. Users can click the button
  * to get back to the home/welcome page.
  */
-const AddMilestoneComponent = () => {
+export const EditRouteComponent = ({ history }: Props) => {
+
+  let routeId = "";
+
+  if (window.location.href.split("?")[1]) {
+    const aux = window.location.href.split("?")[1].split("=")[1];
+    if (aux !== routeId) {
+      routeId = aux;
+    }
+  }
+
   const { t } = useTranslation();
+  const [ activeIndex, setActiveIndex ] = useState(0);
   return (
     <TextEditorWrapper>
       <TextEditorContainer>
         <Header>
-          <p>{t('addMilestone.title')}</p>
+          <p>{t('editRoute.title')}</p>
         </Header>
-        <AddMilestone />
+        <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index) }>
+          <TabPanel header={t('addMilestone.title')}>
+            <EditRoute history={history} routeId={routeId}/>
+          </TabPanel>
+          <TabPanel header={t('editRoute.upload')}>
+            <Form id="uploadTab">
+              <FullGridSize>
+                <FullGridSize>
+                  <FileUploader webId={webId} routeId={routeId} t={t} />
+                </FullGridSize>
+              </FullGridSize>
+            </Form>
+          </TabPanel>
+        </TabView>
       </TextEditorContainer>
     </TextEditorWrapper>
   );
 };
 
-export default AddMilestoneComponent;
+export default EditRouteComponent;

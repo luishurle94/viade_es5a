@@ -49,8 +49,8 @@ describe.only('Get data', () => {
 describe.only('Get all files', () => {
   test('list one', async () => {
     expect((await SolidAdapter.getAll()).length).toStrictEqual(1);
-    expect((await SolidAdapter.getAll('aaa')).length).toStrictEqual(2);
-    expect((await SolidAdapter.getAll('1324541791')).length).toStrictEqual(1);
+    expect((await SolidAdapter.getAll('aaa')).length).toStrictEqual(0);
+    expect((await SolidAdapter.getAll('1324541791')).length).toStrictEqual(0);
   });
 });
 
@@ -74,7 +74,7 @@ describe.only('Create predicate  ', () => {
 
 describe.only('Check params', () => {
   test('first time', async () => {
-    expect(await SolidAdapter.checkParams()).toStrictEqual({"createDocument": true, "folder": "", "parentFilename": "data.ttl", "parentPredicate": "schema:hasPart", "parentWebId": 'https://jaluma.inrupt.net/', "webId": 'https://jaluma.inrupt.net/'});
+    expect(await SolidAdapter.checkParams()).toStrictEqual({"createDocument": true, "folder": "", "parentFilename": "settings.ttl", "parentPredicate": "schema:hasPart", "parentWebId": 'https://jaluma.inrupt.net/', "webId": 'https://jaluma.inrupt.net/'});
     expect(await SolidAdapter.checkParams(false, 'folder', 'parent', 'predicate', 'webId', 'web')).toStrictEqual({"createDocument": true, "folder": "web/", "parentFilename": "1348032073.ttl", "parentPredicate": "webId", "parentWebId": 'parent', "webId": 'folder'});
   });
 });

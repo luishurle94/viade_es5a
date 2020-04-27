@@ -22,7 +22,7 @@ export const buildPathFromWebId = (webId, path) => {
  * Helper function to check for the user's pod storage value. If it doesn't exist, we assume root of the pod
  * @returns {Promise<string>}
  */
-export const getAppStorage = async webId => {
+export const getAppStorage = async (webId, privatePath = true) => {
   const podStoragePath = await data[webId].storage;
   let podStoragePathValue =
     podStoragePath && podStoragePath.value.trim().length > 0 ? podStoragePath.value : '';
@@ -32,12 +32,31 @@ export const getAppStorage = async webId => {
     podStoragePathValue = `${podStoragePathValue}/`;
   }
 
+  let res = `${podStoragePathValue}${appPath}`;
+
   // If there is no storage value from the pod, use webId as the backup, and append the application path from env
   if (!podStoragePathValue || podStoragePathValue.trim().length === 0) {
-    return buildPathFromWebId(webId, appPath);
+    res = buildPathFromWebId(webId, appPath);
   }
 
-  return `${podStoragePathValue}${appPath}`;
+  if (!privatePath)  {
+    res = res.replace('private', 'public')
+  }
+
+  return res;
+};
+
+export const getStorage = async webId => {
+  const podStoragePath = await data[webId].storage;
+  let podStoragePathValue =
+    podStoragePath && podStoragePath.value.trim().length > 0 ? podStoragePath.value : '';
+
+  // Make sure that the path ends in a / so it is recognized as a folder path
+  if (podStoragePathValue && !podStoragePathValue.endsWith('/')) {
+    podStoragePathValue = `${podStoragePathValue}/`;
+  }
+
+  return `${podStoragePathValue}`;
 };
 
 /**

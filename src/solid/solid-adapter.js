@@ -11,27 +11,27 @@ import * as SolidHelper from './solid-helper'
  * @param {String} webId user
  * @param {String} parentWebId parent webId
  */
-export const create = async (obj, context, createDocumentP, webIdP, parentWebIdP, parentFilenameP, parentPredicateP, folderP) => {
+export const create = async (obj, context, createDocumentP, webIdP, parentWebIdP, parentFilenameP, parentPredicateP, folderP, privatePath = true) => {
   try {
     const {createDocument, webId, parentWebId, parentFilename, parentPredicate, folder} = await checkParams(createDocumentP, webIdP, parentWebIdP, parentFilenameP, parentPredicateP, folderP);    
 
     // check if structure is created
     if (await SolidHelper.createInitialStructure(webId)) {
-      return await insert(obj, context, createDocument, obj.getIdentifier(), webId, parentWebId, parentFilename, parentPredicate, folder);
+      return await insert(obj, context, createDocument, obj.getIdentifier(), webId, parentWebId, parentFilename, parentPredicate, folder, privatePath);
     }    
   } catch (e) {
     console.error(e)
   }
-  
+
   return {
     added: false
   };
 }
 
-export const insert = async (obj, context, createDocumentP, filename, webIdP, parentWebIdP, parentFilenameP, parentPredicateP, folderP) => {
+export const insert = async (obj, context, createDocumentP, filename, webIdP, parentWebIdP, parentFilenameP, parentPredicateP, folderP, privatePath) => {
   const {createDocument, webId, parentWebId, parentFilename, parentPredicate, folder} = await checkParams(createDocumentP, webIdP, parentWebIdP, parentFilenameP, parentPredicateP,folderP);    
 
-  const appPath = await SolidHelper.getAppPathStorage(webId);
+  const appPath = await SolidHelper.getAppPathStorage(webId, privatePath);
   const path = `${HashHelper.hash(filename)}.ttl`;
   const documentUri = `${appPath}${folder}${path}`;
 
@@ -47,7 +47,7 @@ export const insert = async (obj, context, createDocumentP, filename, webIdP, pa
   if (newDocument.ok) {
     for await (const field of context.shape) {
         const data = obj[field.object];
-        await SolidHelper.link(webId, data, field.literal, path, folder, SolidHelper.getPredicate(field, context));
+        await SolidHelper.link(webId, data, field.literal, path, folder, SolidHelper.getPredicate(field, context), privatePath);
     }
     
     // create link with parent. IT CAN'T BE A LITERAL, IT'S A REFERENCE
@@ -67,10 +67,18 @@ export const remove = async (webId) => {
 }
 
 export const link = async (webId, obj, lit, predicate) => {
+  if (!isValidUrl(webId)) {
+    const appPath = await SolidHelper.getAppPathStorage(await currentUserId());
+    webId = `${appPath}${webId}`;
+  }
   await SolidHelper.linkToGraph(webId, obj, lit, predicate);
 }
 
 export const unlink = async(webId, predicate, url) => {
+  if (!isValidUrl(webId)) {
+    const appPath = await SolidHelper.getAppPathStorage(await currentUserId());
+    webId = `${appPath}${webId}`;
+  }
   return await SolidHelper.unlink(webId, predicate, url);
 }
 
@@ -80,6 +88,10 @@ export const unlink = async(webId, predicate, url) => {
  */
 export const get = async (webId, context) => {
   try {
+    if (!isValidUrl(webId)) {
+      const appPath = await SolidHelper.getAppPathStorage(await currentUserId());
+      webId = `${appPath}${webId}`;
+    }
     return await SolidHelper.fetchRawData(webId, context);
   } catch (e) {
     return undefined;
@@ -88,11 +100,15 @@ export const get = async (webId, context) => {
 
 export const getAll = async (folder) => {
   try {
-    folder = folder || '';
-
     const webId = await currentUserId();
-    const appPath = await SolidHelper.getAppPathStorage(webId);
-    const documentsUri = `${appPath}${folder}`;
+    let appPath;
+    if (folder) {
+      appPath = await SolidHelper.getPathStorage(webId);
+    } else {
+      appPath = await SolidHelper.getAppPathStorage(webId);
+    }
+
+    const documentsUri = `${appPath}${folder ? folder : ''}`;
 
     return await SolidHelper.fetchFilesData(documentsUri);
   } catch (e) {
@@ -100,8 +116,9 @@ export const getAll = async (folder) => {
   }
 }
 
-export const share = async (webId, friendId, shareUrl) => {
+export const share = async (friendId, shareUrl) => {
   try {
+    const webId = await currentUserId()
     const permissions = [
     {
         agents: [friendId],
@@ -145,18 +162,28 @@ export const checkParams = async (createDocument, webId, parentWebId, parentFile
       parentFilename = HashHelper.hash(parentFilename);
     } 
   } else {
-    parentFilename = 'data';
+    parentFilename = 'settings';
   }
   if (parentFilename && !parentFilename.toString().includes('.ttl'))  parentFilename = `${parentFilename}.ttl`
   parentPredicate = parentPredicate || 'schema:hasPart';
   return {createDocument, webId, parentWebId, parentFilename, parentPredicate, folder};
 }
 
-  export const getFriends = async (webId) => {
-    return await SolidHelper.getFriends(webId);
-  }
+export const getFriends = async (webId) => {
+  return await SolidHelper.getFriends(webId);
+}
+
+export const createFile = async (webId, body, mimeType) => {
+  return await SolidHelper.createFile(webId, body, mimeType);
+}
+
+const isValidUrl = (string) => {
+    try {
+      new URL(string);
+    } catch (_) {
+      return false;  
+    }
   
-  export const createFile = async (webId, body, mimeType) => {
-    return await SolidHelper.createFile(webId, body, mimeType);
+    return true;
   }
-  
+

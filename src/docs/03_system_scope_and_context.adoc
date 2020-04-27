@@ -1,7 +1,6 @@
 [[section-system-scope-and-context]]
 == System Scope and Context
 
-.Contents
 The system must be a web application based on the new technology called SOLID. This must be a system that allows you to upload and share routes with friends. 
 
 The main advantage of this system is to avoid storing personal information in a external server. The user is the owner of their information and decides with whom to share it. It allows us to have a clear separation between the data and the application because the information is stored in a POD, which is unique for each user, and allows to store their information inside it. This provides us privacy, security and guarantees.

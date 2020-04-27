@@ -1,17 +1,20 @@
 import styled from 'styled-components';
 
+import {
+  GradientBackground,
+  Panel,
+} from '@util-components';
+
 import { media } from '@utils';
 
-export const TextEditorWrapper = styled.section`
+export const TextEditorWrapper = styled(GradientBackground)`
   display: flex;
   flex: 1 0 auto;
   align-items: center;
   justify-content: center;
-  background-image: url('img/concentric-hex-pattern_2x.png');
-  background-repeat: repeat;
   padding: 60px 0;
 `;
-export const TextEditorContainer = styled.div`
+export const TextEditorContainer = styled(Panel)`
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
   background-color: white;
   max-width: 900px;
@@ -25,8 +28,7 @@ export const Header = styled.div`
   position: relative;
   align-items: center;
   justify-content: center;
-  background-image: url('img/pattern-geo.png'),
-    linear-gradient(135deg, #7c4dff 0%, #18a9e6 50%, #01c9ea 100%);
+  background-image: linear-gradient(135deg, #00F8A9 0%, #4F7DEC 50%, #00F8A9 100%);
   background-repeat: repeat, no-repeat;
   padding: 30px 20px;
   font-size: 50px;
@@ -48,7 +50,7 @@ export const Input = styled.input`
 `;
 
 export const Label = styled.label`
-  margin: 5px;
+  margin: 5px; 
 `;
 
 export const TextArea = styled.textarea`
@@ -59,6 +61,7 @@ export const Form = styled.form`
   padding: 20px 40px;
   align-items: center;
   display: grid;
+  border-color: #050505;
   grid-template-columns: 1fr;
   grid-gap: 20px 40px;
   ${media.tablet`
@@ -69,7 +72,6 @@ export const Form = styled.form`
 export const Button = styled.button`
   max-width: 128px;
   display: inline-block;
-
   &:first-child {
     margin-right: 10px;
   }
@@ -86,6 +88,7 @@ export const FullGridSize = styled.div`
 export const WebId = styled.div`
   padding: 20px 40px 0px 40px;
   position: relative;
+  
   &:after {
     background-color: #d8d8d8;
     display: block;

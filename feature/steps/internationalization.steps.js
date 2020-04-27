@@ -28,6 +28,7 @@ defineFeature(feature, test => {
    
 
     then('el idioma se cambia', async () => {
+      await page.waitFor(10000);
       const element = await page.$("h1");
       const text = await page.evaluate(element => element.textContent, element);
       //expect(text).toMatch("Hola! Bienvenido a Solid.");

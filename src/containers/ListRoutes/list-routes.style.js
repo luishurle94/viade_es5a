@@ -1,15 +1,17 @@
 import styled from 'styled-components';
+import {
+  GradientBackground,
+  Panel,
+} from '@util-components';
 
-export const TextEditorWrapper = styled.section`
+export const TextEditorWrapper = styled(GradientBackground)`
   display: flex;
   flex: 1 0 auto;
   align-items: center;
   justify-content: center;
-  background-image: url('img/concentric-hex-pattern_2x.png');
-  background-repeat: repeat;
   padding: 60px 0;
 `;
-export const TextEditorContainer = styled.div`
+export const TextEditorContainer = styled(Panel)`
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
   background-color: white;
   max-width: 900px;
@@ -23,8 +25,7 @@ export const Header = styled.div`
   position: relative;
   align-items: center;
   justify-content: center;
-  background-image: url('img/pattern-geo.png'),
-    linear-gradient(135deg, #7c4dff 0%, #18a9e6 50%, #01c9ea 100%);
+  background-image: linear-gradient(135deg, #00F8A9 0%, #4F7DEC 50%, #00F8A9 100%);
   background-repeat: repeat, no-repeat;
   padding: 30px 20px;
   font-size: 50px;
@@ -44,13 +45,17 @@ export const Header = styled.div`
 export const Button = styled.button`
   max-width: 128px;
   display: inline-block;
-  background-color: #7C4DFF;
+  background-color: #4B7FEB;
   color: white;
   text-align: center;
   height: 30px;
 
   &:first-child {
     margin-right: 10px;
+  }
+  &:hover {
+    color: white;
+    background-color: #406dc9;
   }
 `;
 
@@ -59,7 +64,8 @@ export const RouteDetails = styled.div`
   border: 0.5px groove;
   padding: 10px;
   font-size: 1.2rem;
-
+  text-align:left;
+  
   .content {
     display:flex;
     font-size: 1rem;

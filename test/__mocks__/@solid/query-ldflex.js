@@ -23,7 +23,7 @@ const graph = {
     'solid:account': 'webId3',
     'solid:hasPhoto': {
       add: async(obj) => true,
-      remove: async(obj) => true
+      delete: async(obj) => true
     },
   },
   'http://www.friend3.comfolderfilename': {
@@ -31,7 +31,7 @@ const graph = {
     'solid:account': 'webId3',
     'solid:hasPhoto': {
       add: async(obj) => true,
-      remove: async(obj) => true
+      delete: async(obj) => true
     },
   },
 }

@@ -5,8 +5,8 @@ import {List} from './list-friends.style';
 
 export class ListFriends extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       selected: null
     };
@@ -24,6 +24,7 @@ export class ListFriends extends Component {
 
   selectFriend(e) {
     this.setState({ selected: e.value })
+    this.props.selected(e.value);
   }
 
   render() {

@@ -1,6 +1,6 @@
 {
   "name": "viade_es5a",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "homepage": "https://arquisoft.github.io/viade_es5a/",
   "private": true,
   "dependencies": {
@@ -23,7 +23,6 @@
     "classnames": "^2.2.6",
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
-    "enzyme-adapter-react-15": "^1.4.1",
     "flag-icon-css": "^3.3.0",
     "fork-ts-checker-webpack-plugin-alt": "0.4.14",
     "fs-extra": "7.0.0",
@@ -44,6 +43,7 @@
     "react": "16.8.4",
     "react-app-polyfill": "^0.2.2",
     "react-bootstrap": "^1.0.0-beta.17",
+    "react-chat-widget": "^3.0.0",
     "react-click-outside": "^3.0.1",
     "react-dev-utils": "^7.0.1",
     "react-dom": "16.8.4",
@@ -67,6 +67,10 @@
     "docs": "shx rm -rf build/docs && asciidoctor -D build/docs -a imagesdir=./images -r asciidoctor-diagram src/docs/index.adoc && shx cp -R src/docs/images build/docs",
     "eject": "react-scripts eject",
     "flow": "flow"
+  },
+  "resolutions": {
+    "react-chat-widget/react": "16.8.4",
+    "react-chat-widget/react-dom": "16.8.4"
   },
   "husky": {
     "hooks": {

@@ -14,8 +14,8 @@ export default class Comment {
   }
 
   getIdentifier() {
-    if (this.message && this.createdBy)
-      return `${this.message}_${this.createdBy}`;
+    if (this.message && this.createdBy && this.createdAt)
+      return `${this.message}_${this.createdBy}_${this.createdAt}`;
 
     return undefined;
   }

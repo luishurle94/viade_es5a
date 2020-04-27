@@ -81,8 +81,10 @@ defineFeature(feature, test => {
         await page.waitForSelector("[id='descriptionId']", {visible: true});
         await page.type("[id='descriptionId']", "Estoy escribiendo esto con la mente....");
 
+
+
         await page.waitFor(500);
-        
+
         await page.evaluate(() => {
           let btns = [...document.querySelectorAll("[id='submitId']")];
           btns.forEach(function (btn) {
@@ -102,7 +104,7 @@ defineFeature(feature, test => {
     then('nos añade la ruta', async () => {
 
         let currentPage = page.url().split("?")[0];
-        expect(currentPage).toBe("http://localhost:3000/#/add-milestone")
+        expect(currentPage).toBe("http://localhost:3000/#/route-edit")
         
     });
 

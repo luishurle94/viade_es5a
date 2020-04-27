@@ -11,25 +11,21 @@ import { CommentFactory } from "@factories";
  */
 export const publishComment = async (routeId, comment) => {
   if (!comment) {
-    return false;
+    return {
+      added: false
+    };
   }
   // get route
   const route = await RouteService.get(routeId);
   if (!route) {
-    return false;
+    return {
+      added: false
+    };
   }
 
   //create ttl file
-  const res = await SolidAdapter.create(comment, commentShape, true, comment.createdBy);
-  if (!res && !res.added) {
-    return false;
-  }
-
-  const field = routeShape.shape.filter(s => s.object === 'media').pop();
-  const predicate = await SolidAdapter.getPredicate(field, routeShape);
-
-  await SolidAdapter.link(route.webId, res.webId, false, predicate);
-  return true;
+  const field = routeShape.shape.filter(s => s.object === 'messages').pop();
+  return await SolidAdapter.create(comment, commentShape, true, null, routeId, route.getIdentifier(), await SolidAdapter.getPredicate(field, routeShape), field.object, false);
 }
 
 /**
