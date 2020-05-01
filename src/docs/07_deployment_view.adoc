@@ -7,26 +7,23 @@
 ----
 actor User
 
-node Browser
-
-node Docker{
+node Browser {
    node ViaDe {
 	   [RouteModule]
 	   [DataService]
 	   [SolidAdapter]
    }
+}
 
-   node SolidNodeServer {
-      interface HTTP
-      [Autentication] - [LDP]
-      [LDP] - HTTP
-      HTTP - [Storage]
-   }
+node SolidNodeServer {
+   interface HTTP
+   [Autentication] - [LDP]
+   [LDP] - HTTP
+   HTTP - [Storage]
 }
 
 
 User --> Browser : uses
-Browser --> Docker : HTTP request
 
 RouteModule --> DataService: action
 DataService--> RouteModule : response
